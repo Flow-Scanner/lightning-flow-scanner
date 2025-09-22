@@ -9,7 +9,7 @@
   },
   "icon": "media/lightningflow.png",
   "description": "A Visual Studio Code Extension designed to proactively enforce secure and maintainable Salesforce Flows. It detects unsafe running contexts, hardcoded IDs and URLs, overly broad field access, unhandled nulls, and inefficient database operations, helping teams ensure their automations are safe and reliable.",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "engines": {
     "vscode": "^1.99.1"
   },
