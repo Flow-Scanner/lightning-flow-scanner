@@ -59,7 +59,7 @@ export default class Commands {
   }
 
   private openDocumentation() {
-    const url = vscode.Uri.parse('https://github.com/Flow-Scanner/lightning-flow-scanner-ce?tab=readme-ov-file#default-rules');
+    const url = vscode.Uri.parse('https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=readme-ov-file#default-rules');
     vscode.env.openExternal(url);
   }
 

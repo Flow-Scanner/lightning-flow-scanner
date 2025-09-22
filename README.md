@@ -7,7 +7,7 @@
 Use our side bar or the **Command Palette** and type `Flow Scanner` to see the list of all available commands.
 
 * `Scan Flows` allows choosing either a directory or a selection of flows to run the analysis against.
-  *More information on the default rules can be found in the [core documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-ce).*
+  *More information on the default rules can be found in the [core documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-core).*
 * `Fix Flows` will apply available fixes automatically.
 * `Open Documentation` can be used to reference the documentation.
 
