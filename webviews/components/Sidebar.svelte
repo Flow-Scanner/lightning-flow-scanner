@@ -2,9 +2,9 @@
     import TailwindWrapper from './commons/TailwindWrapper.svelte';
     import Banner from './Banner.svelte'
 
-    function viewRules() {
+    function openDocumentation() {
       tsvscode.postMessage({
-            type: "viewRules"
+            type: "openDocumentation"
         });
     }
 
@@ -40,7 +40,7 @@
         <button class="btn btn-blue" on:click={fixFlows}>
           Fix Flows
         </button>
-        <button class="btn btn-blue" on:click={viewRules}>
+        <button class="btn btn-blue" on:click={openDocumentation}>
           Documentation
         </button>
       </nav>

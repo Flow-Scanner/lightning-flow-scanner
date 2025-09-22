@@ -17,7 +17,7 @@ export default class Commands {
 
   get handlers() {
     const rawHandlers: Record<string, (...args: any[]) => any> = {
-      'lightningflowscanner.viewDefaulFlowRules': () => this.viewDefaulFlowRules(),
+      'lightningflowscanner.openDocumentation': () => this.openDocumentation(),
       'lightningflowscanner.configRules': () => this.configRules(),
       'lightningflowscanner.debugView': () => this.debugView(),
       'lightningflowscanner.scanFlows': () => this.scanFlows(),
@@ -58,8 +58,9 @@ export default class Commands {
     }
   }
 
-  private viewDefaulFlowRules() {
-    RuleOverview.createOrShow(this.context.extensionUri);
+  private openDocumentation() {
+    const url = vscode.Uri.parse('https://github.com/Flow-Scanner/lightning-flow-scanner-ce?tab=readme-ov-file#default-rules');
+    vscode.env.openExternal(url);
   }
 
   private async configRules() {
