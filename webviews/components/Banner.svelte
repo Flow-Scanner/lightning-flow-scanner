@@ -1,4 +1,4 @@
-  <a href="https://github.com/SF-Flow-Scanner">
+  <a href="https://github.com/Flow-Scanner">
 <div class="banner">
 
     <img

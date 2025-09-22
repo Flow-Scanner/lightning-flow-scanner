@@ -1,13 +1,13 @@
- [![Lightning Flow Scanner Banner](media/bannerslim.png)](https://github.com/SF-Flow-Scanner)
+ [![Lightning Flow Scanner Banner](media/bannerslim.png)](https://github.com/Flow-Scanner)
 
-[![Flow Overview](media/demo.gif)](https://github.com/SF-Flow-Scanner)
+[![Flow Overview](media/demo.gif)](https://github.com/Flow-Scanner)
 
 ## Features/Commands
 
 Use our side bar or the **Command Palette** and type `Flow` to see the list of all available commands.
 
 Use the `Scan Flows` command by choosing either a directory or a selection of flows to run the analysis on.
-*More information on the default rules can be found in the [core  documentation](https://github.com/SF-Flow-Scanner/lightning-flow-scanner-ce).*
+*More information on the default rules can be found in the [core  documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-ce).*
 
 Use the `Configurate Flow Rules` command to configure the rules executed during scanning.
 
