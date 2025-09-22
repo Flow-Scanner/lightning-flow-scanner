@@ -1,13 +1,13 @@
- [![Lightning Flow Scanner Banner](media/bannerslim.png)](https://github.com/Lightning-Flow-Scanner)
+ [![Lightning Flow Scanner Banner](media/bannerslim.png)](https://github.com/SF-Flow-Scanner)
 
-[![Flow Overview](media/demo.gif)](https://github.com/Lightning-Flow-Scanner)
+[![Flow Overview](media/demo.gif)](https://github.com/SF-Flow-Scanner)
 
 ## Features/Commands
 
 Use our side bar or the **Command Palette** and type `Flow` to see the list of all available commands.
 
 Use the `Scan Flows` command by choosing either a directory or a selection of flows to run the analysis on.
-*More information on the default rules can be found in the [core  documentation](https://github.com/Lightning-Flow-Scanner/lightning-flow-scanner-core).*
+*More information on the default rules can be found in the [core  documentation](https://github.com/SF-Flow-Scanner/lightning-flow-scanner-ce).*
 
 Use the `Configurate Flow Rules` command to configure the rules executed during scanning.
 
@@ -19,8 +19,8 @@ The `Calculate Flow Coverage` command calculates Flow Test coverage percentages 
 
 <!-- commands -->
 
-| Command                                            | Title                   |
-| -------------------------------------------------- | ----------------------- |
+| Command                                          | Title                   |
+| ------------------------------------------------ | ----------------------- |
 | `lightningflowscanner.viewDefaultFlowRules`      | Default Flow Rules      |
 | `lightningflowscanner.scanFlows`                 | Scan Flows              |
 | `lightningflowscanner.debugView`                 | Debug Flow Scanner View |
@@ -32,8 +32,8 @@ The `Calculate Flow Coverage` command calculates Flow Test coverage percentages 
 
 <!-- configs -->
 
-| Key                                       | Description                                                                       | Type        | Default                         |
-| ----------------------------------------- | --------------------------------------------------------------------------------- | ----------- | ------------------------------- |
+| Key                                     | Description                                                                       | Type      | Default                       |
+| --------------------------------------- | --------------------------------------------------------------------------------- | --------- | ----------------------------- |
 | `lightningFlowScanner.SpecifyFiles`     | Specify flow file paths instead of a root directory.                              | `boolean` | `false`                       |
 | `lightningFlowScanner.NamingConvention` | Specify a REGEX expression to use as Flow Naming convention.                      | `string`  | `"[A-Za-z0-9]+_[A-Za-z0-9]+"` |
 | `lightningFlowScanner.APIVersion`       | Specify an expression to validate the API version, i.e. '===50'(use at least 50). | `string`  | `">50"`                       |
