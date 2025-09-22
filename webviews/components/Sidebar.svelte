@@ -52,10 +52,6 @@
       @apply flex flex-col;
     }
 
-    p{
-      @apply italic mt-auto;
-    }
-
     .btn {
       @apply font-bold py-2 my-2 px-4 rounded;
     }
