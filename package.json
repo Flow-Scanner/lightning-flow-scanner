@@ -8,8 +8,8 @@
     "url": "https://github.com/SF-Flow-Scanner/lightning-flow-scanner-vsx"
   },
   "icon": "media/lightningflow.png",
-  "description":" A VSCode Extension designed to proactively enforce secure and maintainable Salesforce Flows. It detects unsafe running contexts, hardcoded IDs and URLs, overly broad field access, unhandled nulls, and inefficient database operations, helping teams ensure their automations are safe, compliant, and reliable.",
-  "version": "1.0.0",
+  "description": " A VSCode Extension designed to proactively enforce secure and maintainable Salesforce Flows. It detects unsafe running contexts, hardcoded IDs and URLs, overly broad field access, unhandled nulls, and inefficient database operations, helping teams ensure their automations are safe, compliant, and reliable.",
+  "version": "1.1.0",
   "engines": {
     "vscode": "^1.99.1"
   },
