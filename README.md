@@ -1,19 +1,24 @@
-[![Lightning Flow Scanner Banner](https://raw.githubusercontent.com/Flow-Scanner/lightning-flow-scanner-core/main/media/bannerslim.png)](https://github.com/Flow-Scanner)
+<div style="text-align: center;">
+  <a href="https://github.com/Flow-Scanner">
+    <img src="https://raw.githubusercontent.com/Flow-Scanner/lightning-flow-scanner-core/main/media/bannerslim.png" style="width: 55%;" />
+  </a>
+  <p>Detects unsafe contexts, hardcoded IDs, inefficient operations and more for safe, reliable automations.</p>
+</div>
 
 ![FlowScan example](docs/images/sfdxgif.gif)
 
-## Table of contents
-
 - [Installation](#installation)
 - [Usage](#usage)
+
   - [Options](#options)
   - [Examples](#examples)
 - [Configuration](#configuration)
+
   - [Defining the severity per rule](#defining-the-severity-per-rule)
   - [Specifying an exception](#specifying-an-exception)
   - [Configuring an expression](#configuring-an-expression)
-  - [Loading Custom Rules](#loading-custom-rules)
 - [Development Setup](#development-setup)
+- [Contribution Guidelines](#contribution-guidelines)
 
 ## Installation
 
@@ -152,7 +157,7 @@ Some rules have additional attributes to configure, such as the expression, that
 }
 ```
 
-### Development Setup
+## Development Setup
 
 ### Preparing for Changes
 
@@ -185,3 +190,7 @@ NODE_OPTIONS=--inspect-brk /path/to/lightning-flow-scanner-cli/bin/run flow:scan
 2. **Attach Debugger**: Open your local Salesforce DX project in Visual Studio Code, set desired breakpoints, and attach the debugger to the remote session.
 
 For more detailed information, you can refer to the [wiki](https://github.com/salesforcecli/cli/wiki) of the Salesforce CLI repository.
+
+## Contribution Guidelines
+
+* **Lightning Flow Scanner CLI** is a fortified fork of [lightning-flow-scanner-sfdx](https://github.com/Flow-Scanner/lightning-flow-scanner-sfdx), previously unpublished to eliminate a RCE vulnerability. Prioritizing security and maintainability, we've removed custom rules for a safer, more reliable tool. If you'd like to help us enhance it, please consider having a look at the [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
