@@ -1,9 +1,9 @@
-<div style="text-align: center;">
+<p align="center">
   <a href="https://github.com/Flow-Scanner">
     <img src="https://raw.githubusercontent.com/Flow-Scanner/lightning-flow-scanner-core/main/media/bannerslim.png" style="width: 55%;" />
   </a>
-  <p>Detects unsafe contexts, hardcoded IDs, inefficient operations and more for safe, reliable automations.</p>
-</div>
+</p>
+<p align="center">Scans for unsafe contexts, hardcoded IDs, and other issues to  optimize your Flows.</p>
 
 ![FlowScan example](docs/images/sfdxgif.gif)
 
