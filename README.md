@@ -28,4 +28,7 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
 | `lightningFlowScanner.APIVersion`       | Specify an expression to validate the API version, i.e. '===50'(use at least 50). | `">50"`                       |
 | `lightningFlowScanner.Reset`            | Reset all configurations on every scan                                            | `false`                       |
 
-<!-- configs -->
+## Contribution Guidelines
+
+**Lightning Flow Scanner VSX** is a fortified fork of [lightning-flow-scanner-vsce](https://github.com/Flow-Scanner/lightning-flow-scanner-vsce), previously unpublished to eliminate a RCE vulnerability. Prioritizing security, we've completely removed custom rules from the tool. If you'd like to help us enhance it, please consider having a look at the [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
+
