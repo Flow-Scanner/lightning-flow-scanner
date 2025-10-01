@@ -193,4 +193,4 @@ For more detailed information, you can refer to the [wiki](https://github.com/sa
 
 ## Contribution Guidelines
 
-* **Lightning Flow Scanner CLI** is a fortified fork of [lightning-flow-scanner-sfdx](https://github.com/Flow-Scanner/lightning-flow-scanner-sfdx), previously unpublished to eliminate a RCE vulnerability. Prioritizing security and maintainability, we've removed custom rules for a safer, more reliable tool. If you'd like to help us enhance it, please consider having a look at the [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
+**Lightning Flow Scanner CLI** is a fortified fork of [lightning-flow-scanner-sfdx](https://github.com/Flow-Scanner/lightning-flow-scanner-sfdx), previously unpublished to eliminate a RCE vulnerability. Prioritizing security, we've removed custom rules for a safer tool. If you'd like to help us enhance it, please consider having a look at the [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
