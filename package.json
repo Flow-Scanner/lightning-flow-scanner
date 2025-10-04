@@ -2,7 +2,7 @@
   "name": "@flow-scanner/lightning-flow-scanner-cli",
   "version": "1.5.0",
   "bugs": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli/issues",
-  "description": "A Salesforce CLI Plugin designed to proactively enforce secure and maintainable Salesforce Flows. It detects unsafe running contexts, hardcoded IDs, unhandled nulls, inefficient database operations and more, helping teams ensure their automations are safe and reliable.",
+  "description": "A Salesforce CLI plugin for static analysis and optimization of Flows. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and CI/CD integration to help users maintain secure and reliable Flow automations.",
   "dependencies": {
     "@oclif/core": "^4.5.4",
     "@salesforce/core": "^8.18.7",
@@ -79,6 +79,9 @@
     "lfs:link": "npm link lightning-flow-scanner-core && npm pack && sf plugins link"
   },
   "type": "module",
+  "publishConfig": {
+  "access": "public"
+  },
   "keywords": [
   "salesforce",
   "sf",
