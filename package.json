@@ -79,9 +79,6 @@
     "lfs:link": "npm link lightning-flow-scanner-core && npm pack && sf plugins link"
   },
   "type": "module",
-  "publishConfig": {
-  "access": "public"
-  },
   "keywords": [
   "salesforce",
   "sf",
