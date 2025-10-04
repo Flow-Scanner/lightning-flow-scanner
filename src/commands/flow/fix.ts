@@ -7,7 +7,7 @@ import CoreFixService from "../../libs/CoreFixService.js";
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url, true);
 
 const commandMessages = Messages.loadMessages(
-  "@rubenhalman/lightning-flow-scanner-cli",
+  "@flow-scanner/lightning-flow-scanner-cli",
   "fix-command",
 );
 

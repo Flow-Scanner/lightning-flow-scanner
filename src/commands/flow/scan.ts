@@ -18,7 +18,7 @@ const { parse: parseFlows, scan: scanFlows } = pkg;
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 
-const messages = Messages.loadMessages("@rubenhalman/lightning-flow-scanner-cli", "command");
+const messages = Messages.loadMessages("@flow-scanner/lightning-flow-scanner-cli", "command");
 
 export default class Scan extends SfCommand<Output> {
   public static description = messages.getMessage("commandDescription");

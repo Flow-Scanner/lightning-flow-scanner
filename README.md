@@ -25,13 +25,13 @@
 Install with SFDX:
 
 ```sh-session
-sfdx plugins:install @rubenhalman/lightning-flow-scanner-cli
+sfdx plugins:install @flow-scanner/lightning-flow-scanner-cli
 ```
 
 Install with NPM:
 
 ```sh-session
-npm install -g @rubenhalman/lightning-flow-scanner-cli
+npm install -g @flow-scanner/lightning-flow-scanner-cli
 ```
 
 ## Usage
