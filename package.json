@@ -1,6 +1,6 @@
 {
-  "name": "@rubenhalman/lightning-flow-scanner-cli",
-  "version": "1.4.0",
+  "name": "@flow-scanner/lightning-flow-scanner-cli",
+  "version": "1.5.0",
   "bugs": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli/issues",
   "description": "A Salesforce CLI Plugin designed to proactively enforce secure and maintainable Salesforce Flows. It detects unsafe running contexts, hardcoded IDs, unhandled nulls, inefficient database operations and more, helping teams ensure their automations are safe and reliable.",
   "dependencies": {
@@ -49,21 +49,21 @@
     "/oclif.manifest.json"
   ],
   "homepage": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli/",
-  "keywords": [
-    "sfdx-plugin"
-  ],
   "license": "AGPL-3.0",
   "oclif": {
     "commands": "./lib/src/commands",
     "bin": "sf",
     "topics": {
       "flow": {
-        "description": "Commands to find and fix potential bugs in Salesforce Flows."
+        "description": "Commands to run the Lightning Flow Scanner"
       }
     },
     "devPlugins": [
       "@oclif/plugin-help"
     ]
+  },
+  "author": {
+    "name": "Ruben Halman"
   },
   "repository": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git",
   "scripts": {
@@ -78,5 +78,28 @@
     "version": "oclif readme && git add README.md",
     "lfs:link": "npm link lightning-flow-scanner-core && npm pack && sf plugins link"
   },
-  "type": "module"
+  "type": "module",
+  "keywords": [
+  "salesforce",
+  "sf",
+  "sf-plugin",
+  "sf-cli",
+  "sf-cli-plugin",
+  "cli-plugin",
+  "salesforce-flow",
+  "salesforce-flows",
+  "salesforce-automation",
+  "process-builder",
+  "salesforce-workflows",
+  "static-analysis",
+  "flow-scanner",
+  "salesforce-quality",
+  "salesforce-security",
+  "salesforce-devops",
+  "salesforce-linting",
+  "sfdx",
+  "sfdx-plugin",
+  "salesforce-admin",
+  "salesforce-developer"
+  ]
 }
