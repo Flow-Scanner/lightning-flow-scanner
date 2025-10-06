@@ -81,6 +81,7 @@
   "type": "module",
   "keywords": [
     "salesforce",
+    "flow",
     "sf",
     "sf-plugin",
     "sf-cli",
