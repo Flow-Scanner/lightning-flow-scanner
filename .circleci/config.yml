@@ -49,7 +49,7 @@ jobs:
 
 workflows:
   version: 2
-  "lightning-flow-scannner-cli":
+  "lightning-flow-scannner":
     jobs:
       - node-latest
       - node-8
