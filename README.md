@@ -1,4 +1,10 @@
- [![Lightning Flow Scanner Banner](media/bannerslim.png)](https://github.com/Flow-Scanner)
+<div style="text-align: center;">
+  <a href="https://github.com/Flow-Scanner">
+    <img src="media/bannerslim.png" style="width: 55%;" />
+  </a>
+</div>
+
+<p align="center">Scans for unsafe contexts, hardcoded IDs, and other known issues to optimize your Flows.</p>
 
 [![Flow Overview](media/demo.gif)](https://github.com/Flow-Scanner)
 
@@ -28,7 +34,31 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
 | `lightningFlowScanner.APIVersion`       | Specify an expression to validate the API version, i.e. '===50'(use at least 50). | `">50"`                       |
 | `lightningFlowScanner.Reset`            | Reset all configurations on every scan                                            | `false`                       |
 
-## Contribution Guidelines
+## Development Setup
 
-**Lightning Flow Scanner VSX** is a fortified fork of [lightning-flow-scanner-vsce](https://github.com/Flow-Scanner/lightning-flow-scanner-vsce), previously unpublished to eliminate a RCE vulnerability. Prioritizing security, we've completely removed custom rules from the tool. If you'd like to help us enhance it, please consider having a look at the [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
+1. Clone the repo:
 
+   ```bash
+   git clone https://github.com/Flow-Scanner/lightning-flow-scanner-vsx.git
+   ```
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+3. Build the project:
+
+   ```bash
+   npm run build
+   ```
+4. Run tests:
+
+   ```bash
+   npm run test
+   ```
+
+## Contributing
+
+The original `lightning-flow-scanner-vsce` package was unpublished from the Visual Studio Marketplace after a Remote Code Execution (RCE) vulnerability was identified in its core dependency, `lightning-flow-scanner-core`. This issue, caused by unsafe custom rule loading, has been fully resolved in the [v5.1.0 release of the core library](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). The [lightning-flow-scanner-vsx](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx) fork, has focussed on security and maintainability, removing unsafe custom rule loading.
+
+If you'd like to help us enhance Flow Scanner, please consider having a look at the [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
