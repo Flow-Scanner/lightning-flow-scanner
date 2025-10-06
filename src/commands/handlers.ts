@@ -29,33 +29,10 @@ export default class Commands {
       return [
         command,
         async (...args: any[]): Promise<any> => {
-          this.checkExtensionAutoUpdate();   // nag before running command
           return handler(...args);
         }
       ] as const;
     });
-  }
-
-  private async checkExtensionAutoUpdate() {
-    const autoUpdate = vscode.workspace
-      .getConfiguration(undefined, null)
-      .get<string | boolean>("extensions.autoUpdate", true);
-
-    // Treat "onlyEnabledExtensions" and false as OK; warn only if true
-    if (autoUpdate === true) {
-      const selection = await vscode.window.showWarningMessage(
-        "⚠️ Extension auto-update for *all* extensions is enabled. Please disable or restrict it.",
-        "Open Settings",
-        "Ignore"
-      );
-
-      if (selection === "Open Settings") {
-        vscode.commands.executeCommand(
-          "workbench.action.openSettings",
-          "extensions.autoUpdate"
-        );
-      }
-    }
   }
 
   private openDocumentation() {

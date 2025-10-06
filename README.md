@@ -1,6 +1,6 @@
 <div style="text-align: center;">
   <a href="https://github.com/Flow-Scanner">
-    <img src="media/bannerslim.png" style="width: 55%;" />
+    <img src="media/bannerslim.png" style="width: 44%;" />
   </a>
 </div>
 
