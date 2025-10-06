@@ -9,11 +9,9 @@
 
 - [Installation](#installation)
 - [Usage](#usage)
-
   - [Options](#options)
   - [Examples](#examples)
 - [Configuration](#configuration)
-
   - [Defining the severity per rule](#defining-the-severity-per-rule)
   - [Specifying an exception](#specifying-an-exception)
   - [Configuring an expression](#configuring-an-expression)
@@ -25,13 +23,13 @@
 Install with SFDX:
 
 ```sh-session
-sfdx plugins:install @flow-scanner/lightning-flow-scanner
+sfdx plugins:install lightning-flow-scanner
 ```
 
 Install with NPM:
 
 ```sh-session
-npm install -g @flow-scanner/lightning-flow-scanner
+npm install -g lightning-flow-scanner
 ```
 
 ## Usage
@@ -193,4 +191,6 @@ For more detailed information, you can refer to the [wiki](https://github.com/sa
 
 ## Contribution Guidelines
 
-The `lightning-flow-scanner` (sfdx) package, used for scanning Salesforce Lightning Flows, was previously unpublished from the npm registry due to as remote code execution (RCE) vulnerability in its core dependency, `lightning-flow-scanner-core`. The vulnerability, caused by unsafe custom rule loading, has been addressed in the [v5 release of the core](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). Prioritizing security, we've removed custom rules for a safer tool. If you'd like to help us enhance Flow Scanner, please consider having a look at the [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
+The `lightning-flow-scanner`, was previously unpublished from the npm registry due to as remote code execution (RCE) vulnerability in its core dependency, `lightning-flow-scanner-core`. The vulnerability, caused by unsafe custom rule loading, has been addressed in the [v5 release of the core](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). Prioritizing security, we've removed custom rules for a safer tool. 
+
+If you'd like to help us enhance Flow Scanner, please consider having a look at the [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
