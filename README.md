@@ -1,10 +1,9 @@
-<div style="text-align: center;">
+<p align="center">
   <a href="https://github.com/Flow-Scanner">
-    <img src="media/bannerslim.png" style="width: 44%;" />
+    <img src="media/bannerslim.png" style="width: 41%;" />
   </a>
-</div>
-
-<p align="center">Scans for unsafe contexts, hardcoded IDs, and other known issues to optimize your Flows.</p>
+</p>
+<p align="center">Scans for unsafe contexts, hardcoded IDs, and other issues to  optimize your Flows.</p>
 
 [![Flow Overview](media/demo.gif)](https://github.com/Flow-Scanner)
 
