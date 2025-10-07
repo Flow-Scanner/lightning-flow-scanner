@@ -11,7 +11,7 @@
     "cosmiconfig": "^9.0.0",
     "fs-extra": "^11.3.0",
     "glob": "^11.0.3",
-    "lightning-flow-scanner-core": "^5.8.0"
+    "lightning-flow-scanner-core": "^5.9.0"
   },
   "devDependencies": {
     "@oclif/plugin-help": "6.2.32",
