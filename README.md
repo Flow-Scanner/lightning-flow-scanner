@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/Flow-Scanner">
-    <img src="https://raw.githubusercontent.com/Flow-Scanner/lightning-flow-scanner-core/main/media/bannerslim.png" style="width: 55%;" />
+    <img src="docs/images/banner.png" style="width: 41%;" />
   </a>
 </p>
 <p align="center">Scans for unsafe contexts, hardcoded IDs, and other issues to  optimize your Flows.</p>
