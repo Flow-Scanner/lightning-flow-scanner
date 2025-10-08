@@ -15,8 +15,7 @@
   - [Defining the severity per rule](#defining-the-severity-per-rule)
   - [Specifying an exception](#specifying-an-exception)
   - [Configuring an expression](#configuring-an-expression)
-- [Development Setup](#development-setup)
-- [Contribution Guidelines](#contribution-guidelines)
+- [Development](#development)
 
 ## Installation
 
@@ -155,7 +154,7 @@ Some rules have additional attributes to configure, such as the expression, that
 }
 ```
 
-## Development Setup
+## Development
 
 ### Preparing for Changes
 
@@ -185,12 +184,6 @@ npm link lightning-flow-scanner-core
 NODE_OPTIONS=--inspect-brk /path/to/lightning-flow-scanner-cli/bin/run flow:scan
 ```
 
-2. **Attach Debugger**: Open your local Salesforce DX project in Visual Studio Code, set desired breakpoints, and attach the debugger to the remote session.
+2. **Attach Debugger**: Open your local Salesforce DX project in Visual Studio Code, set desired breakpoints, and attach the debugger to the remote session. For more detailed information, you can refer to the [wiki](https://github.com/salesforcecli/cli/wiki) of the Salesforce CLI repository.
 
-For more detailed information, you can refer to the [wiki](https://github.com/salesforcecli/cli/wiki) of the Salesforce CLI repository.
-
-## Contribution Guidelines
-
-The `lightning-flow-scanner`, was previously unpublished from the npm registry due to as remote code execution (RCE) vulnerability in its core dependency, `lightning-flow-scanner-core`. The vulnerability, caused by unsafe custom rule loading, has been addressed in the [v5 release of the core](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). Prioritizing security, we've removed custom rules for a safer tool. 
-
-If you'd like to help us enhance Flow Scanner, please consider having a look at the [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
+Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).

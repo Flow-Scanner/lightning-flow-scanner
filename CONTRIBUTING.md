@@ -1,0 +1,3 @@
+The `lightning-flow-scanner`, was previously unpublished from the npm registry due to as remote code execution (RCE) vulnerability in its core dependency, `lightning-flow-scanner-core`. The vulnerability, caused by unsafe custom rule loading, has been addressed in the [v5 release of the core](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). Prioritizing security, we've removed custom rules for a safer tool.
+
+Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
