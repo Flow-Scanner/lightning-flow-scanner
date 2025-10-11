@@ -1,6 +1,6 @@
 {
   "name": "lightning-flow-scanner-vsx",
-  "displayName": "Lightning Flow Scanner CE",
+  "displayName": "Lightning Flow Scanner VSX",
   "publisher": "ForceConfigControl",
   "license": "AGPL-3.0",
   "repository": {
@@ -8,14 +8,15 @@
     "url": "https://github.com/Flow-Scanner/lightning-flow-scanner-vsx"
   },
   "icon": "media/lightningflow.png",
-  "description": "A Visual Studio Code Extension designed to proactively enforce secure and maintainable Salesforce Flows. It detects unsafe running contexts, hardcoded IDs and URLs, overly broad field access, unhandled nulls, and inefficient database operations, helping teams ensure their automations are safe and reliable.",
-  "version": "1.7.0",
+  "description": "A VS Code Extension for analysis and optimization of Salesforce Flows. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and tests integration.",
+  "version": "1.7.2",
   "engines": {
     "vscode": "^1.99.1"
   },
   "categories": [
-    "Other"
+    "Linters"
   ],
+  "homepage": "https://flow-scanner.github.io/lightning-flow-scanner-vsx",
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
@@ -98,9 +99,6 @@
     "build-webapp": "rollup -c",
     "build": "npm run v:update && rollup -c && vsce package",
     "build:beta": "npm run v:update && rollup -c && vsce package --pre-release",
-    "deploy:minor": "vsce publish minor",
-    "deploy:major": "vsce publish major",
-    "deploy:patch": "vsce publish patch",
     "package": "webpack --mode production --devtool hidden-source-map --config ./build/node-extension.webpack.config.js",
     "test-compile": "tsc -p ./",
     "test-watch": "tsc -watch -p ./",
@@ -187,5 +185,16 @@
     "uuid": "^11.0.5",
     "xml2js": "^0.6.2",
     "yaml": "^2.8.0"
-  }
+  },
+  "keywords": [
+    "salesforce",
+    "flow",
+    "linter",
+    "static analysis",
+    "security scanner",
+    "flow scanner",
+    "salesforce flow",
+    "best practices",
+    "code quality"
+  ]
 }
