@@ -3,9 +3,11 @@
     <img src="media/bannerslim.png" style="width: 41%;" />
   </a>
 </p>
-<p align="center">Scans for unsafe contexts, hardcoded IDs, and other issues to  optimize your Flows.</p>
+<p align="center">Scans for unsafe contexts, hardcoded IDs, and other issues to optimize your Flows.</p>
 
-[![Flow Overview](media/demo.gif)](https://github.com/Flow-Scanner)
+<p align="center">
+ <img src="media/demo.gif" alt="Flow Overview" width="88%" />
+</p>
 
 ## Features/Commands
 
@@ -36,7 +38,7 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
    ```bash
    npm install
    ```
-3. run locally
+3. run dev environment
 
    ```
    npm run watch
@@ -47,8 +49,8 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
    npm run build
    ```
 
-## Note on the original project
+## This is a fork
 
 The original `lightning-flow-scanner-vsce` package was unpublished from the Visual Studio Marketplace after a Remote Code Execution (RCE) vulnerability was identified in its core dependency, `lightning-flow-scanner-core`. This issue, caused by unsafe custom rule loading, has been fully resolved in the [v5.1.0 release of the core library](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). The [lightning-flow-scanner-vsx](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx) fork, focusses on security and maintainability.
 
-If you'd like to help us enhance Lightning Flow Scanner, please consider having a look at the [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
+Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
