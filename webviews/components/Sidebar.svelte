@@ -8,6 +8,12 @@
         });
     }
 
+    function configRules() {
+      tsvscode.postMessage({
+            type: "configRules"
+        });
+    }
+
     function scanFlows() {
       tsvscode.postMessage({
             type: "scanFlows"
@@ -31,6 +37,9 @@
     <div class="sb">
     <Banner/>
       <nav aria-label="Sidebar">
+        <button class="btn btn-blue" on:click={configRules}>
+          Configure Rules
+        </button>
         <button class="btn btn-blue" on:click={scanFlows}>
           Scan Flows
         </button>

@@ -9,6 +9,7 @@ import { CacheProvider } from '../providers/cache-provider';
 import { testdata } from '../store/testdata';
 import { OutputChannel } from '../providers/outputChannel';
 import { ConfigProvider } from '../providers/config-provider';
+import * as YAML from 'yaml';
 
 const { USE_NEW_CONFIG: isUseNewConfig } = process.env;
 
@@ -40,82 +41,150 @@ export default class Commands {
     vscode.env.openExternal(url);
   }
 
-  private async configRules() {
-    if (isUseNewConfig === 'true') {
-      await this.ruleConfiguration();
+private async configRules() {
+  type RuleWithExpression = { severity: string; expression?: string };
+  type RuleConfig = Record<string, RuleWithExpression>;
+
+  // If new YAML config flow is enabled
+  if (isUseNewConfig === 'true') {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders || workspaceFolders.length === 0) {
+      vscode.window.showErrorMessage('No workspace folder found.');
       return;
     }
-    const allRules: core.IRuleDefinition[] = [
-      ...core.getRules()
-    ];
-    const ruleConfig = { rules: {} };
 
-    let items = allRules.map((rule) => {
-      return { label: rule.label, value: rule.name, picked: true };
-    });
+    const workspacePath = workspaceFolders[0].uri.fsPath;
+    const configProvider = new ConfigProvider();
 
-    const selectedRules = (await vscode.window.showQuickPick(items, {
-      canPickMany: true,
-    })) as { label: string; value: string }[];
+    try {
+      const configResult = await configProvider.discover(workspacePath);
 
-    for (const rule of allRules) {
-      if (selectedRules.map((r) => r.value).includes(rule.name)) {
-        ruleConfig.rules[rule.name] = { severity: 'error' };
+      // Type assertion for safe access
+      const configTyped = configResult.config as { rules?: RuleConfig } | undefined;
+      const rules: RuleConfig = configTyped?.rules ?? {};
+
+      // Prompt for missing expressions
+      if (!rules.FlowName?.expression) {
+        const naming = await vscode.window.showInputBox({
+          prompt: 'Define a naming convention for Flow Names (REGEX format).',
+          placeHolder: '[A-Za-z0-9]+_[A-Za-z0-9]+',
+          value: '[A-Za-z0-9]+_[A-Za-z0-9]+',
+        });
+        if (naming) rules.FlowName = { severity: 'error', expression: naming };
       }
+
+      if (!rules.APIVersion?.expression) {
+        const apiVersion = await vscode.window.showInputBox({
+          prompt: 'Set an API Version rule (e.g. ">50" or ">=60").',
+          placeHolder: '>50',
+          value: '>50',
+        });
+        if (apiVersion) rules.APIVersion = { severity: 'error', expression: apiVersion };
+      }
+
+      // Persist updated YAML config using yaml.stringify
+      const yamlString = YAML.stringify(configResult.config);
+      await vscode.workspace.fs.writeFile(
+        vscode.Uri.file(configResult.fspath),
+        new TextEncoder().encode(yamlString)
+      );
+
+      // Store rules in cache
+      await CacheProvider.instance.set('ruleconfig', rules);
+      OutputChannel.getInstance().logChannel.debug('Stored YAML rule config', rules);
+
+      // Open config file in editor
+      const document = await vscode.workspace.openTextDocument(configResult.fspath);
+      await vscode.window.showTextDocument(document);
+      vscode.window.showInformationMessage(`Loaded configuration from ${configResult.fspath}`);
+      return;
+    } catch (err: any) {
+      vscode.window.showErrorMessage(`Error loading configuration: ${err?.message || err}`);
+      return;
     }
-    if (selectedRules.map((r) => r.value).includes('FlowName')) {
-      const namingConventionString = await vscode.window.showInputBox({
-        prompt:
-          'Readability of a flow is very important. Setting a naming convention for the Flow Name will improve the findability/searchability and overall consistency. You can define your default naming convention using REGEX.',
-        placeHolder: '[A-Za-z0-9]+_[A-Za-z0-9]+',
-        value: '[A-Za-z0-9]+_[A-Za-z0-9]+',
-      });
-      ruleConfig.rules['FlowName'] = {
-        severity: 'error',
-        expression: namingConventionString,
-      };
-      await vscode.workspace
-        .getConfiguration()
-        .update(
-          'lightningFlowScanner.NamingConvention',
-          namingConventionString,
-          true
-        );
-    }
-    if (selectedRules.map((r) => r.value).includes('APIVersion')) {
-      const apiVersionEvalExpressionString = await vscode.window.showInputBox({
-        prompt:
-          ' The Api Version has been available as an attribute on the Flow since API v50.0 and it is recommended to limit variation and to update them on a regular basis. Set an expression to set a valid range of API versions(Minimum 50).',
-        placeHolder: '>50',
-        value: '>50',
-      });
-      ruleConfig.rules['APIVersion'] = {
-        severity: 'error',
-        expression: apiVersionEvalExpressionString,
-      };
-      await vscode.workspace
-        .getConfiguration()
-        .update(
-          'lightningFlowScanner.APIVersion',
-          apiVersionEvalExpressionString,
-          true
-        );
-    }
-    await CacheProvider.instance.set('ruleconfig', ruleConfig);
-    OutputChannel.getInstance().logChannel.debug(
-      'Stored rule configurations',
-      ruleConfig
-    );
   }
+
+  // ----- Legacy QuickPick flow -----
+  const allRules: core.IRuleDefinition[] = [...core.getRules()];
+  const ruleConfig: RuleConfig = {};
+
+  const items = allRules.map((rule) => ({
+    label: rule.label,
+    value: rule.name,
+    picked: true,
+  }));
+
+  const selectedRules = (await vscode.window.showQuickPick(items, {
+    canPickMany: true,
+  })) as { label: string; value: string }[];
+
+  if (!selectedRules) {
+    vscode.window.showInformationMessage('No rules selected.');
+    return;
+  }
+
+  for (const rule of allRules) {
+    if (selectedRules.map((r) => r.value).includes(rule.name)) {
+      ruleConfig[rule.name] = { severity: 'error' };
+    }
+  }
+
+  // Prompt for FlowName expression if selected
+  if (selectedRules.some((r) => r.value === 'FlowName')) {
+    const naming = await vscode.window.showInputBox({
+      prompt: 'Define a naming convention for Flow Names (REGEX format).',
+      placeHolder: '[A-Za-z0-9]+_[A-Za-z0-9]+',
+      value: '[A-Za-z0-9]+_[A-Za-z0-9]+',
+    });
+    if (naming) {
+      ruleConfig['FlowName'] = { severity: 'error', expression: naming };
+      await vscode.workspace
+        .getConfiguration()
+        .update('lightningFlowScanner.NamingConvention', naming, true);
+    }
+  }
+
+  // Prompt for APIVersion expression if selected
+  if (selectedRules.some((r) => r.value === 'APIVersion')) {
+    const apiVersion = await vscode.window.showInputBox({
+      prompt: 'Set an API Version rule (e.g. ">50" or ">=60").',
+      placeHolder: '>50',
+      value: '>50',
+    });
+    if (apiVersion) {
+      ruleConfig['APIVersion'] = { severity: 'error', expression: apiVersion };
+      await vscode.workspace
+        .getConfiguration()
+        .update('lightningFlowScanner.APIVersion', apiVersion, true);
+    }
+  }
+
+  // Store legacy rules in cache
+  await CacheProvider.instance.set('ruleconfig', ruleConfig);
+  OutputChannel.getInstance().logChannel.debug('Stored legacy rule config', ruleConfig);
+}
+
 
   private async ruleConfiguration() {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders || workspaceFolders.length === 0) {
+      vscode.window.showErrorMessage('No workspace folder found.');
+      return;
+    }
+
+    const workspacePath = workspaceFolders[0].uri.fsPath;
     const configProvider = new ConfigProvider();
-    const config = await configProvider.discover(
-      vscode.workspace.workspaceFolders?.[0].uri.path
-    );
-    const document = await vscode.workspace.openTextDocument(config.fspath);
-    await vscode.window.showTextDocument(document);
+
+    try {
+      const config = await configProvider.discover(workspacePath);
+      const document = await vscode.workspace.openTextDocument(config.fspath);
+      await vscode.window.showTextDocument(document);
+      vscode.window.showInformationMessage(`Loaded configuration from ${config.fspath}`);
+    } catch (err: any) {
+      vscode.window.showErrorMessage(`Error loading configuration: ${err?.message || err}`);
+    }
   }
+
 
   private async debugView() {
     let results = testdata as unknown as core.ScanResult[];

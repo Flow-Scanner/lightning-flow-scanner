@@ -11,8 +11,8 @@
 
 Use our side bar or the **Command Palette** and type `Flow Scanner` to see the list of all available commands.
 
+* `Configure Rules` Allows to define rules and expressions as per defined in the [core documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-core).
 * `Scan Flows` allows choosing either a directory or a selection of flows to run the analysis against.
-  *More information on the default rules can be found in the [core documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-core).*
 * `Fix Flows` will apply available fixes automatically.
 * `Open Documentation` can be used to reference the documentation.
 
@@ -23,7 +23,6 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
 | `lightningFlowScanner.SpecifyFiles`     | Specify flow file paths instead of a root directory.                              | `false`                       |
 | `lightningFlowScanner.NamingConvention` | Specify a REGEX expression to use as Flow Naming convention.                      | `"[A-Za-z0-9]+_[A-Za-z0-9]+"` |
 | `lightningFlowScanner.APIVersion`       | Specify an expression to validate the API version, i.e. '===50'(use at least 50). | `">50"`                       |
-| `lightningFlowScanner.Reset`            | Reset all configurations on every scan                                            | `false`                       |
 
 ## Development Setup
 
