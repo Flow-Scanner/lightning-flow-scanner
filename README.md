@@ -9,7 +9,7 @@
  <img src="media/demo.gif" alt="Flow Overview" width="88%" />
 </p>
 
-## Features/Commands
+## Usage
 
 Use our side bar or the **Command Palette** and type `Flow Scanner` to see the list of all available commands.
 
@@ -18,7 +18,7 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
 * `Fix Flows` will apply available fixes automatically.
 * `Open Documentation` can be used to reference the documentation.
 
-## Configuration Options
+## Configuration
 
 | Key                                       | Description                                                                       | Default Value                   |
 | ----------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------- |
@@ -26,7 +26,7 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
 | `lightningFlowScanner.NamingConvention` | Specify a REGEX expression to use as Flow Naming convention.                      | `"[A-Za-z0-9]+_[A-Za-z0-9]+"` |
 | `lightningFlowScanner.APIVersion`       | Specify an expression to validate the API version, i.e. '===50'(use at least 50). | `">50"`                       |
 
-## Development Setup
+## Development
 
 1. Clone the repo:
 
@@ -49,8 +49,8 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
    npm run build
    ```
 
-## This is a fork
+## Contributing
 
 The original `lightning-flow-scanner-vsce` package was unpublished from the Visual Studio Marketplace after a Remote Code Execution (RCE) vulnerability was identified in its core dependency, `lightning-flow-scanner-core`. This issue, caused by unsafe custom rule loading, has been fully resolved in the [v5.1.0 release of the core library](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). The [lightning-flow-scanner-vsx](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx) fork, focusses on security and maintainability.
 
-Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
+###### Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file).
