@@ -9,7 +9,7 @@
   },
   "icon": "media/lightningflow.png",
   "description": "A VS Code Extension for analysis and optimization of Salesforce Flows. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and tests integration.",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "engines": {
     "vscode": "^1.99.1"
   },
@@ -90,10 +90,10 @@
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack --config ./build/node-extension.webpack.config.js",
-    "watch": "npm run v:update && concurrently \"rollup -c -w\" \"webpack --watch --config ./build/node-extension.webpack.config.js\"",
+    "watch": "concurrently \"rollup -c -w\" \"webpack --watch --config ./build/node-extension.webpack.config.js\"",
     "build-webapp": "rollup -c",
-    "build": "npm run v:update && rollup -c && vsce package",
-    "build:beta": "npm run v:update && rollup -c && vsce package --pre-release",
+    "build": "rollup -c && vsce package",
+    "build:beta": "rollup -c && vsce package --pre-release",
     "package": "webpack --mode production --devtool hidden-source-map --config ./build/node-extension.webpack.config.js",
     "test-compile": "tsc -p ./",
     "test-watch": "tsc -watch -p ./",
@@ -105,15 +105,14 @@
     "________": "scripts for reactive-vscode",
     "v:dev": "run-p v:dev:*",
     "v:build:reactive": "tsup --env.NODE_ENV production --treeshake",
-    "v:build:vite": "npm run v:update && vue-tsc --noEmit -p beta-vscode.tsconfig.json && vite build",
+    "v:build:vite": "vue-tsc --noEmit -p beta-vscode.tsconfig.json && vite build",
     "v:dev:reactive": "tsup --watch ./src --env.NODE_ENV development",
     "v:dev:vite": "vite",
     "v:vite:preview": "vite preview",
     "v:typecheck:reactive": "tsc --noEmit -p reactive-vscode.tsconfig.json",
     "v:vscode:prepublish:reactive": "pnpm run build",
     "v:test:reactive": "jest",
-    "v:test": "vitest",
-    "v:update": "vscode-ext-gen --output src/generated/meta.ts"
+    "v:test": "vitest"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.2",
@@ -166,7 +165,6 @@
     "vite": "^6.3.5",
     "vite-plugin-vue-devtools": "^7.7.6",
     "vitest": "^3.1.3",
-    "vscode-ext-gen": "^1.0.2",
     "vue": "3.5.14",
     "vue-tsc": "2.2.10",
     "wdio-vscode-service": "^6.1.2",
@@ -175,7 +173,7 @@
   },
   "dependencies": {
     "convert-array-to-csv": "^2.0.0",
-    "lightning-flow-scanner-core": "^5.9.4",
+    "lightning-flow-scanner-core": "^5.9.7",
     "tabulator-tables": "^6.3.1",
     "uuid": "^11.0.5",
     "xml2js": "^0.6.2",
@@ -192,5 +190,8 @@
     "best practices",
     "code quality",
     "salesforce automation"
-  ]
+  ],
+  "volta": {
+    "node": "20.13.1"
+  }
 }

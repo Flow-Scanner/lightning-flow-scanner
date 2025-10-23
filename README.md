@@ -28,6 +28,14 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
 
 ## Development
 
+> This project optionally uses [Volta](https://volta.sh) to manage Node.js versions. Install Volta with:
+>
+> ```sh
+> curl https://get.volta.sh | bash
+> ```
+>
+> Volta will automatically use the Node.js version defined in `package.json`.
+
 1. Clone the repo:
 
    ```bash
