@@ -11,7 +11,7 @@
     "cosmiconfig": "^9.0.0",
     "fs-extra": "^11.3.0",
     "glob": "^11.0.3",
-    "lightning-flow-scanner-core": "^5.9.0"
+    "lightning-flow-scanner-core": "^5.9.7"
   },
   "devDependencies": {
     "@oclif/plugin-help": "6.2.32",
@@ -67,15 +67,9 @@
   },
   "repository": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git",
   "scripts": {
-    "start": "ts-node bin/run",
-    "lint": "eslint",
-    "postpack": "rm -f oclif.manifest.json",
-    "prepack": "rm -rf lib && tsc -b && oclif manifest && oclif readme",
-    "prettier": "prettier --write '**/*.{js,json,md,ts,yaml,yml}'",
-    "test": "nyc --include src npm run test:unit",
-    "pretest": "npm run prepack",
-    "test:unit": "mocha -r ts-node/register test/**/*.test.ts",
-    "version": "oclif readme && git add README.md",
+    "build": "rm -rf lib && tsc -b && oclif manifest && oclif readme",
+    "prepack": "npm run build",
+    "test": "mocha -r ts-node/register test/**/*.test.ts",
     "lfs:link": "npm link lightning-flow-scanner-core && npm pack && sf plugins link"
   },
   "type": "module",

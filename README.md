@@ -186,4 +186,4 @@ NODE_OPTIONS=--inspect-brk /path/to/lightning-flow-scanner-cli/bin/run flow:scan
 
 2. **Attach Debugger**: Open your local Salesforce DX project in Visual Studio Code, set desired breakpoints, and attach the debugger to the remote session. For more detailed information, you can refer to the [wiki](https://github.com/salesforcecli/cli/wiki) of the Salesforce CLI repository.
 
-Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
+Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file).
