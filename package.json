@@ -26,7 +26,7 @@
     "@types/sinon": "17.0.4",
     "@types/sinonjs__fake-timers": "8.1.5",
     "@typescript-eslint/eslint-plugin": "8.46.2",
-    "@typescript-eslint/parser": "8.38.0",
+    "@typescript-eslint/parser": "^8.46.2",
     "chai": "6.2.0",
     "eslint": "9.38.0",
     "eslint-config-prettier": "10.1.8",
