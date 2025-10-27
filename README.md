@@ -143,7 +143,7 @@ Specifying exceptions can be done by flow, rule and result(s), as shown in the f
 1. **Clone the repository**
 
 ```bash
-  git clone https://github.com/Flow-Scanner/lightning-flow-scanner-vsx.git
+  git clone https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git
 ```
 
 2. **Install Dependencies**
