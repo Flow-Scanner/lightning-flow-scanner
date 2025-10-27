@@ -3,26 +3,25 @@
     <img src="docs/images/banner.png" style="width: 41%;" />
   </a>
 </p>
-<p align="center">Scans for unsafe contexts, hardcoded IDs, and other issues to  optimize your Flows.</p>
+<p align="center"><i>Scans for unsafe contexts, hardcoded IDs, and other issues to  optimize your Flows.</i></p>
 
 ![FlowScan example](docs/images/sfdxgif.gif)
 
-- [Installation](#installation)
-- [Usage](#usage)
+- **[Installation](#installation)**
+- **[Usage](#usage)**
   - [Options](#options)
-  - [Examples](#examples)
-- [Configuration](#configuration)
+- **[Configuration](#configuration)**
   - [Defining the severity per rule](#defining-the-severity-per-rule)
   - [Specifying an exception](#specifying-an-exception)
   - [Configuring an expression](#configuring-an-expression)
-- [Development](#development)
+- **[Development](#development)**
 
 ## Installation
 
 Install with SFDX:
 
 ```sh-session
-sfdx plugins:install lightning-flow-scanner
+sf plugins install lightning-flow-scanner
 ```
 
 Install with NPM:
@@ -33,11 +32,11 @@ npm install -g lightning-flow-scanner
 
 ## Usage
 
-```sh-session
-sfdx flow:scan [options]
-```
+Lightning Flow Scanner CLI is plug-and-play. Open any project with flows and run `sf flow:scan`; all default rules and thresholds are applied automatically.
 
-***To learn more about the default rules and options, see the [core documentation](https://flow-scanner.github.io/lightning-flow-scanner-core/).***
+```sh-session
+sf flow:scan [options]
+```
 
 ### Options
 
@@ -57,27 +56,11 @@ sfdx flow:scan [options]
   --loglevel=(trace|debug|info|warn|error|fatal)                    [default: warn] logging level.
 ```
 
-### Examples
-
-You can test the scanner by simply opening an existing project that contains flows and running the scan without any configurations or parameters. This way all the default rules are autmatically included in the scan.
-
-```sh-sessions
-sfdx flow:scan
-```
-
-```sh-sessions
-sfdx flow:scan --json
-```
-
-```sh-sessions
-sfdx flow:scan --config path/to/.flow-scanner.json
-```
-
 ## Configuration
 
 Create a .flow-scanner.json file in order to configure:
 
-- The ruleset to be executed.
+- A defined ruleset to be executed.
 - The severity of violating any specific rule.
 - Custom expressions or rule implementations.
 - Any known exceptions that should be ignored during scanning.
@@ -112,6 +95,25 @@ When the severity is not provided it will be `error` by default. Other available
 }
 ```
 
+### Configuring an expression
+
+Some rules have additional attributes to configure, such as the expression, that will overwrite default values. These can be configured in the same way as severity as shown in the following example. For more information on the available rules and configurations, please review the [flow scanner documentation](https://flow-scanner.github.io/lightning-flow-scanner-core/).
+
+```json
+{
+  "rules": {
+    "APIVersion": {
+      "severity": "error",
+      "expression": "===58"
+    },
+    "FlowName": {
+      "severity": "error",
+      "expression": "[A-Za-z0-9]"
+    }
+  }
+}
+```
+
 ### Specifying an exception
 
 Specifying exceptions can be done by flow, rule and result(s), as shown in the following example.
@@ -120,35 +122,10 @@ Specifying exceptions can be done by flow, rule and result(s), as shown in the f
 {
   "exceptions": {
     "AssignTaskOwner": {
-      "UnusedVariable": [
-        "somecount"
-      ]
+      "UnusedVariable": ["somecount"]
     },
-    "GetAccounts":{
-      "UnusedVariable": [
-        "incvar"
-      ]
-    }
-  }
-}
-```
-
-### Configuring an expression
-
-Some rules have additional attributes to configure, such as the expression, that will overwrite default values. These can be configured in the same way as severity as shown in the following example.
-
-```json
-{
-  "rules": {
-    "APIVersion":
-    {
-        "severity": "error",
-        "expression": "===58"
-    },
-    "FlowName":
-    {
-        "severity": "error",
-        "expression": "[A-Za-z0-9]"
+    "GetAccounts": {
+      "UnusedVariable": ["incvar"]
     }
   }
 }
@@ -156,34 +133,49 @@ Some rules have additional attributes to configure, such as the expression, that
 
 ## Development
 
-### Preparing for Changes
+> This project optionally uses [Volta](https://volta.sh) to manage Node.js versions. Install Volta with:
+>
+> ```sh
+> curl https://get.volta.sh | bash
+> ```
+>
+> Volta will automatically use the Node.js version defined in `package.json`.
 
-1. **Clone Project**: Clone the Lightning Flow Scanner Salesforce CLI repository.
-2. **Install Dependencies**: Open the directory and run `npm install` in the terminal to install the dependencies.
-3. **Optional: Make changes**: For example, if you want to upgrade the core module using npm, you can use the  command: `npm update lightning-flow-scanner-core`
-4. **Prepack**: Execute `npm run prepack` to build the plugin locally and prepare for packaging.
-5. **Link Plugin**: Link the plugin to your Salesforce DX environment using `sfdx plugins link .`.
-
-### Debugging the Plugin
-
-1. **Linking Core Module**: You may need to clone and link the `lightning-flow-scanner-core` locally to your project. This step is necessary if you're making changes to the core module and want those changes reflected in the plugin. You can link the core module by navigating to its directory and running:
+1. **Clone the repository**
 
 ```bash
-npm link
+  git clone https://github.com/Flow-Scanner/lightning-flow-scanner-vsx.git
 ```
 
-Then, navigate to the sfdx plugin directory and run:
+2. **Install Dependencies**
 
 ```bash
-npm link lightning-flow-scanner-core
+  npm install
 ```
 
-1. **Run Plugin**: In the terminal of your example flow project (or any other project intended for scanning), run the following command to start the plugin with debugging enabled:
+3. **Build Executables**
 
 ```bash
-NODE_OPTIONS=--inspect-brk /path/to/lightning-flow-scanner-cli/bin/run flow:scan
+  npm run build
 ```
 
-2. **Attach Debugger**: Open your local Salesforce DX project in Visual Studio Code, set desired breakpoints, and attach the debugger to the remote session. For more detailed information, you can refer to the [wiki](https://github.com/salesforcecli/cli/wiki) of the Salesforce CLI repository.
+4. **Run Tests**
 
-Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file).
+```bash
+  npm run build
+```
+
+5. **Linking** **Core Module (Optional)**
+
+If you’re developing or testing updates to the core module, you can link it locally:
+
+- In the core module directory, run:
+  ```bash
+  npm run link
+  ```
+- In this CLI project directory, run:
+  ```bash
+  npm link lightning-flow-scanner-core
+  ```
+
+<p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>

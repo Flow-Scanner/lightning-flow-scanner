@@ -8,9 +8,9 @@
 /tmp
 node_modules
 .yarn/install-state
-.yarn/**
 coverage/**
-.yarn/install-state.gz
 oclif.manifest.json
 *.log
 *.tgz
+
+.vscode/

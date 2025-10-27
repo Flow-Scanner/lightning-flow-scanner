@@ -1,3 +1,8 @@
-The `lightning-flow-scanner`, was previously unpublished from the npm registry due to as remote code execution (RCE) vulnerability in its core dependency, `lightning-flow-scanner-core`. The vulnerability, caused by unsafe custom rule loading, has been addressed in the [v5 release of the core](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). Prioritizing security, we've removed custom rules for a safer tool.
+Since 2021, the _Lightning Flow Scanner_ has grown from its roots in CLI and VS Code tools to empower Salesforce Developers across six free and open-source platforms—from CLI tools to native Salesforce apps—delivering a unified experience for robust static analysis of Flows. Our dedicated community has shared their expertise to deepen understanding of Flow optimization. Your support can amplify our impact. Here’s how you can contribute:
+
+- ⭐ Starring the project to show your support
+- 📢 Sharing our work with your network
+- 💬 Sharing feedback to help us improve
+- 💻 Contributing code to drive innovation
 
 Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
