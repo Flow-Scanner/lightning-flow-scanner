@@ -27,7 +27,7 @@
     "@types/sinonjs__fake-timers": "8.1.5",
     "@typescript-eslint/eslint-plugin": "8.38.0",
     "@typescript-eslint/parser": "8.38.0",
-    "chai": "5.2.1",
+    "chai": "6.2.0",
     "eslint": "9.38.0",
     "eslint-config-prettier": "10.1.8",
     "globby": "14.1.0",
