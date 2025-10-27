@@ -3,17 +3,16 @@
     <img src="docs/images/banner.png" style="width: 41%;" />
   </a>
 </p>
-<p align="center"><i>Scans for unsafe contexts, hardcoded IDs, and other issues to  optimize your Flows.</i></p>
+<p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize your Salesforce Flows</i></p>
 
 ![FlowScan example](docs/images/sfdxgif.gif)
 
 - **[Installation](#installation)**
 - **[Usage](#usage)**
-  - [Options](#options)
 - **[Configuration](#configuration)**
   - [Defining the severity per rule](#defining-the-severity-per-rule)
-  - [Specifying an exception](#specifying-an-exception)
   - [Configuring an expression](#configuring-an-expression)
+  - [Specifying an exception](#specifying-an-exception)
 - **[Development](#development)**
 
 ## Installation
@@ -38,7 +37,7 @@ Lightning Flow Scanner CLI is plug-and-play. Open any project with flows and run
 sf flow:scan [options]
 ```
 
-### Options
+Customize the scan behavior using the following options:
 
 ```sh-session
   -c, --config <path>                                               provide a path to the configuration file.
