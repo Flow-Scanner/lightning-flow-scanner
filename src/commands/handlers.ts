@@ -16,14 +16,15 @@ const { USE_NEW_CONFIG: isUseNewConfig } = process.env;
 export default class Commands {
   constructor(private context: vscode.ExtensionContext) { }
 
+  
   get handlers() {
     const rawHandlers: Record<string, (...args: any[]) => any> = {
-      'lightningflowscanner.openDocumentation': () => this.openDocumentation(),
-      'lightningflowscanner.configRules': () => this.configRules(),
-      'lightningflowscanner.debugView': () => this.debugView(),
-      'lightningflowscanner.scanFlows': () => this.scanFlows(),
-      'lightningflowscanner.fixFlows': () => this.fixFlows(),
-      'lightningflowscanner.calculateFlowTestCoverage': () => this.calculateFlowTestCoverage(),
+      'flowscanner.openDocumentation': () => this.openDocumentation(),
+      'flowscanner.configRules': () => this.configRules(),
+      'flowscanner.debugger': () => this.debugView(),
+      'flowscanner.scanFlows': () => this.scanFlows(),
+      'flowscanner.fixFlows': () => this.fixFlows(),
+      'flowscanner.calculateFlowTestCoverage': () => this.calculateFlowTestCoverage(),
     };
 
     return Object.entries(rawHandlers).map(([command, handler]) => {
@@ -140,7 +141,7 @@ private async configRules() {
       ruleConfig['FlowName'] = { severity: 'error', expression: naming };
       await vscode.workspace
         .getConfiguration()
-        .update('lightningFlowScanner.NamingConvention', naming, true);
+        .update('flowscanner.NamingConvention', naming, true);
     }
   }
 
@@ -155,7 +156,7 @@ private async configRules() {
       ruleConfig['APIVersion'] = { severity: 'error', expression: apiVersion };
       await vscode.workspace
         .getConfiguration()
-        .update('lightningFlowScanner.APIVersion', apiVersion, true);
+        .update('flowscanner.APIVersion', apiVersion, true);
     }
   }
 
@@ -235,7 +236,7 @@ private async configRules() {
       OutputChannel.getInstance().logChannel.trace('create panel');
       let configReset: vscode.WorkspaceConfiguration =
         vscode.workspace
-          .getConfiguration('lightningFlowScanner')
+          .getConfiguration('flowscanner')
           .get('Reset') ?? undefined;
       OutputChannel.getInstance().logChannel.trace(
         'load vscode stored configurations'

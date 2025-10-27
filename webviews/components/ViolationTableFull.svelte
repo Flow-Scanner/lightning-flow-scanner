@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { TabulatorFull as Tabulator } from "tabulator-tables";
     import { onMount } from "svelte";
 

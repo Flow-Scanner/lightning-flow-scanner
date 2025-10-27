@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"module": "Node16",
+		"target": "ES2020",
+		"outDir": "dist",
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+		"lib": [
+			"ES2020", "WebWorker"
+		],
+		"types": [
+            "mocha",
+			"node",
+			"@wdio/globals/types",
+            "@wdio/mocha-framework",
+            "wdio-vscode-service",
+		],
+		"sourceMap": true,
+		"rootDir": "specs",
+		"strict": false
+	},
+	"include": ["specs/*.ts"],
+}

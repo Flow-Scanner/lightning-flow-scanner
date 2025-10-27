@@ -29,7 +29,7 @@ export class ConfigProvider {
       (await this.attemptToReadConfig(configPath, findInJson, JSON.parse)) ??
       (await this.attemptToReadConfig(configPath, findInYml, parse));
 
-    const vscodeConfig = vscode.workspace.getConfiguration('lightningFlowScanner');
+    const vscodeConfig = vscode.workspace.getConfiguration('flowscanner');
 
     if (!configFile) {
       // No file exists, create a new one with workspace settings applied
