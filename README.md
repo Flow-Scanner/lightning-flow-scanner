@@ -85,3 +85,4 @@ If you’re developing or testing updates to the core module, you can link it lo
 The `lightning-flow-scanner-vsce` package was unpublished from the Visual Studio and Open VSX Marketplaces due to a vulnerability in `lightning-flow-scanner-core`, stemming from unsafe rule loading. This issue was addressed in [v5 of the core library](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). This fork, created on 22/09/2025, emphasizes security and maintainability.
 
 <p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>
+<!-- force-contributors-render: 2025-10-28 22:10:01 -->
