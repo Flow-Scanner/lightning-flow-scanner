@@ -18,7 +18,7 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
 * `Fix Flows` will apply available fixes automatically.
 * `Open Documentation` can be used to reference the documentation.
 
-**Zero user data collected.** All analysis runs 100% client-side.  
+**Privacy:** Zero user data collected. All processing is client-side.
 → See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx?tab=security-ov-file).
 
 ## Configuration
