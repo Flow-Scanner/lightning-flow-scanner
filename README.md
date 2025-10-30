@@ -46,14 +46,15 @@ Customize the scan behavior using the following options:
 
   -p, --files <C:\..\flow1.flow, C:\..\flow2.flow>                  provide a space-separated list of flow paths to scan.
 
-  -u, --targetusername <username>                                   retrieve the latest metadata from the target before the scan.
-
   -d, --directory <C:\..\force-app\main\default\flows>              provide a directory to scan.
 
   --json                                                            set output format as json.
 
   --loglevel=(trace|debug|info|warn|error|fatal)                    [default: warn] logging level.
 ```
+
+**Privacy:** Zero user data collected. All processing is client-side.
+→ See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-cli?tab=security-ov-file).
 
 ## Configuration
 
