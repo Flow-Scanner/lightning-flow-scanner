@@ -1,7 +1,6 @@
 import { SfCommand, Flags } from "@salesforce/sf-plugins-core";
-import { Messages, SfError } from "@salesforce/core";
+import { Messages } from "@salesforce/core";
 import chalk from "chalk";
-import { exec } from "child_process";
 
 import { loadScannerOptions } from "../../libs/ScannerConfig.js";
 import { FindFlows } from "../../libs/FindFlows.js";
@@ -73,30 +72,16 @@ export default class Scan extends SfCommand<Output> {
       description: "List of source flows paths to scan",
       charAliases: ["p"],
       exclusive: ["directory"],
-    }),
-    targetusername: Flags.string({
-      char: "u",
-      description:
-        "Retrieve the latest metadata from the target before the scan.",
-      required: false,
-      charAliases: ["o"],
-    }),
+    })
   };
 
 public async run(): Promise<Output> {
-  // 🚨 Step 0: Block risky APIs before anything else
   this.enforceSecurityGuards();
-
-  // Step 1: Parse CLI flags
   const { flags } = await this.parse(Scan);
   this.failOn = flags.failon || "error";
   
   this.spinner.start("Loading Lightning Flow Scanner");
   this.userConfig = await loadScannerOptions(flags.config);
-
-  if (flags.targetusername) {
-    await this.retrieveFlowsFromOrg(flags.targetusername);
-  }
 
   const targets: string[] = flags.files;
 
@@ -279,29 +264,5 @@ public async run(): Promise<Output> {
       }
       return dynamicImport(...args);
     };
-  }
-
-
-  private async retrieveFlowsFromOrg(targetusername: string) {
-    let errored = false;
-    this.spinner.start(chalk.yellowBright("Retrieving Metadata..."));
-    const retrieveCommand = `sf project retrieve start -m Flow -o "${targetusername}"`;
-    try {
-      await exec(retrieveCommand, { maxBuffer: 1000000 * 1024 });
-    } catch (exception) {
-      errored = true;
-      this.toErrorJson(exception);
-      this.spinner.stop(chalk.redBright("Retrieve Operation Failed."));
-    }
-    if (errored) {
-      throw new SfError(
-        messages.getMessage("errorRetrievingMetadata"),
-        "",
-        [],
-        1,
-      );
-    } else {
-      this.spinner.stop(chalk.greenBright("Retrieve Completed ✔."));
-    }
   }
 }
