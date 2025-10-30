@@ -15,17 +15,16 @@ Use our side bar or the **Command Palette** and type `Flow Scanner` to see the l
 
 * `Configure Rules` Allows to define rules and expressions as per defined in the [core documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-core).
 * `Scan Flows` allows choosing either a directory or a selection of flows to run the analysis against.
-* `Calc Coverage` calculates the test coverage of Flows in the default org.
 * `Fix Flows` will apply available fixes automatically.
 * `Open Documentation` can be used to reference the documentation.
 
 ## Configuration
 
-| Key                                       | Description                                                                       | Default Value                   |
-| ----------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------- |
-| `flowscanner.SpecifyFiles`     | Specify flow file paths instead of a root directory.                              | `false`                       |
-| `flowscanner.NamingConvention` | Specify a REGEX expression to use as Flow Naming convention.                      | `"[A-Za-z0-9]+_[A-Za-z0-9]+"` |
-| `flowscanner.APIVersion`       | Specify an expression to validate the API version, i.e. '===50'(use at least 50). | `">50"`                       |
+| Key                              | Description                                                                       | Default Value                 |
+| -------------------------------- | --------------------------------------------------------------------------------- | ----------------------------- |
+| `flowscanner.SpecifyFiles`     | Specify flow file paths instead of a root directory.                              | `false`                     |
+| `flowscanner.NamingConvention` | Specify a REGEX expression to use as Flow Naming convention.                      | `[A-Za-z0-9]+_[A-Za-z0-9]+` |
+| `flowscanner.APIVersion`       | Specify an expression to validate the API version, i.e. '===50'(use at least 50). | `>50`                       |
 
 ## Development
 

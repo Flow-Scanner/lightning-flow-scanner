@@ -31,12 +31,6 @@ export default class MessageService {
     vscode.commands.executeCommand('flowscanner.fixFlows');
   }
 
-  runTests(query: any) {
-    vscode.commands.executeCommand(
-      'flowscanner.calculateFlowTestCoverage'
-    );
-  }
-
   configRules(query: any) {
     vscode.commands.executeCommand('flowscanner.configRules');
   }

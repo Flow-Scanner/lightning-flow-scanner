@@ -43,23 +43,15 @@
     "commands": [
       {
         "command": "flowscanner.openDocumentation",
-        "title": "Open LFS Documentation"
+        "title": "Flow Scanner Documentation"
       },
       {
         "command": "flowscanner.scanFlows",
         "title": "Scan Flows"
       },
       {
-        "command": "flowscanner.debugger",
-        "title": "Debug Flow Scanner"
-      },
-      {
         "command": "flowscanner.fixFlows",
         "title": "Fix Flows"
-      },
-      {
-        "command": "flowscanner.calculateFlowTestCoverage",
-        "title": "Calculate Flow Coverage"
       },
       {
         "command": "flowscanner.configRules",

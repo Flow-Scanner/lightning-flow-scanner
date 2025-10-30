@@ -43,9 +43,6 @@
         <button class="btn btn-blue" on:click={scanFlows}>
           Scan Flows
         </button>
-        <button class="btn btn-blue" on:click={runTests}>
-          Calc Coverage %
-        </button>
         <button class="btn btn-blue" on:click={fixFlows}>
           Fix Flows
         </button>

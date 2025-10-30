@@ -1,12 +1,10 @@
 import * as vscode from 'vscode';
-import { RuleOverview } from '../panels/RuleOverviewPanel';
 import { SelectFlows } from '../libs/SelectFlows';
 import { SaveFlow } from '../libs/SaveFlow';
 import { ScanOverview } from '../panels/ScanOverviewPanel';
 import * as core from 'lightning-flow-scanner-core';
 import { findFlowCoverage } from '../libs/FindFlowCoverage';
 import { CacheProvider } from '../providers/cache-provider';
-import { testdata } from '../store/testdata';
 import { OutputChannel } from '../providers/outputChannel';
 import { ConfigProvider } from '../providers/config-provider';
 import * as YAML from 'yaml';
@@ -21,10 +19,8 @@ export default class Commands {
     const rawHandlers: Record<string, (...args: any[]) => any> = {
       'flowscanner.openDocumentation': () => this.openDocumentation(),
       'flowscanner.configRules': () => this.configRules(),
-      'flowscanner.debugger': () => this.debugView(),
       'flowscanner.scanFlows': () => this.scanFlows(),
       'flowscanner.fixFlows': () => this.fixFlows(),
-      'flowscanner.calculateFlowTestCoverage': () => this.calculateFlowTestCoverage(),
     };
 
     return Object.entries(rawHandlers).map(([command, handler]) => {
@@ -165,57 +161,15 @@ private async configRules() {
   OutputChannel.getInstance().logChannel.debug('Stored legacy rule config', ruleConfig);
 }
 
-
-  private async ruleConfiguration() {
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    if (!workspaceFolders || workspaceFolders.length === 0) {
-      vscode.window.showErrorMessage('No workspace folder found.');
-      return;
-    }
-
-    const workspacePath = workspaceFolders[0].uri.fsPath;
-    const configProvider = new ConfigProvider();
-
-    try {
-      const config = await configProvider.discover(workspacePath);
-      const document = await vscode.workspace.openTextDocument(config.fspath);
-      await vscode.window.showTextDocument(document);
-      vscode.window.showInformationMessage(`Loaded configuration from ${config.fspath}`);
-    } catch (err: any) {
-      vscode.window.showErrorMessage(`Error loading configuration: ${err?.message || err}`);
-    }
-  }
-
-
-  private async debugView() {
-    let results = testdata as unknown as core.ScanResult[];
-    await CacheProvider.instance.set('results', results);
-    ScanOverview.createOrShow(this.context.extensionUri, results);
-    await vscode.commands.executeCommand(
-      'workbench.action.webview.openDeveloperTools'
-    );
-  }
-
-  private async calculateFlowTestCoverage() {
-    const results = CacheProvider.instance.get('results');
-    ScanOverview.createOrShow(this.context.extensionUri, []);
-    if (results && results.length > 0) {
-      const coverageMap = await findFlowCoverage(results);
-      const newResults = [];
-      for (let result of results) {
-        let flowName = result.flow.name;
-        const coverage = coverageMap.get(flowName);
-        result['coverage'] = coverage;
-        newResults.push(result);
-        await CacheProvider.instance.set('results', newResults);
-        ScanOverview.createOrShow(this.context.extensionUri, newResults);
-      }
-    } else {
-      vscode.window.showInformationMessage(
-        'No results found. Please make sure to complete a scan before calculating coverage.'
-      );
-    }
-  }
+  // debug view 
+  // private async debugView() {
+  //   let results = testdata as unknown as core.ScanResult[];
+  //   await CacheProvider.instance.set('results', results);
+  //   ScanOverview.createOrShow(this.context.extensionUri, results);
+  //   await vscode.commands.executeCommand(
+  //     'workbench.action.webview.openDeveloperTools'
+  //   );
+  // }
 
   private async scanFlows() {
     const rootPath = vscode.workspace.workspaceFolders?.[0]?.uri;
