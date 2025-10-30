@@ -28,5 +28,4 @@ We actively track and maintain an up-to-date inventory of all third-party depend
 | `lightning-flow-scanner-core` | [MIT](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/LICENSE.md) | Salesforce Flow scanning utilities             |
 | `tabulator-tables`            | [MIT](https://github.com/olifolkerd/tabulator/blob/master/LICENSE)                      | Interactive tables and data grids for web apps |
 | `uuid`                        | [MIT](https://github.com/uuidjs/uuid/blob/main/LICENSE.md)                              | Generates RFC-compliant UUIDs                  |
-| `xml2js`                      | [MIT](https://github.com/Leonidas-from-XIV/node-xml2js/blob/master/LICENSE)             | XML-to-JavaScript object converter             |
 | `yaml`                        | [ISC](https://github.com/eemeli/yaml/blob/main/LICENSE)                                 | YAML parser and stringifier for JavaScript     |

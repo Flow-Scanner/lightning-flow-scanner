@@ -3,7 +3,7 @@
     <img src="media/bannerslim.png" style="width: 41%;" />
   </a>
 </p>
-<p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize your Salesforce Flows</i></p>
+<p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
 <p align="center">
  <img src="media/demo.gif" alt="Flow Overview" width="88%" />
