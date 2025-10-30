@@ -14,7 +14,7 @@ If you discover a security vulnerability, please report it using [GitHub vulnera
 
 This project collects zero user data. No credentials, PII, payment info, health data, or user content is ever stored, transmitted, or shared. All analysis runs 100% client-side with no network calls to external services.
 
-**Note:** We temporarily fetch metadata (e.g., Flow metadata, timestamps) in-memory only for real-time functionality during your session. This data is never stored, logged, or transmitted and is discarded immediately when the session ends.
+**Note:** We temporarily use metadata (e.g., Flow metadata, timestamps) in-memory only for real-time functionality during your session. This data is never stored, logged, or transmitted and is discarded immediately when the session ends.
 
 ## Dependencies
 
