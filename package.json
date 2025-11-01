@@ -9,7 +9,6 @@
     "@salesforce/sf-plugins-core": "^12.2.3",
     "chalk": "^5.6.2",
     "cosmiconfig": "^9.0.0",
-    "fs-extra": "^11.3.0",
     "glob": "^11.0.3",
     "lightning-flow-scanner-core": "^5.9.7"
   },
