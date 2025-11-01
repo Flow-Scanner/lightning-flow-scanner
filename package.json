@@ -29,7 +29,7 @@
     "chai": "6.2.0",
     "eslint": "9.38.0",
     "eslint-config-prettier": "10.1.8",
-    "globby": "14.1.0",
+    "globby": "15.0.0",
     "mocha": "11.7.1",
     "nyc": "17.1.0",
     "oclif": "4.22.5",
