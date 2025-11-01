@@ -14,10 +14,7 @@
       "stopOnEntry": false,
       "sourceMaps": true,
       "outFiles": ["${workspaceRoot}/out/src/**/*.js"],
-      "preLaunchTask": "npm: watch",
-      "env": {
-        "USE_NEW_CONFIG": "true"
-      },
+      "preLaunchTask": "npm: watch"
     },
     {
       "args": [
@@ -40,24 +37,7 @@
       ],
       "outFiles": [
         "${workspaceFolder}/dist/**/*.js"
-      ],
-      "env": {
-        "USE_NEW_CONFIG": "true"
-      },
-    },
-    {
-      "name": "Extension Tests",
-      "type": "extensionHost",
-      "request": "launch",
-      "runtimeExecutable": "${execPath}",
-      "args": [
-        "--disable-extensions",
-        "--extensionDevelopmentPath=${workspaceFolder}",
-        "--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
-      ],
-      "outFiles": [
-        "${workspaceFolder}/out/test/**/*.js"
       ]
-    },
+    }
   ]
 }

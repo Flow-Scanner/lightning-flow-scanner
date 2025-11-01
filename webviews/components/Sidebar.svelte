@@ -20,12 +20,6 @@
         });
     }
 
-    function runTests() {
-      tsvscode.postMessage({
-            type: "runTests"
-        });
-    }
-
     function fixFlows() {
       tsvscode.postMessage({
             type: "fixFlows"

@@ -1,44 +1,57 @@
----
-#
-# Documentation:
-# https://help.github.com/en/articles/workflow-syntax-for-github-actions
-#
+name: "Build & Release"
 
-#######################################
-# Start the job on all push to master #
-#######################################
-name: 'Build & Deploy - RELEASE'
 on:
   release:
-    # Want to run the automation when a release is created
-    types: ['created']
+    types: [created]
 
-permissions: read-all
+permissions:
+  contents: read
+  id-token: write # for future OpenID CI auth to avoid PATs
 
 concurrency:
   group: ${{ github.ref_name }}-${{ github.workflow }}
   cancel-in-progress: true
 
-###############
-# Set the Job #
-###############
 jobs:
-  deploy:
+  release:
     runs-on: ubuntu-latest
-    permissions: read-all
-    environment:
-      name: release
+    environment: release
+
     steps:
-      - uses: actions/checkout@v4
-        # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v4.0.4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
-      - name: Setup Dependencies
+
+      - name: Install Dependencies
+        run: npm ci
+
+      # Snyk security scan (currently advisory)
+      - name: Snyk Security Scan (Advisory Mode)
+        if: env.SNYK_TOKEN != ''
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
-          npm ci
-          npm install -g @vscode/vsce ovsx
-      - name: Compile VSIX
-        run: npm run build
-      - name: Publish VSCE Marketplace
-        run: vsce publish --pat ${{ secrets.VSCE_PAT }} -i $(ls -all | grep "lightningflowscanner" | awk '{print $9}')
+          npm install -g snyk
+          snyk test || echo "❗ SNYK findings detected (not failing pipeline yet)"
+
+      - name: Build Extension Artifacts
+        run: npm run vscode:prepublish
+
+      - name: Run WDIO E2E Tests
+        run: npm run test
+
+      - name: Package VSIX
+        run: |
+          npm install -g @vscode/vsce
+          vsce package
+
+      - name: Publish to VS Code Marketplace
+        run: |
+          vsce publish --pat "${{ secrets.VSCE_PAT }}" --packagePath *.vsix
+        shell: bash

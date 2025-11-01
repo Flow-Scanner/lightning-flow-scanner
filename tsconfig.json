@@ -40,6 +40,5 @@
 		"jest.config.ts",
 		"tests",
 		"vite.config.ts",
-		"beta-webview"
 	]
 }

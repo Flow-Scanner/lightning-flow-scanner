@@ -11,23 +11,21 @@
 
 ## Usage
 
-Use our side bar or the **Command Palette** and type `Flow Scanner` to see the list of all available commands.
+Use our side bar or the **Command Palette** and type `flowscanner` to see the list of all available commands.
 
-* `Configure Rules` Allows to define rules and expressions as per defined in the [core documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-core).
-* `Scan Flows` allows choosing either a directory or a selection of flows to run the analysis against.
-* `Fix Flows` will apply available fixes automatically.
-* `Open Documentation` can be used to reference the documentation.
+* `Configure Flow Scanner` - Set up rules in `.flow-scanner.yml` (see [documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-core))
+* `Scan Flows` - Analyze a directory or selected flow files
+* `Fix Flows` - Automatically apply available fixes
+* `Flow Scanner Documentation` - Open the rules reference guide
 
 **Privacy:** Zero user data collected. All processing is client-side.
 → See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx?tab=security-ov-file).
 
 ## Configuration
 
-| Key                              | Description                                                                       | Default Value                 |
-| -------------------------------- | --------------------------------------------------------------------------------- | ----------------------------- |
-| `flowscanner.SpecifyFiles`     | Specify flow file paths instead of a root directory.                              | `false`                     |
-| `flowscanner.NamingConvention` | Specify a REGEX expression to use as Flow Naming convention.                      | `[A-Za-z0-9]+_[A-Za-z0-9]+` |
-| `flowscanner.APIVersion`       | Specify an expression to validate the API version, i.e. '===50'(use at least 50). | `>50`                       |
+| Key                          | Description                                          | Default Value |
+| ---------------------------- | ---------------------------------------------------- | ------------- |
+| `flowscanner.SpecifyFiles` | Specify flow file paths instead of a root directory. | `false`     |
 
 ## Development
 
@@ -84,7 +82,7 @@ If you’re developing or testing updates to the core module, you can link it lo
 
 ## VSCE to VSX
 
-The `lightning-flow-scanner-vsce` package was unpublished from the Visual Studio and Open VSX Marketplaces due to a vulnerability in `lightning-flow-scanner-core`, stemming from unsafe rule loading. This issue was addressed in [v5 of the core library](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). This fork, created on 22/09/2025, emphasizes security and maintainability.
+The `lightning-flow-scanner-vsce` package was unpublished from the Visual Studio and Open VSX Marketplaces due to a vulnerability stemming from unsafe rule loading. The issue was addressed in [v5 of the core library](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). This fork, created on 22/09/2025, emphasizes security and maintainability.
 
 <p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>
 <!-- force-contributors-render: 2025-10-28 22:10:01 -->

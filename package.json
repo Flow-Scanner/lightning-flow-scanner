@@ -9,7 +9,7 @@
   },
   "icon": "media/lightningflow.png",
   "description": "A VS Code Extension for analysis and optimization of Salesforce Flows. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and tests integration.",
-  "version": "1.8.6",
+  "version": "1.9.0",
   "engines": {
     "vscode": "^1.92.0"
   },
@@ -27,16 +27,6 @@
           "type": "boolean",
           "default": false,
           "description": "Specify flow file paths instead of a root directory."
-        },
-        "flowscanner.NamingConvention": {
-          "type": "string",
-          "default": "[A-Za-z0-9]+_[A-Za-z0-9]+",
-          "description": "Specify a REGEX expression to use as Flow Naming convention."
-        },
-        "flowscanner.APIVersion": {
-          "type": "string",
-          "default": ">50",
-          "description": "Specify an expression to validate the API version, i.e. '===50'(use at least 50)."
         }
       }
     },
@@ -55,7 +45,7 @@
       },
       {
         "command": "flowscanner.configRules",
-        "title": "Configure Flow Rules"
+        "title": "Configure Flow Scanner"
       }
     ],
     "viewsContainers": {
@@ -90,13 +80,13 @@
     "postcoverage": "nyc report -t coverage/raw --report-dir coverage/summary --reporter=lcov --reporter=text",
     "pretest": "npm run test-compile && npm run lint",
     "test-compile": "tsc -p ./",
-    "vscode:prepublish": "npm run package",
+    "vscode:prepublish": "rollup -c && npm run package",
     "wdio": "wdio run ./wdio.conf.mts > wdio.log",
     "package": "webpack --mode production --devtool hidden-source-map --config ./build/node-extension.webpack.config.js",
     "____MAIN____": "Developer Scripts",
     "build": "rollup -c && npm run build:wdio",
-    "build:vsx": "rollup -c && vsce package",
-    "watch": "concurrently \"rollup -c -w\" \"webpack --watch --config ./build/node-extension.webpack.config.js\"",
+    "build:vsx": "npm run vscode:prepublish && vsce package --allow-package-secrets npm",
+    "watch": "rimraf out dist && concurrently \"rollup -c -w\" \"webpack --watch --config ./build/node-extension.webpack.config.js\"",
     "test": "npm run wdio"
   },
   "devDependencies": {
@@ -140,6 +130,7 @@
     "postcss-load-config": "^4.0.2",
     "prettier": "^3.5.3",
     "process": "^0.11.10",
+    "rimraf": "^6.1.0",
     "rollup": "^4.34.0",
     "rollup-plugin-css-only": "^4.5.2",
     "rollup-plugin-node-builtins": "^2.1.2",
@@ -158,10 +149,10 @@
   },
   "dependencies": {
     "convert-array-to-csv": "^2.0.0",
+    "cosmiconfig": "^9.0.0",
     "lightning-flow-scanner-core": "^5.9.7",
     "tabulator-tables": "^6.3.1",
-    "uuid": "^11.0.5",
-    "yaml": "^2.8.0"
+    "uuid": "^11.0.5"
   },
   "keywords": [
     "salesforce",

@@ -12,19 +12,19 @@ const ESLintPlugin = require('eslint-webpack-plugin');
  * @returns {WebpackConfig}
  */
 const extensionConfig = (env, argv) => ({
-  target: 'node', // WDIO runs in Node.js context
-  mode: 'none', // Keep source close to original; set to 'production' for packaging
-  entry: './src/extension.ts', // Your entry point
+  target: 'node',
+  mode: 'none',
+  entry: './src/extension.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'extension.js',
     libraryTarget: 'commonjs2',
   },
   externals: {
-    vscode: 'commonjs vscode', // Exclude vscode module
+    vscode: 'commonjs vscode',
   },
   resolve: {
-    extensions: ['.ts', '.js'], // Support TypeScript and JavaScript
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
@@ -51,13 +51,13 @@ const extensionConfig = (env, argv) => ({
     }),
   ],
   cache: {
-    type: 'filesystem', // Speed up rebuilds
+    type: 'filesystem',
     name: argv.mode + '-wdio_' + env['wdio'] + '-coverage_' + env['coverage'],
     version: '1',
   },
-  devtool: 'nosources-source-map', // Same as original
+  devtool: 'nosources-source-map', 
   infrastructureLogging: {
-    level: 'log', // Same as original
+    level: 'log',
   },
 });
 

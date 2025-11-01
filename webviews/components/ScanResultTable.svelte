@@ -49,12 +49,6 @@
                     minWidth: 120 
                 },
                 {
-                    title: "% Test Coverage",
-                    field: "coverage",
-                    hozAlign: "center",
-                    width: 100,
-                },
-                {
                     title: "Details",
                     formatter: detailButton,
                     width: 100,
