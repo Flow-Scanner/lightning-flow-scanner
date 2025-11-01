@@ -5,7 +5,7 @@
   "description": "A Salesforce CLI plugin for static analysis and optimization of Flows. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and CI/CD integration to help users maintain secure and reliable Flow automations.",
   "dependencies": {
     "@oclif/core": "^4.5.4",
-    "@salesforce/core": "^8.18.7",
+    "@salesforce/core": "^8.23.4",
     "@salesforce/sf-plugins-core": "^12.2.3",
     "chalk": "^5.6.2",
     "cosmiconfig": "^9.0.0",
