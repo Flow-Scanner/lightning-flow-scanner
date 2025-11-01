@@ -29,6 +29,5 @@ We actively track and maintain an up-to-date inventory of all third-party depend
 | `@salesforce/sf-plugins-core`       | [BSD-3-Clause](https://github.com/salesforce/sf-plugins-core/blob/main/LICENSE) | Base library for Salesforce CLI plugins |
 | `chalk`                              | [MIT](https://github.com/chalk/chalk/blob/main/license) | Terminal string styling (colors) |
 | `cosmiconfig`                        | [MIT](https://github.com/davidtheclark/cosmiconfig/blob/main/LICENSE) | Config file loader for JavaScript/Node |
-| `fs-extra`                           | [MIT](https://github.com/jprichardson/node-fs-extra/blob/master/LICENSE) | Extended filesystem utilities |
 | `glob`                               | [MIT](https://github.com/isaacs/node-glob/blob/master/LICENSE) | File pattern matching |
 | `lightning-flow-scanner-core`        | [MIT](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/LICENSE.md) | Salesforce Flow scanning utilities |
