@@ -162,7 +162,7 @@ Specifying exceptions can be done by flow, rule and result(s), as shown in the f
 4. **Run Tests**
 
 ```bash
-  npm run build
+  npm run test
 ```
 
 5. **Linking** **Core Module (Optional)**
