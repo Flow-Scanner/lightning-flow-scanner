@@ -23,9 +23,46 @@ Use our side bar or the **Command Palette** and type `flowscanner` to see the li
 
 ## Configuration
 
-| Key                          | Description                                          | Default Value |
-| ---------------------------- | ---------------------------------------------------- | ------------- |
-| `flowscanner.SpecifyFiles` | Specify flow file paths instead of a root directory. | `false`     |
+It is recommended to set up a `.flow-scanner.yml` and define:
+
+- The rules to be executed.
+- The severity of violating any specific rule.
+- Rule properties such as REGEX expressions.
+- Any known exceptions that should be ignored during scanning.
+
+```json
+{
+  "rules": {
+    // Your rules here
+  },
+  "exceptions": {
+    // Your exceptions here
+  }
+}
+```
+
+Using the rules section of your configurations, you can specify the list of rules to be run. Furthermore, you can define the severity and configure expressions of rules.  Below is a breakdown of the available attributes of rule configuration:
+
+```json
+{
+  "rules": {
+    "<RuleName>": {
+      "severity": "<Severity>",
+      "expression": "<Expression>"
+    }
+  }
+}
+```
+
+Note: if you prefer JSON format, you can create a `.flow-scanner.json` file using the same format. For a more on configurations, review the [scanner documentation](https://flow-scanner.github.io/lightning-flow-scanner-core/#configurations).
+
+### Extension Settings
+
+| Extension Settings           | Description                                                         | Default Value |
+| ---------------------------- | ------------------------------------------------------------------- | ------------- |
+| `flowscanner.SpecifyFiles` | Set to true to select .Flow file paths instead of a root directory. | `false`     |
+
+---
 
 ## Development
 

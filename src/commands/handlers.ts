@@ -43,13 +43,16 @@ export default class Commands {
     // OutputChannel.getInstance().logChannel.debug('Raw config loaded:', JSON.stringify(rawConfig, null, 2));
 
     const rawRules = (rawConfig.rules as Record<string, unknown>) || {};
+
+    // todo implement beta 
+
     const rules: RuleConfig = {};
 
     for (const [name, rule] of Object.entries(rawRules)) {
       if (typeof rule === 'object' && rule !== null) {
         const r = rule as Record<string, unknown>;
         rules[name] = {
-          severity: String(r.severity ?? 'error'),
+          severity: String(r.severity ?? 'warning'),
           expression: r.expression !== undefined ? String(r.expression) : undefined
         };
       }
