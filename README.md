@@ -13,7 +13,7 @@
 
 Use our side bar or the **Command Palette** and type `flowscanner` to see the list of all available commands.
 
-* `Configure Flow Scanner` - Set up rules in `.flow-scanner.yml` (see [documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-core))
+* `Configure Flow Scanner` - Set up rules in `.flow-scanner.yml` (see [scanner documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-core))
 * `Scan Flows` - Analyze a directory or selected flow files
 * `Fix Flows` - Automatically apply available fixes
 * `Flow Scanner Documentation` - Open the rules reference guide
@@ -37,7 +37,8 @@ It is recommended to set up a `.flow-scanner.yml` and define:
   },
   "exceptions": {
     // Your exceptions here
-  }
+  },
+  "betamode": false // include rules currently in beta
 }
 ```
 
@@ -119,7 +120,7 @@ If you’re developing or testing updates to the core module, you can link it lo
 
 ## VSCE to VSX
 
-The `lightning-flow-scanner-vsce` package was unpublished from the Visual Studio and Open VSX Marketplaces due to a vulnerability stemming from unsafe rule loading. The issue was addressed in [v5 of the core library](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). This fork, created on 22/09/2025, emphasizes security and maintainability.
+The `lightning-flow-scanner-vsce` package was unpublished from the Visual Studio and Open VSX Marketplaces due to a vulnerability stemming from unsafe rule loading. The issue was addressed in [core library v5](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). This fork, created on 22/09/2025, emphasizes security and maintainability.
 
 <p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>
 <!-- force-contributors-render: 2025-10-28 22:10:01 -->
