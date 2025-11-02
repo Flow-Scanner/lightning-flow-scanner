@@ -9,12 +9,15 @@
  <img src="media/demo.gif" alt="Flow Overview" width="76%" />
 </p>
 
+---
+
 ## Table of contents
 
 - **[Usage](#usage)**
 - **[Configuration](#configuration)**
   - **[Scanner Options](#scanner-options)**
   - **[Extension Settings](#extension-settings)**
+- **[Installation](#installation)**
 - **[Development](#development)**
 
 ---
@@ -76,6 +79,22 @@ Note: if you prefer JSON format, you can create a `.flow-scanner.json` file usin
 | Extension Settings           | Description                                                         | Default Value |
 | ---------------------------- | ------------------------------------------------------------------- | ------------- |
 | `flowscanner.SpecifyFiles` | Set to true to select .Flow file paths instead of a root directory. | `false`     |
+
+---
+
+## Installation
+
+`lightning-flow-scanner-vsx` is available on:
+
+| Visual Studio Marketplace                                                                                                                                                                                                                          | Open VSX Registry                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [![VS Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/ForceConfigControl.lightning-flow-scanner-vsx?label=VS%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=ForceConfigControl.lightning-flow-scanner-vsx) | [![Open VSX Version](https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=Open%20VSX)](https://open-vsx.org/extension/ForceConfigControl/lightning-flow-scanner-vsx) |
+
+To install via CLI (VS Code)
+
+```bash
+code --install-extension ForceConfigControl.lightning-flow-scanner-vsx
+```
 
 ---
 
