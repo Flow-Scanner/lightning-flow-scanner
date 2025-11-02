@@ -3,16 +3,14 @@
     <img src="docs/images/banner.png" style="width: 41%;" />
   </a>
 </p>
-<p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize your Salesforce Flows</i></p>
+
+<p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
 ![FlowScan example](docs/images/sfdxgif.gif)
 
 - **[Installation](#installation)**
 - **[Usage](#usage)**
 - **[Configuration](#configuration)**
-  - [Defining the severity per rule](#defining-the-severity-per-rule)
-  - [Configuring an expression](#configuring-an-expression)
-  - [Specifying an exception](#specifying-an-exception)
 - **[Development](#development)**
 
 ## Installation
@@ -58,78 +56,40 @@ Customize the scan behavior using the following options:
 
 ## Configuration
 
-Create a .flow-scanner.json file in order to configure:
+It is recommended to set up configuration and define:
 
-- A defined ruleset to be executed.
+- The rules to be executed.
 - The severity of violating any specific rule.
-- Custom expressions or rule implementations.
+- Rule properties such as REGEX expressions.
 - Any known exceptions that should be ignored during scanning.
 
 ```json
 {
-    "rules": {
-        ...
-    },
-    "exceptions": {
-        ...
-    }
-}
-```
-
-_Note: if you prefer YAML format, you can create a `.flow-scanner.yml` file using the same format._
-
-### Defining the severity per rule
-
-When the severity is not provided it will be `error` by default. Other available values for severity are `warning` and `note`. Define the severity per rule as shown in the following example.
-
-```json
-{
   "rules": {
-    "FlowDescription": {
-      "severity": "warning"
-    },
-    "UnusedVariable": {
-      "severity": "error"
-    }
-  }
-}
-```
-
-### Configuring an expression
-
-Some rules have additional attributes to configure, such as the expression, that will overwrite default values. These can be configured in the same way as severity as shown in the following example. For more information on the available rules and configurations, please review the [flow scanner documentation](https://flow-scanner.github.io/lightning-flow-scanner-core/).
-
-```json
-{
-  "rules": {
-    "APIVersion": {
-      "severity": "error",
-      "expression": "===58"
-    },
-    "FlowName": {
-      "severity": "error",
-      "expression": "[A-Za-z0-9]"
-    }
-  }
-}
-```
-
-### Specifying an exception
-
-Specifying exceptions can be done by flow, rule and result(s), as shown in the following example.
-
-```json
-{
+    // Your rules here
+  },
   "exceptions": {
-    "AssignTaskOwner": {
-      "UnusedVariable": ["somecount"]
-    },
-    "GetAccounts": {
-      "UnusedVariable": ["incvar"]
+    // Your exceptions here
+  }
+}
+```
+
+Using the rules section of your configurations, you can specify the list of rules to be run. Furthermore, you can define the severity and configure expressions of rules. To include rules currently that are currently in beta, set `betarules` to true. Below is a breakdown of the available attributes of rule configuration:
+
+```json
+{
+  "rules": {
+    "<RuleName>": {
+      "severity": "<Severity>",
+      "expression": "<Expression>"
     }
   }
 }
 ```
+
+Note: if you prefer YAML format, you can create a `.flow-scanner.yml` file using the same format. For a more on configurations, review the [scanner documentation](https://flow-scanner.github.io/lightning-flow-scanner-core/#configurations).
+
+---
 
 ## Development
 
