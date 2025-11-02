@@ -175,7 +175,7 @@ If you’re developing or testing updates to the core module, you can link it lo
   ```
 - In this CLI project directory, run:
   ```bash
-  npm link lightning-flow-scanner-core
+  npm link @flow-scanner/lightning-flow-scanner-core
   ```
 
 <p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>

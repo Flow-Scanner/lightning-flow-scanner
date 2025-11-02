@@ -11,7 +11,7 @@ import pkg, {
   ScanResult,
   RuleResult,
   ResultDetails,
-} from "lightning-flow-scanner-core";
+} from "@flow-scanner/lightning-flow-scanner-core";
 import { inspect } from "util";
 const { parse: parseFlows, scan: scanFlows } = pkg;
 
