@@ -43,11 +43,12 @@ Customize the scan behavior using the following options:
 
   --json                                                            set output format as json.
 
+  -z, --betamode                                                     a runtime toggle to enable experimental beta rules.
+
   --loglevel=(trace|debug|info|warn|error|fatal)                    [default: warn] logging level.
 ```
 
-**Privacy:** Zero user data collected. All processing is client-side.
-→ See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-cli?tab=security-ov-file).
+**Privacy:** Zero user data collected. All processing is client-side. → See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-cli?tab=security-ov-file).
 
 ---
 

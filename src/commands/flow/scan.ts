@@ -1,11 +1,9 @@
 import { SfCommand, Flags } from "@salesforce/sf-plugins-core";
 import { Messages } from "@salesforce/core";
 import chalk from "chalk";
-
 import { loadScannerOptions } from "../../libs/ScannerConfig.js";
 import { FindFlows } from "../../libs/FindFlows.js";
 import { ScanResult as Output } from "../../models/ScanResult.js";
-
 import pkg, {
   ParsedFlow,
   ScanResult,
@@ -13,10 +11,13 @@ import pkg, {
   ResultDetails,
 } from "@flow-scanner/lightning-flow-scanner-core";
 import { inspect } from "util";
-const { parse: parseFlows, scan: scanFlows } = pkg;
+
+const {
+  parse: parseFlows,
+  scan: scanFlows,
+} = pkg;
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
-
 const messages = Messages.loadMessages("lightning-flow-scanner", "command");
 
 export default class Scan extends SfCommand<Output> {
@@ -37,7 +38,6 @@ export default class Scan extends SfCommand<Output> {
   public static requiresProject = false;
   protected static supportsUsername = true;
 
-  protected userConfig: object;
   protected failOn = "error";
   protected errorCounters: Map<string, number> = new Map<string, number>();
 
@@ -61,208 +61,169 @@ export default class Scan extends SfCommand<Output> {
       options: ["error", "warning", "note", "never"] as const,
       default: "error",
     })(),
-    retrieve: Flags.boolean({
-      char: "r",
-      description: "Force retrieve Flows from org at the start of the command",
-      default: false,
-    }),
     files: Flags.file({
       multiple: true,
       exists: true,
       description: "List of source flows paths to scan",
       charAliases: ["p"],
       exclusive: ["directory"],
-    })
+    }),
+    betamode: Flags.boolean({
+      char: "z",
+      description: "Enable beta rules at run-time (experimental)",
+      default: false,
+    }),
   };
 
-public async run(): Promise<Output> {
-  this.enforceSecurityGuards();
-  const { flags } = await this.parse(Scan);
-  this.failOn = flags.failon || "error";
-  
-  this.spinner.start("Loading Lightning Flow Scanner");
-  this.userConfig = await loadScannerOptions(flags.config);
+  public async run(): Promise<Output> {
+    const { flags } = await this.parse(Scan);
+    this.failOn = flags.failon || "error";
 
-  const targets: string[] = flags.files;
+    this.spinner.start("Loading Lightning Flow Scanner");
 
-  // Step 2: Find flows to scan
-  const flowFiles = this.findFlows(flags.directory, targets);
-  this.spinner.start(`Identified ${flowFiles.length} flows to scan`);
+    // ---- 1. Load config file -------------------------------------------------
+    const fileConfig = await loadScannerOptions(flags.config);
 
-  // Step 3: Parse flows
-  const parsedFlows: ParsedFlow[] = await parseFlows(flowFiles);
-  this.debug(`parsed flows ${parsedFlows.length}`, ...parsedFlows);
+    // ---- 2. Merge CLI overrides (betamode) ----------------------------------
+    const mergedConfig = {
+      ...fileConfig,
+      betamode: flags.betamode ?? fileConfig.betamode ?? false,
+    };
 
-  // Step 4: Run scan safely
-  const tryScan = (): [ScanResult[], error: Error] => {
-    try {
-      const scanResult =
-        this.userConfig && Object.keys(this.userConfig).length > 0
-          ? scanFlows(parsedFlows, this.userConfig)
-          : scanFlows(parsedFlows);
-      return [scanResult, null];
-    } catch (error) {
-      return [null, error];
+    // ---- 3. Locate flows ----------------------------------------------------
+    const flowFiles = this.findFlows(flags.directory, flags.files);
+    this.spinner.start(`Identified ${flowFiles.length} flows to scan`);
+
+    // ---- 4. Parse flows ------------------------------------------------------
+    const parsedFlows: ParsedFlow[] = await parseFlows(flowFiles);
+    this.debug(`parsed flows ${parsedFlows.length}`, ...parsedFlows);
+
+    // ---- 5. Run the scan ----------------------------------------------------
+    const tryScan = (): [ScanResult[], Error | null] => {
+      try {
+        const scanConfig: any = {
+          rules: mergedConfig.rules ?? {},
+          betamode: !!mergedConfig.betamode,
+        };
+        return [scanFlows(parsedFlows, scanConfig), null];
+      } catch (err) {
+        return [null, err as Error];
+      }
+    };
+    const [scanResults, scanError] = tryScan();
+
+    this.debug(`error:`, inspect(scanError));
+    this.debug(`scan results: ${scanResults.length}`, ...scanResults);
+    this.spinner.stop(`Scan complete`);
+
+    // ---- 6. Build / display results -----------------------------------------
+    const results = this.buildResults(scanResults);
+
+    if (results.length > 0) {
+      const resultsByFlow: Record<string, any[]> = {};
+      for (const r of results) {
+        resultsByFlow[r.flowName] = resultsByFlow[r.flowName] ?? [];
+        resultsByFlow[r.flowName].push(r);
+      }
+
+      for (const flowName in resultsByFlow) {
+        const match = scanResults.find((s) => s.flow.label === flowName)!;
+        this.styledHeader(
+          `Flow: ${chalk.yellow(flowName)} ${chalk.bgYellow(
+            `(${match.flow.name}.flow-meta.xml)`
+          )} ${chalk.red(`(${resultsByFlow[flowName].length} results)`)}`
+        );
+        this.log(chalk.italic("Type: " + match.flow.type));
+        this.log("");
+        this.table({
+          data: resultsByFlow[flowName],
+          columns: ["rule", "type", "name", "severity"],
+        });
+        this.debug(`Results By Flow: ${inspect(resultsByFlow[flowName])}`);
+        this.log("");
+      }
     }
-  };
 
-  const [scanResults, error] = tryScan();
-  this.debug(`use new scan? ${process.env.IS_NEW_SCAN_ENABLED}`);
-  this.debug(`error:`, inspect(error));
-  this.debug(`scan results: ${scanResults.length}`, ...scanResults);
-  this.spinner.stop(`Scan complete`);
+    this.styledHeader(
+      `Total: ${chalk.red(results.length + " Results")} in ${chalk.yellow(
+        scanResults.length + " Flows"
+      )}.`
+    );
 
-  // Step 5: Build and display results
-  const results = this.buildResults(scanResults);
-  if (results.length > 0) {
-    const resultsByFlow = {};
-    for (const result of results) {
-      resultsByFlow[result.flowName] = resultsByFlow[result.flowName] || [];
-      resultsByFlow[result.flowName].push(result);
+    for (const sev of ["error", "warning", "note"]) {
+      const cnt = this.errorCounters.get(sev) ?? 0;
+      this.log(`- ${sev}: ${cnt}`);
     }
-    for (const resultKey in resultsByFlow) {
-      const matchingScanResult = scanResults.find(
-        (res) => res.flow.label === resultKey
-      );
-      this.styledHeader(
-        `Flow: ${chalk.yellow(resultKey)} ${chalk.bgYellow(
-          `(${matchingScanResult.flow.name}.flow-meta.xml)`
-        )} ${chalk.red(
-          `(${resultsByFlow[resultKey].length} results)`
-        )}`
-      );
-      this.log(chalk.italic("Type: " + matchingScanResult.flow.type));
-      this.log("");
-      this.table({
-        data: resultsByFlow[resultKey],
-        columns: ["rule", "type", "name", "severity"],
-      });
-      this.debug(`Results By Flow: ${inspect(resultsByFlow[resultKey])}`);
-      this.log("");
-    }
+    this.log("");
+
+    // ---- 7. Exit code -------------------------------------------------------
+    const status = this.getStatus();
+    if (status > 0) process.exitCode = status;
+
+    const summary = {
+      flowsNumber: scanResults.length,
+      results: results.length,
+      message: `A total of ${results.length} results have been found in ${scanResults.length} flows.`,
+      errorLevelsDetails: {},
+    };
+
+    return { summary, status, results };
   }
 
-  this.styledHeader(
-    `Total: ${chalk.red(results.length + " Results")} in ${chalk.yellow(
-      scanResults.length + " Flows"
-    )}.`
-  );
-
-  // Step 6: Display summary
-  for (const severity of ["error", "warning", "note"]) {
-    const severityCounter = this.errorCounters[severity] || 0;
-    this.log(`- ${severity}: ${severityCounter}`);
-  }
-  this.log("");
-
-  // Step 7: Return status and summary
-  const status = this.getStatus();
-  if (status > 0) {
-    process.exitCode = status;
-  }
-
-  const summary = {
-    flowsNumber: scanResults.length,
-    results: results.length,
-    message: `A total of ${results.length} results have been found in ${scanResults.length} flows.`,
-    errorLevelsDetails: {},
-  };
-
-  return { summary, status: status, results };
-}
-
-  private findFlows(directory: string, sourcepath: string[]) {
-    // List flows that will be scanned
-    let flowFiles;
-    if (directory) {
-      flowFiles = FindFlows(directory);
-    } else if (sourcepath) {
-      flowFiles = sourcepath;
-    } else {
-      flowFiles = FindFlows(".");
-    }
-    return flowFiles;
+  private findFlows(directory?: string, sourcepath?: string[]) {
+    if (directory) return FindFlows(directory);
+    if (sourcepath?.length) return sourcepath;
+    return FindFlows(".");
   }
 
   private getStatus() {
-    let status = 0;
-    if (this.failOn === "never") {
-      status = 0;
-    } else {
-      if (this.failOn === "error" && this.errorCounters["error"] > 0) {
-        status = 1;
-      } else if (
-        this.failOn === "warning" &&
-        (this.errorCounters["error"] > 0 || this.errorCounters["warning"] > 0)
-      ) {
-        status = 1;
-      } else if (
-        this.failOn === "note" &&
-        (this.errorCounters["error"] > 0 ||
-          this.errorCounters["warning"] > 0 ||
-          this.errorCounters["note"] > 0)
-      ) {
-        status = 1;
-      }
-    }
-    return status;
+    if (this.failOn === "never") return 0;
+    if (this.failOn === "error" && this.errorCounters.get("error")! > 0) return 1;
+    if (
+      this.failOn === "warning" &&
+      (this.errorCounters.get("error")! > 0 || this.errorCounters.get("warning")! > 0)
+    )
+      return 1;
+    if (
+      this.failOn === "note" &&
+      (this.errorCounters.get("error")! > 0 ||
+        this.errorCounters.get("warning")! > 0 ||
+        this.errorCounters.get("note")! > 0)
+    )
+      return 1;
+    return 0;
   }
 
-  private buildResults(scanResults) {
-    const errors = [];
-    for (const scanResult of scanResults) {
-      const flowName = scanResult.flow.label;
-      const flowType = scanResult.flow.type[0];
-      for (const ruleResult of scanResult.ruleResults as RuleResult[]) {
-        const ruleDescription = ruleResult.ruleDefinition.description;
-        const rule = ruleResult.ruleDefinition.label;
-        if (
-          ruleResult.occurs &&
-          ruleResult.details &&
-          ruleResult.details.length > 0
-        ) {
-          const severity = ruleResult.severity || "error";
-          const flowUri = scanResult.flow.fsPath;
-          const flowApiName = `${scanResult.flow.name}.flow-meta.xml`;
-          for (const result of ruleResult.details as ResultDetails[]) {
-            const detailObj = Object.assign(result, {
-              ruleDescription,
-              rule,
+  private buildResults(scanResults: ScanResult[]) {
+    const errors: any[] = [];
+
+    for (const sr of scanResults) {
+      const flowName = sr.flow.label;
+      const flowType = sr.flow.type[0];
+
+      for (const rule of sr.ruleResults as RuleResult[]) {
+        if (!rule.occurs || !rule.details?.length) continue;
+
+        const severity = rule.severity ?? "error";
+        const flowUri = sr.flow.fsPath;
+        const flowApiName = `${sr.flow.name}.flow-meta.xml`;
+
+        for (const detail of rule.details as ResultDetails[]) {
+          errors.push(
+            Object.assign(detail, {
+              ruleDescription: rule.ruleDefinition.description,
+              rule: rule.ruleDefinition.label,
               flowName,
               flowType,
               severity,
               flowUri,
               flowApiName,
-            });
-            errors.push(detailObj);
-            this.errorCounters[severity] =
-              (this.errorCounters[severity] || 0) + 1;
-          }
+            })
+          );
+          this.errorCounters.set(severity, (this.errorCounters.get(severity) ?? 0) + 1);
         }
       }
     }
     return errors;
-  }
-
-  private enforceSecurityGuards(): void {
-    // 🔒 Monkey-patch eval
-    (global as any).eval = function (): never {
-      throw new Error("Blocked use of eval() in lightning-flow-scanner-core");
-    };
-
-    // 🔒 Monkey-patch Function constructor
-    (global as any).Function = function (): never {
-      throw new Error("Blocked use of Function constructor in lightning-flow-scanner-core");
-    };
-
-    // 🔒 Intercept dynamic import() calls
-    const dynamicImport = (globalThis as any).import;
-    (globalThis as any).import = async (...args: any[]): Promise<any> => {
-      const specifier = args[0];
-      if (typeof specifier === "string" && specifier.startsWith("http")) {
-        throw new Error(`Blocked remote import: ${specifier}`);
-      }
-      return dynamicImport(...args);
-    };
   }
 }

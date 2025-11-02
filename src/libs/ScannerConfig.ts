@@ -1,8 +1,17 @@
+// scannerconfig.ts
 import { cosmiconfig } from "cosmiconfig";
+
+export interface ScannerOptions {
+  rules?: Record<string, any>;
+  exceptions?: Record<string, any>;
+  betamode?: boolean;
+  [key: string]: any;
+}
+
 export async function loadScannerOptions(
-  forcedConfigFile: string,
-): Promise<any> {
-  // Read config from file
+  forcedConfigFile?: string,
+  cliOverrides: Partial<ScannerOptions> = {}
+): Promise<ScannerOptions> {
   const moduleName = "flow-scanner";
   const searchPlaces = [
     "package.json",
@@ -13,15 +22,17 @@ export async function loadScannerOptions(
     `config/.${moduleName}.yml`,
     `.flow-scanner`,
   ];
-  const explorer = cosmiconfig(moduleName, {
-    searchPlaces,
-  });
-  let explorerResults;
-  if (forcedConfigFile) {
-    // Forced config file name
-    explorerResults = await explorer.load(forcedConfigFile);
-  }
-  // Let cosmiconfig look for a config file
-  explorerResults = explorerResults ?? (await explorer.search());
-  return explorerResults?.config ?? undefined;
+
+  const explorer = cosmiconfig(moduleName, { searchPlaces });
+  const result = forcedConfigFile
+    ? await explorer.load(forcedConfigFile)
+    : await explorer.search();
+
+  const fileConfig: ScannerOptions = result?.config ?? {};
+
+  return {
+    ...fileConfig,
+    ...cliOverrides,
+    betamode: cliOverrides.betamode ?? fileConfig.betamode ?? false,
+  };
 }
