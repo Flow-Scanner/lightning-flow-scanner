@@ -6,8 +6,18 @@
 <p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
 <p align="center">
- <img src="media/demo.gif" alt="Flow Overview" width="88%" />
+ <img src="media/demo.gif" alt="Flow Overview" width="76%" />
 </p>
+
+## Table of contents
+
+- **[Usage](#usage)**
+- **[Configuration](#configuration)**
+  - **[Scanner Options](#scanner-options)**
+  - **[Extension Settings](#extension-settings)**
+- **[Development](#development)**
+
+---
 
 ## Usage
 
@@ -21,6 +31,8 @@ Use our side bar or the **Command Palette** and type `flowscanner` to see the li
 **Privacy:** Zero user data collected. All processing is client-side.
 → See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx?tab=security-ov-file).
 
+---
+
 ## Configuration
 
 It is recommended to set up a `.flow-scanner.yml` and define:
@@ -29,6 +41,8 @@ It is recommended to set up a `.flow-scanner.yml` and define:
 - The severity of violating any specific rule.
 - Rule properties such as REGEX expressions.
 - Any known exceptions that should be ignored during scanning.
+
+### Scanner Options
 
 ```json
 {
@@ -118,9 +132,10 @@ If you’re developing or testing updates to the core module, you can link it lo
   npm link @flow-scanner/lightning-flow-scanner-core
   ```
 
+---
+
 ## VSCE to VSX
 
 The `lightning-flow-scanner-vsce` package was unpublished from the Visual Studio and Open VSX Marketplaces due to a vulnerability stemming from unsafe rule loading. The issue was addressed in [core library v5](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). This fork, created on 22/09/2025, emphasizes security and maintainability.
 
 <p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>
-<!-- force-contributors-render: 2025-10-28 22:10:01 -->
