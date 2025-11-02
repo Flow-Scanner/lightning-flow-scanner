@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import { SelectFlows } from '../libs/SelectFlows';
 import { SaveFlow } from '../libs/SaveFlow';
 import { ScanOverview } from '../panels/ScanOverviewPanel';
-import * as core from 'lightning-flow-scanner-core';
+import * as core from '@flow-scanner/lightning-flow-scanner-core';
 import { CacheProvider } from '../providers/cache-provider';
 import { OutputChannel } from '../providers/outputChannel';
 import { loadScannerConfig } from '../providers/config-provider';

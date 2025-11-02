@@ -77,7 +77,7 @@ If you’re developing or testing updates to the core module, you can link it lo
   ```
 - In this CLI project directory, run:
   ```bash
-  npm link lightning-flow-scanner-core
+  npm link @flow-scanner/lightning-flow-scanner-core
   ```
 
 ## VSCE to VSX

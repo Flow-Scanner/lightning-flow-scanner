@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getRules } from "lightning-flow-scanner-core";
+    import { getRules } from "@flow-scanner/lightning-flow-scanner-core";
     import RuleCard from "./RuleCard.svelte";
 
     const allRules = getRules();
