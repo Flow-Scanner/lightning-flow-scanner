@@ -43,7 +43,7 @@ Customize the scan behavior using the following options:
 
   --json                                                            set output format as json.
 
-  -z, --betamode                                                     a runtime toggle to enable experimental beta rules.
+  -z, --betamode                                                     a runtime toggle to enable beta rules(experimental)
 
   --loglevel=(trace|debug|info|warn|error|fatal)                    [default: warn] logging level.
 ```
@@ -98,9 +98,9 @@ Note: if you prefer JSON format, you can create a `.flow-scanner.json` file usin
 
 [![npm version](https://img.shields.io/npm/v/lightning-flow-scanner?label=npm)](https://www.npmjs.com/package/lightning-flow-scanner)
 
-| **Install with sf (Salesforce CLI)** | **Install globally with npm** |
-|--------------------------------------|-------------------------------|
-| ```bash<br>sf plugins install lightning-flow-scanner``` | ```bash<br>npm install -g lightning-flow-scanner``` |
+| **Install with sf (Salesforce CLI)**            | **Install globally with npm**               |
+| ----------------------------------------------------- | ------------------------------------------------- |
+| ``bash<br>sf plugins install lightning-flow-scanner`` | ``bash<br>npm install -g lightning-flow-scanner`` |
 
 ---
 
@@ -138,7 +138,14 @@ Note: if you prefer JSON format, you can create a `.flow-scanner.json` file usin
   npm run test
 ```
 
-5. **Linking** **Core Module (Optional)**
+5. **Linking SF CLI Plugin**
+to test changes in your local CLI run:
+
+```bash
+  sf plugins link .
+```
+   
+6. **Linking** **Core Module (Optional)**
 
 If you’re developing or testing updates to the core module, you can link it locally:
 
