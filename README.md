@@ -6,26 +6,21 @@
 
 <p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
-![FlowScan example](docs/images/sfdxgif.gif)
+<p align="center">
+ <img src="docs/images/sfdxgif.gif" alt="Flow Overview" width="76%" />
+</p>
 
-- **[Installation](#installation)**
+---
+
+## Table of contens
+
 - **[Usage](#usage)**
 - **[Configuration](#configuration)**
+  - **[Scanner Options](#scanner-options)**
+- **[Installation](#installation)**
 - **[Development](#development)**
 
-## Installation
-
-Install with SFDX:
-
-```sh-session
-sf plugins install lightning-flow-scanner
-```
-
-Install with NPM:
-
-```sh-session
-npm install -g lightning-flow-scanner
-```
+---
 
 ## Usage
 
@@ -54,14 +49,18 @@ Customize the scan behavior using the following options:
 **Privacy:** Zero user data collected. All processing is client-side.
 → See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-cli?tab=security-ov-file).
 
+---
+
 ## Configuration
 
-It is recommended to set up configuration and define:
+It is recommended to set up a `.flow-scanner.yml` and define:
 
 - The rules to be executed.
 - The severity of violating any specific rule.
 - Rule properties such as REGEX expressions.
 - Any known exceptions that should be ignored during scanning.
+
+### Scanner Options
 
 ```json
 {
@@ -70,11 +69,12 @@ It is recommended to set up configuration and define:
   },
   "exceptions": {
     // Your exceptions here
-  }
+  },
+  "betamode": false // include rules currently in beta
 }
 ```
 
-Using the rules section of your configurations, you can specify the list of rules to be run. Furthermore, you can define the severity and configure expressions of rules. To include rules currently that are currently in beta, set `betarules` to true. Below is a breakdown of the available attributes of rule configuration:
+Using the rules section of your configurations, you can specify the list of rules to be run. Furthermore, you can define the severity and configure expressions of rules.  Below is a breakdown of the available attributes of rule configuration:
 
 ```json
 {
@@ -87,7 +87,19 @@ Using the rules section of your configurations, you can specify the list of rule
 }
 ```
 
-Note: if you prefer YAML format, you can create a `.flow-scanner.yml` file using the same format. For a more on configurations, review the [scanner documentation](https://flow-scanner.github.io/lightning-flow-scanner-core/#configurations).
+Note: if you prefer JSON format, you can create a `.flow-scanner.json` file using the same format. For a more on configurations, review the [scanner documentation](https://flow-scanner.github.io/lightning-flow-scanner-core/#configurations).
+
+---
+
+## Installation
+
+`lightning-flow-scanner-cli` is published to **npm** only.
+
+[![npm version](https://img.shields.io/npm/v/lightning-flow-scanner?label=npm)](https://www.npmjs.com/package/lightning-flow-scanner)
+
+| **Install with sf (Salesforce CLI)** | **Install globally with npm** |
+|--------------------------------------|-------------------------------|
+| ```bash<br>sf plugins install lightning-flow-scanner``` | ```bash<br>npm install -g lightning-flow-scanner``` |
 
 ---
 
