@@ -15,6 +15,7 @@ import { inspect } from "util";
 const {
   parse: parseFlows,
   scan: scanFlows,
+  exportSarif: exportSarif,
 } = pkg;
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
@@ -42,17 +43,17 @@ export default class Scan extends SfCommand<Output> {
   protected errorCounters: Map<string, number> = new Map<string, number>();
 
   public static readonly flags = {
+    config: Flags.file({
+      char: "c",
+      description: "Path to configuration file",
+      required: false,
+    }),
     directory: Flags.directory({
       char: "d",
       description: messages.getMessage("directoryToScan"),
       required: false,
       exists: true,
       exclusive: ["files"],
-    }),
-    config: Flags.file({
-      char: "c",
-      description: "Path to configuration file",
-      required: false,
     }),
     failon: Flags.option({
       char: "f",
@@ -67,6 +68,11 @@ export default class Scan extends SfCommand<Output> {
       description: "List of source flows paths to scan",
       charAliases: ["p"],
       exclusive: ["directory"],
+    }),
+    sarif: Flags.boolean({
+      char: "s",
+      description: "Get SARIF output in the stdout directly",
+      default: false,
     }),
     betamode: Flags.boolean({
       char: "z",
@@ -99,20 +105,23 @@ export default class Scan extends SfCommand<Output> {
     this.debug(`parsed flows ${parsedFlows.length}`, ...parsedFlows);
 
     // ---- 5. Run the scan ----------------------------------------------------
-    const tryScan = (): [ScanResult[], Error | null] => {
-      try {
-        const scanConfig: any = {
-          rules: mergedConfig.rules ?? {},
-          betamode: !!mergedConfig.betamode,
-        };
-        return [scanFlows(parsedFlows, scanConfig), null];
-      } catch (err) {
-        return [null, err as Error];
-      }
-    };
-    const [scanResults, scanError] = tryScan();
+    let scanResults: ScanResult[];
+    try {
+      const scanConfig = {
+        rules: mergedConfig.rules ?? {},
+        betamode: !!mergedConfig.betamode,
+      };
+      scanResults = scanFlows(parsedFlows, scanConfig);
+    } catch (err) {
+      this.error(`Scan failed: ${(err as Error).message}`);
+    }
 
-    this.debug(`error:`, inspect(scanError));
+    if (flags.sarif) {
+      const sarif = await exportSarif(scanResults);
+      process.stdout.write(sarif + '\n');
+      process.exit(this.getStatus());
+    }
+
     this.debug(`scan results: ${scanResults.length}`, ...scanResults);
     this.spinner.stop(`Scan complete`);
 

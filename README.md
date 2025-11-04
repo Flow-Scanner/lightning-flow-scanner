@@ -33,17 +33,19 @@ sf flow:scan [options]
 Customize the scan behavior using the following options:
 
 ```sh-session
-  -c, --config <path>                                               provide a path to the configuration file.
+  -c, --config <path>                                               set a path to the configuration file.
 
-  -f, --failon                                                      provide a threshold level for returning status 1
+  -d, --directory <C:\..\force-app\main\default\flows>              set a directory to scan.
 
-  -p, --files <C:\..\flow1.flow, C:\..\flow2.flow>                  provide a space-separated list of flow paths to scan.
+  -f, --failon                                                      set a threshold level for failure by error
 
-  -d, --directory <C:\..\force-app\main\default\flows>              provide a directory to scan.
+  -p, --files <C:\..\flow1.flow, C:\..\flow2.flow>                  set a space-separated list of flow paths to scan.
+
+  -s, --sarif                                                       get SARIF output to the stdout directly
+
+  -z, --betamode                                                    a runtime toggle to enable beta rules(experimental)
 
   --json                                                            set output format as json.
-
-  -z, --betamode                                                     a runtime toggle to enable beta rules(experimental)
 
   --loglevel=(trace|debug|info|warn|error|fatal)                    [default: warn] logging level.
 ```
@@ -139,12 +141,12 @@ Note: if you prefer JSON format, you can create a `.flow-scanner.json` file usin
 ```
 
 5. **Linking SF CLI Plugin**
-to test changes in your local CLI run:
+   to test changes in your local CLI run:
 
 ```bash
   sf plugins link .
 ```
-   
+
 6. **Linking** **Core Module (Optional)**
 
 If you’re developing or testing updates to the core module, you can link it locally:
