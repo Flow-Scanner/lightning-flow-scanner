@@ -21,7 +21,8 @@
     function onSearch(e) {
         tsvscode.postMessage({ type: "searchFlowName", value: e.target.value });
     }
-     function onSecondarySearch(e) {
+
+    function onSecondarySearch(e) {
         tsvscode.postMessage({ type: "searchAttributes", value: e.target.value });
     }
 </script>
@@ -38,21 +39,18 @@
         </div>
     {/if}
 
-    <!-- Search Bar (in-line, smaller) -->
-    <div class="search-container">
+    <div class="search-group">
         <input
             type="search"
             placeholder="Search flow name..."
             on:input={onSearch}
-            class="flow-search-input"
+            class="search-input primary"
         />
-    </div>
-    <div class="search-container">
         <input
             type="search"
             placeholder="Search attributes..."
             on:input={onSecondarySearch}
-            class="flow-search-input"
+            class="search-input secondary"
         />
     </div>
 
@@ -75,36 +73,50 @@
         gap: 12px;
     }
 
-    .search-container {
+    .search-group {
         flex: 1;
         display: flex;
+        gap: 12px;
         justify-content: center;
+        min-width: 0; /* Allow shrinking */
     }
 
-    .flow-search-input {
-        width: 100%;
-        max-width: 240px;
-        height: 28px;                    /* Smaller height */
-        padding: 4px 10px;
+    .search-input {
+        height: 32px;
+        padding: 6px 14px;
         border: none;
-        border-radius: 14px;
+        border-radius: 16px;
         background: rgba(255, 255, 255, 0.95);
         font-size: 13px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         outline: none;
         transition: all 0.2s;
+        min-width: 140px;
     }
 
-    .flow-search-input:focus {
+    .search-input:focus {
         box-shadow: 0 0 0 2px #2765ae;
         background: white;
     }
 
-    .flow-search-input::placeholder {
+    .search-input::placeholder {
         color: #999;
         font-style: italic;
     }
 
+    /* Primary (flow name) takes more space */
+    .search-input.primary {
+        flex: 1.2;
+        max-width: 300px;
+    }
+
+    /* Secondary (attributes) */
+    .search-input.secondary {
+        flex: 1;
+        max-width: 260px;
+    }
+
+    /* Buttons */
     button {
         background: #2765ae;
         color: white;
@@ -128,5 +140,27 @@
     .nav-button-right {
         display: flex;
         align-items: center;
+    }
+
+    /* Responsive: stack on very small screens */
+    @media (max-width: 700px) {
+        .nav-menu {
+            flex-wrap: wrap;
+            height: auto;
+            padding: 8px;
+            gap: 8px;
+        }
+        .search-group {
+            order: 3;
+            width: 100%;
+            flex-direction: column;
+        }
+        .search-input {
+            max-width: none;
+        }
+        .nav-button-left,
+        .nav-button-right {
+            flex: 1;
+        }
     }
 </style>
