@@ -105,6 +105,10 @@ export class ScanOverview {
           webview.postMessage({ type: "applySearchFlowName", value: data.value });
           break;
         }
+        case "searchAttributes": {
+          webview.postMessage({ type: "applySearchAttributes", value: data.value });
+          break;
+        }
         case "init-view": {
           if (scanResults) {
             webview.postMessage({

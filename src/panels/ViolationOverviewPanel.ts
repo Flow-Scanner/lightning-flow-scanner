@@ -98,6 +98,14 @@ export class ViolationOverview {
           ScanOverview.createOrShow(this._extensionUri, data.value);
           break;
         }
+        case "searchFlowName": {
+          webview.postMessage({ type: "applySearchFlowName", value: data.value });
+          break;
+        }
+        case "searchAttributes": {
+          webview.postMessage({ type: "applySearchAttributes", value: data.value });
+          break;
+        }
         case "init-view": {
           webview.postMessage({
             type: "init",

@@ -1,112 +1,79 @@
 <script lang="ts">
-    import { TabulatorFull as Tabulator } from "tabulator-tables";
-    import { onMount } from "svelte";
+  import { TabulatorFull as Tabulator } from "tabulator-tables";
+  import { onMount } from "svelte";
 
-    export let allResults;
-    let tableComponent;
-    let table;
-    let printData = [];
+  export let allResults: any[] = [];
+  let tableComponent: HTMLDivElement;
+  let table: Tabulator;
+  let printData: any[] = [];
 
-    onMount(() => {
-        for(let result of allResults){
-            const detailObj = Object.assign({}, result);
-            printData.push(detailObj);
-        }
-        table = new Tabulator(tableComponent, {
-            data: allResults,
-            reactiveData: true,
-            layout: "fitColumns",
-            groupBy: ["ruleLabel"],
-            groupHeader: function (value, count, data, group) {
-                let description;
-                if (data && data.length > 0) {
-                    description = data[0].ruleDescription;
-                    return (
-                        value +
-                        "<span>(" +
-                        count +
-                        ")</span>" +
-                        "<p style='font-style: italic'>" +
-                        description +
-                        "</p>"
-                    );
-                } else {
-                    return (
-                        value +
-                        "<span style='color:#d00; margin-left:10px;'>(" +
-                        count +
-                        ")</span>"
-                    );
-                }
-            },
-            columns: [
-                { 
-                    title: "#", 
-                    formatter: "rownum", 
-                    width: 75
-                },
-                {
-                    title: "Name",
-                    field: "name",
-                    formatter: "textarea",
-                    minWidth: 150,
-                },
-                {
-                    title: "Severity",
-                    field: "severity",
-                    formatter: "textarea",
-                    minWidth: 150,
-                },
-                {
-                    title: "Type",
-                    field: "type",
-                    formatter: "plaintext",
-                    width: 150,
-                },
-                {
-                    title: "Flow name",
-                    field: "flowName",
-                    formatter: "textarea",
-                    minWidth: 150,
-                },
-                {
-                    title: "X coordinates",
-                    field: "locationX",
-                    width: 75,
-                },
-                {
-                    title: "Y coordinates",
-                    field: "locationY",
-                    width: 75,
-                },
-                {
-                    title: "Connects to",
-                    field: "connectsTo",
-                    formatter: "textarea",
-                    minWidth: 150,
-                },
-                {
-                    title: "Expression",
-                    field: "expression",
-                    formatter: "textarea",
-                    minWidth: 150,
-                },
-                {
-                    title: "DataType",
-                    field: "dataType",
-                    width: 150,
-                    formatter: "textarea"
-                }
-            ],
-        });
+  onMount(() => {
+    printData = allResults.map((r) => ({ ...r }));
+
+    table = new Tabulator(tableComponent, {
+      data: allResults,
+      reactiveData: true,
+      layout: "fitColumns",
+      groupBy: ["ruleLabel"],
+      groupHeader: (value, count, data) => {
+        const desc = data[0]?.ruleDescription || "";
+        return `${value} <span>(${count})</span><p style="font-style:italic">${desc}</p>`;
+      },
+      columns: [
+        { title: "#", formatter: "rownum", width: 75 },
+        { title: "Name", field: "name", minWidth: 150 },
+        { title: "Severity", field: "severity", minWidth: 150 },
+        { title: "Type", field: "type", width: 150 },
+        {
+          title: "Flow name",
+          field: "flowName",
+          minWidth: 150,
+          headerFilter: true,
+          headerFilterPlaceholder: "",
+        },
+        { title: "X", field: "locationX", width: 75 },
+        { title: "Y", field: "locationY", width: 75 },
+        { title: "Connects to", field: "connectsTo", minWidth: 150 },
+        { title: "Expression", field: "expression", minWidth: 150 },
+        { title: "DataType", field: "dataType", width: 150 },
+      ],
     });
+  });
 
-    export function download() {
-        tsvscode.postMessage({
-            type: "download",
-            value: printData
-        });
+  export function download() {
+    tsvscode.postMessage({ type: "download", value: printData });
+  }
+
+  function onMessage(e: MessageEvent) {
+    const msg = e.data;
+    if (msg.type === "applySearchFlowName") {
+      const term = (msg.value ?? "").trim();
+      if (!term) {
+        table?.clearHeaderFilter();
+        return;
+      }
+      table?.setHeaderFilterValue("flowName", term);
     }
+    if (msg.type === "applySearchAttributes") {
+      const term = (msg.value ?? "").trim();
+
+      if (!term) {
+        table?.clearHeaderFilter(["resultCount", "type"]);
+        return;
+      }
+
+      // Option 1: Use built-in OR via custom filter
+      table?.setFilter(
+        [
+          { field: "resultCount", type: "like", value: term },
+          { field: "type", type: "like", value: term },
+        ],
+        "or"
+      );
+      return;
+    }
+  }
 </script>
 
-<div bind:this={tableComponent} />
+<svelte:window on:message={onMessage} />
+<div bind:this={tableComponent} class="tabulator-table" />
