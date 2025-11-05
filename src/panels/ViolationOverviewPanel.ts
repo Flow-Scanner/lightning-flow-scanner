@@ -2,7 +2,8 @@ import { ScanOverview } from "./ScanOverviewPanel";
 import * as vscode from "vscode";
 import * as uuid from "uuid";
 import { convertArrayToCSV } from "convert-array-to-csv";
-import { ScanResult } from "@flow-scanner/lightning-flow-scanner-core";
+import { exportSarif, ScanResult } from "@flow-scanner/lightning-flow-scanner-core";
+import { CacheProvider } from "../providers/cache-provider";
 
 export class ViolationOverview {
   public static currentPanel: ViolationOverview | undefined;
@@ -10,7 +11,6 @@ export class ViolationOverview {
   private readonly _panel: vscode.WebviewPanel;
   private readonly _extensionUri: vscode.Uri;
   private _disposables: vscode.Disposable[] = [];
-  private isDownloading = false;
 
   public static createOrShow(
     extensionUri: vscode.Uri,
@@ -106,22 +106,64 @@ export class ViolationOverview {
           return;
         }
         case "download": {
-          if (!data.value) {
+          if (!data.value || !Array.isArray(data.value) || data.value.length === 0) {
             await vscode.window.showInformationMessage(
-              "No results found. Please make sure to complete a scan before calculating coverage."
+              "No results found. Please make sure to complete a scan before downloading."
             );
             return;
           }
-          let saveResult = await vscode.window.showSaveDialog({
-            filters: {
-              csv: [".csv"],
-            },
-          });
-          const csv = convertArrayToCSV(data.value);
-          await vscode.workspace.fs.writeFile(saveResult, Buffer.from(csv));
-          await vscode.window.showInformationMessage(
-            "Downloaded file: " + saveResult.fsPath
+
+          const formatChoice = await vscode.window.showQuickPick(
+            [
+              { label: "CSV", description: "Comma-separated values", value: "csv" },
+              { label: "SARIF", description: "Static Analysis Results Interchange Format", value: "sarif" }
+            ],
+            {
+              placeHolder: "Select export format (Esc to cancel)",
+              canPickMany: false,
+              ignoreFocusOut: false,
+            }
           );
+
+          if (!formatChoice) return;
+
+          const chosenFormat = formatChoice.value;
+          const filterKey = chosenFormat === "sarif" ? "sarif" : "csv";
+          const filterExt = chosenFormat === "sarif" ? ".sarif" : ".csv";
+
+          const defaultUri = vscode.workspace.workspaceFolders?.[0]?.uri;
+          const saveResult = await vscode.window.showSaveDialog({
+            defaultUri,
+            filters: { [filterKey]: [filterExt] },
+            title: `Save ${chosenFormat.toUpperCase()} file`,
+          });
+
+          if (!saveResult) return;
+
+          try {
+            let content: string;
+
+            if (chosenFormat === "sarif") {
+              const cachedResults = CacheProvider.instance.get("results") as ScanResult[] | undefined;
+              if (!cachedResults || cachedResults.length === 0) {
+                await vscode.window.showWarningMessage("No scan data available for SARIF export. Please run a scan first.");
+                return;
+              }
+              content = exportSarif(cachedResults);
+            } else {
+              content = convertArrayToCSV(data.value);
+            }
+
+            await vscode.workspace.fs.writeFile(saveResult, Buffer.from(content, "utf-8"));
+            await vscode.window.showInformationMessage(
+              `Downloaded ${chosenFormat.toUpperCase()} file: ${saveResult.fsPath}`
+            );
+          } catch (err: any) {
+            await vscode.window.showErrorMessage(
+              `Failed to export ${chosenFormat.toUpperCase()}: ${err?.message || err}`
+            );
+          }
+          break;
         }
       }
     });
