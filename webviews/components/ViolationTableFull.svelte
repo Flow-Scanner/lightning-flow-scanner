@@ -6,13 +6,19 @@
   let tableComponent: HTMLDivElement;
   let table: Tabulator;
   let printData: any[] = [];
+  let originalData: any[] = []; // Keep original
+
+  // Update when allResults changes
+  $: if (allResults) {
+    originalData = allResults.map(r => ({ ...r }));
+    printData = originalData;
+    if (table) table.setData(originalData);
+  }
 
   onMount(() => {
-    printData = allResults.map((r) => ({ ...r }));
-
     table = new Tabulator(tableComponent, {
-      data: allResults,
-      reactiveData: true,
+      data: [],
+      reactiveData: false,
       layout: "fitColumns",
       groupBy: ["ruleLabel"],
       groupHeader: (value, count, data) => {
@@ -21,21 +27,27 @@
       },
       columns: [
         { title: "#", formatter: "rownum", width: 75 },
-        { title: "Name", field: "name", minWidth: 150 },
-        { title: "Severity", field: "severity", minWidth: 150 },
-        { title: "Type", field: "type", width: 150 },
-        {
-          title: "Flow name",
-          field: "flowName",
-          minWidth: 150,
-          headerFilter: true,
-          headerFilterPlaceholder: "",
+        { 
+          title: "Name", field: "name", minWidth: 150,
+          headerFilter: "input", headerFilterFunc: "like", headerFilterPlaceholder: ""
         },
-        { title: "X", field: "locationX", width: 75 },
-        { title: "Y", field: "locationY", width: 75 },
-        { title: "Connects to", field: "connectsTo", minWidth: 150 },
-        { title: "Expression", field: "expression", minWidth: 150 },
-        { title: "DataType", field: "dataType", width: 150 },
+        { 
+          title: "Severity", field: "severity", minWidth: 150,
+          headerFilter: "input", headerFilterFunc: "like", headerFilterPlaceholder: ""
+        },
+        { 
+          title: "Type", field: "type", width: 150,
+          headerFilter: "input", headerFilterFunc: "like", headerFilterPlaceholder: ""
+        },
+        { 
+          title: "Flow name", field: "flowName", minWidth: 150,
+          headerFilter: "input", headerFilterFunc: "like", headerFilterPlaceholder: ""
+        },
+        { title: "X", field: "locationX", width: 75, headerFilter: "input", headerFilterFunc: "like", headerFilterPlaceholder: "" },
+        { title: "Y", field: "locationY", width: 75, headerFilter: "input", headerFilterFunc: "like", headerFilterPlaceholder: "" },
+        { title: "Connects to", field: "connectsTo", minWidth: 150, headerFilter: "input", headerFilterFunc: "like", headerFilterPlaceholder: "" },
+        { title: "Expression", field: "expression", minWidth: 150, headerFilter: "input", headerFilterFunc: "like", headerFilterPlaceholder: "" },
+        { title: "DataType", field: "dataType", width: 150, headerFilter: "input", headerFilterFunc: "like", headerFilterPlaceholder: "" },
       ],
     });
   });
@@ -46,32 +58,45 @@
 
   function onMessage(e: MessageEvent) {
     const msg = e.data;
+
     if (msg.type === "applySearchFlowName") {
-      const term = (msg.value ?? "").trim();
-      if (!term) {
-        table?.clearHeaderFilter();
-        return;
-      }
-      table?.setHeaderFilterValue("flowName", term);
-    }
-    if (msg.type === "applySearchAttributes") {
-      const term = (msg.value ?? "").trim();
-
-      if (!term) {
-        table?.clearHeaderFilter(["resultCount", "type"]);
-        return;
-      }
-
-      // Option 1: Use built-in OR via custom filter
-      table?.setFilter(
-        [
-          { field: "resultCount", type: "like", value: term },
-          { field: "type", type: "like", value: term },
-        ],
-        "or"
-      );
+      const term = (msg.value ?? "").toString().trim();
+      applyFlowFilter(term);
       return;
     }
+
+    if (msg.type === "applySearchAttributes") {
+      const term = (msg.value ?? "").toString().trim();
+      applyAttributeFilter(term);
+    }
+  }
+
+  // === FLOW NAME FILTER ===
+  function applyFlowFilter(term: string) {
+    if (!term) {
+      table?.setData(originalData);
+      return;
+    }
+    const filtered = originalData.filter(row => 
+      row.flowName?.toString().toLowerCase().includes(term.toLowerCase())
+    );
+    table?.setData(filtered);
+  }
+
+  // === ATTRIBUTES FILTER ===
+  function applyAttributeFilter(term: string) {
+    if (!term) {
+      table?.setData(originalData);
+      return;
+    }
+    const filtered = originalData.filter(row => {
+      return [
+        row.name, row.severity, row.type,
+        row.locationX, row.locationY,
+        row.connectsTo, row.expression, row.dataType
+      ].some(val => val?.toString().toLowerCase().includes(term.toLowerCase()));
+    });
+    table?.setData(filtered);
   }
 </script>
 
