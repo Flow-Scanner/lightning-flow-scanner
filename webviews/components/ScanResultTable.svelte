@@ -2,63 +2,41 @@
     import { TabulatorFull as Tabulator } from "tabulator-tables";
     import { onMount } from "svelte";
 
-    export let scanResults;
-    let tableComponent;
-    let table;
-    let printData = [];
+    export let scanResults: any[] = [];
+    let tableComponent: HTMLDivElement;
+    let table: Tabulator;
+    let printData: any[] = [];
 
-    var detailButton = function (cell, formatterParams, onRendered) {
-        return `<button style="background-color: #2765ae;border-radius: 10px;">Details</button>`;
-    };
+    const detailButton = () => `<button style="background:#2765ae;border-radius:10px;">Details</button>`;
 
     onMount(() => {
-        for(let scanResult of scanResults){
-            const detailObj = Object.assign({}, scanResult);
-            delete detailObj.flow;
-            delete detailObj.ruleResults;
-            printData.push(detailObj);
-        }
+        printData = scanResults.map(r => {
+            const obj = { ...r };
+            delete obj.flow;
+            delete obj.ruleResults;
+            return obj;
+        });
+
         table = new Tabulator(tableComponent, {
             data: scanResults,
             reactiveData: true,
             layout: "fitColumns",
             columns: [
+                { title: "# Results", field: "resultCount", hozAlign: "center", bottomCalc: "count", width: 100 },
                 {
-                    title: "# Results",
-                    field: "resultCount",
-                    hozAlign: "center",
-                    bottomCalc: "count",
-                    width: 100,
-                },
-                {
-                    title: "Label",
-                    field: "label",
-                    formatter: "link",
-                    minWidth: 150,
-                    cellClick: function (e, cell) {
-                        tsvscode.postMessage({
-                            type: "goToFile",
-                            value: cell.getRow().getData().flow,
-                        });
+                    title: "Label", field: "label", minWidth: 150, formatter: "link",
+                    formatterParams: (cell: any) => ({ label: cell.getValue(), url: "javascript:void(0);" }),
+                    cellClick: (_e: any, cell: any) => {
+                        tsvscode.postMessage({ type: "goToFile", value: cell.getRow().getData().flow });
                     },
+                    headerFilter: true,
+                    headerFilterPlaceholder: "",
                 },
-                { 
-                    title: "Flow Type", 
-                    field: "type", 
-                    formatter: "plaintext", 
-                    minWidth: 120 
-                },
+                { title: "Flow Type", field: "type", minWidth: 120 },
                 {
-                    title: "Details",
-                    formatter: detailButton,
-                    width: 100,
-                    hozAlign: "center",
-                    print: false,
-                    cellClick: function (e, cell) {
-                        tsvscode.postMessage({
-                            type: "goToDetails",
-                            value: cell.getRow().getData(),
-                        });
+                    title: "Details", formatter: detailButton, width: 100, hozAlign: "center", print: false,
+                    cellClick: (_e: any, cell: any) => {
+                        tsvscode.postMessage({ type: "goToDetails", value: cell.getRow().getData() });
                     },
                 },
             ],
@@ -66,11 +44,21 @@
     });
 
     export function download() {
-        tsvscode.postMessage({
-            type: "download",
-            value: printData
-        });
+        tsvscode.postMessage({ type: "download", value: printData });
+    }
+
+    function onMessage(e: MessageEvent) {
+        const msg = e.data;
+        if (msg.type === "applySearchFlowName") {
+            const term = (msg.value ?? "").trim();
+            if (!term) {
+                table?.clearHeaderFilter();
+                return;
+            }
+            table?.setHeaderFilterValue("label", term);
+        }
     }
 </script>
 
-<div bind:this={tableComponent} />
+<svelte:window on:message={onMessage} />
+<div bind:this={tableComponent} class="tabulator-table" />

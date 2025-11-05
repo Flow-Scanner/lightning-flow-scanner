@@ -101,7 +101,10 @@ export class ScanOverview {
           vscode.window.showErrorMessage(data.value);
           break;
         }
-
+        case "searchFlowName": {
+          webview.postMessage({ type: "applySearchFlowName", value: data.value });
+          break;
+        }
         case "init-view": {
           if (scanResults) {
             webview.postMessage({
@@ -113,67 +116,67 @@ export class ScanOverview {
         }
 
         case "download": {
-  if (!data.value || !Array.isArray(data.value) || data.value.length === 0) {
-    await vscode.window.showInformationMessage(
-      "No results found. Please make sure to complete a scan before downloading."
-    );
-    return;
-  }
+          if (!data.value || !Array.isArray(data.value) || data.value.length === 0) {
+            await vscode.window.showInformationMessage(
+              "No results found. Please make sure to complete a scan before downloading."
+            );
+            return;
+          }
 
-  const formatChoice = await vscode.window.showQuickPick(
-    [
-      { label: "CSV",  description: "Comma-separated values", value: "csv" },
-      { label: "SARIF",description: "Static Analysis Results Interchange Format", value: "sarif" }
-    ],
-    {
-      placeHolder: "Select export format (Esc to cancel)",
-      canPickMany: false,
-      ignoreFocusOut: false,
-    }
-  );
+          const formatChoice = await vscode.window.showQuickPick(
+            [
+              { label: "CSV", description: "Comma-separated values", value: "csv" },
+              { label: "SARIF", description: "Static Analysis Results Interchange Format", value: "sarif" }
+            ],
+            {
+              placeHolder: "Select export format (Esc to cancel)",
+              canPickMany: false,
+              ignoreFocusOut: false,
+            }
+          );
 
-  if (!formatChoice) return;
+          if (!formatChoice) return;
 
-  const chosenFormat = formatChoice.value;
-  const filterKey = chosenFormat === "sarif" ? "sarif" : "csv";
-  const filterExt = chosenFormat === "sarif" ? ".sarif" : ".csv";
+          const chosenFormat = formatChoice.value;
+          const filterKey = chosenFormat === "sarif" ? "sarif" : "csv";
+          const filterExt = chosenFormat === "sarif" ? ".sarif" : ".csv";
 
-  const defaultUri = vscode.workspace.workspaceFolders?.[0]?.uri;
-  const saveResult = await vscode.window.showSaveDialog({
-    defaultUri,
-    filters: { [filterKey]: [filterExt] },
-    title: `Save ${chosenFormat.toUpperCase()} file`,
-  });
+          const defaultUri = vscode.workspace.workspaceFolders?.[0]?.uri;
+          const saveResult = await vscode.window.showSaveDialog({
+            defaultUri,
+            filters: { [filterKey]: [filterExt] },
+            title: `Save ${chosenFormat.toUpperCase()} file`,
+          });
 
-  if (!saveResult) return;
+          if (!saveResult) return;
 
-  try {
-    let content: string;
+          try {
+            let content: string;
 
-    if (chosenFormat === "sarif") {
-      // ----  SARIF: use the *original* scan results (they have a real Flow with fsPath)
-      const originalResults: ScanResult[] = this._lastScanResults ?? [];
-      if (originalResults.length === 0) {
-        await vscode.window.showWarningMessage("No original scan data available for SARIF export.");
-        return;
-      }
-      content = exportSarif(originalResults);
-    } else {
-      // ----  CSV: keep using the web-view payload (already flattened)
-      content = convertArrayToCSV(data.value);
-    }
+            if (chosenFormat === "sarif") {
+              // ----  SARIF: use the *original* scan results (they have a real Flow with fsPath)
+              const originalResults: ScanResult[] = this._lastScanResults ?? [];
+              if (originalResults.length === 0) {
+                await vscode.window.showWarningMessage("No original scan data available for SARIF export.");
+                return;
+              }
+              content = exportSarif(originalResults);
+            } else {
+              // ----  CSV: keep using the web-view payload (already flattened)
+              content = convertArrayToCSV(data.value);
+            }
 
-    await vscode.workspace.fs.writeFile(saveResult, Buffer.from(content, "utf-8"));
-    await vscode.window.showInformationMessage(
-      `Downloaded ${chosenFormat.toUpperCase()} file: ${saveResult.fsPath}`
-    );
-  } catch (err: any) {
-    await vscode.window.showErrorMessage(
-      `Failed to export ${chosenFormat.toUpperCase()}: ${err?.message ?? err}`
-    );
-  }
-  break;
-}
+            await vscode.workspace.fs.writeFile(saveResult, Buffer.from(content, "utf-8"));
+            await vscode.window.showInformationMessage(
+              `Downloaded ${chosenFormat.toUpperCase()} file: ${saveResult.fsPath}`
+            );
+          } catch (err: any) {
+            await vscode.window.showErrorMessage(
+              `Failed to export ${chosenFormat.toUpperCase()}: ${err?.message ?? err}`
+            );
+          }
+          break;
+        }
       }
     });
   }
