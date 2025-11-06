@@ -41,6 +41,11 @@ export default class MessageService {
     vscode.env.openExternal(vscode.Uri.parse(reviewUrl));
   }
 
+  openReviewPage(query: any) {
+  const url = query.url || "https://marketplace.visualstudio.com/items?itemName=ForceConfigControl.lightning-flow-scanner-vsx";
+  vscode.env.openExternal(vscode.Uri.parse(url));
+}
+
   getCache(query: any) {
     const { nonce, key } = query;
     this.sendResponse(
