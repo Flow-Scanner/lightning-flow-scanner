@@ -35,7 +35,11 @@ export default class MessageService {
     vscode.commands.executeCommand('flowscanner.configRules');
   }
 
-  // Todo implement Cache in Front end components
+  openVsxReviews(_query: any) {
+    const reviewUrl =
+      "https://open-vsx.org/extension/ForceConfigControl/lightning-flow-scanner-vsx/reviews";
+    vscode.env.openExternal(vscode.Uri.parse(reviewUrl));
+  }
 
   getCache(query: any) {
     const { nonce, key } = query;
