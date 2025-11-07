@@ -1,11 +1,10 @@
-import type { IRulesConfig } from "lightning-flow-scanner-core/main/internals/internals.js";
 import { writeFileSync } from "node:fs";
 
 import { FindFlows } from "./FindFlows.js";
 import pkg from "@flow-scanner/lightning-flow-scanner-core";
 const { scan, parse, fix: fixFlows } = pkg;
 
-import type { ScanResult as FlowScanResults } from "@flow-scanner/lightning-flow-scanner-core";
+import type { ScanResult as FlowScanResults, IRulesConfig } from "@flow-scanner/lightning-flow-scanner-core";
 
 export default class CoreFixService {
   public constructor(

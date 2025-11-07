@@ -34,6 +34,7 @@
     "nyc": "17.1.0",
     "oclif": "4.22.5",
     "prettier": "3.6.2",
+    "rimraf": "^6.1.0",
     "sinon": "21.0.0",
     "ts-node": "10.9.2",
     "typescript": "5.8.3"
@@ -66,10 +67,11 @@
   },
   "repository": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git",
   "scripts": {
-    "build": "rm -rf lib && tsc -b && oclif manifest && oclif readme",
+    "build": "rimraf lib && tsc -b && oclif manifest && oclif readme",
     "prepack": "npm run build",
     "test": "mocha -r ts-node/register test/**/*.test.ts",
-    "lfs:link": "npm link lightning-flow-scanner-core && npm pack && sf plugins link"
+    "lfs:link": "npm link lightning-flow-scanner-core && npm pack && sf plugins link",
+    "clean": "rimraf lib"
   },
   "type": "module",
   "keywords": [

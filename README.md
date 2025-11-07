@@ -32,23 +32,16 @@ sf flow:scan [options]
 
 Customize the scan behavior using the following options:
 
-```sh-session
-  -c, --config <path>                                               set a path to the configuration file.
-
-  -d, --directory <C:\..\force-app\main\default\flows>              set a directory to scan.
-
-  -f, --failon                                                      set a threshold level for failure by error
-
-  -p, --files <C:\..\flow1.flow, C:\..\flow2.flow>                  set a space-separated list of flow paths to scan.
-
-  -s, --sarif                                                       get SARIF output to the stdout directly
-
-  -z, --betamode                                                    a runtime toggle to enable beta rules(experimental)
-
-  --json                                                            set output format as json.
-
-  --loglevel=(trace|debug|info|warn|error|fatal)                    [default: warn] logging level.
-```
+| Flag                | Alias | Description                                                                 | Example                                      |
+|---------------------|-------|-----------------------------------------------------------------------------|----------------------------------------------|
+| `--config`          | `-c`  | Path to the configuration file                                              | `-c ./lfs.config.json`                       |
+| `--directory`       | `-d`  | Directory to scan recursively                                               | `-d ./force-app/main/default/flows`          |
+| `--threshold`       | `-f`  | Fail the run on errors of this level or higher (`error`\|`warn`\|`info`)    | `--threshold warn`                           |
+| `--files`           | `-p`  | Space-separated list of specific flow files to scan                         | `-p "flow1.flow-meta.xml" "flows/flow2.flow-meta.xml"` |
+| `--sarif`           | `-s`  | Output results in SARIF format to stdout                                    | `--sarif > results.sarif`                    |
+| `--betamode`        | `-z`  | Enable experimental beta rules                                              | `--betamode`                                 |
+| `--json`            |       | Output results as pretty-printed JSON                                       | `--json`                                     |
+| `--loglevel`        |       | Logging verbosity<br/>`trace` \| `debug` \| `info` \| `warn` \| `error` \| `fatal` <br/>[default: `warn`] | `--loglevel debug`                           |
 
 **Privacy:** Zero user data collected. All processing is client-side. → See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-cli?tab=security-ov-file).
 
