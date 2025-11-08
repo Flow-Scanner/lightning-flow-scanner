@@ -3,12 +3,8 @@
 ## Security Practices
 
 - Code is open-source and peer-reviewed by the community.
-- Vulnerabilities can be reported privately via GitHub security features.
+- Vulnerabilities can be reported privately via [GitHub vulnerability reporting](https://github.com/Flow-Scanner/lightning-flow-scanner-cli/security).
 - Changes to the repository are scanned and reviewed before merging.
-
-## Reporting a Vulnerability
-
-If you discover a security vulnerability, please report it using [GitHub vulnerability reporting](https://github.com/Flow-Scanner/lightning-flow-scanner-cli/security).
 
 ## Data Handling
 
