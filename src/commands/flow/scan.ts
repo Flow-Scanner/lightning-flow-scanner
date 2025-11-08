@@ -115,14 +115,26 @@ export default class Scan extends SfCommand<Output> {
       this.error(`Scan failed: ${(err as Error).message}`);
     }
 
-    // BUILD RESULTS ONCE — AND ONLY ONCE
+    // BUILD RESULTS
     const results = this.buildResults(scanResults);
 
-    // SARIF: now uses correct errorCounters
+    // SARIF: output
     if (flags.sarif) {
       const sarif = await exportSarif(scanResults);
-      process.stdout.write(sarif + '\n');
-      process.exit(this.getStatus());
+      this.log(sarif); // ← ONLY THIS WORKS reliably
+      const status = this.getStatus();
+      if (status > 0) {
+        process.exitCode = status;
+      }
+      return {
+        summary: {
+          flowsNumber: scanResults.length,
+          results: results.length,
+          message: "SARIF output generated",
+        },
+        status,
+        results: [],
+      };
     }
     
     this.debug(`scan results: ${scanResults.length}`, ...scanResults);
@@ -168,7 +180,6 @@ export default class Scan extends SfCommand<Output> {
       flowsNumber: scanResults.length,
       results: results.length,
       message: `A total of ${results.length} results have been found in ${scanResults.length} flows.`,
-      errorLevelsDetails: Object.fromEntries(this.errorCounters),
     };
     return { summary, status, results };
   }

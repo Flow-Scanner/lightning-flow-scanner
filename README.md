@@ -15,6 +15,7 @@
 ## Table of contens
 
 - **[Usage](#usage)**
+  - [Examples](#examples)
 - **[Configuration](#configuration)**
   - [Scanner Options](#scanner-options)
 - **[Installation](#installation)**
@@ -44,6 +45,23 @@ Customize the scan behavior using the following options:
 | `--loglevel`        |       | Logging verbosity<br/>`trace` \| `debug` \| `info` \| `warn` \| `error` \| `fatal` <br/>[default: `warn`] | `--loglevel debug`                           |
 
 **Privacy:** Zero user data collected. All processing is client-side. → See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-cli?tab=security-ov-file).
+
+### Examples
+
+Quick local scan with JSON output
+```
+sf flow:scan -d ./flows --json
+```
+
+CI/CD ready with SARIF
+```
+sf flow:scan -d src/flows --sarif > report.sarif
+```
+
+Scan only two specific flows with beta rules
+```
+sf flow:scan -p "flows/Opportunity_Auto_Approve.flow-meta.xml" "flows/Case_Escalation.flow-meta.xml" -z --json
+```
 
 ---
 
