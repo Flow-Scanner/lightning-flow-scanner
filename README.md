@@ -58,7 +58,7 @@ CI/CD ready with SARIF
 sf flow:scan -d src/flows --sarif > report.sarif
 ```
 
-Scan only two specific flows with beta rules
+Scan only two specific flows including beta rules
 ```
 sf flow:scan -p "flows/Opportunity_Auto_Approve.flow-meta.xml" "flows/Case_Escalation.flow-meta.xml" -z --json
 ```
@@ -84,7 +84,7 @@ It is recommended to set up a `.flow-scanner.yml` and define:
   "exceptions": {
     // Your exceptions here
   },
-  "betamode": false // include rules currently in beta
+  "betamode": false // Enable beta rules
 }
 ```
 
@@ -113,7 +113,7 @@ Note: if you prefer JSON format, you can create a `.flow-scanner.json` file usin
 
 | **Install with sf (Salesforce CLI)**            | **Install globally with npm**               |
 | ----------------------------------------------------- | ------------------------------------------------- |
-| ``bash<br>sf plugins install lightning-flow-scanner`` | ``bash<br>npm install -g lightning-flow-scanner`` |
+| `sf plugins install lightning-flow-scanner` | `npm install -g lightning-flow-scanner` |
 
 ---
 

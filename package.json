@@ -2,7 +2,7 @@
   "name": "lightning-flow-scanner",
   "version": "6.2.3",
   "bugs": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli/issues",
-  "description": "A Salesforce CLI plugin for static analysis and optimization of Flows. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and CI/CD integration to help users maintain secure and reliable Flow automations.",
+  "description": "A Salesforce CLI plugin for analysis and optimization of Salesforce Flow. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and CI/CD integration to help users maintain secure and reliable Flow automations.",
   "dependencies": {
     "@flow-scanner/lightning-flow-scanner-core": "^6.1.2",
     "@oclif/core": "^4.5.4",
@@ -48,7 +48,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli/",
+  "homepage": "https://cli.lightningflowscanner.org",
   "license": "AGPL-3.0",
   "oclif": {
     "commands": "./lib/src/commands",

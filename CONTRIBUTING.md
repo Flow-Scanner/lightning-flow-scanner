@@ -4,6 +4,6 @@ Since 2021, the _Lightning Flow Scanner_ has grown from its roots as VS Code too
 - 📢 Share our work with your network
 - 💬 Provide feedback to help us improve
 - 💻 Contribute code to drive innovation
-- 🤝 [Become a member](https://register.lightningflowscanner.org/) and help sustain the project
+- 🤝 [Become a member](https://register.lightningflowscanner.org/) and stay involved.
 
 Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).
