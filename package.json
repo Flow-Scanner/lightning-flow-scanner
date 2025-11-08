@@ -25,7 +25,7 @@
       "properties": {
         "flowscanner.SpecifyFiles": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Specify flow file paths instead of a root directory."
         }
       }
