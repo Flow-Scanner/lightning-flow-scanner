@@ -6,7 +6,7 @@
 <p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
 <p align="center">
- <img src="media/demo.gif" alt="Flow Overview" width="76%" />
+ <img src="media/demo.gif" alt="Flow Overview"/>
 </p>
 
 ---
@@ -15,8 +15,8 @@
 
 - **[Usage](#usage)**
 - **[Configuration](#configuration)**
-  - **[Scanner Options](#scanner-options)**
-  - **[Extension Settings](#extension-settings)**
+  - [Scanner Options](#scanner-options)
+  - [Extension Settings](#extension-settings)
 - **[Installation](#installation)**
 - **[Development](#development)**
 
@@ -25,7 +25,7 @@
 ## Usage
 
 
-Lightning Flow Scanner CLI is plug-and-play. Open any project with flows and use our side bar or the **Command Palette** and type `flowscanner` to see the list of all available commands.
+Lightning Flow Scanner VSX is plug-and-play. Open any project with flows and use our side bar or the **Command Palette** and type `flowscanner` to see the list of all available commands.
 
 * `Configure Flow Scanner` - Set up rules in `.flow-scanner.yml` (see [scanner documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-core))
 * `Scan Flows` - Analyze a directory or selected flow files
@@ -109,7 +109,7 @@ code --install-extension ForceConfigControl.lightning-flow-scanner-vsx
 >
 > Volta will automatically use the Node.js version defined in `package.json`.
 
-1. **Clone the repository**
+1. **Clone the Repository**
 
 ```bash
   git clone https://github.com/Flow-Scanner/lightning-flow-scanner-vsx.git
@@ -121,13 +121,13 @@ code --install-extension ForceConfigControl.lightning-flow-scanner-vsx
   npm install
 ```
 
-3. **Build the Project**
+3. **Compile a New Version**
 
 ```bash
   npm run build
 ```
 
-4. **Watch for Changes**
+4. **Auto-compile New Changes**
 
 ```bash
   npm run watch
@@ -156,6 +156,6 @@ If you’re developing or testing updates to the core module, you can link it lo
 
 ## VSCE to VSX
 
-The `lightning-flow-scanner-vsce` package was unpublished from the Visual Studio and Open VSX Marketplaces due to a vulnerability stemming from unsafe rule loading. The issue was addressed in [core v5](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). This fork, created on 22/09/2025, emphasizes security and maintainability.
+`lightning-flow-scanner-vsce` was unpublished from the Visual Studio and Open VSX Marketplaces due to a vulnerability stemming from unsafe rule loading. The issue was addressed in [core v5](https://github.com/Flow-Scanner/lightning-flow-scanner-core/releases/tag/v5.1.0). This fork, created on 22/09/2025, emphasizes security and maintainability.
 
 <p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>

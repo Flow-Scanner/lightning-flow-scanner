@@ -16,7 +16,7 @@
   "categories": [
     "Linters"
   ],
-  "homepage": "https://flow-scanner.github.io/lightning-flow-scanner-vsx",
+  "homepage": "https://vsx.lightningflowscanner.org",
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
