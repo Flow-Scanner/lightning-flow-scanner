@@ -79,7 +79,7 @@ Note: if you prefer JSON format, you can create a `.flow-scanner.json` file usin
 
 | Extension Settings           | Description                                                         | Default Value |
 | ---------------------------- | ------------------------------------------------------------------- | ------------- |
-| `flowscanner.SpecifyFiles` | Set to true to select .Flow file paths instead of a root directory. | `false`     |
+| `flowscanner.SpecifyFiles` | Set to true to select .Flow file paths instead of a root directory. | `true`     |
 
 ---
 
