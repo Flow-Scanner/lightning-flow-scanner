@@ -35,8 +35,8 @@ Customize the scan behavior using the following options:
 
 | Flag                | Alias | Description                                                                 | Example                                      |
 |---------------------|-------|-----------------------------------------------------------------------------|----------------------------------------------|
-| `--config`          | `-c`  | Path to the configuration file                                              | `-c ./lfs.config.json`                       |
-| `--directory`       | `-d`  | Directory to scan recursively                                               | `-d ./force-app/main/default/flows`          |
+| `--config`          | `-c`  | Path to the configuration file                                              | `-c ./dir/flow-scanner.json`                       |
+| `--directory`       | `-d`  | Directory to scan recursively                                               | `-d ./force-app/main/`          |
 | `--threshold`       | `-f`  | Fail the run on errors of this level or higher (`error`\|`warn`\|`info`)    | `--threshold warn`                           |
 | `--files`           | `-p`  | Space-separated list of specific flow files to scan                         | `-p "flow1.flow-meta.xml" "flows/flow2.flow-meta.xml"` |
 | `--sarif`           | `-s`  | Output results in SARIF format to stdout                                    | `--sarif > results.sarif`                    |
