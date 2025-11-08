@@ -7,7 +7,7 @@
 <p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
 <p align="center">
- <img src="docs/images/sfdxgif.gif" alt="Flow Overview" width="76%" />
+ <img src="docs/images/sfdxgif.gif" alt="Flow Overview"/>
 </p>
 
 ---
@@ -37,14 +37,14 @@ Customize the scan behavior using the following options:
 |---------------------|-------|-----------------------------------------------------------------------------|----------------------------------------------|
 | `--config`          | `-c`  | Path to the configuration file                                              | `-c ./dir/flow-scanner.json`                       |
 | `--directory`       | `-d`  | Directory to scan recursively                                               | `-d ./force-app/main/`          |
-| `--threshold`       | `-f`  | Fail the run on errors of this level or higher (`error`\|`warn`\|`info`)    | `--threshold warn`                           |
 | `--files`           | `-p`  | Space-separated list of specific flow files to scan                         | `-p "flow1.flow-meta.xml" "flows/flow2.flow-meta.xml"` |
 | `--sarif`           | `-s`  | Output results in SARIF format to stdout                                    | `--sarif > results.sarif`                    |
+| `--threshold`       | `-t`  | Fail the run on errors of this level or higher (`error`\|`warn`\|`info`)    | `--threshold warn`                           |
 | `--betamode`        | `-z`  | Enable experimental beta rules                                              | `--betamode`                                 |
 | `--json`            |       | Output results as pretty-printed JSON                                       | `--json`                                     |
 | `--loglevel`        |       | Logging verbosity<br/>`trace` \| `debug` \| `info` \| `warn` \| `error` \| `fatal` <br/>[default: `warn`] | `--loglevel debug`                           |
 
-**Privacy:** Zero user data collected. All processing is client-side. → See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-cli?tab=security-ov-file).
+**Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-cli?tab=security-ov-file).
 
 ### Examples
 
@@ -107,8 +107,9 @@ Note: if you prefer JSON format, you can create a `.flow-scanner.json` file usin
 
 ## Installation
 
-`lightning-flow-scanner-cli` is published to **npm** only.
-
+[![GitHub stars](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner-cli)](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner-cli)
+[![GitHub contributors](https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner-cli.svg)](https://gitHub.com/Flow-Scanner/lightning-flow-scanner-cli/graphs/contributors/)
+[![License](https://img.shields.io/npm/l/lightning-flow-scanner.svg)](github.com/Flow-Scanner/lightning-flow-scanner-cli/raw/main/LICENSE.md)
 [![npm version](https://img.shields.io/npm/v/lightning-flow-scanner?label=npm)](https://www.npmjs.com/package/lightning-flow-scanner)
 
 | **Install with sf (Salesforce CLI)**            | **Install globally with npm**               |
@@ -152,7 +153,7 @@ Note: if you prefer JSON format, you can create a `.flow-scanner.json` file usin
 ```
 
 5. **Linking SF CLI Plugin**
-   to test changes in your local CLI run:
+   to test changes locally, run:
 
 ```bash
   sf plugins link .
@@ -160,7 +161,7 @@ Note: if you prefer JSON format, you can create a `.flow-scanner.json` file usin
 
 6. **Linking** **Core Module (Optional)**
 
-If you’re developing or testing updates to the core module, you can link it locally:
+If you’re developing or testing updates to the core module, run:
 
 - In the core module directory, run:
   ```bash
