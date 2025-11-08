@@ -32,8 +32,7 @@ Lightning Flow Scanner VSX is plug-and-play. Open any project with flows and use
 * `Fix Flows` - Automatically apply available fixes
 * `Flow Scanner Documentation` - Open the rules reference guide
 
-**Privacy:** Zero user data collected. All processing is client-side.
-→ See Data Handling in our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx?tab=security-ov-file).
+**Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx?tab=security-ov-file).
 
 ---
 
