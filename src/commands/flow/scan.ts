@@ -36,6 +36,7 @@ export default class Scan extends SfCommand<Output> {
   public static requiresProject = false;
   protected static supportsUsername = true;
   protected failOn = "error";
+  protected static supportsRawOutput = true;
   protected errorCounters: Map<string, number> = new Map<string, number>();
   public static readonly flags = {
     config: Flags.file({
@@ -104,7 +105,7 @@ export default class Scan extends SfCommand<Output> {
     const parsedFlows: ParsedFlow[] = await parseFlows(flowFiles);
     this.debug(`parsed flows ${parsedFlows.length}`, ...parsedFlows);
     // ---- 5. Run the scan ----------------------------------------------------
-   let scanResults: ScanResult[];
+    let scanResults: ScanResult[];
     try {
       const scanConfig = {
         rules: mergedConfig.rules ?? {},
@@ -114,65 +115,53 @@ export default class Scan extends SfCommand<Output> {
     } catch (err) {
       this.error(`Scan failed: ${(err as Error).message}`);
     }
-
-    // BUILD RESULTS
+    this.debug("Does every scanResult have fsPath?", scanResults.some(r => !r.flow?.fsPath));
+    // BUILD RESULTS ALWAYS (for status and errorCounters)
     const results = this.buildResults(scanResults);
-
-    // SARIF: output
+    // SARIF: if sarif, no human output
     if (flags.sarif) {
       const sarif = await exportSarif(scanResults);
-      this.log(sarif); // ← ONLY THIS WORKS reliably
-      const status = this.getStatus();
-      if (status > 0) {
-        process.exitCode = status;
-      }
-      return {
-        summary: {
-          flowsNumber: scanResults.length,
-          results: results.length,
-          message: "SARIF output generated",
-        },
-        status,
-        results: [],
-      };
+      this.spinner.stop();
+      console.log(sarif);
     }
-    
     this.debug(`scan results: ${scanResults.length}`, ...scanResults);
-    this.spinner.stop(`Scan complete`);
-    // ---- 6. Build / display results -----------------------------------------
-    if (results.length > 0) {
-      const resultsByFlow: Record<string, any[]> = {};
-      for (const r of results) {
-        resultsByFlow[r.flowName] = resultsByFlow[r.flowName] ?? [];
-        resultsByFlow[r.flowName].push(r);
+    if (!flags.sarif) this.spinner.stop(`Scan SARIF Mode`);
+    // ---- 6. Human readable only if not sarif -----------------------------------------
+    if (!flags.sarif) {
+      if (results.length > 0) {
+        const resultsByFlow: Record<string, any[]> = {};
+        for (const r of results) {
+          resultsByFlow[r.flowName] = resultsByFlow[r.flowName] ?? [];
+          resultsByFlow[r.flowName].push(r);
+        }
+        for (const flowName in resultsByFlow) {
+          const match = scanResults.find((s) => s.flow.label === flowName)!;
+          this.styledHeader(
+            `Flow: ${chalk.yellow(flowName)} ${chalk.bgYellow(
+              `(${match.flow.name}.flow-meta.xml)`
+            )} ${chalk.red(`(${resultsByFlow[flowName].length} results)`)}`
+          );
+          this.log(chalk.italic("Type: " + match.flow.type));
+          this.log("");
+          this.table({
+            data: resultsByFlow[flowName],
+            columns: ["rule", "type", "name", "severity"],
+          });
+          this.debug(`Results By Flow: ${inspect(resultsByFlow[flowName])}`);
+          this.log("");
+        }
       }
-      for (const flowName in resultsByFlow) {
-        const match = scanResults.find((s) => s.flow.label === flowName)!;
-        this.styledHeader(
-          `Flow: ${chalk.yellow(flowName)} ${chalk.bgYellow(
-            `(${match.flow.name}.flow-meta.xml)`
-          )} ${chalk.red(`(${resultsByFlow[flowName].length} results)`)}`
-        );
-        this.log(chalk.italic("Type: " + match.flow.type));
-        this.log("");
-        this.table({
-          data: resultsByFlow[flowName],
-          columns: ["rule", "type", "name", "severity"],
-        });
-        this.debug(`Results By Flow: ${inspect(resultsByFlow[flowName])}`);
-        this.log("");
+      this.styledHeader(
+        `Total: ${chalk.red(results.length + " Results")} in ${chalk.yellow(
+          scanResults.length + " Flows"
+        )}.`
+      );
+      for (const sev of ["error", "warning", "note"]) {
+        const cnt = this.errorCounters.get(sev) ?? 0;
+        this.log(`- ${sev}: ${cnt}`);
       }
+      this.log("");
     }
-    this.styledHeader(
-      `Total: ${chalk.red(results.length + " Results")} in ${chalk.yellow(
-        scanResults.length + " Flows"
-      )}.`
-    );
-    for (const sev of ["error", "warning", "note"]) {
-      const cnt = this.errorCounters.get(sev) ?? 0;
-      this.log(`- ${sev}: ${cnt}`);
-    }
-    this.log("");
     // ---- 7. Exit code -------------------------------------------------------
     const status = this.getStatus();
     if (status > 0) process.exitCode = status;
