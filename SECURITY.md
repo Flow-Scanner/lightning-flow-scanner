@@ -3,16 +3,12 @@
 ## Security Practices
 
 - Code is open-source and peer-reviewed by the community.
-- Vulnerabilities can be reported privately via GitHub security features.
+- Vulnerabilities can be reported privately via [GitHub vulnerability reporting](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx/security).
 - Changes to the repository are scanned and reviewed before merging.
-
-## Reporting a Vulnerability
-
-If you discover a security vulnerability, please report it using [GitHub vulnerability reporting](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx/security).
 
 ## Data Handling
 
-This project collects zero user data. No credentials, PII, payment info, health data, or user content is ever stored, transmitted, or shared. All analysis runs 100% client-side with no network calls to external services.
+This tool collects zero user data. No credentials, PII, payment info, health data, or user content is ever stored, transmitted, or shared. All analysis runs 100% client-side with no network calls to external services.
 
 We temporarily use metadata (e.g., Flow metadata, timestamps) in-memory only for real-time functionality during your session. This data is never stored, logged, or transmitted and is discarded immediately when the session ends.
 
