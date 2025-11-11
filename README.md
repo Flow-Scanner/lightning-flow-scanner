@@ -27,7 +27,7 @@
 
 Lightning Flow Scanner VSX is plug-and-play. Open any project with flows and use our side bar or the **Command Palette** and type `flowscanner` to see the list of all available commands.
 
-* `Configure Flow Scanner` - Set up rules in `.flow-scanner.yml` (see [scanner documentation](https://github.com/Flow-Scanner/lightning-flow-scanner-core))
+* `Configure Flow Scanner` - Set up rules in `.flow-scanner.yml`
 * `Scan Flows` - Analyze a directory or selected flow files
 * `Fix Flows` - Automatically apply available fixes
 * `Flow Scanner Documentation` - Open the rules reference guide
@@ -108,31 +108,31 @@ code --install-extension ForceConfigControl.lightning-flow-scanner-vsx
 >
 > Volta will automatically use the Node.js version defined in `package.json`.
 
-1. **Clone the Repository**
+1. **Clone the repository**
 
 ```bash
   git clone https://github.com/Flow-Scanner/lightning-flow-scanner-vsx.git
 ```
 
-2. **Install Dependencies**
+2. **Install dependencies**
 
 ```bash
   npm install
 ```
 
-3. **Compile a New Version**
+3. **Compile a new version**
 
 ```bash
   npm run build
 ```
 
-4. **Auto-compile New Changes**
+4. **Auto-compile new changes**
 
 ```bash
   npm run watch
 ```
 
-5. **Run End-to-End Tests**
+5. **Run end-to-end tests**
 
 ```bash
   npm run test

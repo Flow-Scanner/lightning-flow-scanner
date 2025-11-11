@@ -148,7 +148,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@flow-scanner/lightning-flow-scanner-core": "^6.2.1",
+    "@flow-scanner/lightning-flow-scanner-core": "^6.4.0",
     "convert-array-to-csv": "^2.0.0",
     "cosmiconfig": "^9.0.0",
     "lightning-flow-scanner-core": "^5.9.7",
