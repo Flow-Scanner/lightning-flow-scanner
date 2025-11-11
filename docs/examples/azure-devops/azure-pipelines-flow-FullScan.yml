@@ -1,0 +1,28 @@
+pool:
+  vmImage: 'ubuntu-latest'
+
+# Use the Salesforce-Provided docker image with SF CLI preinstalled
+# https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_docker.htm
+container: salesforce/cli:latest-slim
+
+steps:
+- checkout: self
+
+# Ensure lightning-flow-scanner is installed (pipe "Y" to confirm installation)
+- script: |
+    echo Y | sf plugins install lightning-flow-scanner
+  displayName: 'Ensure lightning-flow-scanner is installed'
+
+# Capture SARIF from stdout → file
+- script: |
+    sf flow:scan --sarif > $(Build.ArtifactStagingDirectory)/results.sarif
+  displayName: Run Flow Scanner (stdout to SARIF)
+
+# Upload SARIF as artifact pipeline (per documentation https://marketplace.visualstudio.com/items?itemName=sariftools.scans)
+- task: PublishBuildArtifacts@1
+ # Flow scanner may report failure when it detects violations. Ignore that and publish artifacts anyway
+  condition: succeededOrFailed()
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/results.sarif'
+    ArtifactName: 'CodeAnalysisLogs'
+    publishLocation: 'Container'

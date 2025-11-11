@@ -1,0 +1,63 @@
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  targetBranch: "origin/main"
+  destinationFolder: "$(Build.ArtifactStagingDirectory)/diff/"
+
+# Use the Salesforce-Provided docker image with SF CLI preinstalled
+# https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_docker.htm
+container: salesforce/cli:latest-slim
+
+steps:
+# Checkout the repository with credentials persisted for git commands
+- checkout: self
+  persistCredentials: true
+  clean: true
+  fetchDepth: 1
+  fetchTags: false
+
+# Ensure lightning-flow-scanner is installed (pipe "Y" to confirm)
+- script: |
+    echo Y | sf plugins install lightning-flow-scanner
+  displayName: 'Ensure lightning-flow-scanner is installed'
+
+# Get added and changed files from the PR and copy them to a directory
+- script: |
+    # Fetch the PRs target branch so that we can compare against it
+    echo "Fetching target branch: $(targetBranch)..."
+    git fetch $targetBranch
+
+    diffFilter="AM" # Added and modified files
+
+    echo "Determining changed files..."
+    # Compute the list of changed files between target and source branches.
+    CHANGED_FILES=$(git diff --name-only --diff-filter=$diffFilter $(targetBranch))
+    echo "Changed files: $CHANGED_FILES"
+
+    # Create the destination directory to store changed files
+    mkdir -p "$(destinationFolder)"
+
+    # Copy each changed file into the directory while preserving the directory structure.
+    for file in $CHANGED_FILES; do
+      if [ -f "$file" ]; then
+        mkdir -p "$(destinationFolder)$(dirname $file)"
+        cp "$file" "$(destinationFolder)$file"
+      fi
+    done
+    echo "Files copied to $(destinationFolder)"
+  displayName: 'Extract Added and Changed Files'
+
+# Scan only the changed files and capture SARIF from stdout → file
+- script: |
+    sf flow:scan -d "$(destinationFolder)" --sarif > $(Build.ArtifactStagingDirectory)/results.sarif
+  displayName: Run Flow Scanner (stdout to SARIF)
+
+# Upload SARIF as artifact pipeline (per documentation https://marketplace.visualstudio.com/items?itemName=sariftools.scans)
+- task: PublishBuildArtifacts@1
+ # Flow scanner may report failure when it detects violations. ignore that and publish artifacts anyway
+  condition: succeededOrFailed()
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/results.sarif'
+    ArtifactName: 'CodeAnalysisLogs'
+    publishLocation: 'Container'
