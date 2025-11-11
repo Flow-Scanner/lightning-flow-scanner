@@ -16,6 +16,7 @@
 
 - **[Usage](#usage)**
   - [Examples](#examples)
+  - [Templates](#templates)
 - **[Configuration](#configuration)**
   - [Scanner Options](#scanner-options)
 - **[Installation](#installation)**
@@ -62,6 +63,19 @@ Scan only two specific flows including beta rules
 ```
 sf flow:scan -p "flows/Opportunity_Auto_Approve.flow-meta.xml" "flows/Case_Escalation.flow-meta.xml" -z --json
 ```
+
+### Templates
+Ready-to-use CI/CD pipeline templates.
+
+### Templates
+Ready-to-use CI/CD pipeline templates contributed by the community.
+
+| Platform       | Template Type                     | Link |
+|----------------|-----------------------------------|------|
+| Azure DevOps   | Full Project Scan                 | [`azure-pipelines-flow-FullScan.yml`](docs/examples/azure-devops/azure-pipelines-flow-FullScan.yml) |
+| Azure DevOps   | Change-Based Scan (Modified Flows)| [`azure-pipelines-flow-changedFiles.yml`](docs/examples/azure-devops/azure-pipelines-flow-changedFiles.yml) |
+
+> Templates are located in [`docs/examples/`](docs/examples/).
 
 ---
 
@@ -134,19 +148,19 @@ Note: if you prefer JSON format, you can create a `.flow-scanner.json` file usin
   git clone https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git
 ```
 
-2. **Install Dependencies**
+2. **Install dependencies**
 
 ```bash
   npm install
 ```
 
-3. **Build Executables**
+3. **Compile a new version**
 
 ```bash
   npm run build
 ```
 
-4. **Run Tests**
+4. **Run tests**
 
 ```bash
   npm run test
