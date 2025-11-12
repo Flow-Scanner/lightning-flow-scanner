@@ -65,9 +65,6 @@ sf flow:scan -p "flows/Opportunity_Auto_Approve.flow-meta.xml" "flows/Case_Escal
 ```
 
 ### Templates
-Ready-to-use CI/CD pipeline templates.
-
-### Templates
 Ready-to-use CI/CD pipeline templates contributed by the community.
 
 | Platform       | Template Type                     | Link |
