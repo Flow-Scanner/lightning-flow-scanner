@@ -65,14 +65,22 @@ sf flow:scan -p "flows/Opportunity_Auto_Approve.flow-meta.xml" "flows/Case_Escal
 ```
 
 ### Templates
-Ready-to-use CI/CD pipeline templates contributed by the community.
+Ready-to-use CI/CD templates and a **native GitHub Action**.  
+All examples: [`docs/examples/`](docs/examples/).
 
 | Platform       | Template Type                     | Link |
 |----------------|-----------------------------------|------|
 | Azure DevOps   | Full Project Scan                 | [`azure-pipelines-flow-FullScan.yml`](docs/examples/azure-devops/azure-pipelines-flow-FullScan.yml) |
-| Azure DevOps   | Change-Based Scan (Modified Flows)| [`azure-pipelines-flow-changedFiles.yml`](docs/examples/azure-devops/azure-pipelines-flow-changedFiles.yml) |
+| Azure DevOps   | Change-Based Scan                 | [`azure-pipelines-flow-changedFiles.yml`](docs/examples/azure-devops/azure-pipelines-flow-changedFiles.yml) |
+| GitHub | Full & PR-Only Scans       | [`scan-flows.yml`](docs/examples/github-action/scan-flows.yml) |
 
-> Templates are located in [`docs/examples/`](docs/examples/).
+> **Why a Native GitHub Action**  
+> - **No `sf` CLI required** – runs natively with Node.js.  
+> - **Scans `.flow` and `.flow-meta.xml` files directly** from your repo.  
+> - **Auto-detects changed flows** in PRs using Git diff.  
+> - **Automatically loads `.flow-scanner` config** (YAML, JSON, or `package.json`).  
+> 
+> For more information, see [`lightning-flow-scanner-action`](https://github.com/Flow-Scanner/lightning-flow-scanner-action?tab=readme-ov-file#usage)
 
 ---
 
