@@ -72,14 +72,14 @@ All examples: [`docs/examples/`](docs/examples/).
 |----------------|-----------------------------------|------|
 | Azure DevOps   | Full Project Scan                 | [`azure-pipelines-flow-FullScan.yml`](docs/examples/azure-devops/azure-pipelines-flow-FullScan.yml) |
 | Azure DevOps   | Change-Based Scan                 | [`azure-pipelines-flow-changedFiles.yml`](docs/examples/azure-devops/azure-pipelines-flow-changedFiles.yml) |
-| Copado | Full & Change-Based Scans       | [Copado CI/CD Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado) |
+| Copado DevOps | Full & Change-Based Scans       | [CI/CD Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado) |
 | GitHub | Full & Change-Based Scans       | [`scan-flows.yml`](docs/examples/github-action/scan-flows.yml) |
 
 > **Why a Native GitHub Action**  
-> - **No `sf` CLI required** – runs natively with Node.js.  
 > - **Scans `.flow` and `.flow-meta.xml` files directly** from your repo.  
-> - **Auto-detects changed flows** in PRs using Git diff.  
 > - **Automatically loads `.flow-scanner` config** (YAML, JSON, or `package.json`).  
+> - **Auto-detects changed flows** in PRs using Git diff.  
+> - **No `sf` CLI required** – runs natively with Node.js.  
 > 
 > For more information, see [`lightning-flow-scanner-action`](https://github.com/Flow-Scanner/lightning-flow-scanner-action?tab=readme-ov-file#usage)
 
