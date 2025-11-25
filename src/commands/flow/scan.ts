@@ -8,7 +8,7 @@ import pkg, {
   ParsedFlow,
   ScanResult,
   RuleResult,
-  ResultDetails,
+  Violation,
 } from "@flow-scanner/lightning-flow-scanner-core";
 import { inspect } from "util";
 const {
@@ -204,7 +204,7 @@ export default class Scan extends SfCommand<Output> {
         const severity = rule.severity ?? "error";
         const flowUri = sr.flow.fsPath;
         const flowApiName = `${sr.flow.name}.flow-meta.xml`;
-        for (const detail of rule.details as ResultDetails[]) {
+        for (const detail of rule.details as Violation[]) {
           errors.push(
             Object.assign(detail, {
               ruleDescription: rule.ruleDefinition.description,
