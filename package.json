@@ -13,7 +13,7 @@
     "glob": "^11.1.0"
   },
   "devDependencies": {
-    "@oclif/plugin-help": "6.2.32",
+    "@oclif/plugin-help": "6.2.36",
     "@oclif/test": "4.1.13",
     "@salesforce/dev-config": "4.3.1",
     "@salesforce/ts-sinon": "1.4.31",
