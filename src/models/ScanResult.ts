@@ -1,4 +1,4 @@
-import { Violation } from "./Violation.js";
+import { FlatViolation } from "@flow-scanner/lightning-flow-scanner-core";
 
 export type ScanResult = {
   status: number;
@@ -7,5 +7,5 @@ export type ScanResult = {
     results: number;
     message: string;
   };
-  results: Violation[];
+  results: FlatViolation[];
 };

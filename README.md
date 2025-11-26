@@ -39,11 +39,12 @@ Customize the scan behavior using the following options:
 | `--config`          | `-c`  | Path to the configuration file                                              | `-c ./dir/flow-scanner.json`                       |
 | `--directory`       | `-d`  | Directory to scan recursively                                               | `-d ./force-app/main/`          |
 | `--files`           | `-p`  | Space-separated list of specific flow files to scan                         | `-p "flow1.flow-meta.xml" "flows/flow2.flow-meta.xml"` |
+| `--csv`             | `-v`  | Get violations only, csv ready.                                           | `--csv > violations.csv`                                 |
 | `--sarif`           | `-s`  | Output results in SARIF format to stdout                                    | `--sarif > results.sarif`                    |
 | `--threshold`       | `-t`  | Fail the run on errors of this level or higher (`error`\|`warn`\|`info`)    | `--threshold warn`                           |
 | `--betamode`        | `-z`  | Enable experimental beta rules                                              | `--betamode`                                 |
 | `--json`            |       | Output results as pretty-printed JSON                                       | `--json`                                     |
-| `--loglevel`        |       | Logging verbosity<br/>`trace` \| `debug` \| `info` \| `warn` \| `error` \| `fatal` <br/>[default: `warn`] | `--loglevel debug`                           |
+| `--loglevel`        |       | Logging verbosity `trace` \| `debug` \| `info` \| `warn` \| `error` \| `fatal` | `--loglevel debug`                           |
 
 **Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-cli?tab=security-ov-file).
 
@@ -102,8 +103,7 @@ It is recommended to set up a `.flow-scanner.yml` and define:
   },
   "exceptions": {
     // Your exceptions here
-  },
-  "betamode": false // Enable beta rules
+  }
 }
 ```
 
