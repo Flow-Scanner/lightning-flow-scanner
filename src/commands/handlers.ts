@@ -114,7 +114,7 @@ export default class Commands {
     });
     if (includeBeta === undefined) return;
     const betamode = includeBeta === 'Yes';
-    const allRules = [...core.getRules(), ...(betamode ? core.getBetaRules() : [])];
+    const allRules = [...core.getRules()];
     const currentNames = Object.keys(rules);
     // Preselect all rules if no config exists
     const isEmptyConfig = currentNames.length === 0;
