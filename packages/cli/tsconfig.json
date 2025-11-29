@@ -14,9 +14,18 @@
     "types": ["node", "mocha"],
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true
+    ,
+    "baseUrl": ".",
+    "paths": {
+      "@flow-scanner/lightning-flow-scanner-core": ["../core/types"],
+      "@flow-scanner/lightning-flow-scanner-core/*": ["../core/types/*"]
+    }
   },
   "ts-node": {
     "esm": true
   },
+  "references": [
+    { "path": "../core" }
+  ],
   "include": ["./src/**/*", "./test/**/*"]
 }

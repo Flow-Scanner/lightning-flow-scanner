@@ -1,21 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "pipeline": {
+  "tasks": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "lib/**",
-        "out/**",
-        "dist/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": ["lib/**", "out/**", "dist/**", "oclif.manifest.json"]
     },
     "test": {
-      "dependsOn": [
-        "build"
-      ],
-      "cache": true
+      "dependsOn": ["build"],
+      "outputs": []
     },
     "clean": {
       "cache": false
