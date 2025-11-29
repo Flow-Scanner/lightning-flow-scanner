@@ -11,6 +11,10 @@
     },
     "clean": {
       "cache": false
+    },
+    "vite:dist": {
+      "dependsOn": ["build"],
+      "outputs": ["dist/**"]
     }
   }
 }

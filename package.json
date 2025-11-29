@@ -12,6 +12,8 @@
     "test:cli": "turbo run test --filter=lightning-flow-scanner",
     "clean": "turbo run clean",
     "dev": "turbo run build --watch",
+    "dist": "turbo run vite:dist --filter=@flow-scanner/lightning-flow-scanner-core",
+    "dist:core": "turbo run vite:dist --filter=@flow-scanner/lightning-flow-scanner-core",
     "lfs:link": "turbo run buildng-flow-scanner && cd packages/ --filter=lightnicli && pnpm lfs:link"
   },
   "devDependencies": {
@@ -26,5 +28,5 @@
     "node": "20.19.6",
     "pnpm": "9.0.0"
   },
-  "repository": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git"
+  "repository": "https://github.com/Flow-Scanner/lightning-flow-scanner.git"
 }

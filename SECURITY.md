@@ -3,7 +3,7 @@
 ## Security Practices
 
 - Code is open-source and peer-reviewed by the community.
-- Vulnerabilities can be reported privately via [GitHub vulnerability reporting](https://github.com/Flow-Scanner/lightning-flow-scanner-core/security).
+- Vulnerabilities can be reported privately via [GitHub vulnerability reporting](https://github.com/Flow-Scanner/lightning-flow-scanner/security).
 - All changes are scanned with [Snyk](https://github.com/snyk/cli) prior to publication.
 - Releases are published to npm using **GitHub Actions Trusted Publishing (OIDC)**.
 - Tags (`v*`) trigger automated `npm publish`, providing a full audit trail.
@@ -18,6 +18,20 @@ We temporarily use metadata (e.g., Flow metadata, timestamps) in-memory only for
 
 We actively track and maintain an up-to-date inventory of all third-party dependencies to ensure security and compatibility. Our dependencies include:
 
+### Core
+
 | Package           | License                                                                           | Purpose                                        |
 | ----------------- | --------------------------------------------------------------------------------- | ---------------------------------------------- |
 | `fast-xml-parser` | [MIT](https://github.com/NaturalIntelligence/fast-xml-parser/blob/master/LICENSE) | Validate XML, Parse XML and Build XML rapidly. |
+
+### CLI
+
+| Package                             | License | Purpose |
+| ----------------------------------- | ------- | ------- |
+| `@oclif/core`                        | [MIT](https://github.com/oclif/oclif/blob/main/LICENSE) | CLI framework core utilities |
+| `@salesforce/core`                   | [BSD-3-Clause](https://github.com/salesforce/core/blob/main/LICENSE) | Salesforce core library for CLI plugins |
+| `@salesforce/sf-plugins-core`       | [BSD-3-Clause](https://github.com/salesforce/sf-plugins-core/blob/main/LICENSE) | Base library for Salesforce CLI plugins |
+| `chalk`                              | [MIT](https://github.com/chalk/chalk/blob/main/license) | Terminal string styling (colors) |
+| `cosmiconfig`                        | [MIT](https://github.com/davidtheclark/cosmiconfig/blob/main/LICENSE) | Config file loader for JavaScript/Node |
+| `glob`                               | [MIT](https://github.com/isaacs/node-glob/blob/master/LICENSE) | File pattern matching |
+| `lightning-flow-scanner-core`        | [MIT](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/LICENSE.md) | Salesforce Flow scanning utilities |

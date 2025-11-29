@@ -21,6 +21,8 @@
   - [Examples](#examples)
   - [Functions](#functions)
 - **[Installation](#installation)**
+  - [Salesforce CLI Plugin](#salesforce-cli-plugin)
+  - [Core](#core)
 - **[Development](#development)**
 
 ---
@@ -326,16 +328,27 @@ _Get SARIF output including exact line numbers of violations._
 
 ## Installation
 
-[![GitHub stars](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner-core)](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner-core)
-[![GitHub contributors](https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner-core.svg)](https://gitHub.com/Flow-Scanner/lightning-flow-scanner-core/graphs/contributors/)
-[![License](https://img.shields.io/npm/l/lightning-flow-scanner-core.svg)](https://github.com/Flow-Scanner/lightning-flow-scanner-core/raw/main/LICENSE.md)
-[![npm version](https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core)](https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core)
-[![Known Vulnerabilities](https://snyk.io/test/github/Flow-Scanner/lightning-flow-scanner-core/badge.svg)](https://snyk.io/test/github/Flow-Scanner/lightning-flow-scanner-core)
+[![GitHub stars](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)
+[![GitHub contributors](https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner.svg)](https://gitHub.com/Flow-Scanner/lightning-flow-scanner/graphs/contributors/)
+[![License](https://img.shields.io/npm/l/lightning-flow-scanner.svg)](github.com/Flow-Scanner/lightning-flow-scanner/raw/main/LICENSE.md)
 
-**To install with npm:**
+
+### Salesforce CLI Plugin
+[![npm](https://img.shields.io/npm/v/lightning-flow-scanner?label=)](https://www.npmjs.com/package/lightning-flow-scanner)
 
 ```bash
-npm install @flow-scanner/lightning-flow-scanner-core
+sf plugins install lightning-flow-scanner
+```
+OR
+```bash
+npm install -g lightning-flow-scanner
+```
+
+### Core
+[![npm](https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=)](https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core)
+
+```bash
+npm install -g @flow-scanner/lightning-flow-scanner-core
 ```
 
 ---
@@ -353,48 +366,56 @@ npm install @flow-scanner/lightning-flow-scanner-core
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/Flow-Scanner/lightning-flow-scanner-core.git
+   git clone https://github.com/Flow-Scanner/lightning-flow-scanner.git
    ```
 
 2. Install dependencies:
 
    ```bash
-   npm install
+   pnpm install
    ```
 
-3. Compile a new version:
+3. Compile:
 
    ```bash
-   npm run build
+   pnpm run build
+   ```
+
+   To compile just the core package::
+   ```bash
+   pnpm build:core 
    ```
 
 4. Run tests:
 
    ```bash
-   npm run test
+   pnpm test 
    ```
 
-5. Testing the module locally(Optional):
+  Or to test a new version of the core:
+   ```bash
+   pnpm test:core 
+   ```
+
+5. Linking the core module locally(Optional):
 
    To link the module, run:
 
    ```bash
-   npm run link
+   pnpm link --global @flow-scanner/lightning-flow-scanner-core
    ```
 
-   a. Ad-Hoc Testing with node:
+   a. You can now do Ad-Hoc Testing with node:
 
    ```bash
-   npm run link
+   node -i -e "import('@flow-scanner/lightning-flow-scanner-core').then(m => { Object.assign(global, m.default ? m.default : m); console.log('✅ Core loaded! Try: await parse(...), scan(...), etc.'); })"
    ```
 
-   b. Test in a dependent project (e.g. VSX or CLI):
+   b. Or test in a dependent project:
 
    ```bash
    npm link @flow-scanner/lightning-flow-scanner-core
    ```
-
-   Your local module will now replace any installed version and update on rebuild.
 
 6. Deploy Demo Flows (Optional):
 
@@ -410,4 +431,4 @@ npm install @flow-scanner/lightning-flow-scanner-core
      npm run vite:dist // creates UMD at`dist/lightning-flow-scanner-core.umd.js`.
    ```
 
-<p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>
+<p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>
