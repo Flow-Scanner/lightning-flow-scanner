@@ -1,0 +1,25 @@
+{
+  "name": "lightning-flow-scanner-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "volta": {
+    "node": "20.19.6"
+  },
+  "repository": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git"
+}
