@@ -18,7 +18,7 @@
     "build:js": "swc src --out-dir out --copy-files --strip-leading-paths --config-file .swcrc",
     "build:types": "tsc -p tsconfig.types.json --declaration --emitDeclarationOnly --outDir out",
     "copy:media": "node -e \"require('fs').cpSync('assets/media','out/assets/media',{recursive:true,force:true}) || require('fs').mkdirSync('out/assets/media',{recursive:true})\"",
-    "copy:root-files:out": "node -e \"['README.md','LICENSE.md','SECURITY.md','CONTRIBUTING.md','package.json'].forEach(f=>require('fs').copyFileSync(f,'out/'+f))\"",
+    "copy:root-files:out": "node -e \"['../../README.md','../../LICENSE.md','../../SECURITY.md','../../CONTRIBUTING.md','package.json'].forEach(f=>require('fs').copyFileSync(f,'out/'+f.split('/').pop()))\"",
     "copy:root-files:dist": "node -e \"require('fs').copyFileSync('LICENSE.md','dist/LICENSE.md')\"",
     "____main____": "__DEVELOPER COMMANDS__",
     "build": "npm run clean && npm run build:js && npm run build:types && npm run copy:media && npm run copy:root-files:out",
