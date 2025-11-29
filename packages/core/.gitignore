@@ -1,0 +1,25 @@
+node_modules
+
+# Mac files
+**/.DS_Store
+.DS_Store
+
+.yarn/**
+**.gz
+*.log
+
+# generated directories
+types
+dist
+out
+
+# stryker temp files
+.stryker-tmp
+
+# generated reports
+reports
+coverage
+.nyc_output
+.github/.secrets
+
+lc

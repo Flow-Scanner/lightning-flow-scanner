@@ -1,0 +1,5 @@
+assets/example-flows/**
+out/**
+tests/**/*.test.ts
+jest.config.ts
+vite.config.ts

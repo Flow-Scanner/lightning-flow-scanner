@@ -1,0 +1,128 @@
+[
+  {
+    "flow": {
+      "name": "Test_Flow",
+      "xmldata": {
+        "@xmlns": "http://soap.sforce.com/2006/04/metadata",
+        "apiVersion": "62.0",
+        "environments": "Default",
+        "interviewLabel": "Test Flow {!$Flow.CurrentDateTime}",
+        "label": "Test Flow",
+        "processMetadataValues": [
+          { "name": "BuilderType", "value": { "stringValue": "LightningFlowBuilder" } },
+          { "name": "CanvasMode", "value": { "stringValue": "AUTO_LAYOUT_CANVAS" } },
+          { "name": "OriginBuilderType", "value": { "stringValue": "LightningFlowBuilder" } }
+        ],
+        "processType": "AutoLaunchedFlow",
+        "recordUpdates": {
+          "description": "test",
+          "name": "Update_triggering_records",
+          "label": "Update triggering records",
+          "locationX": "176",
+          "locationY": "287",
+          "inputAssignments": { "field": "Active__c", "value": { "stringValue": "Yes" } },
+          "inputReference": "$Record"
+        },
+        "start": {
+          "locationX": "50",
+          "locationY": "0",
+          "connector": { "targetReference": "Update_triggering_records" },
+          "object": "Account",
+          "recordTriggerType": "Create",
+          "triggerType": "RecordBeforeSave"
+        },
+        "status": "Draft"
+      },
+      "label": "Test Flow",
+      "interviewLabel": "Test Flow {!$Flow.CurrentDateTime}",
+      "processType": "AutoLaunchedFlow",
+      "processMetadataValues": [
+        { "name": "BuilderType", "value": { "stringValue": "LightningFlowBuilder" } },
+        { "name": "CanvasMode", "value": { "stringValue": "AUTO_LAYOUT_CANVAS" } },
+        { "name": "OriginBuilderType", "value": { "stringValue": "LightningFlowBuilder" } }
+      ],
+      "start": {
+        "locationX": "50",
+        "locationY": "0",
+        "connector": { "targetReference": "Update_triggering_records" },
+        "object": "Account",
+        "recordTriggerType": "Create",
+        "triggerType": "RecordBeforeSave"
+      },
+      "status": "Draft",
+      "type": "AutoLaunchedFlow",
+      "elements": [
+        { "element": "62.0", "subtype": "apiVersion", "metaType": "metadata" },
+        { "element": "Default", "subtype": "environments", "metaType": "metadata" },
+        {
+          "element": "Test Flow {!$Flow.CurrentDateTime}",
+          "subtype": "interviewLabel",
+          "metaType": "metadata"
+        },
+        { "element": "Test Flow", "subtype": "label", "metaType": "metadata" },
+        {
+          "element": { "name": "BuilderType", "value": { "stringValue": "LightningFlowBuilder" } },
+          "subtype": "processMetadataValues",
+          "metaType": "metadata"
+        },
+        {
+          "element": { "name": "CanvasMode", "value": { "stringValue": "AUTO_LAYOUT_CANVAS" } },
+          "subtype": "processMetadataValues",
+          "metaType": "metadata"
+        },
+        {
+          "element": {
+            "name": "OriginBuilderType",
+            "value": { "stringValue": "LightningFlowBuilder" }
+          },
+          "subtype": "processMetadataValues",
+          "metaType": "metadata"
+        },
+        { "element": "AutoLaunchedFlow", "subtype": "processType", "metaType": "metadata" },
+        {
+          "element": {
+            "description": "test",
+            "name": "Update_triggering_records",
+            "label": "Update triggering records",
+            "locationX": "176",
+            "locationY": "287",
+            "inputAssignments": { "field": "Active__c", "value": { "stringValue": "Yes" } },
+            "inputReference": "$Record"
+          },
+          "subtype": "recordUpdates",
+          "metaType": "node",
+          "connectors": [],
+          "name": "Update_triggering_records",
+          "locationX": "176",
+          "locationY": "287"
+        },
+        {
+          "element": {
+            "locationX": "50",
+            "locationY": "0",
+            "connector": { "targetReference": "Update_triggering_records" },
+            "object": "Account",
+            "recordTriggerType": "Create",
+            "triggerType": "RecordBeforeSave"
+          },
+          "subtype": "start",
+          "metaType": "node",
+          "connectors": [
+            {
+              "element": { "targetReference": "Update_triggering_records" },
+              "processed": false,
+              "type": "connector",
+              "reference": "Update_triggering_records"
+            }
+          ],
+          "name": "flowstart",
+          "locationX": "50",
+          "locationY": "0"
+        },
+        { "element": "Draft", "subtype": "status", "metaType": "metadata" }
+      ],
+      "startReference": "Update_triggering_records",
+      "triggerOrder": 10
+    }
+  }
+]

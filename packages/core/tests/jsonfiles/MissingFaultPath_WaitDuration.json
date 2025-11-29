@@ -1,0 +1,90 @@
+[
+  {
+    "flow": {
+      "name": "Test_Flow_WaitDuration",
+      "xmldata": {
+        "@xmlns": "http://soap.sforce.com/2006/04/metadata",
+        "apiVersion": "62.0",
+        "label": "Test Flow WaitDuration",
+        "processType": "AutoLaunchedFlow",
+        "waits": {
+          "name": "Wait_5_Minutes",
+          "label": "Wait 5 Minutes",
+          "locationX": "176",
+          "locationY": "287",
+          "elementSubtype": "WaitDuration",
+          "timeOffset": 5,
+          "timeOffsetUnit": "Minutes"
+        },
+        "start": {
+          "locationX": "50",
+          "locationY": "0",
+          "connector": { "targetReference": "Wait_5_Minutes" },
+          "triggerType": "RecordAfterSave",
+          "object": "Account",
+          "recordTriggerType": "Create"
+        },
+        "status": "Draft"
+      },
+      "label": "Test Flow WaitDuration",
+      "processType": "AutoLaunchedFlow",
+      "start": {
+        "locationX": "50",
+        "locationY": "0",
+        "connector": { "targetReference": "Wait_5_Minutes" },
+        "triggerType": "RecordAfterSave",
+        "object": "Account",
+        "recordTriggerType": "Create"
+      },
+      "status": "Draft",
+      "type": "AutoLaunchedFlow",
+      "elements": [
+        { "element": "62.0", "subtype": "apiVersion", "metaType": "metadata" },
+        { "element": "Test Flow WaitDuration", "subtype": "label", "metaType": "metadata" },
+        { "element": "AutoLaunchedFlow", "subtype": "processType", "metaType": "metadata" },
+        {
+          "element": {
+            "name": "Wait_5_Minutes",
+            "label": "Wait 5 Minutes",
+            "locationX": "176",
+            "locationY": "287",
+            "elementSubtype": "WaitDuration",
+            "timeOffset": 5,
+            "timeOffsetUnit": "Minutes"
+          },
+          "subtype": "waits",
+          "metaType": "node",
+          "connectors": [],
+          "name": "Wait_5_Minutes",
+          "locationX": "176",
+          "locationY": "287"
+        },
+        {
+          "element": {
+            "locationX": "50",
+            "locationY": "0",
+            "connector": { "targetReference": "Wait_5_Minutes" },
+            "triggerType": "RecordAfterSave",
+            "object": "Account",
+            "recordTriggerType": "Create"
+          },
+          "subtype": "start",
+          "metaType": "node",
+          "connectors": [
+            {
+              "element": { "targetReference": "Wait_5_Minutes" },
+              "processed": false,
+              "type": "connector",
+              "reference": "Wait_5_Minutes"
+            }
+          ],
+          "name": "flowstart",
+          "locationX": "50",
+          "locationY": "0"
+        },
+        { "element": "Draft", "subtype": "status", "metaType": "metadata" }
+      ],
+      "startReference": "Wait_5_Minutes"
+    }
+  }
+]

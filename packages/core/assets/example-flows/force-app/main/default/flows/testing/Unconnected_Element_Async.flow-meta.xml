@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <assignments>
+        <description>Error Variable</description>
+        <name>Error</name>
+        <label>Error</label>
+        <locationX>1377</locationX>
+        <locationY>432</locationY>
+        <assignmentItems>
+            <assignToReference>ErrorVariable</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>UnconnectedElementTestOnAsync</name>
+        <label>UnconnectedElementTestOnAsync</label>
+        <locationX>1081</locationX>
+        <locationY>598</locationY>
+        <assignmentItems>
+            <assignToReference>ErrorVariable</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Validate_User_is_Inactive</name>
+        <label>Validate User is Inactive</label>
+        <locationX>1069</locationX>
+        <locationY>432</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>User_is_Inactive</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.IsActive</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Standard_User</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_User_Information</targetReference>
+            </connector>
+            <label>User is Inactive</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Unconnected Element Async {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Unconnected Element Async</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Get Standard User Profile</description>
+        <name>Get_Standard_User</name>
+        <label>Get Standard User</label>
+        <locationX>1069</locationX>
+        <locationY>324</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Validate_User_is_Inactive</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Standard User</stringValue>
+            </value>
+        </filters>
+        <object>Profile</object>
+        <outputAssignments>
+            <assignToReference>ProfileId</assignToReference>
+            <field>Id</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordUpdates>
+        <description>Update User Information</description>
+        <name>Update_User_Information</name>
+        <label>Update User Information</label>
+        <locationX>937</locationX>
+        <locationY>540</locationY>
+        <inputAssignments>
+            <field>ProfileId</field>
+            <value>
+                <elementReference>ProfileId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserRoleId</field>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>745</locationX>
+        <locationY>48</locationY>
+        <object>User</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <scheduledPaths>
+            <connector>
+                <targetReference>Get_Standard_User</targetReference>
+            </connector>
+            <pathType>AsyncAfterCommit</pathType>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>InvalidDraft</status>
+    <variables>
+        <description>Error Variable</description>
+        <name>ErrorVariable</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Profile Id</description>
+        <name>ProfileId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

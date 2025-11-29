@@ -1,0 +1,88 @@
+[
+  {
+    "flow": {
+      "name": "Test_Flow_WaitDate",
+      "xmldata": {
+        "@xmlns": "http://soap.sforce.com/2006/04/metadata",
+        "apiVersion": "62.0",
+        "label": "Test Flow WaitDate",
+        "processType": "AutoLaunchedFlow",
+        "waits": {
+          "name": "Wait_Until_Date",
+          "label": "Wait Until Date",
+          "locationX": "176",
+          "locationY": "287",
+          "elementSubtype": "WaitDate",
+          "dateTimeValue": "2025-12-31T00:00:00.000Z"
+        },
+        "start": {
+          "locationX": "50",
+          "locationY": "0",
+          "connector": { "targetReference": "Wait_Until_Date" },
+          "triggerType": "RecordAfterSave",
+          "object": "Account",
+          "recordTriggerType": "Create"
+        },
+        "status": "Draft"
+      },
+      "label": "Test Flow WaitDate",
+      "processType": "AutoLaunchedFlow",
+      "start": {
+        "locationX": "50",
+        "locationY": "0",
+        "connector": { "targetReference": "Wait_Until_Date" },
+        "triggerType": "RecordAfterSave",
+        "object": "Account",
+        "recordTriggerType": "Create"
+      },
+      "status": "Draft",
+      "type": "AutoLaunchedFlow",
+      "elements": [
+        { "element": "62.0", "subtype": "apiVersion", "metaType": "metadata" },
+        { "element": "Test Flow WaitDate", "subtype": "label", "metaType": "metadata" },
+        { "element": "AutoLaunchedFlow", "subtype": "processType", "metaType": "metadata" },
+        {
+          "element": {
+            "name": "Wait_Until_Date",
+            "label": "Wait Until Date",
+            "locationX": "176",
+            "locationY": "287",
+            "elementSubtype": "WaitDate",
+            "dateTimeValue": "2025-12-31T00:00:00.000Z"
+          },
+          "subtype": "waits",
+          "metaType": "node",
+          "connectors": [],
+          "name": "Wait_Until_Date",
+          "locationX": "176",
+          "locationY": "287"
+        },
+        {
+          "element": {
+            "locationX": "50",
+            "locationY": "0",
+            "connector": { "targetReference": "Wait_Until_Date" },
+            "triggerType": "RecordAfterSave",
+            "object": "Account",
+            "recordTriggerType": "Create"
+          },
+          "subtype": "start",
+          "metaType": "node",
+          "connectors": [
+            {
+              "element": { "targetReference": "Wait_Until_Date" },
+              "processed": false,
+              "type": "connector",
+              "reference": "Wait_Until_Date"
+            }
+          ],
+          "name": "flowstart",
+          "locationX": "50",
+          "locationY": "0"
+        },
+        { "element": "Draft", "subtype": "status", "metaType": "metadata" }
+      ],
+      "startReference": "Wait_Until_Date"
+    }
+  }
+]
