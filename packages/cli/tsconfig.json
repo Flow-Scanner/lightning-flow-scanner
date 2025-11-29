@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "Node16",
+    "module": "Node16",
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "declaration": true,
+    "outDir": "./lib",
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "types": ["node", "mocha"],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["./src/**/*", "./test/**/*"]
+}

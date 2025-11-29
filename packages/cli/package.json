@@ -1,0 +1,97 @@
+{
+  "name": "lightning-flow-scanner",
+  "version": "6.5.0",
+  "bugs": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli/issues",
+  "description": "A Salesforce CLI plugin for analysis and optimization of Salesforce Flow. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and CI/CD integration to help users maintain secure and reliable Flow automations.",
+  "dependencies": {
+    "@flow-scanner/lightning-flow-scanner-core": "^6.6.0",
+    "@oclif/core": "^4.5.4",
+    "@salesforce/core": "^8.18.7",
+    "@salesforce/sf-plugins-core": "^12.2.3",
+    "chalk": "^5.6.2",
+    "cosmiconfig": "^9.0.0",
+    "csv-stringify": "^6.6.0",
+    "glob": "^11.1.0"
+  },
+  "devDependencies": {
+    "@oclif/plugin-help": "6.2.32",
+    "@oclif/test": "4.1.13",
+    "@salesforce/dev-config": "4.3.1",
+    "@salesforce/ts-sinon": "1.4.31",
+    "@sinonjs/fake-timers": "14.0.0",
+    "@types/chai": "5.2.2",
+    "@types/jsforce": "1.11.5",
+    "@types/mocha": "10.0.10",
+    "@types/node": "24.1.0",
+    "@types/sinon": "17.0.4",
+    "@types/sinonjs__fake-timers": "8.1.5",
+    "@typescript-eslint/eslint-plugin": "8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
+    "chai": "6.2.0",
+    "eslint": "9.38.0",
+    "eslint-config-prettier": "10.1.8",
+    "globby": "14.1.0",
+    "mocha": "11.7.1",
+    "nyc": "17.1.0",
+    "oclif": "4.22.5",
+    "prettier": "3.6.2",
+    "rimraf": "^6.1.0",
+    "sinon": "21.0.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.8.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "/lib",
+    "/messages",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://cli.lightningflowscanner.org",
+  "license": "AGPL-3.0",
+  "oclif": {
+    "commands": "./lib/src/commands",
+    "bin": "sf",
+    "topics": {
+      "flow": {
+        "description": "Commands to run the Lightning Flow Scanner"
+      }
+    },
+    "devPlugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "author": {
+    "name": "Ruben Halman"
+  },
+  "repository": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git",
+  "scripts": {
+    "build": "rimraf lib && tsc -b && oclif manifest && oclif readme",
+    "prepack": "npm run build",
+    "test": "mocha -r ts-node/register test/**/*.test.ts",
+    "lfs:link": "npm link lightning-flow-scanner-core && npm pack && sf plugins link",
+    "clean": "rimraf lib"
+  },
+  "type": "module",
+  "keywords": [
+    "salesforce",
+    "flow",
+    "flow-scanner",
+    "flow-linter",
+    "code-quality",
+    "static-analysis",
+    "static-code-analysis",
+    "salesforce-cli",
+    "sf-cli-plugin",
+    "sfdx-plugin",
+    "devops",
+    "ci-cd",
+    "security-scanner",
+    "best-practices"
+  ],
+  "volta": {
+    "node": "20.19.6"
+  }
+}

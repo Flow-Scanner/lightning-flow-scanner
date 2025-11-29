@@ -1,0 +1,16 @@
+*-debug.log
+*-error.log
+.DS_Store
+/.nyc_output
+/dist
+/lib
+/node_modules
+/tmp
+node_modules
+.yarn/install-state
+coverage/**
+oclif.manifest.json
+*.log
+*.tgz
+
+.vscode/
