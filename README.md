@@ -1,10 +1,10 @@
 <p align="center">
   <a href="https://github.com/Flow-Scanner">
-    <img src="assets/media/bannerslim.png" style="width: 43%;" />
+    <img src="assets/media/banner.png" style="width: 43%;" />
   </a>
 </p>
 
-<p align="center"><i>UMD-compatible Flow metadata engine for Node.js & browsers—20+ rules to catch issues.</i></p>
+<p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
 ---
 
@@ -18,12 +18,11 @@
   - [Specifying Exceptions](#specifying-exceptions)
   - [Report Detail Level](#report-detail-level)
   - [Include Beta Rules](#include-beta-rules)
-- **[Usage](#Usage)**
-  - [Examples](#examples)
-  - [Functions](#functions)
 - **[Installation](#installation)**
   - [Salesforce CLI Plugin](#salesforce-cli-plugin)
-  - [Core Module](#core)
+  - [Core Module](#core-module)
+  - [CICD Templates](#cicd-templates)
+- **[Quick Start](#quick-start)**
 - **[Development](#development)**
 
 ---
@@ -148,7 +147,7 @@ _[UnusedVariable](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/ma
 
 ## Configuration
 
-Lightning Flow Scanner is plug-and-play by default, but we recommend configuring and defining:
+It is recommend to configure and define:
 
 - The rules to be executed.
 - The severity of violating any specific rule.
@@ -165,6 +164,8 @@ Lightning Flow Scanner is plug-and-play by default, but we recommend configuring
   }
 }
 ```
+
+Most Lightning Flow Scanner distributions automatically resolve configurations from `.flow-scanner.yml`, `.flow-scanner.json`, or `package.json` → `flowScanner`.
 
 Using the rules section of your configurations, you can specify the list of rules to be run. Furthermore, you can define the severity and configure expressions of rules. Below is a breakdown of the available attributes of rule configuration:
 
@@ -282,63 +283,6 @@ New rules are introduced in Beta mode before being added to the default ruleset.
 
 ```
 
----
-
-## Usage
-
-### Core Module
-Use `lightning-flow-scanner-core` as a Node.js/browser dependency or standalone UMD module.
-
-#### Examples
-
-```js
-// Basic
-import { parse, scan } from "@flow-scanner/lightning-flow-scanner-core";
-parse("flows/*.xml").then(scan);
-
-// Apply available patches
-import { parse, scan, fix } from "@flow-scanner/lightning-flow-scanner-core";
-parse("flows/*.xml").then(scan).then(fix);
-
-// Get SARIF output
-import { parse, scan, exportSarif } from "@flow-scanner/lightning-flow-scanner-core";
-parse("flows/*.xml").then(scan).then(exportSarif); //.then((sarif) => save("results.sarif", sarif));
-
-// Browser Usage (Tooling API)
-const { Flow, scan } = window.lightningflowscanner;
-const metadataRes = await conn.tooling.query(`SELECT Id, FullName, Metadata FROM Flow`);
-const results = scan(
-  metadataRes.records.map((r) => ({
-    uri: `/services/data/v60.0/tooling/sobjects/Flow/${r.Id}`,
-    flow: new Flow(r.FullName, r.Metadata),
-  })) //, optionsForScan
-);
-```
-
-#### Functions
-
-##### [`getRules(ruleNames?: string[]): IRuleDefinition[]`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/GetRuleDefinitions.ts)
-
-_Retrieves rule definitions used in the scanner._
-
-##### [`parse(selectedUris: any): Promise<ParsedFlow[]>`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/ParseFlows.ts)
-
-_Loads Flow XML files into in-memory models.(Node.js only)_
-
-##### [`scan(parsedFlows: ParsedFlow[], ruleOptions?: IRulesConfig): ScanResult[]`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/ScanFlows.ts)
-
-_Runs all enabled rules and returns detailed violations._
-
-##### [`fix(results: ScanResult[]): ScanResult[]`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/FixFlows.ts)
-
-_Automatically applies available fixes(removing variables and unconnected elements)._
-
-##### [`exportSarif(results: ScanResult[]): string`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/exportAsSarif.ts)
-
-_Get SARIF output including exact line numbers of violations._
-
----
-
 ## Installation
 
 [![GitHub stars](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)
@@ -364,6 +308,44 @@ npm install -g @flow-scanner/lightning-flow-scanner-core
 ```
 
 ---
+
+### CICD Templates
+Ready-to-use CI/CD templates and a **native GitHub Action**.  
+All examples: [`docs/examples/`](docs/examples/).
+
+| Platform       | Template Type                     | Link |
+|----------------|-----------------------------------|------|
+| Azure DevOps   | Full Project Scan                 | [`azure-pipelines-flow-FullScan.yml`](docs/examples/azure-devops/azure-pipelines-flow-FullScan.yml) |
+| Azure DevOps   | Change-Based Scan                 | [`azure-pipelines-flow-changedFiles.yml`](docs/examples/azure-devops/azure-pipelines-flow-changedFiles.yml) |
+| Copado DevOps | Full & Change-Based Scans       | [CI/CD Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado) |
+| GitHub | Full & Change-Based Scans       | [`scan-flows.yml`](docs/examples/github-action/scan-flows.yml) |
+
+## Quick Start
+
+Lightning Flow Scanner is plug-and-play by default
+
+### Salesforce CLI Plugin
+
+Use `lightning-flow-scanner` in the Salesforce CLI:
+
+```bash
+sf flow:scan 
+sf flow:fix -d src/force-app
+sf flow:scan --sarif > report.sarif
+```
+
+### Core Module
+Use `lightning-flow-scanner-core` as a Node.js/browser dependency:
+
+```js
+// Basic
+import { parse, scan } from "@flow-scanner/lightning-flow-scanner-core";
+parse("flows/*.xml").then(scan);
+
+// Get SARIF output
+import { parse, scan, exportSarif } from "@flow-scanner/lightning-flow-scanner-core";
+parse("flows/*.xml").then(scan).then(exportSarif);
+```
 
 ## Development
 
