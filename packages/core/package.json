@@ -31,7 +31,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Flow-Scanner/lightning-flow-scanner-core.git"
+    "url": "git+https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git",
+    "directory": "packages/core"
   },
   "dependencies": {
     "fast-xml-parser": "^5.3.0"

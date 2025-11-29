@@ -4,7 +4,7 @@
   "bugs": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli/issues",
   "description": "A Salesforce CLI plugin for analysis and optimization of Salesforce Flow. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and CI/CD integration to help users maintain secure and reliable Flow automations.",
   "dependencies": {
-    "@flow-scanner/lightning-flow-scanner-core": "^6.6.0",
+    "@flow-scanner/lightning-flow-scanner-core": "workspace:*",
     "@oclif/core": "^4.5.4",
     "@salesforce/core": "^8.18.7",
     "@salesforce/sf-plugins-core": "^12.2.3",
@@ -66,7 +66,11 @@
   "author": {
     "name": "Ruben Halman"
   },
-  "repository": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flow-Scanner/lightning-flow-scanner-cli.git",
+    "directory": "packages/cli"
+  },
   "scripts": {
     "build": "rimraf lib && tsc -b && oclif manifest && oclif readme",
     "prepack": "npm run build",
