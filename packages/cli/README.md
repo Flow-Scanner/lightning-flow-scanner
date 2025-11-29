@@ -73,12 +73,6 @@ All examples: [`docs/examples/`](docs/examples/).
 | Copado DevOps | Full & Change-Based Scans       | [CI/CD Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado) |
 | GitHub | Full & Change-Based Scans       | [`scan-flows.yml`](docs/examples/github-action/scan-flows.yml) |
 
-> **Why a Native GitHub Action** 
-> - Automatically loads `.flow-scanner` config (YAML, JSON, or `package.json`).  
-> - Auto-detects changed flows in PRs using Git diff.  
-> - No `sf` CLI required – runs natively with Node.js.  
-> 
-> For more information, see [`lightning-flow-scanner-action`](https://github.com/Flow-Scanner/lightning-flow-scanner-action?tab=readme-ov-file#usage)
 
 ---
 

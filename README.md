@@ -286,9 +286,10 @@ New rules are introduced in Beta mode before being added to the default ruleset.
 
 ## Usage
 
+### Core Module
 Use `lightning-flow-scanner-core` as a Node.js/browser dependency or standalone UMD module.
 
-### Examples
+#### Examples
 
 ```js
 // Basic
@@ -314,27 +315,25 @@ const results = scan(
 );
 ```
 
+#### Functions
 
-
-### Functions
-
-#### [`getRules(ruleNames?: string[]): IRuleDefinition[]`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/GetRuleDefinitions.ts)
+##### [`getRules(ruleNames?: string[]): IRuleDefinition[]`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/GetRuleDefinitions.ts)
 
 _Retrieves rule definitions used in the scanner._
 
-#### [`parse(selectedUris: any): Promise<ParsedFlow[]>`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/ParseFlows.ts)
+##### [`parse(selectedUris: any): Promise<ParsedFlow[]>`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/ParseFlows.ts)
 
 _Loads Flow XML files into in-memory models.(Node.js only)_
 
-#### [`scan(parsedFlows: ParsedFlow[], ruleOptions?: IRulesConfig): ScanResult[]`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/ScanFlows.ts)
+##### [`scan(parsedFlows: ParsedFlow[], ruleOptions?: IRulesConfig): ScanResult[]`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/ScanFlows.ts)
 
 _Runs all enabled rules and returns detailed violations._
 
-#### [`fix(results: ScanResult[]): ScanResult[]`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/FixFlows.ts)
+##### [`fix(results: ScanResult[]): ScanResult[]`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/FixFlows.ts)
 
 _Automatically applies available fixes(removing variables and unconnected elements)._
 
-#### [`exportSarif(results: ScanResult[]): string`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/exportAsSarif.ts)
+##### [`exportSarif(results: ScanResult[]): string`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/libs/exportAsSarif.ts)
 
 _Get SARIF output including exact line numbers of violations._
 
