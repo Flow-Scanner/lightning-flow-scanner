@@ -349,7 +349,7 @@ parse("flows/*.xml").then(scan).then(exportSarif);
 
 ## Development
 
-> This project optionally uses [Volta](https://volta.sh) to manage Node.js versions. Install Volta with:
+> This project optionally uses [Volta](https://volta.sh) to manage Node.js and PNPM versions. Install Volta with:
 >
 > ```sh
 > curl https://get.volta.sh | bash
@@ -399,13 +399,13 @@ parse("flows/*.xml").then(scan).then(exportSarif);
    pnpm link --global @flow-scanner/lightning-flow-scanner-core
    ```
 
-   a. You can now do Ad-Hoc Testing with node:
+   You can now do Ad-Hoc Testing with node:
 
    ```bash
    node -i -e "import('@flow-scanner/lightning-flow-scanner-core').then(m => { Object.assign(global, m.default ? m.default : m); console.log('✅ Core loaded! Try: await parse(...), scan(...), etc.'); })"
    ```
 
-   b. Or test in a dependent project:
+   Or test in a dependent project:
 
    ```bash
    npm link @flow-scanner/lightning-flow-scanner-core
@@ -414,7 +414,7 @@ parse("flows/*.xml").then(scan).then(exportSarif);
 6. Deploy Demo Flows (Optional):
 
    ```bash
-   cd assets/example-flows && sf project deploy start &&
+   cd assets/example-flows && sf project deploy start
    ```
 
    Navigate to the [Demo Readme](assets\example-flows\README.md) for full details
@@ -422,7 +422,7 @@ parse("flows/*.xml").then(scan).then(exportSarif);
 7. Create a standalone UMD Module(Optional):
 
    ```bash
-     npm run vite:dist // creates UMD at`dist/lightning-flow-scanner-core.umd.js`.
+     pnpm dist // creates UMD at`dist/lightning-flow-scanner-core.umd.js`.
    ```
 
 <p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>

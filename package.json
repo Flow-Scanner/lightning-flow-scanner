@@ -7,6 +7,7 @@
     "build": "turbo run build",
     "build:core": "pnpm turbo run build --filter=@flow-scanner/lightning-flow-scanner-core",
     "build:cli": "pnpm turbo run build --filter=lightning-flow-scanner",
+    "build:docs": "node scripts/update-package-readmes.js",
     "test": "turbo run test",
     "test:core": "turbo run test --filter=@flow-scanner/lightning-flow-scanner-core",
     "test:cli": "turbo run test --filter=lightning-flow-scanner",
