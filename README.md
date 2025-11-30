@@ -38,7 +38,7 @@
 | **Copado Plugin**                   | Copado CI/CD pipelines                        | [Flow-Scanner/lightning-flow-scanner-copado](https://github.com/Flow-Scanner/lightning-flow-scanner-copado) | [Copado Marketplace](https://success.copado.com/s/listing-detail?language=en_US&recordId=a54P7000003G3gBIAS)                                               |
 | **Core Library** (Node.js + Browser)| Custom tools, scripts, extensions, web apps   | [Flow-Scanner/lightning-flow-scanner](https://github.com/Flow-Scanner/lightning-flow-scanner) | `npm install @flow-scanner/lightning-flow-scanner-core`                        |
 
-**Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner-core?tab=security-ov-file).
+**Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner?tab=security-ov-file).
 
 ## Default Rules
 
