@@ -1,33 +1,37 @@
-name: Publish Core to npm
+name: Publish to npm
+
 on:
   push:
     tags:
-      - "core-v*"  # Use core-v1.0.0 for core releases
+      - "v*"
+
 permissions:
   contents: read
   id-token: write
-  security-events: write
+
 jobs:
-  publish-core:
+  publish:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
-      - uses: pnpm/action-setup@v4
-      
+
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: 20
           registry-url: "https://registry.npmjs.org"
-          cache: "pnpm"
-      
+
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      
-      - name: Build core package
-        run: pnpm --filter=@flow-scanner/lightning-flow-scanner-core run build
-      
-      - name: Publish core to npm (trusted publishing)
-        run: cd packages/core/out && npm publish --access public --provenance
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish
+        working-directory: packages/core
+        run: npm publish --provenance --access public
