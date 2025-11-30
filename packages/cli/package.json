@@ -1,6 +1,6 @@
 {
   "name": "lightning-flow-scanner",
-  "version": "6.5.0",
+  "version": "6.6.0",
   "bugs": "https://github.com/Flow-Scanner/lightning-flow-scanner-cli/issues",
   "description": "A Salesforce CLI plugin for analysis and optimization of Salesforce Flow. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and CI/CD integration to help users maintain secure and reliable Flow automations.",
   "dependencies": {
@@ -47,7 +47,9 @@
     "/lib",
     "/messages",
     "/npm-shrinkwrap.json",
-    "/oclif.manifest.json"
+    "/oclif.manifest.json",
+    "/README.md",
+    "/LICENSE.md"
   ],
   "homepage": "https://cli.lightningflowscanner.org",
   "license": "AGPL-3.0",
@@ -73,10 +75,16 @@
   },
   "scripts": {
     "build": "rimraf lib && tsc -b && oclif manifest && oclif readme",
-    "prepack": "npm run build",
+    "prepack": "npm run copy:license && npm run build",
+    "postpack": "rimraf LICENSE.md",
+    "copy:license": "node -e \"require('fs').copyFileSync('../../LICENSE.md', 'LICENSE.md')\"",
     "test": "mocha -r ts-node/register test/**/*.test.ts",
     "lfs:link": "npm link lightning-flow-scanner-core && npm pack && sf plugins link",
-    "clean": "rimraf lib"
+    "clean": "rimraf lib",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "publish:npm": "npm run prepack && npm publish"
   },
   "type": "module",
   "keywords": [
