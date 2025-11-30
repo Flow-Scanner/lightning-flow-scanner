@@ -29,7 +29,7 @@
     "____pack____": "PACKAGING COMMANDS__",
     "swc:sim:pack": "npm run build",
     "vite:dist": "npm run build:js && vite build && npm run copy:root-files:dist",
-    "prepare": "husky",
+    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production' && !process.env.CI) require('husky').install()\"",
     "precommit": "lint-staged",
     "prepush": "npm run build && npm test",
     "stryker": "npm i -g @stryker-mutator/core @stryker-mutator/jest-runner && stryker run"
