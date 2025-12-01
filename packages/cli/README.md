@@ -57,7 +57,7 @@ sf flow:scan --sarif > report.sarif # get results as SARIF file
 <p>📌<strong>Tip:</strong> To link directly to a specific rule, use the full GitHub anchor link format. Example:</p>
 <p><em><a href="https://github.com/Flow-Scanner/lightning-flow-scanner#unsafe-running-context">https://github.com/Flow-Scanner/lightning-flow-scanner#unsafe-running-context</a></em></p>
 
-> Want to code a new rule? → See [How to Write a Rule](docs/write-a-rule.md)
+> Want to code a new rule? → See [How to Write a Rule](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/write-a-rule.md)
 
 ### Action Calls In Loop
 
@@ -317,12 +317,12 @@ npm install -g lightning-flow-scanner
 
 ## Development
 
-> This project optionally uses [Volta](https://volta.sh) to guarantee the exact same Node.js and tool versions for every contributor. Install with:
+> This project optionally uses [Volta](https://volta.sh) to guarantee the exact same Node.js and tool versions for every contributor. Install Volta with:
 >
 > ```sh
 > curl https://get.volta.sh | bash
 > ```
-> Or on Windows:
+>
 > ```sh
 > winget install Volta.Volta 
 > ```
@@ -388,7 +388,7 @@ npm install -g lightning-flow-scanner
    cd assets/example-flows && sf project deploy start
    ```
 
-   Navigate to the [Demo Readme](assets\example-flows\README.md) for full details
+   Navigate to the [Demo Readme](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/assets/example-flows\README.md) for full details
 
 7. Create a standalone UMD Module(Optional):
 
