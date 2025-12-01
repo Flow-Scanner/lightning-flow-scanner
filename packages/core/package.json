@@ -10,7 +10,6 @@
       "types": "./out/index.d.ts"
     }
   },
-  "files": ["out", "README.md", "LICENSE.md"],
   "engines": {
     "node": "^18 || ^20 || ^22 || ^23"
   },
@@ -19,10 +18,10 @@
     "build:js": "swc src --out-dir out --copy-files --strip-leading-paths --config-file .swcrc",
     "build:types": "tsc -p tsconfig.types.json --declaration --emitDeclarationOnly --outDir out",
     "copy:media": "node -e \"require('fs').cpSync('assets/media','out/assets/media',{recursive:true,force:true}) || require('fs').mkdirSync('out/assets/media',{recursive:true})\"",
-    "copy:root-files:out": "node -e \"['../../README.md','../../LICENSE.md','../../SECURITY.md','../../CONTRIBUTING.md','package.json'].forEach(f=>require('fs').copyFileSync(f,'out/'+f.split('/').pop()))\"",
+    "prepare:publish": "node ../../scripts/prepare-publish.js",
     "copy:root-files:dist": "node -e \"['../../LICENSE.md'].forEach(f => { const n = f.split('/').pop(); if (require('fs').existsSync(f)) require('fs').copyFileSync(f, 'dist/'+n) })\"",
     "____main____": "__DEVELOPER COMMANDS__",
-    "build": "npm run clean && npm run build:js && npm run build:types && npm run copy:media && npm run copy:root-files:out",
+    "build": "npm run clean && npm run build:js && npm run build:types && npm run copy:media && npm run prepare:publish",
     "test": "npm run test:umd",
     "test:node": "jest",
     "test:umd": "npm run build:js && vite build && npm run copy:root-files:dist && cross-env UMD_PATH=dist/lightning-flow-scanner-core.umd.js jest",
