@@ -5,7 +5,7 @@ import * as core from "../src";
 import { MissingMetadataDescription } from "../src/main/rules/MissingMetadataDescription";
 
 describe("Beta Rule Handling", () => {
-  const example_uri1 = path.join(__dirname, "../assets/example-flows/force-app/main/default/flows/demo/Unconnected_Element.flow-meta.xml");
+  const example_uri1 = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/demo/Unconnected_Element.flow-meta.xml");
 
   it("should include beta rule when betaMode is true and no rules are specified", async () => {
     const flows = await core.parse([example_uri1]);

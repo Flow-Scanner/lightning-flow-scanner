@@ -10,7 +10,7 @@ describe("UnconnectedElement", () => {
   it("there should be checks for unconnected element", async () => {
     const connectedElementTestFile = path.join(
       __dirname,
-      "../assets/example-flows/force-app/main/default/flows/demo/Unconnected_Element.flow-meta.xml"
+      "../../../assets/example-flows/force-app/main/default/flows/demo/Unconnected_Element.flow-meta.xml"
     );
     const parsed: ParsedFlow = (await parse([connectedElementTestFile])).pop() as ParsedFlow;
     const ruleResult: core.RuleResult = unconnectedElementRule.execute(parsed.flow as core.Flow);
@@ -23,7 +23,7 @@ describe("UnconnectedElement", () => {
   it("async path there should be checks for unconnected element", async () => {
     const connectedElementTestFile = path.join(
       __dirname,
-      "../assets/example-flows/force-app/main/default/flows/testing/Unconnected_Element_Async.flow-meta.xml"
+      "../../../assets/example-flows/force-app/main/default/flows/testing/Unconnected_Element_Async.flow-meta.xml"
     );
     const parsed: ParsedFlow = (await parse([connectedElementTestFile])).pop() as ParsedFlow;
     const ruleResult: core.RuleResult = unconnectedElementRule.execute(parsed.flow as core.Flow);
@@ -35,7 +35,7 @@ describe("UnconnectedElement", () => {
   it("should fix the unconnected element error", async () => {
     const connectedElementTestFile = path.join(
       __dirname,
-      "../assets/example-flows/force-app/main/default/flows/demo/Unconnected_Element.flow-meta.xml"
+      "../../../assets/example-flows/force-app/main/default/flows/demo/Unconnected_Element.flow-meta.xml"
     );
     const flows = await core.parse([connectedElementTestFile]);
     const ruleConfig = {
@@ -55,7 +55,7 @@ describe("UnconnectedElement", () => {
   it("should not include enriched details with detailLevel simple", async () => {
     const testFile = path.join(
       __dirname,
-      "../assets/example-flows/force-app/main/default/flows/demo/Unconnected_Element.flow-meta.xml"
+      "../../../assets/example-flows/force-app/main/default/flows/demo/Unconnected_Element.flow-meta.xml"
     );
     const flows = await core.parse([testFile]);
     const ruleConfig = {

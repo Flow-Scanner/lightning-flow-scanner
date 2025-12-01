@@ -48,7 +48,7 @@ sf flow:scan --sarif > report.sarif # get results as SARIF file
 | `--betamode`   | `-z`  | Enable beta rules                             | `--betamode`                        |
 | `--loglevel`   |       | Logging level                                 | `--loglevel debug`                  |
 
-**Privacy:** Zero user data collected. All processing is client-side.
+**Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner?tab=security-ov-file).
 
 ---
 
@@ -317,13 +317,16 @@ npm install -g lightning-flow-scanner
 
 ## Development
 
-> This project optionally uses [Volta](https://volta.sh) to manage Node.js and PNPM versions. Install Volta with:
+> This project optionally uses [Volta](https://volta.sh) to guarantee the exact same Node.js and tool versions for every contributor. Install with:
 >
 > ```sh
 > curl https://get.volta.sh | bash
 > ```
->
-> Volta will automatically use the Node.js version defined in `package.json`.
+> Or on Windows:
+> ```sh
+> winget install Volta.Volta 
+> ```
+> Volta will automatically lock the exact versions of **Node.js**, **pnpm**, and all tools defined in `package.json`.
 
 1. Clone the repository
 

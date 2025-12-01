@@ -13,7 +13,7 @@ describe("UnsafeRunningContext", () => {
   it("should have a scan result for without sharing system mode", async () => {
     const unsafeContextTestFile = path.join(
       __dirname,
-      "../assets/example-flows/force-app/main/default/flows/demo/Unsafe_Running_Context.flow-meta.xml"
+      "../../../assets/example-flows/force-app/main/default/flows/demo/Unsafe_Running_Context.flow-meta.xml"
     );
     const parsed: ParsedFlow = (await parse([unsafeContextTestFile])).pop() as ParsedFlow;
     const ruleResult: core.RuleResult = unsafeRunningContext.execute(parsed.flow as core.Flow);
@@ -25,7 +25,7 @@ describe("UnsafeRunningContext", () => {
   it("should not have a scan result for with sharing system mode", async () => {
     const unsafeContextTestFile = path.join(
       __dirname,
-      "../assets/example-flows/force-app/main/default/flows/testing/Unsafe_Running_Context_WithSharing.flow-meta.xml"
+      "../../../assets/example-flows/force-app/main/default/flows/testing/Unsafe_Running_Context_WithSharing.flow-meta.xml"
     );
     const parsed: ParsedFlow = (await parse([unsafeContextTestFile])).pop() as ParsedFlow;
     const ruleResult: core.RuleResult = unsafeRunningContext.execute(parsed.flow as core.Flow);
@@ -36,7 +36,7 @@ describe("UnsafeRunningContext", () => {
   it("should not have a scan result for default mode", async () => {
     const unsafeContextTestFile = path.join(
       __dirname,
-      "../assets/example-flows/force-app/main/default/flows/testing/Unsafe_Running_Context_Default.flow-meta.xml"
+      "../../../assets/example-flows/force-app/main/default/flows/testing/Unsafe_Running_Context_Default.flow-meta.xml"
     );
     const parsed: ParsedFlow = (await parse([unsafeContextTestFile])).pop() as ParsedFlow;
     const ruleResult: core.RuleResult = unsafeRunningContext.execute(parsed.flow as core.Flow);

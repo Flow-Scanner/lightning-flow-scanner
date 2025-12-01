@@ -311,18 +311,15 @@ npm install -g @flow-scanner/lightning-flow-scanner-core
 
 ### CICD Templates
 Ready-to-use CI/CD templates and a **native GitHub Action**.  
-All examples: [`docs/examples/`](docs/examples/).
 
 | Platform       | Template Type                     | Link |
 |----------------|-----------------------------------|------|
-| Azure DevOps   | Full Project Scan                 | [`azure-pipelines-flow-FullScan.yml`](docs/examples/azure-devops/azure-pipelines-flow-FullScan.yml) |
-| Azure DevOps   | Change-Based Scan                 | [`azure-pipelines-flow-changedFiles.yml`](docs/examples/azure-devops/azure-pipelines-flow-changedFiles.yml) |
+| Azure DevOps   | Full Project Scan                 | [`azure-pipelines-flow-FullScan.yml`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/examples/azure-devops/azure-pipelines-flow-FullScan.yml) |
+| Azure DevOps   | Change-Based Scan                 | [`azure-pipelines-flow-changedFiles.yml`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/examples/azure-devops/azure-pipelines-flow-changedFiles.yml) |
 | Copado DevOps | Full & Change-Based Scans       | [CI/CD Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado) |
-| GitHub | Full & Change-Based Scans       | [`scan-flows.yml`](docs/examples/github-action/scan-flows.yml) |
+| GitHub | Full & Change-Based Scans       | [`scan-flows.yml`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/examples/github-action/scan-flows.yml) |
 
 ## Quick Start
-
-Lightning Flow Scanner is plug-and-play by default
 
 ### Salesforce CLI Plugin
 
@@ -349,13 +346,16 @@ parse("flows/*.xml").then(scan).then(exportSarif);
 
 ## Development
 
-> This project optionally uses [Volta](https://volta.sh) to manage Node.js and PNPM versions. Install Volta with:
+> This project optionally uses [Volta](https://volta.sh) to guarantee the exact same Node.js and tool versions for every contributor. Install Volta with:
 >
 > ```sh
 > curl https://get.volta.sh | bash
 > ```
 >
-> Volta will automatically use the Node.js version defined in `package.json`.
+> ```sh
+> winget install Volta.Volta 
+> ```
+> Volta will automatically lock the exact versions of **Node.js**, **pnpm**, and all tools defined in `package.json`.
 
 1. Clone the repository
 
@@ -417,7 +417,7 @@ parse("flows/*.xml").then(scan).then(exportSarif);
    cd assets/example-flows && sf project deploy start
    ```
 
-   Navigate to the [Demo Readme](assets\example-flows\README.md) for full details
+   Navigate to the [Demo Readme](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/assets/example-flows\README.md) for full details
 
 7. Create a standalone UMD Module(Optional):
 

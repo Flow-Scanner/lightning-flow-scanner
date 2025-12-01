@@ -5,8 +5,8 @@ import * as core from "../src";
 import { CyclomaticComplexity } from "../src/main/rules/CyclomaticComplexity";
 
 describe("CyclomaticComplexity ", () => {
-  const example_uri = path.join(__dirname, "../assets/example-flows/force-app/main/default/flows/demo/Cyclomatic_Complexity.flow-meta.xml");
-  const other_uri = path.join(__dirname, "../assets/example-flows/force-app/main/default/flows/demo/SOQL_Query_In_A_Loop.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/demo/Cyclomatic_Complexity.flow-meta.xml");
+  const other_uri = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/demo/SOQL_Query_In_A_Loop.flow-meta.xml");
   const defaultConfig = {
     rules: {
       CyclomaticComplexity: {

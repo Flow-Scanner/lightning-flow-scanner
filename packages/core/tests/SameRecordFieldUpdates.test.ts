@@ -131,7 +131,7 @@ describe("SameRecordFieldUpdates", () => {
   });
 
   it("should trigger from default configuration on store", async () => {
-    const example_uri1 = path.join(__dirname, "../assets/example-flows/force-app/main/default/flows/testing/Same_Record_Field_Updates.flow-meta.xml");
+    const example_uri1 = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/testing/Same_Record_Field_Updates.flow-meta.xml");
     const flows = await parse([example_uri1]);
     const ruleConfig = {
       rules: {},
@@ -147,7 +147,7 @@ describe("SameRecordFieldUpdates", () => {
   });
 
   it("should trigger when opt-in configuration", async () => {
-    const example_uri1 = path.join(__dirname, "../assets/example-flows/force-app/main/default/flows/testing/Same_Record_Field_Updates.flow-meta.xml");
+    const example_uri1 = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/testing/Same_Record_Field_Updates.flow-meta.xml");
     const flows = await parse([example_uri1]);
     const ruleConfig = {
       rules: {

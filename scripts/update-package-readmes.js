@@ -161,7 +161,3 @@ const cliReadmePath = path.join('packages', 'cli', 'README.md');
 fs.writeFileSync(cliReadmePath, updatedCli);
 
 console.log('✓ packages/cli/README.md updated successfully');
-console.log('  - Default Rules section replaced');
-console.log('  - Configuration section replaced');
-console.log('  - Development section replaced/added');
-console.log('  - All other CLI-specific content preserved');
