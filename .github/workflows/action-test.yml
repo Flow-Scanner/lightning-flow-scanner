@@ -1,0 +1,42 @@
+# Local Debugging Template
+name: Flow Scanner (local test)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Lightning Flow Scanner
+        id: flowscanner
+        uses: ./
+        with:
+          outputMode: sarif
+
+      - name: Show SARIF file (debug)
+        if: always()
+        run: |
+          SARIF_PATH="${{ steps.flowscanner.outputs.sarifPath }}"
+          echo "SARIF Path: $SARIF_PATH"
+          if [ -f "$SARIF_PATH" ]; then
+            echo "File exists! Size: $(stat -c%s "$SARIF_PATH") bytes"
+            echo "=== First 20 lines ==="
+            head -20 "$SARIF_PATH"
+            echo "=== End ==="
+          else
+            echo "File NOT found!"
+          fi
+
+      - name: Debug SARIF Path
+        if: always()
+        run: |
+          echo "SARIF Path: ${{ steps.flowscanner.outputs.sarifPath }}"
+          ls -la "${{ steps.flowscanner.outputs.sarifPath }}" || echo "File not found!"

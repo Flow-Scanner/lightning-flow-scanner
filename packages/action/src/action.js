@@ -61,8 +61,16 @@ function meetsThreshold(severity, threshold) {
 }
 
 async function run() {
-  const GITHUB_TOKEN = core.getInput("GITHUB_TOKEN");
-  const octokit = github.getOctokit(GITHUB_TOKEN);
+  // Smart token resolution — supports both patterns
+  const inputToken = core.getInput("GITHUB_TOKEN", { required: false });
+  const token = inputToken || process.env.GITHUB_TOKEN || github.context.token;
+
+  if (!token) {
+    core.setFailed("No GitHub token available. Provide GITHUB_TOKEN input or run in a GitHub Actions context.");
+    return;
+  }
+
+  const octokit = github.getOctokit(token);
   const { context } = github;
   const repo = context.repo;
 

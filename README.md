@@ -317,7 +317,20 @@ Ready-to-use CI/CD templates and a **native GitHub Action**.
 | Azure DevOps   | Full Project Scan                 | [`azure-pipelines-flow-FullScan.yml`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/examples/azure-devops/azure-pipelines-flow-FullScan.yml) |
 | Azure DevOps   | Change-Based Scan                 | [`azure-pipelines-flow-changedFiles.yml`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/examples/azure-devops/azure-pipelines-flow-changedFiles.yml) |
 | Copado DevOps | Full & Change-Based Scans       | [CI/CD Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado) |
-| GitHub | Full & Change-Based Scans       | [`scan-flows.yml`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/examples/github-action/scan-flows.yml) |
+
+GitHub Action Snippet:
+```yaml
+- name: Lightning Flow Scanner
+  id: flowscanner
+  uses: Flow-Scanner/lightning-flow-scanner@main
+
+- name: Upload SARIF to Code Scanning
+  uses: github/codeql-action/upload-sarif@v3
+  with:
+    sarif_file: ${{ steps.flowscanner.outputs.sarifPath }}
+```
+
+To see the full example, see [`scan-flows.yml`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/examples/github-action/scan-flows.yml).
 
 ## Quick Start
 
@@ -348,14 +361,15 @@ parse("flows/*.xml").then(scan).then(exportSarif);
 
 > This project optionally uses [Volta](https://volta.sh) to guarantee the exact same Node.js and tool versions for every contributor. Install Volta with:
 >
+> MacOs/Linux: 
 > ```sh
 > curl https://get.volta.sh | bash
 > ```
->
+> Windows:
 > ```sh
 > winget install Volta.Volta 
 > ```
-> Volta will automatically lock the exact versions of **Node.js**, **pnpm**, and all tools defined in `package.json`.
+> Volta will automatically install and lock the tool versions defined in `package.json`.
 
 1. Clone the repository
 
@@ -405,11 +419,11 @@ parse("flows/*.xml").then(scan).then(exportSarif);
    node -i -e "import('@flow-scanner/lightning-flow-scanner-core').then(m => { Object.assign(global, m.default ? m.default : m); console.log('✅ Core loaded! Try: await parse(...), scan(...), etc.'); })"
    ```
 
-   Or test in a dependent project:
+    Or test in a dependent project:
 
-   ```bash
-   npm link @flow-scanner/lightning-flow-scanner-core
-   ```
+    ```bash
+    npm link @flow-scanner/lightning-flow-scanner-core
+    ```
 
 6. Deploy Demo Flows (Optional):
 
@@ -422,7 +436,8 @@ parse("flows/*.xml").then(scan).then(exportSarif);
 7. Create a standalone UMD Module(Optional):
 
    ```bash
-     pnpm dist // creates UMD at`dist/lightning-flow-scanner-core.umd.js`.
+     pnpm dist
    ```
+   This creates UMD at `dist/lightning-flow-scanner-core.umd.js`.
 
 <p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>

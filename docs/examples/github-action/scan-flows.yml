@@ -17,12 +17,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Flow Scanner
-        id: scanner
-        uses: Flow-Scanner/lightning-flow-scanner-action@v2.1.1
+        id: flowscanner
+        uses: Flow-Scanner/lightning-flow-scanner@main
         with:
           outputMode: sarif      # optional (default)
 
       - name: Upload SARIF to Code Scanning
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ${{ steps.scanner.outputs.sarifPath }}
+          sarif_file: ${{ steps.flowscanner.outputs.sarifPath }}

@@ -1,12 +1,12 @@
-name: Run Flow Scanner
+name: Lightning Flow Scanner
 description: Scan Salesforce Flows for best practices, security, and performance issues.
 branding:
   icon: zap
   color: purple
 inputs:
   GITHUB_TOKEN:
-    description: GitHub token with `contents:read` and `security-events:write` permissions
-    required: true
+    description: GitHub token with `contents:read` and `security-events:write` permissions. Optional — defaults to the built-in `github.token` if not provided.
+    required: false
     default: ${{ github.token }}
 
   threshold:
