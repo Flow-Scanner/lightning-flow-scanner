@@ -29,14 +29,14 @@
 
 ## Distributions
 
-| Distribution                        | Best for                                      | Repository                                                                                   | Install / Use                                                                 |
-|-------------------------------------|-----------------------------------------------|----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| **Salesforce CLI Plugin**           | Local development, scratch orgs, CI/CD        | [Flow-Scanner/lightning-flow-scanner](https://github.com/Flow-Scanner/lightning-flow-scanner) | `sf plugins install lightning-flow-scanner`                                   |
-| **VS Code Extension**               | Real-time scanning inside VS Code             | [Flow-Scanner/lightning-flow-scanner-vsx](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx)     | `code --install-extension ForceConfigControl.lightning-flow-scanner-vsx`                        |
-| **Salesforce App**                  | Run scans directly inside any Salesforce org  | [Flow-Scanner/lightning-flow-scanner-app](https://github.com/Flow-Scanner/lightning-flow-scanner-app)     |  <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgK0000007M73QAE"><img alt="Install Managed Package" src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png"></a>                 |
-| **GitHub Action**                   | Native PR checks                              | [Flow-Scanner/lightning-flow-scanner-action](https://github.com/Flow-Scanner/lightning-flow-scanner-action) | [GitHub Marketplace](https://github.com/marketplace/actions/run-flow-scanner)                        |
-| **Copado Plugin**                   | Copado CI/CD pipelines                        | [Flow-Scanner/lightning-flow-scanner-copado](https://github.com/Flow-Scanner/lightning-flow-scanner-copado) | [Copado Marketplace](https://success.copado.com/s/listing-detail?language=en_US&recordId=a54P7000003G3gBIAS)                                               |
-| **Core Library** (Node.js + Browser)| Custom tools, scripts, extensions, web apps   | [Flow-Scanner/lightning-flow-scanner](https://github.com/Flow-Scanner/lightning-flow-scanner) | `npm install @flow-scanner/lightning-flow-scanner-core`                        |
+| Distribution                                      | Best for                                      | Install / Use                                                                                           |
+|----------------------------------------------------------------|-----------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| **[Salesforce CLI Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner/tree/main/packages/cli)** | Local development, scratch orgs, CI/CD        | `sf plugins install lightning-flow-scanner`                                                             |
+| **[VS Code Extension](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx)** | Real-time scanning inside VS Code             | `code --install-extension ForceConfigControl.lightning-flow-scanner-vsx`                               |
+| **[Salesforce App (Managed Package)](https://github.com/Flow-Scanner/lightning-flow-scanner-app)** | Run scans directly inside any Salesforce org  | `sf package install --package 04tgK0000007M73QAE` |
+| **[GitHub Action](https://github.com/Flow-Scanner/lightning-flow-scanner-action)** | Native PR checks                              | [GitHub Marketplace](https://github.com/marketplace/actions/run-flow-scanner)                           |
+| **[Copado Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado)** | Copado CI/CD pipelines                        | [Copado Marketplace](https://success.copado.com/s/listing-detail?language=en_US&recordId=a54P7000003G3gBIAS) |
+| **[Core Library](https://github.com/Flow-Scanner/lightning-flow-scanner/tree/main/packages/core)** (Node.js + Browser) | Custom tools, scripts, extensions, web apps   | `npm install @flow-scanner/lightning-flow-scanner-core`                                                 |
 
 **Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner?tab=security-ov-file).
 
