@@ -24,7 +24,7 @@ If it's more specific like a bug or a new feature—use [GitHub Issues](https://
 
 - [CLI Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner/issues)
 - [Copado Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado/issues)
-- [GitHub Action](https://github.com/Flow-Scanner/lightning-flow-scanner-action/issues)
+- [GitHub Action](https://github.com/Flow-Scanner/lightning-flow-scanner/issues)
 - [Salesforce App](https://github.com/Flow-Scanner/lightning-flow-scanner-app/issues)
 - [VS Code/Code Builder](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx/issues)
 
