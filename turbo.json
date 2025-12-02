@@ -2,19 +2,37 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["lib/**", "out/**", "dist/**", "oclif.manifest.json"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "lib/**",
+        "out/**",
+        "dist/**",
+        "oclif.manifest.json"
+      ]
     },
     "test": {
-      "dependsOn": ["build"],
-      "outputs": []
+      "dependsOn": [
+        "build"
+      ],
+      "cache": true,
+      "inputs": [
+        "src/**",
+        "test/**",
+        "!packages/action/**"
+      ]
     },
     "clean": {
       "cache": false
     },
     "vite:dist": {
-      "dependsOn": ["build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     }
   }
 }

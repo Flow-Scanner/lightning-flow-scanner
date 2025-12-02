@@ -3,3 +3,6 @@ node_modules/
 .DS_Store
 .turbo
 packages/cli/LICENSE.md
+
+# Allow GitHub Action dist (required for actions)
+!packages/action/dist/
