@@ -1,12 +1,12 @@
 <p align="center">
   <a href="https://github.com/Flow-Scanner">
-    <img src="../../assets/media/banner.png" style="width: 41%;" />
+    <img src="../assets/media/banner.png" style="width: 41%;" />
   </a>
 </p>
 <p align="center"><em>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows.</em></p>
 
 <p align="center">
- <img src="../../assets/media/lfsaction.gif" alt="Lightning Flow Scanner Demo"/>
+ <img src="../assets/media/lfsaction.gif" alt="Lightning Flow Scanner Demo"/>
 </p>
 
 ---

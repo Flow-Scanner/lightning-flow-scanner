@@ -109,10 +109,36 @@ function syncPackageReadme(packagePath, packageName) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Copy Action README to .github/marketplace-readme.md
+function syncMarketplaceReadme() {
+  const src = path.join('packages', 'action', 'README.md');
+  const destDir = path.join('.github');
+  const dest = path.join(destDir, 'marketplace-readme.md');
+
+  if (!fs.existsSync(src)) {
+    console.warn(`Action README not found: ${src}`);
+    return;
+  }
+
+  if (!fs.existsSync(destDir)) {
+    fs.mkdirSync(destDir);
+  }
+
+  let content = fs.readFileSync(src, 'utf8');
+
+  // Adjust asset paths for Marketplace README
+ content = content.replace(/src="\.\.\/\.\.\/assets\/media\//g, 'src="../assets/media/');
+
+  fs.writeFileSync(dest, content);
+  console.log('Marketplace README updated: .github/marketplace-readme.md');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Run it
 console.log('Syncing documentation...\n');
 
 syncPackageReadme('packages/cli', 'CLI');
 syncPackageReadme('packages/action', 'Action');
+syncMarketplaceReadme();
 
 console.log('\nAll documentation synchronized!');
