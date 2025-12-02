@@ -320,7 +320,7 @@ Ready-to-use CI/CD templates and a **native GitHub Action**.
 
 GitHub Action Snippet:
 ```yaml
-- name: Lightning Flow Scanner
+- name: Lightning Flow Scan
   id: flowscanner
   uses: Flow-Scanner/lightning-flow-scanner@main
 
