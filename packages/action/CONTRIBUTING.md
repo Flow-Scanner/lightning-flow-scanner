@@ -1,0 +1,8 @@
+Since 2021, the _Lightning Flow Scanner_ has grown from its roots as VS Code tool to empower Salesforce Developers across six free and open-source platforms—from developer tools to native Salesforce App—delivering a unified experience for robust static analysis of Flows. Our dedicated community has shared their expertise to deepen understanding of Flow optimization. Your support can amplify our impact. Here’s how you can contribute:
+
+- 📢 Share our work with your network.
+- 💬 Share feedback to help us improve.
+- 💻 Contribute code via pull requests.
+- 🤝 [Join as a member](https://register.lightningflowscanner.org/) to connect.
+
+Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/CONTRIBUTING.md).

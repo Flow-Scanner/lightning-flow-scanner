@@ -1,0 +1,51 @@
+# Local Debugging Template
+name: Flow Scanner (local test)
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Flow Scanner
+        id: scanner
+        uses: ./
+        with:
+          outputMode: sarif
+
+      - name: Show SARIF file (debug)
+        if: always()
+        run: |
+          SARIF_PATH="${{ steps.scanner.outputs.sarifPath }}"
+          echo "SARIF Path: $SARIF_PATH"
+          if [ -f "$SARIF_PATH" ]; then
+            echo "File exists! Size: $(stat -c%s "$SARIF_PATH") bytes"
+            echo "=== First 20 lines ==="
+            head -20 "$SARIF_PATH"
+            echo "=== End ==="
+          else
+            echo "File NOT found!"
+          fi
+
+      # - name: Upload SARIF (simulated)
+      #   if: always()
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     sarif_file: ${{ steps.scanner.outputs.sarifPath }}
+
+      - name: Debug SARIF Path
+        if: always()
+        run: |
+          echo "SARIF Path: ${{ steps.scanner.outputs.sarifPath }}"
+          ls -la "${{ steps.scanner.outputs.sarifPath }}" || echo "File not found!"

@@ -1,0 +1,46 @@
+{
+  "name": "lightning-flow-scanner-action",
+  "version": "2.2.0",
+  "description": "A GitHub Action for automated analysis and optimization of Salesforce Flow in Pull Requests. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/action.js -o dist --source-map",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "@flow-scanner/lightning-flow-scanner-core": "^6.6.0",
+    "@vercel/ncc": "^0.38.1",
+    "cosmiconfig": "^9.0.0"
+  },
+  "keywords": [
+    "best-practices",
+    "code-quality",
+    "flow",
+    "flow-builder",
+    "flow-linter",
+    "flow-scanner",
+    "linter",
+    "salesforce",
+    "security-scanner",
+    "static-analysis",
+    "sf"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flow-Scanner/lightning-flow-scanner-action.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Flow-Scanner/lightning-flow-scanner-action/issues"
+  },
+  "homepage": "https://flow-scanner.github.io/lightning-flow-scanner-action",
+  "author": {
+    "name": "Ruben Halman",
+    "url": "https://github.com/RubenHalman"
+  },
+  "volta": {
+    "node": "20.19.5"
+  }
+}
