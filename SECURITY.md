@@ -42,6 +42,5 @@ We actively track and maintain an up-to-date inventory of all third-party depend
 | ------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------- |
 | `@actions/core`               | [MIT](https://github.com/actions/toolkit/blob/main/packages/core/LICENSE)          | Toolkit for developing GitHub Actions       |
 | `@actions/github`             | [MIT](https://github.com/actions/toolkit/blob/main/packages/github/LICENSE)        | Interact with the GitHub API in Actions     |
-| `@vercel/ncc`                 | [MIT](https://github.com/vercel/ncc/blob/main/LICENSE)                             | Compile Node.js projects into a single file |
 | `lightning-flow-scanner-core` | [MIT](https://github.com/Flow-Scanner/lightning-flow-scanner-core/blob/main/LICENSE.md) | Core library for scanning Salesforce flows  |
 | `cosmiconfig`                        | [MIT](https://github.com/davidtheclark/cosmiconfig/blob/main/LICENSE) | Config file loader for JavaScript/Node |
