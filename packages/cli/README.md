@@ -1,13 +1,11 @@
 <p align="center">
   <a href="https://github.com/Flow-Scanner">
-    <img src="../../assets/media/banner.png" alt="Lightning Flow Scanner" width="41%" />
+    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/banner.png" alt="Lightning Flow Scanner" width="41%" />
   </a>
 </p>
 
-<p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
-
 <p align="center">
- <img src="../../assets/media/sfdxgif.gif" alt="Flow Overview"/>
+  <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/sfdxgif.gif" alt="Flow Overview"/>
 </p>
 
 ---
@@ -343,57 +341,24 @@ npm install -g lightning-flow-scanner
 3. Compile:
 
    ```bash
-   pnpm run build
-   ```
-
-   To compile just the core package::
-   ```bash
-   pnpm build:core 
+   pnpm run build:cli
    ```
 
 4. Run tests:
 
    ```bash
-   pnpm test 
+   pnpm test:cli
    ```
 
-  Or to test a new version of the core:
-   ```bash
-   pnpm test:core 
-   ```
-
-5. Linking the core module locally(Optional):
+5. Linking the Salesforce CLI module locally(Optional):
 
    To link the module, run:
 
    ```bash
-   pnpm link --global @flow-scanner/lightning-flow-scanner-core
+   cd packages/cli
+   sf plugins link .
    ```
 
-   You can now do Ad-Hoc Testing with node:
 
-   ```bash
-   node -i -e "import('@flow-scanner/lightning-flow-scanner-core').then(m => { Object.assign(global, m.default ? m.default : m); console.log('✅ Core loaded! Try: await parse(...), scan(...), etc.'); })"
-   ```
-
-   Or test in a dependent project:
-
-   ```bash
-   npm link @flow-scanner/lightning-flow-scanner-core
-   ```
-
-6. Deploy Demo Flows (Optional):
-
-   ```bash
-   cd assets/example-flows && sf project deploy start
-   ```
-
-   Navigate to the [Demo Readme](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/assets/example-flows\README.md) for full details
-
-7. Create a standalone UMD Module(Optional):
-
-   ```bash
-     pnpm dist // creates UMD at`dist/lightning-flow-scanner-core.umd.js`.
-   ```
 
 <p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>
