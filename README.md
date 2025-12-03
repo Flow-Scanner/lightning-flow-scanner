@@ -36,7 +36,7 @@
 | **[Salesforce App (Managed Package)](https://github.com/Flow-Scanner/lightning-flow-scanner-app)** | Run scans directly inside a Salesforce org  | `sf package install --package 04tgK0000007M73QAE` |
 | **[GitHub Action](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/action/README.md)** | Native PR checks                              | [GitHub Marketplace](https://github.com/marketplace/actions/run-flow-scanner)                           |
 | **[Copado Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado)** | Copado CI/CD pipelines                        | [Copado Marketplace](https://success.copado.com/s/listing-detail?language=en_US&recordId=a54P7000003G3gBIAS) |
-| **[Core Library](https://github.com/Flow-Scanner/lightning-flow-scanner/tree/main/packages/core)** (Node.js + Browser) | Custom tools, scripts, extensions, web apps   | `npm install @flow-scanner/lightning-flow-scanner-core`                                                 |
+| **[Core Library](https://github.com/Flow-Scanner/lightning-flow-scanner/tree/main/packages/core)** (Node.js + Browser) | Custom tools, scripts, extensions, web apps   | `npm install -g @flow-scanner/lightning-flow-scanner-core`                                                 |
 
 **Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner?tab=security-ov-file).
 
