@@ -317,14 +317,15 @@ npm install -g lightning-flow-scanner
 
 > This project optionally uses [Volta](https://volta.sh) to guarantee the exact same Node.js and tool versions for every contributor. Install Volta with:
 >
+> MacOs/Linux: 
 > ```sh
 > curl https://get.volta.sh | bash
 > ```
->
+> Windows:
 > ```sh
 > winget install Volta.Volta 
 > ```
-> Volta will automatically lock the exact versions of **Node.js**, **pnpm**, and all tools defined in `package.json`.
+> Volta will automatically install and lock the tool versions defined in `package.json`.
 
 1. Clone the repository
 
