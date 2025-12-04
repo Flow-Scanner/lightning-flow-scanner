@@ -1,7 +1,7 @@
 {
   "name": "@flow-scanner/lightning-flow-scanner-core",
   "description": "A lightweight engine for Flow metadata in Node.js, and browser environments. Assess and enhance Salesforce Flow automations for best practices, security, governor limits, and performance issues.",
-  "version": "6.6.1",
+  "version": "6.6.2",
   "main": "out/index.js",
   "types": "out/index.d.ts",
   "exports": {
@@ -30,7 +30,10 @@
     "____pack____": "PACKAGING COMMANDS__",
     "swc:sim:pack": "npm run build",
     "vite:dist": "npm run build:js && vite build && npm run copy:root-files:dist",
-    "stryker": "npm i -g @stryker-mutator/core @stryker-mutator/jest-runner && stryker run"
+    "stryker": "npm i -g @stryker-mutator/core @stryker-mutator/jest-runner && stryker run",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major"
   },
   "license": "MIT",
   "repository": {
