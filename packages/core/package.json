@@ -34,7 +34,8 @@
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
     "version:major": "npm version major",
-    "publish:npm": "npm run build && cd out && npm publish"
+    "publish:npm": "npm run build && cd out && npm publish",
+    "publish:tag": "node ../../scripts/publish-tag.js ."
   },
   "license": "MIT",
   "repository": {
