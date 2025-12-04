@@ -14,6 +14,7 @@ const publishPkg = {
   exports: {
     ".": {
       import: "./index.js",
+      require: "./index.js",
       types: "./index.d.ts"
     }
   },
