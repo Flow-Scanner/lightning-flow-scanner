@@ -80,8 +80,7 @@
     "____MAIN____": "Developer Scripts",
     "build": "rollup -c && npm run compile",
     "build:vsx": "npm run vscode:prepublish && vsce package --allow-package-secrets npm",
-    "watch": "rimraf out dist && concurrently \"rollup -c -w\" \"webpack --watch --config ./build/node-extension.webpack.config.js\"",
-    "test": "npm run wdio"
+    "watch": "rimraf out dist && concurrently \"rollup -c -w\" \"webpack --watch --config ./build/node-extension.webpack.config.js\""
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.2",
@@ -155,8 +154,5 @@
   ],
   "volta": {
     "node": "20.19.5"
-  },
-  "env": {
-    "NODE_ENV": "wdio"
   }
 }
