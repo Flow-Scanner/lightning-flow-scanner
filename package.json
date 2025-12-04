@@ -2,7 +2,7 @@
   "name": "lightning-flow-scanner-vsx",
   "displayName": "Lightning Flow Scanner VSX",
   "publisher": "ForceConfigControl",
-  "license": "AGPL-3.0",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Flow-Scanner/lightning-flow-scanner-vsx"
