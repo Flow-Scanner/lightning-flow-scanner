@@ -314,34 +314,12 @@ _Example_
 }
 ```
 
-### Report Detail Level
-
-Control the verbosity of violation reports via detailLevel. By default (`enriched`), outputs include element or flow-level details like variable data types, node connectors/locations, or attribute expressions for comprehensive reports. Set to `simple` for lighter output with only line and column numbers.
-
-```json
-{
-  "rules": {
-    ...
-  },
-  "exceptions": {
-    ...
-  },
-  "detailLevel": "simple"
-}
-```
-
 ### Include Beta Rules
 
 New rules are introduced in Beta mode before being added to the default ruleset. To include current Beta rules, enable the optional betamode parameter in your configuration:
 
 ```json
 {
-  "rules": {
-    ...
-  },
-  "exceptions": {
-    ...
-  },
   "betaMode": true
 }
 
