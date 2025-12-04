@@ -22,6 +22,8 @@ const extensionConfig = (env, argv) => ({
   },
   externals: {
     vscode: 'commonjs vscode',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    '@flow-scanner/lightning-flow-scanner-core': 'commonjs @flow-scanner/lightning-flow-scanner-core'
   },
   resolve: {
     extensions: ['.ts', '.js'],

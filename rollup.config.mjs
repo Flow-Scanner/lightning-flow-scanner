@@ -5,7 +5,6 @@ import terser from "@rollup/plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import json from "@rollup/plugin-json";
-import { svelteSVG } from 'rollup-plugin-svelte-svg';
 import path from 'path';
 import fs from 'fs';
 import css from 'rollup-plugin-css-only';
@@ -52,12 +51,6 @@ export default fs
                     preferBuiltins: false
                 }),
                 commonjs(),
-                // builtins(),  // ← REMOVED
-                svelteSVG({
-                    // optional SVGO options
-                    // pass empty object to enable defaults
-                    svgo: {},
-                }),
                 production && terser(),
                 typescript({
                     tsconfig: "webviews/tsconfig.json",

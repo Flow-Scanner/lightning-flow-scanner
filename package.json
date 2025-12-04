@@ -78,7 +78,7 @@
     "vscode:prepublish": "rollup -c && npm run package",
     "package": "webpack --mode production --devtool hidden-source-map --config ./build/node-extension.webpack.config.js",
     "____MAIN____": "Developer Scripts",
-    "build": "rollup -c",
+    "build": "rollup -c && npm run compile",
     "build:vsx": "npm run vscode:prepublish && vsce package --allow-package-secrets npm",
     "watch": "rimraf out dist && concurrently \"rollup -c -w\" \"webpack --watch --config ./build/node-extension.webpack.config.js\"",
     "test": "npm run wdio"
@@ -122,7 +122,6 @@
     "rollup": "^4.34.0",
     "rollup-plugin-css-only": "^4.5.2",
     "rollup-plugin-svelte": "^7.2.2",
-    "rollup-plugin-svelte-svg": "^1.0.0-beta.6",
     "svelte-preprocess": "^4.10.6",
     "tailwindcss": "^3.4.17",
     "ts-jest": "^29.3.2",
@@ -134,7 +133,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@flow-scanner/lightning-flow-scanner-core": "^6.6.0",
+    "@flow-scanner/lightning-flow-scanner-core": "^6.6.3",
     "convert-array-to-csv": "^2.0.0",
     "cosmiconfig": "^9.0.0",
     "glob": "^13.0.0",
