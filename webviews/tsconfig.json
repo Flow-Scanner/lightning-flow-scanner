@@ -3,7 +3,6 @@
     "module": "esnext",
     "target": "es2018",
     "moduleResolution": "node",
-    "verbatimModuleSyntax": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
