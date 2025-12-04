@@ -1,9 +1,9 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
-    "moduleResolution": "node",
-    "target": "es2018",
     "module": "esnext",
+    "target": "es2018",
+    "moduleResolution": "node",
+    "verbatimModuleSyntax": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -11,5 +11,9 @@
     "rootDir": ".",
     "sourceMap": true
   },
+  "include": [
+    "**/*.ts",
+    "**/*.svelte"
+  ],
   "exclude": ["node_modules", "dist", "out"]
 }

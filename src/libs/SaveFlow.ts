@@ -8,10 +8,9 @@ export class SaveFlow {
   }
 
   private async writeFlow(flow: Flow, pathToWrite: vscode.Uri) {
-    await vscode.workspace.fs.writeFile(
-      pathToWrite,
-      Buffer.from(flow.toXMLString())
-    );
+    const bytes = new TextEncoder().encode(flow.toXMLString());
+    await vscode.workspace.fs.writeFile(pathToWrite, bytes);
+
     return true;
   }
 }

@@ -162,7 +162,8 @@ export class ViolationOverview {
               content = convertArrayToCSV(data.value);
             }
 
-            await vscode.workspace.fs.writeFile(saveResult, Buffer.from(content, "utf-8"));
+            const bytes = new TextEncoder().encode(content);
+            await vscode.workspace.fs.writeFile(saveResult, bytes);
             await vscode.window.showInformationMessage(
               `Downloaded ${chosenFormat.toUpperCase()} file: ${saveResult.fsPath}`
             );
