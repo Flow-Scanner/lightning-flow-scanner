@@ -2,7 +2,7 @@
   "name": "lightning-flow-scanner-vsx",
   "displayName": "Lightning Flow Scanner VSX",
   "publisher": "ForceConfigControl",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Flow-Scanner/lightning-flow-scanner-vsx"
@@ -79,7 +79,7 @@
     "package": "webpack --mode production --devtool hidden-source-map --config ./build/node-extension.webpack.config.js",
     "____MAIN____": "Developer Scripts",
     "build": "rollup -c && npm run compile",
-    "build:vsx": "npm run vscode:prepublish && vsce package --allow-package-secrets npm",
+    "build:vsx": "npm run vscode:prepublish && vsce package",
     "watch": "rimraf out dist && concurrently \"rollup -c -w\" \"webpack --watch --config ./build/node-extension.webpack.config.js\""
   },
   "devDependencies": {
