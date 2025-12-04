@@ -2,7 +2,7 @@
 'use strict';
 const path = require('path');
 const webpack = require('webpack');
-// eslint-disable-next-line n/no-unpublished-require
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 /** @typedef {import('webpack').Configuration} WebpackConfig */
@@ -32,30 +32,21 @@ const extensionConfig = (env, argv) => ({
     rules: [
       {
         test: /\.ts$/,
-        exclude: [/node_modules/, /wdio\.conf\.mts/], // Exclude WDIO config
-        use: env['coverage']
-          ? [
-              { loader: '@jsdevtools/coverage-istanbul-loader' }, // Add coverage for WDIO
-              { loader: 'ts-loader' },
-            ]
-          : [{ loader: 'ts-loader' }],
+        exclude: [/node_modules/],
+        use: [{ loader: 'ts-loader' }],
       },
     ],
   },
   plugins: [
-    new ESLintPlugin(), // Optional: Enforce code quality
+    new ESLintPlugin(),
     new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1, // Ensure single bundle for extension
-    }),
-    new webpack.DefinePlugin({
-      'process.env.TESTING': JSON.stringify(env['wdio'] || false), // Flag for WDIO testing
-      'process.env.COVERAGE': JSON.stringify(env['coverage'] || false), // Flag for coverage
+      maxChunks: 1, 
     }),
   ],
   cache: {
-    type: 'filesystem',
-    name: argv.mode + '-wdio_' + env['wdio'] + '-coverage_' + env['coverage'],
-    version: '1',
+  type: 'filesystem',
+  name: argv.mode || 'default',
+  version: '1',
   },
   devtool: 'nosources-source-map', 
   infrastructureLogging: {
