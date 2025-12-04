@@ -9,7 +9,7 @@
   },
   "icon": "media/lightningflow.png",
   "description": "A VS Code Extension for analysis and optimization of Salesforce Flows. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and tests integration.",
-  "version": "1.13.4",
+  "version": "1.13.5",
   "engines": {
     "vscode": "^1.92.0"
   },
@@ -131,7 +131,6 @@
     "typescript": "^4.9.5",
     "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4"
-    
   },
   "dependencies": {
     "@flow-scanner/lightning-flow-scanner-core": "6.6.0",
