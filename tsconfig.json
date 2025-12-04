@@ -24,9 +24,6 @@
 		},
 		"types": [
             "node",
-			"@wdio/globals/types",
-            "@wdio/mocha-framework",
-            "wdio-vscode-service"
         ],
 		"esModuleInterop": true
 	},
@@ -35,7 +32,6 @@
 		".vscode-test",
 		"webviews",
 		"test",
-		"wdio.conf.mts",
 		"tsup.config.ts",
 		"jest.config.ts",
 		"tests",

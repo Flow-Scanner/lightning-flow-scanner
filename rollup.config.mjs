@@ -6,19 +6,15 @@ import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import json from "@rollup/plugin-json";
 import { svelteSVG } from 'rollup-plugin-svelte-svg';
-import builtins from 'rollup-plugin-node-builtins';
 import path from 'path';
 import fs from 'fs';
 import css from 'rollup-plugin-css-only';
 import {fileURLToPath} from 'url';
-
 import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
 
 const production = !process.env.ROLLUP_WATCH;
-
 const __filename = fileURLToPath(import.meta.url);
-
 const __dirname = path.dirname(__filename);
 
 export default fs
@@ -40,11 +36,11 @@ export default fs
                         // enable run-time checks when not in production
                         dev: !production,
                       },
-                    preprocess: sveltePreprocess({ 
+                    preprocess: sveltePreprocess({
                         sourceMap: !production,
                         postcss: {
                             plugins: [tailwindcss, autoprefixer],
-                          },
+                        },
                     }),
                     emitCss: production,
                 }),
@@ -56,12 +52,12 @@ export default fs
                     preferBuiltins: false
                 }),
                 commonjs(),
-                builtins(),
+                // builtins(),  // ← REMOVED
                 svelteSVG({
                     // optional SVGO options
                     // pass empty object to enable defaults
                     svgo: {},
-                  }),
+                }),
                 production && terser(),
                 typescript({
                     tsconfig: "webviews/tsconfig.json",
