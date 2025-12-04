@@ -19,8 +19,6 @@ const config = {
   devtool: 'nosources-source-map',
   externals: {
     vscode: 'commonjs vscode', // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    '@flow-scanner/lightning-flow-scanner-core': 'commonjs @flow-scanner/lightning-flow-scanner-core',
   },
   resolve: {
     // support reading TypeScript and JavaScript files, 📖 -> https://github.com/TypeStrong/ts-loader
