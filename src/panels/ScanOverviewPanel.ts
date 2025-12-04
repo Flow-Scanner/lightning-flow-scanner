@@ -110,15 +110,12 @@ export class ScanOverview {
           break;
         }
         case "init-view": {
-          if (scanResults) {
             webview.postMessage({
-              type: "init",
-              value: scanResults,
+                type: "init",
+                value: this._lastScanResults
             });
-          }
-          return;
+            return;
         }
-
         case "download": {
           if (!data.value || !Array.isArray(data.value) || data.value.length === 0) {
             await vscode.window.showInformationMessage(
