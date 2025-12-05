@@ -1,0 +1,16 @@
+out
+dist
+node_modules
+.vscode-test/
+*.vsix
+.DS_Store
+yarn-error.logs
+.wdio-vscode-service
+
+*.log
+*.vsix
+coverage
+
+.config
+
+src/vscode.d.ts

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2018",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": ".",
+    "sourceMap": true
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.svelte"
+  ],
+  "exclude": ["node_modules", "dist", "out"]
+}

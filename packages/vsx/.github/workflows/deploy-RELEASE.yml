@@ -1,0 +1,57 @@
+name: "Build & Release"
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: read
+  id-token: write # for future OpenID CI auth to avoid PATs
+
+concurrency:
+  group: ${{ github.ref_name }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Install Dependencies
+        run: npm ci
+
+      # Snyk security scan (currently advisory)
+      - name: Snyk Security Scan (Advisory Mode)
+        if: env.SNYK_TOKEN != ''
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: |
+          npm install -g snyk
+          snyk test || echo "❗ SNYK findings detected (not failing pipeline yet)"
+
+      - name: Build Extension Artifacts
+        run: npm run vscode:prepublish
+
+      - name: Run WDIO E2E Tests
+        run: npm run test
+
+      - name: Package VSIX
+        run: |
+          npm install -g @vscode/vsce
+          vsce package
+
+      - name: Publish to VS Code Marketplace
+        run: |
+          vsce publish --pat "${{ secrets.VSCE_PAT }}" --packagePath *.vsix
+        shell: bash
