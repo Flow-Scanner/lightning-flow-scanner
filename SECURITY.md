@@ -51,3 +51,4 @@ We actively track and maintain an up-to-date inventory of all third-party depend
 | `tabulator-tables`            | [MIT](https://github.com/olifolkerd/tabulator/blob/master/LICENSE)                      | Interactive tables and data grids for web apps |
 | `uuid`                        | [MIT](https://github.com/uuidjs/uuid/blob/main/LICENSE.md)                              | Generates RFC-compliant UUIDs                  |
 | `cosmiconfig`                        | [MIT](https://github.com/davidtheclark/cosmiconfig/blob/main/LICENSE) | Config file loader for JavaScript/Node |
+| `glob`                               | [MIT](https://github.com/isaacs/node-glob/blob/master/LICENSE) | File pattern matching |
