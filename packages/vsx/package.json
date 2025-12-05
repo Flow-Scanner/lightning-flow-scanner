@@ -5,7 +5,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Flow-Scanner/lightning-flow-scanner-vsx"
+    "url": "git+https://github.com/Flow-Scanner/lightning-flow-scanner.git",
+    "directory": "packages/vsx"
   },
   "icon": "media/lightningflow.png",
   "description": "A VS Code Extension for analysis and optimization of Salesforce Flows. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and tests integration.",
@@ -133,7 +134,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@flow-scanner/lightning-flow-scanner-core": "6.6.0",
+    "@flow-scanner/lightning-flow-scanner-core": "workspace:*",
     "convert-array-to-csv": "^2.0.0",
     "cosmiconfig": "^9.0.0",
     "glob": "^13.0.0",
