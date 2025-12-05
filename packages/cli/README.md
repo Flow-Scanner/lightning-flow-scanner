@@ -3,6 +3,7 @@
     <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/banner.png" alt="Lightning Flow Scanner" width="41%" />
   </a>
 </p>
+<p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/sfdxgif.gif" alt="Flow Overview"/>
@@ -16,6 +17,8 @@
 - **[Default Rules](#default-rules)**
 - **[Configuration](#configuration)**
 - **[Installation](#installation)**
+- **[Development](#development)**
+
 ---
 
 ## Usage

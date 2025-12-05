@@ -6,11 +6,18 @@
 
 <p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
+[![GitHub stars](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)
+[![GitHub contributors](https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner.svg)](https://gitHub.com/Flow-Scanner/lightning-flow-scanner/graphs/contributors/)
+[![License](https://img.shields.io/npm/l/lightning-flow-scanner.svg)](github.com/Flow-Scanner/lightning-flow-scanner/raw/main/LICENSE.md)
+[![core](https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=core)](https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core)
+[![cli](https://img.shields.io/npm/v/lightning-flow-scanner?label=cli)](https://www.npmjs.com/package/lightning-flow-scanner)
+[![VS Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/ForceConfigControl.lightning-flow-scanner-vsx?label=VS%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=ForceConfigControl.lightning-flow-scanner-vsx) 
+[![Open VSX Version](https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=Open%20VSX)](https://open-vsx.org/extension/ForceConfigControl/lightning-flow-scanner-vsx) 
+
 ---
 
 ## Table of contens
 
-- **[Distributions](#distributions)**
 - **[Default Rules](#default-rules)**
 - **[Configuration](#configuration)**
   - [Defining Severity Levels](#defining-severity-levels)
@@ -18,24 +25,12 @@
   - [Specifying Exceptions](#specifying-exceptions)
   - [Include Beta Rules](#include-beta-rules)
 - **[Installation](#installation)**
-  - [Salesforce CLI Plugin](#salesforce-cli-plugin)
-  - [Core Module](#core-module)
+  - [Distributions](#distributions)
   - [CICD Templates](#cicd-templates)
 - **[Quick Start](#quick-start)**
 - **[Development](#development)**
 
 ---
-
-## Distributions
-
-| Distribution                                      | Best for                                      | Install / Use                                                                                           |
-|----------------------------------------------------------------|-----------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| **[Salesforce CLI Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/cli/README.md)** | Local development, scratch orgs, CI/CD        | `sf plugins install lightning-flow-scanner`                                                             |
-| **[VS Code Extension](https://github.com/Flow-Scanner/lightning-flow-scanner-vsx)** | Real-time scanning inside VS Code             | `code --install-extension ForceConfigControl.lightning-flow-scanner-vsx`                               |
-| **[Salesforce App (Managed Package)](https://github.com/Flow-Scanner/lightning-flow-scanner-app)** | Run scans directly inside a Salesforce org  | `sf package install --package 04tgK0000007M73QAE` |
-| **[Core Library](https://github.com/Flow-Scanner/lightning-flow-scanner/tree/main/packages/core)** (Node.js + Browser) | Custom tools, scripts, extensions, web apps   | `npm install -g @flow-scanner/lightning-flow-scanner-core`                                                 |
-
-**Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner?tab=security-ov-file).
 
 ## Default Rules
 
@@ -260,29 +255,16 @@ New rules are introduced in Beta mode before being added to the default ruleset.
 
 ## Installation
 
-[![GitHub stars](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)
-[![GitHub contributors](https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner.svg)](https://gitHub.com/Flow-Scanner/lightning-flow-scanner/graphs/contributors/)
-[![License](https://img.shields.io/npm/l/lightning-flow-scanner.svg)](github.com/Flow-Scanner/lightning-flow-scanner/raw/main/LICENSE.md)
+### Distributions
 
-### Salesforce CLI Plugin
-[![npm](https://img.shields.io/npm/v/lightning-flow-scanner?label=)](https://www.npmjs.com/package/lightning-flow-scanner)
+| Distribution                                      | Best for                                      | Install / Use                                                                                           |
+|----------------------------------------------------------------|-----------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| **[Salesforce CLI Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/cli/README.md)** | Local development, scratch orgs, CI/CD        | `sf plugins install lightning-flow-scanner`                                                             |
+| **[VS Code Extension](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/vsx/README.md)** | Real-time scanning inside VS Code             | `code --install-extension ForceConfigControl.lightning-flow-scanner-vsx`                               |
+| **[Salesforce App (Managed Package)](https://github.com/Flow-Scanner/lightning-flow-scanner-app)** | Run scans directly inside a Salesforce org  | `sf package install --package 04tgK0000007M73QAE` |
+| **[Core Library](https://github.com/Flow-Scanner/lightning-flow-scanner/tree/main/packages/core)** (Node.js + Browser) | Custom tools, scripts, extensions, web apps   | `npm install -g @flow-scanner/lightning-flow-scanner-core`                                                 |
 
-```bash
-sf plugins install lightning-flow-scanner
-```
-OR
-```bash
-npm install -g lightning-flow-scanner
-```
-
-### Core Module
-[![npm](https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=)](https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core)
-
-```bash
-npm install -g @flow-scanner/lightning-flow-scanner-core
-```
-
----
+**Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner?tab=security-ov-file).
 
 ### CICD Templates
 Ready-to-use CI/CD templates and a **native GitHub Action**.  

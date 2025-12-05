@@ -17,7 +17,7 @@
   "categories": [
     "Linters"
   ],
-  "homepage": "https://vsx.lightningflowscanner.org",
+  "homepage": "https://flow-scanner.github.io/lightning-flow-scanner/",
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
@@ -74,13 +74,13 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "compile": "webpack --config ./build/node-extension.webpack.config.js",
     "lint": "eslint src --ext ts test --ext ts",
-    "pretest": "npm run test-compile && npm run lint",
+    "pretest": "pnpm run test-compile && pnpm run lint",
     "test-compile": "tsc -p ./",
-    "vscode:prepublish": "rollup -c && npm run package",
+    "vscode:prepublish": "pnpm run build",
     "package": "webpack --mode production --devtool hidden-source-map --config ./build/node-extension.webpack.config.js",
     "____MAIN____": "Developer Scripts",
-    "build": "rollup -c && npm run compile",
-    "build:vsx": "npm run vscode:prepublish && vsce package",
+    "build": "rollup -c && pnpm run compile",
+    "build:vsx": "pnpm run vscode:prepublish && vsce package --no-dependencies",
     "watch": "rimraf out dist && concurrently \"rollup -c -w\" \"webpack --watch --config ./build/node-extension.webpack.config.js\""
   },
   "devDependencies": {
