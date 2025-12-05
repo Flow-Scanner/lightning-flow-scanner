@@ -11,7 +11,6 @@
 [![License](https://img.shields.io/npm/l/lightning-flow-scanner.svg)](github.com/Flow-Scanner/lightning-flow-scanner/raw/main/LICENSE.md)
 [![core](https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=core)](https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core)
 [![cli](https://img.shields.io/npm/v/lightning-flow-scanner?label=cli)](https://www.npmjs.com/package/lightning-flow-scanner)
-[![VS Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/ForceConfigControl.lightning-flow-scanner-vsx?label=VS%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=ForceConfigControl.lightning-flow-scanner-vsx) 
 [![Open VSX Version](https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=Open%20VSX)](https://open-vsx.org/extension/ForceConfigControl/lightning-flow-scanner-vsx) 
 
 ---
