@@ -19,7 +19,10 @@
     "watch:vsx": "pnpm --filter=lightning-flow-scanner-vsx run watch",
     "dist": "turbo run vite:dist --filter=@flow-scanner/lightning-flow-scanner-core",
     "dist:core": "turbo run vite:dist --filter=@flow-scanner/lightning-flow-scanner-core",
-    "lfs:link": "turbo run buildng-flow-scanner && cd packages/ --filter=lightnicli && pnpm lfs:link"
+    "lfs:link": "turbo run buildng-flow-scanner && cd packages/ --filter=lightnicli && pnpm lfs:link",
+    "vsx:patch": "pnpm --filter=lightning-flow-scanner-vsx version:patch && pnpm --filter=lightning-flow-scanner-vsx publish:vsx",
+    "vsx:minor": "pnpm --filter=lightning-flow-scanner-vsx version:minor && pnpm --filter=lightning-flow-scanner-vsx publish:vsx",
+    "vsx:major": "pnpm --filter=lightning-flow-scanner-vsx version:major && pnpm --filter=lightning-flow-scanner-vsx publish:vsx"
   },
   "devDependencies": {
     "turbo": "^2.6.1",

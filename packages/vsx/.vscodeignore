@@ -20,3 +20,10 @@ rollup.config.*
 tailwind.config.*
 .turbo/
 CNAME
+
+!LICENSE.md
+!CONTRIBUTING.md
+!SECURITY.md
+!dist/**
+!out/**
+!media/**

@@ -10,7 +10,7 @@
   },
   "icon": "media/lightningflow.png",
   "description": "A VS Code Extension for analysis and optimization of Salesforce Flows. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and tests integration.",
-  "version": "1.13.5",
+  "version": "2.0.2",
   "engines": {
     "vscode": "^1.92.0"
   },
@@ -78,9 +78,15 @@
     "test-compile": "tsc -p ./",
     "vscode:prepublish": "pnpm run build",
     "package": "webpack --mode production --devtool hidden-source-map --config ./build/node-extension.webpack.config.js",
+    "version:patch": "npm version patch -m \"chore(vsx): publish v%s\"",
+    "version:minor": "npm version minor -m \"chore(vsx): publish v%s\"",
+    "version:major": "npm version major -m \"chore(vsx): publish v%s\"",
+    "publish:vsx": "pnpm run build:vsx",
     "____MAIN____": "Developer Scripts",
     "build": "rollup -c && pnpm run compile",
-    "build:vsx": "pnpm run vscode:prepublish && vsce package --no-dependencies",
+    "copy:root-files": "node -e \"['../../LICENSE.md','../../CONTRIBUTING.md','../../SECURITY.md'].forEach(f=>require('fs').existsSync(f)&&require('fs').copyFileSync(f,require('path').basename(f)))\"",
+    "clean:root-files": "rimraf LICENSE.md CONTRIBUTING.md SECURITY.md",
+    "build:vsx": "pnpm run vscode:prepublish && pnpm run copy:root-files && vsce package --no-dependencies && pnpm run clean:root-files",
     "watch": "rimraf out dist && concurrently \"rollup -c -w\" \"webpack --watch --config ./build/node-extension.webpack.config.js\""
   },
   "devDependencies": {

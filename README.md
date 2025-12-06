@@ -1,18 +1,34 @@
 <p align="center">
+  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/stargazers">
+    <img src="https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="GitHub stars">
+  </a>
+  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner.svg?style=flat-square" alt="Contributors">
+  </a>
+  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/LICENSE.md">
+    <img src="https://img.shields.io/github/license/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="License">
+  </a>
+  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+    <img src="https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=core&style=flat-square" alt="Core version">
+  </a>
+  <a href="https://www.npmjs.com/package/lightning-flow-scanner">
+    <img src="https://img.shields.io/npm/v/lightning-flow-scanner?label=cli&style=flat-square" alt="CLI version">
+  </a>
+  <a href="https://open-vsx.org/extension/ForceConfigControl/lightning-flow-scanner-vsx">
+    <img src="https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=Open%20VSX&style=flat-square" alt="Open VSX">
+  </a>
+  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+    <img src="https://img.shields.io/badge/downloads-510k%2B-success?style=flat-square" alt="Total Downloads">
+  </a>
+</p>
+
+<p align="center">
   <a href="https://github.com/Flow-Scanner">
     <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/banner.png" alt="Lightning Flow Scanner" width="43%" />
   </a>
 </p>
 
 <p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
-
-[![GitHub stars](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)
-[![GitHub contributors](https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner.svg)](https://gitHub.com/Flow-Scanner/lightning-flow-scanner/graphs/contributors/)
-[![License](https://img.shields.io/npm/l/lightning-flow-scanner.svg)](github.com/Flow-Scanner/lightning-flow-scanner/raw/main/LICENSE.md)
-[![core](https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=core)](https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core)
-[![cli](https://img.shields.io/npm/v/lightning-flow-scanner?label=cli)](https://www.npmjs.com/package/lightning-flow-scanner)
-[![Open VSX Version](https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=Open%20VSX)](https://open-vsx.org/extension/ForceConfigControl/lightning-flow-scanner-vsx) 
-[![Total Core Downloads](https://img.shields.io/badge/downloads-510k%2B-success)](https://www.npmjs.com/package/lightning-flow-scanner-core)
 
 ---
 

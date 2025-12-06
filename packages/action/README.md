@@ -1,15 +1,39 @@
 <p align="center">
-  <a href="https://github.com/Flow-Scanner">
-    <img src="../../assets/media/banner.png" style="width: 41%;" />
+  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/stargazers">
+    <img src="https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="GitHub stars">
+  </a>
+  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner.svg?style=flat-square" alt="Contributors">
+  </a>
+  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/LICENSE.md">
+    <img src="https://img.shields.io/github/license/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="License">
+  </a>
+  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+    <img src="https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=core&style=flat-square" alt="Core version">
+  </a>
+  <a href="https://www.npmjs.com/package/lightning-flow-scanner">
+    <img src="https://img.shields.io/npm/v/lightning-flow-scanner?label=cli&style=flat-square" alt="CLI version">
+  </a>
+  <a href="https://open-vsx.org/extension/ForceConfigControl/lightning-flow-scanner-vsx">
+    <img src="https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=Open%20VSX&style=flat-square" alt="Open VSX">
+  </a>
+  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+    <img src="https://img.shields.io/badge/downloads-510k%2B-success?style=flat-square" alt="Total Downloads">
   </a>
 </p>
-<p align="center"><em>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows.</em></p>
 
 <p align="center">
- <img src="../../assets/media/lfsaction.gif" alt="Lightning Flow Scanner Demo"/>
+  <a href="https://github.com/Flow-Scanner">
+    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/banner.png" alt="Lightning Flow Scanner" width="43%" />
+  </a>
 </p>
 
+<p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
+
 ---
+
+
+
 
 ## Table of contens
 
@@ -100,8 +124,6 @@ Scan all flows on every push to selected branches.
 | `GITHUB_TOKEN`  | No       | `github.token`         | Custom token if needed (e.g. fork PRs, extra permissions). **Usually not required** — the default token works in nearly all cases. |
 | `threshold`     | No       | —                      | Minimum severity to fail in `table` mode (`note`, `warning`, `error`)       |
 | `outputMode`    | No       | `sarif`                | `sarif` (upload to Code Scanning) or `table` (console output)               |
-
----
 
 ## Default Rules
 
@@ -205,9 +227,6 @@ _[UnsafeRunningContext](https://github.com/Flow-Scanner/lightning-flow-scanner/b
 ### Unused Variable
 
 _[UnusedVariable](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/UnusedVariable.ts)_ - To maintain efficiency and manageability, avoid including variables that are never referenced.
-
-
----
 
 ## Configuration
 
