@@ -1,12 +1,12 @@
 <p align="center">
+  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/LICENSE.md">
+    <img src="https://img.shields.io/github/license/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="License">
+  </a>
   <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/stargazers">
     <img src="https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="GitHub stars">
   </a>
   <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner.svg?style=flat-square" alt="Contributors">
-  </a>
-  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/LICENSE.md">
-    <img src="https://img.shields.io/github/license/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="License">
   </a>
   <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
     <img src="https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=core&style=flat-square" alt="Core version">
@@ -30,10 +30,13 @@
 
 <p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
+<p align="center">
+  <a href="https://github.com/Flow-Scanner">
+    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/lfsaction.gif"/>
+  </a>
+</p>
+
 ---
-
-
-
 
 ## Table of contens
 
