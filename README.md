@@ -319,6 +319,14 @@ sf flow:fix -d src/force-app
 sf flow:scan --sarif > report.sarif
 ```
 
+### VS Code Extension
+Use our side bar or the **Command Palette** and type `flowscanner` to see all available commands:
+
+* `Configure Flow Scanner` - Set up rules in `.flow-scanner.yml`
+* `Scan Flows` - Analyze a directory or selected flow files
+* `Fix Flows` - Automatically apply available fixes
+* `Flow Scanner Documentation` - Open the rules reference guide
+
 ### Core Module
 Use `lightning-flow-scanner-core` as a Node.js/browser dependency:
 
