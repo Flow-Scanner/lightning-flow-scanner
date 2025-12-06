@@ -30,13 +30,15 @@
 
 <p align="center"><i>Detect unsafe contexts, queries in loops, hardcoded IDs, and more to optimize Salesforce Flows</i></p>
 
+
 <p align="center">
   <a href="https://github.com/Flow-Scanner">
-    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/lfsaction.gif"/>
+    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/action.gif"/>
   </a>
 </p>
 
 ---
+
 
 ## Table of contens
 
