@@ -38,4 +38,4 @@ fs.writeFileSync(
   JSON.stringify(publishPkg, null, 2) + '\n'
 );
 
-console.log('✓ Prepared package for publishing in out/');
+console.log('✓ Compiled package in out/');
