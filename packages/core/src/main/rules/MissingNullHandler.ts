@@ -4,11 +4,9 @@ import { IRuleDefinition } from "../interfaces/IRuleDefinition";
 export class MissingNullHandler extends RuleCommon implements IRuleDefinition {
   constructor() {
     super({
-      autoFixable: false,
       description:
         "When a Get Records operation doesn't find any data, it returns null. To ensure data validation, utilize a decision element on the operation result variable to check for a non-null result.",
       docRefs: [],
-      isConfigurable: false,
       label: "Missing Null Handler",
       name: "MissingNullHandler",
       supportedTypes: [...core.FlowType.backEndTypes, ...core.FlowType.visualTypes],

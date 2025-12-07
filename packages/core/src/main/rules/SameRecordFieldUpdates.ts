@@ -23,8 +23,6 @@ export class SameRecordFieldUpdates extends RuleCommon implements IRuleDefinitio
             path: "https://architect.salesforce.com/decision-guides/trigger-automation#Same_Record_Field_Updates",
           },
         ],
-        isConfigurable: false,
-        autoFixable: false,
       },
       { severity: "warning" }
     );

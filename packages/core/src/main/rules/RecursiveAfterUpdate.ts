@@ -10,7 +10,6 @@ export class RecursiveAfterUpdate extends RuleCommon implements IRuleDefinition 
   constructor() {
     super(
       {
-        autoFixable: false,
         description:
           "After updates are meant to be used for record modifications that are not the same record that triggered the flow. Using after updates on the same record can lead to recursion and unexpected behavior. Consider using before save flows for same record updates.",
         docRefs: [
@@ -19,7 +18,6 @@ export class RecursiveAfterUpdate extends RuleCommon implements IRuleDefinition 
             path: "https://architect.salesforce.com/decision-guides/trigger-automation#Same_Record_Field_Updates",
           },
         ],
-        isConfigurable: false,
         label: "Recursive After Update",
         name: "RecursiveAfterUpdate",
         supportedTypes: [...core.FlowType.backEndTypes],

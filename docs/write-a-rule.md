@@ -57,8 +57,6 @@ export class HardcodedReferences extends RuleCommon implements IRuleDefinition {
         "Detects Get Records or other elements that use hard-coded Ids instead of variables.",
       supportedTypes: core.FlowType.allTypes(),
       docRefs: [],
-      isConfigurable: false,
-      autoFixable: false,
     });
   }
 

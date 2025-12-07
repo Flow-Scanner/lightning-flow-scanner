@@ -5,10 +5,8 @@ import { RuleCommon } from "../models/RuleCommon";
 export class MissingMetadataDescription extends RuleCommon implements IRuleDefinition {
   constructor() {
     super({
-      autoFixable: false,
       description: "Every element must have a meaningful description",
       docRefs: [],
-      isConfigurable: false,
       label: "Missing Metadata Description",
       name: "MissingMetadataDescription",
       supportedTypes: core.FlowType.allTypes(),

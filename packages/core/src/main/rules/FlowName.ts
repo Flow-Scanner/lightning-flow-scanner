@@ -5,7 +5,6 @@ import { IRuleDefinition } from "../interfaces/IRuleDefinition";
 export class FlowName extends RuleCommon implements IRuleDefinition {
   constructor() {
     super({
-      autoFixable: false,
       description:
         "The readability of a flow is of utmost importance. Establishing a naming convention for the Flow Name significantly enhances findability, searchability, and maintains overall consistency. It is advisable to include at least a domain and a brief description of the actions carried out in the flow, for instance, 'Service_OrderFulfillment'.",
       docRefs: [
@@ -14,7 +13,6 @@ export class FlowName extends RuleCommon implements IRuleDefinition {
           path: "https://www.linkedin.com/posts/stephen-n-church_naming-your-flows-this-is-more-critical-activity-7099733198175158274-1sPx",
         },
       ],
-      isConfigurable: true,
       label: "Flow Naming Convention",
       name: "FlowName",
       supportedTypes: core.FlowType.allTypes(),

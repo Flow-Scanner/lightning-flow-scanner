@@ -6,7 +6,6 @@ export class GetRecordAllFields extends RuleCommon implements IRuleDefinition {
   constructor() {
     super(
       {
-        autoFixable: false,
         description:
           "Following the principle of least privilege (PoLP), avoid using Get Records with 'Automatically store all fields' unless necessary.",
         docRefs: [
@@ -19,7 +18,6 @@ export class GetRecordAllFields extends RuleCommon implements IRuleDefinition {
             path: "https://developer.salesforce.com/docs/atlas.en-us.salesforce_large_data_volumes_bp.meta/salesforce_large_data_volumes_bp/ldv_deployments_infrastructure_indexes.htm",
           },
         ],
-        isConfigurable: false,
         label: "Get Record All Fields",
         name: "GetRecordAllFields",
         supportedTypes: core.FlowType.allTypes(),

@@ -5,11 +5,9 @@ import { IRuleDefinition } from "../interfaces/IRuleDefinition";
 export class UnconnectedElement extends RuleCommon implements IRuleDefinition {
   constructor() {
     super({
-      autoFixable: true,
       description:
         "To maintain the efficiency and manageability of your Flow, it's best to avoid including unconnected elements that are not in use.",
       docRefs: [],
-      isConfigurable: false,
       label: "Unconnected Element",
       name: "UnconnectedElement",
       supportedTypes: [...core.FlowType.backEndTypes, ...core.FlowType.visualTypes],

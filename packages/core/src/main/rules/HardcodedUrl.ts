@@ -6,7 +6,6 @@ export class HardcodedUrl extends RuleCommon implements IRuleDefinition {
   constructor() {
     super(
       {
-        autoFixable: false,
         description:
           "Avoid hard-coding URLs as they are org-specific. Instead, use a $API formula (preferred) or you can use an environment-specific such as custom labels, custom metadata, or custom settings.",
         docRefs: [
@@ -19,7 +18,6 @@ export class HardcodedUrl extends RuleCommon implements IRuleDefinition {
             path: "https://admin.salesforce.com/blog/2021/why-you-should-avoid-hard-coding-and-three-alternative-solutions",
           },
         ],
-        isConfigurable: false,
         label: "Hardcoded Url",
         name: "HardcodedUrl",
         supportedTypes: FlowType.allTypes(),

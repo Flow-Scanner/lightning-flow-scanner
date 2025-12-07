@@ -9,12 +9,6 @@ export type RuleDefinitionExpression = {
  */
 export class RuleInfo {
   /**
-   * Indicates whether the rule can be automatically fixed.
-   * When the rule is autofixable, implement @see {AutoFixable}
-   */
-  public autoFixable: boolean;
-
-  /**
    * A human-readable description of the rule.
    */
   public description: string;
@@ -23,17 +17,6 @@ export class RuleInfo {
    * An array of documentation references related to the rule.
    */
   public docRefs: Array<{ label: string; path: string }>;
-
-  /**
-   * Specifies if the rule's behavior can be configured.
-   * When configurable, execute should take in a second parameter @see RuleDefinitionExpression
-   * @example
-   * ```typescript
-   * public execute(flow: core.Flow, options?: { expression: string }): core.RuleResult {
-   *   // your rule
-   * }
-   */
-  public isConfigurable: boolean;
 
   /**
    * The display label for the rule.

@@ -1,5 +1,5 @@
 {
-  "commandDescription":"Fix common problems using lfs core engine. Rule definitions that specifies autoFixable can be executed and fixes may be applied automatically",
+  "commandDescription":"Fix common problems using lfs core engine.",
   "flagsDirsDescription":"Specify one or more Directorie(s) to find flows and fix",
   "flagsRulesDescription": "Specify one or more Rule Id(s) to run",
   "flagsFilesDescription": "Specify one or more flow File(s) to run",

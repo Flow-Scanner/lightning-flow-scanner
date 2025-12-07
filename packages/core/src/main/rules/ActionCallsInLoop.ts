@@ -4,7 +4,6 @@ export class ActionCallsInLoop extends LoopRuleCommon implements IRuleDefinition
   constructor() {
     super(
       {
-        autoFixable: false,
         description:
           "To prevent exceeding Apex governor limits, it is advisable to consolidate and bulkify your apex calls, utilize a single action call containing a collection variable at the end of the loop.",
         docRefs: [
@@ -13,7 +12,6 @@ export class ActionCallsInLoop extends LoopRuleCommon implements IRuleDefinition
             path: "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_annotation_InvocableMethod.htm",
           },
         ],
-        isConfigurable: false,
         label: "Action Call In Loop",
         name: "ActionCallsInLoop",
         supportedTypes: FlowType.backEndTypes,

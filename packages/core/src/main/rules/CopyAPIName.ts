@@ -10,8 +10,6 @@ export class CopyAPIName extends RuleCommon implements IRuleDefinition {
         "Maintaining multiple elements with a similar name, like 'Copy_X_Of_Element,' can diminish the overall readability of your Flow. When copying and pasting these elements, it's crucial to remember to update the API name of the newly created copy.",
       supportedTypes: core.FlowType.allTypes(),
       docRefs: [],
-      isConfigurable: false,
-      autoFixable: false,
     });
   }
   protected check(

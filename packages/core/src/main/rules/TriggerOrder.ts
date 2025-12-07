@@ -19,8 +19,6 @@ export class TriggerOrder extends RuleCommon implements IRuleDefinition {
             path: "https://architect.salesforce.com/decision-guides/trigger-automation#Ordering___Orchestration",
           },
         ],
-        isConfigurable: false,
-        autoFixable: false,
       },
       { severity: "note" }
     );
