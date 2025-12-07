@@ -2,9 +2,6 @@
   <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/LICENSE.md">
     <img src="https://img.shields.io/github/license/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="License">
   </a>
-  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/stargazers">
-    <img src="https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="GitHub stars">
-  </a>
   <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner.svg?style=flat-square" alt="Contributors">
   </a>
@@ -17,7 +14,10 @@
   <a href="https://open-vsx.org/extension/ForceConfigControl/lightning-flow-scanner-vsx">
     <img src="https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=Open%20VSX&style=flat-square" alt="Open VSX">
   </a>
-  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/stargazers">
+    <img src="https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="GitHub stars">
+  </a>
+  <a href="https://www.npmjs.com/package/lightning-flow-scanner-core">
     <img src="https://img.shields.io/badge/downloads-510k%2B-success?style=flat-square" alt="Total Downloads">
   </a>
 </p>
@@ -36,6 +36,9 @@
 </p>
 
 ---
+
+
+
 
 
 ## Table of contens
@@ -61,7 +64,7 @@ Lightning Flow Scanner VSX is plug-and-play. Open any project with flows and use
 
 | Extension Settings           | Description                                                         | Default Value |
 | ---------------------------- | ------------------------------------------------------------------- | ------------- |
-| `flowscanner.SpecifyFiles` | Set to true to select .Flow file paths instead of a root directory. | `true`     |
+| `flowscanner.SpecifyFiles` | Set to true to select .Flow file paths instead of a root directory. | `false`     |
 
 ## Default Rules
 
