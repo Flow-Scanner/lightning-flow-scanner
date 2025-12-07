@@ -1,7 +1,7 @@
 {
   "name": "@flow-scanner/lightning-flow-scanner-core",
   "description": "A lightweight engine for Flow metadata in Node.js, and browser environments. Assess and enhance Salesforce Flow automations for best practices, security, governor limits, and performance issues.",
-  "version": "6.6.4",
+  "version": "6.6.5",
   "main": "out/index.js",
   "exports": {
     ".": {
@@ -22,7 +22,7 @@
     "prepare:publish": "node ../../scripts/prepare-publish.js",
     "copy:root-files:dist": "node -e \"['../../LICENSE.md'].forEach(f => { const n = f.split('/').pop(); if (require('fs').existsSync(f)) require('fs').copyFileSync(f, 'dist/'+n) })\"",
     "____main____": "__DEVELOPER COMMANDS__",
-    "build": "npm run clean && npm run build:js && npm run build:types && npm run copy:media",
+    "build": "npm run clean && npm run build:js && npm run build:types && npm run copy:media && npm run prepare:publish",
     "test": "npm run test:umd",
     "test:node": "jest",
     "test:umd": "npm run build:js && vite build && npm run copy:root-files:dist && cross-env UMD_PATH=dist/lightning-flow-scanner-core.umd.js jest",
@@ -34,7 +34,7 @@
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
     "version:major": "npm version major",
-    "publish:npm": "npm run build && npm run prepare:publish && cd out && npm publish",
+    "publish:npm": "npm run build && cd out && npm publish",
     "publish:tag": "node ../../scripts/publish-tag.js ."
   },
   "license": "MIT",
