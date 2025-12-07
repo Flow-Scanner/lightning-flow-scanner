@@ -5,11 +5,9 @@ import { IRuleDefinition } from "../interfaces/IRuleDefinition";
 export class FlowDescription extends RuleCommon implements IRuleDefinition {
   constructor() {
     super({
-      autoFixable: false,
       description:
         "Descriptions play a vital role in documentation. We highly recommend including details about where they are used and their intended purpose.",
       docRefs: [],
-      isConfigurable: false,
       label: "Missing Flow Description",
       name: "FlowDescription",
       supportedTypes: [...core.FlowType.backEndTypes, ...core.FlowType.visualTypes],

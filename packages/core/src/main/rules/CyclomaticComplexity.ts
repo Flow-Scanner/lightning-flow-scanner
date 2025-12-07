@@ -19,8 +19,6 @@ export class CyclomaticComplexity extends RuleCommon implements IRuleDefinition 
             path: "https://en.wikipedia.org/wiki/Cyclomatic_complexity",
           },
         ],
-        isConfigurable: true,
-        autoFixable: false,
       },
       { severity: "note" }
     );

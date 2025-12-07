@@ -6,10 +6,8 @@ import { LoopRuleCommon } from "../../src/main/models/LoopRuleCommon";
 class TestLoopRule extends LoopRuleCommon {
   constructor() {
     super({
-      autoFixable: false,
       description: "Test Rule Description",
       docRefs: [],
-      isConfigurable: false,
       label: "Test Rule",
       name: "TestRule",
       supportedTypes: [],

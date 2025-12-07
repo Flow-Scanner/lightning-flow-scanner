@@ -16,8 +16,6 @@ export class ProcessBuilder extends RuleCommon implements IRuleDefinition {
           path: "https://help.salesforce.com/s/articleView?id=000389396&type=1",
         },
       ],
-      isConfigurable: true,
-      autoFixable: false,
     });
   }
 
