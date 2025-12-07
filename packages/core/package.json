@@ -3,12 +3,12 @@
   "description": "A lightweight engine for Flow metadata in Node.js, and browser environments. Assess and enhance Salesforce Flow automations for best practices, security, governor limits, and performance issues.",
   "version": "6.6.3",
   "main": "out/index.js",
-  "types": "out/index.d.ts",
   "exports": {
     ".": {
+      "types": "./out/index.d.ts",
       "import": "./out/index.js",
       "require": "./out/index.js",
-      "types": "./out/index.d.ts"
+      "default": "./out/index.js"
     }
   },
   "engines": {
