@@ -113,21 +113,21 @@ describe("Exceptions", () => {
           status: "Draft",
           type: "Flow",
           elements: [
-            { element: "61.0", subtype: "apiVersion", metaType: "metadata" },
-            { element: "Default", subtype: "environments", metaType: "metadata" },
+            { element: "61.0", subtype: "apiVersion", metaType: "attribute" },
+            { element: "Default", subtype: "environments", metaType: "attribute" },
             {
               element: "test {!$Flow.CurrentDateTime}",
               subtype: "interviewLabel",
-              metaType: "metadata",
+              metaType: "attribute",
             },
-            { element: "test", subtype: "label", metaType: "metadata" },
+            { element: "test", subtype: "label", metaType: "attribute" },
             {
               element: {
                 name: "BuilderType",
                 value: { stringValue: "LightningFlowBuilder" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -135,7 +135,7 @@ describe("Exceptions", () => {
                 value: { stringValue: "AUTO_LAYOUT_CANVAS" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -143,13 +143,13 @@ describe("Exceptions", () => {
                 value: { stringValue: "LightningFlowBuilder" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
-            { element: "Flow", subtype: "processType", metaType: "metadata" },
+            { element: "Flow", subtype: "processType", metaType: "attribute" },
             {
               element: "SystemModeWithoutSharing",
               subtype: "runInMode",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -190,7 +190,7 @@ describe("Exceptions", () => {
               locationX: "50",
               locationY: "0",
             },
-            { element: "Draft", subtype: "status", metaType: "metadata" },
+            { element: "Draft", subtype: "status", metaType: "attribute" },
           ],
           startReference: "testtest",
         } as Partial<core.Flow> as core.Flow,
@@ -327,21 +327,21 @@ describe("Exceptions", () => {
           status: "Draft",
           type: "Flow",
           elements: [
-            { element: "61.0", subtype: "apiVersion", metaType: "metadata" },
-            { element: "Default", subtype: "environments", metaType: "metadata" },
+            { element: "61.0", subtype: "apiVersion", metaType: "attribute" },
+            { element: "Default", subtype: "environments", metaType: "attribute" },
             {
               element: "test {!$Flow.CurrentDateTime}",
               subtype: "interviewLabel",
-              metaType: "metadata",
+              metaType: "attribute",
             },
-            { element: "test", subtype: "label", metaType: "metadata" },
+            { element: "test", subtype: "label", metaType: "attribute" },
             {
               element: {
                 name: "BuilderType",
                 value: { stringValue: "LightningFlowBuilder" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -349,7 +349,7 @@ describe("Exceptions", () => {
                 value: { stringValue: "AUTO_LAYOUT_CANVAS" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -357,13 +357,13 @@ describe("Exceptions", () => {
                 value: { stringValue: "LightningFlowBuilder" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
-            { element: "Flow", subtype: "processType", metaType: "metadata" },
+            { element: "Flow", subtype: "processType", metaType: "attribute" },
             {
               element: "SystemModeWithoutSharing",
               subtype: "runInMode",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -404,7 +404,7 @@ describe("Exceptions", () => {
               locationX: "50",
               locationY: "0",
             },
-            { element: "Draft", subtype: "status", metaType: "metadata" },
+            { element: "Draft", subtype: "status", metaType: "attribute" },
           ],
           startReference: "testtest",
         } as Partial<core.Flow> as core.Flow,
@@ -516,21 +516,21 @@ describe("Exceptions", () => {
           status: "Draft",
           type: "Flow",
           elements: [
-            { element: "61.0", subtype: "apiVersion", metaType: "metadata" },
-            { element: "Default", subtype: "environments", metaType: "metadata" },
+            { element: "61.0", subtype: "apiVersion", metaType: "attribute" },
+            { element: "Default", subtype: "environments", metaType: "attribute" },
             {
               element: "test {!$Flow.CurrentDateTime}",
               subtype: "interviewLabel",
-              metaType: "metadata",
+              metaType: "attribute",
             },
-            { element: "test", subtype: "label", metaType: "metadata" },
+            { element: "test", subtype: "label", metaType: "attribute" },
             {
               element: {
                 name: "BuilderType",
                 value: { stringValue: "LightningFlowBuilder" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -538,7 +538,7 @@ describe("Exceptions", () => {
                 value: { stringValue: "AUTO_LAYOUT_CANVAS" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -546,13 +546,13 @@ describe("Exceptions", () => {
                 value: { stringValue: "LightningFlowBuilder" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
-            { element: "Flow", subtype: "processType", metaType: "metadata" },
+            { element: "Flow", subtype: "processType", metaType: "attribute" },
             {
               element: "SystemModeWithoutSharing",
               subtype: "runInMode",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -593,7 +593,7 @@ describe("Exceptions", () => {
               locationX: "50",
               locationY: "0",
             },
-            { element: "Draft", subtype: "status", metaType: "metadata" },
+            { element: "Draft", subtype: "status", metaType: "attribute" },
           ],
           startReference: "testtest",
         } as Partial<core.Flow> as core.Flow,
@@ -705,21 +705,21 @@ describe("Exceptions", () => {
           status: "Draft",
           type: "Flow",
           elements: [
-            { element: "59.0", subtype: "apiVersion", metaType: "metadata" },
-            { element: "Default", subtype: "environments", metaType: "metadata" },
+            { element: "59.0", subtype: "apiVersion", metaType: "attribute" },
+            { element: "Default", subtype: "environments", metaType: "attribute" },
             {
               element: "test {!$Flow.CurrentDateTime}",
               subtype: "interviewLabel",
-              metaType: "metadata",
+              metaType: "attribute",
             },
-            { element: "test", subtype: "label", metaType: "metadata" },
+            { element: "test", subtype: "label", metaType: "attribute" },
             {
               element: {
                 name: "BuilderType",
                 value: { stringValue: "LightningFlowBuilder" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -727,7 +727,7 @@ describe("Exceptions", () => {
                 value: { stringValue: "AUTO_LAYOUT_CANVAS" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -735,13 +735,13 @@ describe("Exceptions", () => {
                 value: { stringValue: "LightningFlowBuilder" },
               },
               subtype: "processMetadataValues",
-              metaType: "metadata",
+              metaType: "attribute",
             },
-            { element: "Flow", subtype: "processType", metaType: "metadata" },
+            { element: "Flow", subtype: "processType", metaType: "attribute" },
             {
               element: "SystemModeWithoutSharing",
               subtype: "runInMode",
-              metaType: "metadata",
+              metaType: "attribute",
             },
             {
               element: {
@@ -782,7 +782,7 @@ describe("Exceptions", () => {
               locationX: "50",
               locationY: "0",
             },
-            { element: "Draft", subtype: "status", metaType: "metadata" },
+            { element: "Draft", subtype: "status", metaType: "attribute" },
           ],
           startReference: "testtest",
         } as Partial<core.Flow> as core.Flow,

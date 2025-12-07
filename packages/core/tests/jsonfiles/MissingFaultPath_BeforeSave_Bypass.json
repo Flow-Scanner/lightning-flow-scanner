@@ -52,23 +52,23 @@
       "status": "Draft",
       "type": "AutoLaunchedFlow",
       "elements": [
-        { "element": "62.0", "subtype": "apiVersion", "metaType": "metadata" },
-        { "element": "Default", "subtype": "environments", "metaType": "metadata" },
+        { "element": "62.0", "subtype": "apiVersion", "metaType": "attribute" },
+        { "element": "Default", "subtype": "environments", "metaType": "attribute" },
         {
           "element": "Test Flow {!$Flow.CurrentDateTime}",
           "subtype": "interviewLabel",
-          "metaType": "metadata"
+          "metaType": "attribute"
         },
-        { "element": "Test Flow", "subtype": "label", "metaType": "metadata" },
+        { "element": "Test Flow", "subtype": "label", "metaType": "attribute" },
         {
           "element": { "name": "BuilderType", "value": { "stringValue": "LightningFlowBuilder" } },
           "subtype": "processMetadataValues",
-          "metaType": "metadata"
+          "metaType": "attribute"
         },
         {
           "element": { "name": "CanvasMode", "value": { "stringValue": "AUTO_LAYOUT_CANVAS" } },
           "subtype": "processMetadataValues",
-          "metaType": "metadata"
+          "metaType": "attribute"
         },
         {
           "element": {
@@ -76,9 +76,9 @@
             "value": { "stringValue": "LightningFlowBuilder" }
           },
           "subtype": "processMetadataValues",
-          "metaType": "metadata"
+          "metaType": "attribute"
         },
-        { "element": "AutoLaunchedFlow", "subtype": "processType", "metaType": "metadata" },
+        { "element": "AutoLaunchedFlow", "subtype": "processType", "metaType": "attribute" },
         {
           "element": {
             "description": "test",
@@ -119,7 +119,7 @@
           "locationX": "50",
           "locationY": "0"
         },
-        { "element": "Draft", "subtype": "status", "metaType": "metadata" }
+        { "element": "Draft", "subtype": "status", "metaType": "attribute" }
       ],
       "startReference": "Update_triggering_records",
       "triggerOrder": 10

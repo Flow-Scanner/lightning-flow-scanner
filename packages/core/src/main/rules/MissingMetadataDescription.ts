@@ -23,7 +23,7 @@ export class MissingMetadataDescription extends RuleCommon implements IRuleDefin
     flow.elements
       .filter((elem) => {
         if (
-          elem.metaType !== "metadata" &&
+          elem.metaType !== "attribute" &&
           !elem.element["description"] &&
           elem.subtype !== "start"
         ) {

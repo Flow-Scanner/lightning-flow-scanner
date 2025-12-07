@@ -1,3 +1,4 @@
+import { MetaType } from "../enums/MetadataTypes";
 import { FlowElement } from "./FlowElement";
 import { FlowElementConnector } from "./FlowElementConnector";
 
@@ -8,7 +9,7 @@ export class FlowNode extends FlowElement {
   public name: string;
 
   constructor(provName: string, subtype: string, element: object) {
-    super("node", subtype, element);
+    super(MetaType.NODE, subtype, element);
     const nodeName = subtype === "start" ? "flowstart" : provName;
     this.name = nodeName;
     const connectors = this.getConnectors(subtype, element);

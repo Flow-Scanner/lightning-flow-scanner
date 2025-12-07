@@ -1,4 +1,4 @@
-import { MetaType } from "../enums/MetaType";
+import { MetaType } from "../enums/MetadataTypes";
 import { FlowElement } from "./FlowElement";
 
 export class FlowResource extends FlowElement {

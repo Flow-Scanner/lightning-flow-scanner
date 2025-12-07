@@ -40,7 +40,7 @@ export function FixFlows(flow: core.Flow, ruleResults: core.RuleResult[]): core.
 
   const nodesToKeep = flow.elements?.filter((node) => {
     switch (node.metaType) {
-      case "metadata":
+      case "attribute":
       case "resource":
         return true;
       case "node": {

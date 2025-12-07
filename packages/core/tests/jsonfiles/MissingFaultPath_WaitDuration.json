@@ -39,9 +39,9 @@
       "status": "Draft",
       "type": "AutoLaunchedFlow",
       "elements": [
-        { "element": "62.0", "subtype": "apiVersion", "metaType": "metadata" },
-        { "element": "Test Flow WaitDuration", "subtype": "label", "metaType": "metadata" },
-        { "element": "AutoLaunchedFlow", "subtype": "processType", "metaType": "metadata" },
+        { "element": "62.0", "subtype": "apiVersion", "metaType": "attribute" },
+        { "element": "Test Flow WaitDuration", "subtype": "label", "metaType": "attribute" },
+        { "element": "AutoLaunchedFlow", "subtype": "processType", "metaType": "attribute" },
         {
           "element": {
             "name": "Wait_5_Minutes",
@@ -82,7 +82,7 @@
           "locationX": "50",
           "locationY": "0"
         },
-        { "element": "Draft", "subtype": "status", "metaType": "metadata" }
+        { "element": "Draft", "subtype": "status", "metaType": "attribute" }
       ],
       "startReference": "Wait_5_Minutes"
     }

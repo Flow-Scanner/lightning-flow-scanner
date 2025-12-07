@@ -1,4 +1,4 @@
-import { MetaType } from "../enums/MetaType";
+import { MetaType } from "../enums/MetadataTypes";
 
 export class FlowAttribute {
   public name: string;
@@ -12,4 +12,3 @@ export class FlowAttribute {
     this.expression = expression;
   }
 }
-``
