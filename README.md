@@ -314,9 +314,10 @@ To see the full example, see [`scan-flows.yml`](https://github.com/Flow-Scanner/
 Use `lightning-flow-scanner` in the Salesforce CLI:
 
 ```bash
-sf flow:scan 
-sf flow:fix -d src/force-app
-sf flow:scan --sarif > report.sarif
+sf flow:scan # scan flows in current directory
+sf flow:fix -d src/force-app # fix flows in force-app directory
+sf flow:scan --sarif > report.sarif # get results as SARIF file
+sf flow scan --csv > results.csv # get results as CSV file
 ```
 
 ### VS Code Extension

@@ -134,9 +134,7 @@ export default class Scan extends SfCommand<Output> {
     } catch (err) {
       this.error(`Scan failed: ${(err as Error).message}`);
     }
-
     this.debug("Does every scanResult have fsPath?", scanResults.some(r => !r.flow?.fsPath));
-
     // ---- 6. Use exportDetails to get flattened results with line numbers ----
     const flatResults = exportDetails(scanResults, true); // includeDetails=true for full info
     

@@ -68,6 +68,7 @@ All default rules are applied automatically.
 sf flow:scan # scan flows in current directory
 sf flow:fix -d src/force-app # fix flows in force-app directory
 sf flow:scan --sarif > report.sarif # get results as SARIF file
+sf flow scan --csv > results.csv # get results as CSV file
 ```
 
 | Flag            | Alias | Description                                   | Example                             |
