@@ -302,7 +302,6 @@ New rules are introduced in Beta mode before being added to the default ruleset.
 
 ```
 
-
 ## Installation
 
 [![GitHub stars](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)](https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner)
@@ -363,10 +362,7 @@ npm install -g lightning-flow-scanner
    To link the module, run:
 
    ```bash
-   cd packages/cli
-   sf plugins link .
+   sf plugins link packages/cli
    ```
-
-
 
 <p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>

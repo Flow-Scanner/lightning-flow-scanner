@@ -402,11 +402,7 @@ parse("flows/*.xml").then(scan).then(exportSarif);
    node -i -e "import('@flow-scanner/lightning-flow-scanner-core').then(m => { Object.assign(global, m.default ? m.default : m); console.log('✅ Core loaded! Try: await parse(...), scan(...), etc.'); })"
    ```
 
-    Or test in a dependent project:
-
-    ```bash
-    npm link @flow-scanner/lightning-flow-scanner-core
-    ```
+    Or test in a dependent project with `npm link @flow-scanner/lightning-flow-scanner-core`
 
 6. Deploy Demo Flows (Optional):
 
