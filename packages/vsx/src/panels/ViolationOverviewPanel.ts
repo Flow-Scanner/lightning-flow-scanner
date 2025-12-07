@@ -1,9 +1,9 @@
 import { ScanOverview } from "./ScanOverviewPanel";
 import * as vscode from "vscode";
 import * as uuid from "uuid";
-import { convertArrayToCSV } from "convert-array-to-csv";
 import { exportSarif, ScanResult } from "@flow-scanner/lightning-flow-scanner-core";
 import { CacheProvider } from "../providers/cache-provider";
+import { convertArrayToCSV } from "../libs/convertArrayToCSV";
 
 export class ViolationOverview {
   public static currentPanel: ViolationOverview | undefined;
@@ -136,13 +136,13 @@ export class ViolationOverview {
           if (!formatChoice) return;
 
           const chosenFormat = formatChoice.value;
-          const filterKey = chosenFormat === "sarif" ? "sarif" : "csv";
-          const filterExt = chosenFormat === "sarif" ? ".sarif" : ".csv";
+          const filterExt = chosenFormat === "sarif" ? "sarif" : "csv";
+          const filterLabel = chosenFormat === "sarif" ? "SARIF" : "CSV";
 
           const defaultUri = vscode.workspace.workspaceFolders?.[0]?.uri;
           const saveResult = await vscode.window.showSaveDialog({
             defaultUri,
-            filters: { [filterKey]: [filterExt] },
+            filters: { [filterLabel]: [filterExt] }, // Remove the dot from extension
             title: `Save ${chosenFormat.toUpperCase()} file`,
           });
 

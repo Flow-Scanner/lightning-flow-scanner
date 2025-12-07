@@ -29,26 +29,25 @@ We actively track and maintain an up-to-date inventory of all third-party depend
 | Package                             | License | Purpose |
 | ----------------------------------- | ------- | ------- |
 | `@oclif/core`                        | [MIT](https://github.com/oclif/oclif/blob/main/LICENSE) | CLI framework core utilities |
-| `@salesforce/core`                   | [BSD-3-Clause](https://github.com/salesforce/core/blob/main/LICENSE) | Salesforce core library for CLI plugins |
-| `@salesforce/sf-plugins-core`       | [BSD-3-Clause](https://github.com/salesforce/sf-plugins-core/blob/main/LICENSE) | Base library for Salesforce CLI plugins |
+| `@salesforce/core`                   | [BSD-3-Clause](https://github.com/forcedotcom/sfdx-core/blob/main/LICENSE.txt) | Salesforce core library for CLI plugins |
+| `@salesforce/sf-plugins-core`       | [Apache License 2.0](https://github.com/salesforcecli/sf-plugins-core/blob/main/LICENSE.txt) | Base library for Salesforce CLI plugins |
 | `chalk`                              | [MIT](https://github.com/chalk/chalk/blob/main/license) | Terminal string styling (colors) |
-| `cosmiconfig`                        | [MIT](https://github.com/davidtheclark/cosmiconfig/blob/main/LICENSE) | Config file loader for JavaScript/Node |
-| `glob`                               | [MIT](https://github.com/isaacs/node-glob/blob/master/LICENSE) | File pattern matching |
-
-### Action
-
-| Package                         | License                                                                         | Purpose                                     |
-| ------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------- |
-| `@actions/core`               | [MIT](https://github.com/actions/toolkit/blob/main/packages/core/LICENSE)          | Toolkit for developing GitHub Actions       |
-| `@actions/github`             | [MIT](https://github.com/actions/toolkit/blob/main/packages/github/LICENSE)        | Interact with the GitHub API in Actions     |
-| `cosmiconfig`                        | [MIT](https://github.com/davidtheclark/cosmiconfig/blob/main/LICENSE) | Config file loader for JavaScript/Node |
+| `cosmiconfig`                        | [MIT](https://github.com/cosmiconfig/cosmiconfig/blob/main/LICENSE) | Config file loader for JavaScript/Node |
+| `glob`                               | [MIT](https://github.com/isaacs/node-glob/blob/main/LICENSE.md) | File pattern matching |
 
 ### VSX
 
 | Package                         | License                                                                              | Purpose`                                       |
 | ------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------- |
-| `convert-array-to-csv`        | [MIT](https://github.com/zemirco/convert-array-to-csv/blob/master/LICENSE)              | Converts JavaScript arrays into CSV format     |
+| `cosmiconfig`                        | [MIT](https://github.com/cosmiconfig/cosmiconfig/blob/main/LICENSE) | Config file loader for JavaScript/Node |
+| `glob`                               | [MIT](https://github.com/isaacs/node-glob/blob/main/LICENSE.md) | File pattern matching |
 | `tabulator-tables`            | [MIT](https://github.com/olifolkerd/tabulator/blob/master/LICENSE)                      | Interactive tables and data grids for web apps |
 | `uuid`                        | [MIT](https://github.com/uuidjs/uuid/blob/main/LICENSE.md)                              | Generates RFC-compliant UUIDs                  |
-| `cosmiconfig`                        | [MIT](https://github.com/davidtheclark/cosmiconfig/blob/main/LICENSE) | Config file loader for JavaScript/Node |
-| `glob`                               | [MIT](https://github.com/isaacs/node-glob/blob/master/LICENSE) | File pattern matching |
+
+### Action
+
+| Package                         | License                                                                         | Purpose                                     |
+| ------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------- |
+| `@actions/core`               | [MIT](https://github.com/actions/toolkit/blob/main/packages/github/LICENSE)          | Toolkit for developing GitHub Actions       |
+| `@actions/github`             | [MIT](https://github.com/actions/toolkit/blob/main/packages/github/LICENSE)        | Interact with the GitHub API in Actions     |
+| `cosmiconfig`                        | [MIT](https://github.com/cosmiconfig/cosmiconfig/blob/main/LICENSE) | Config file loader for JavaScript/Node |

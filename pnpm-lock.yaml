@@ -226,9 +226,6 @@ importers:
       '@flow-scanner/lightning-flow-scanner-core':
         specifier: workspace:*
         version: link:../core
-      convert-array-to-csv:
-        specifier: ^2.0.0
-        version: 2.0.0
       cosmiconfig:
         specifier: ^9.0.0
         version: 9.0.0(typescript@4.9.5)
@@ -4136,9 +4133,6 @@ packages:
   content-type@1.0.5:
     resolution: {integrity: sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==}
     engines: {node: '>= 0.6'}
-
-  convert-array-to-csv@2.0.0:
-    resolution: {integrity: sha512-dxUINCt28k6WbXGMoB+AaKjGY0Y6GkKwZmT+kvD4nJgVCOKsnIQ3G6n0v2II1lG4NwXQk6EWZ+pPDub9wcqqMg==}
 
   convert-source-map@1.9.0:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
@@ -13070,8 +13064,6 @@ snapshots:
       safe-buffer: 5.2.1
 
   content-type@1.0.5: {}
-
-  convert-array-to-csv@2.0.0: {}
 
   convert-source-map@1.9.0: {}
 
