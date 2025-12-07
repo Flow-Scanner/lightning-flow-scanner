@@ -18,7 +18,6 @@ import { Violation } from "../models/Violation";
 
 // Used to prevent circular dependencies in Common JS
 export {
-  FlatViolation,
   FlowAttribute,
   FlowElement,
   FlowNode,
@@ -33,4 +32,4 @@ export {
   RuleCommon,
   ParsedFlow,
 };
-export type { IRuleDefinition, IRulesConfig };
+export type { IRuleDefinition, IRulesConfig, FlatViolation };
