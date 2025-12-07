@@ -248,6 +248,7 @@ export default class Scan extends SfCommand<Output> {
           name: r.name,
           severity: r.severity,
           line: r.lineNumber,
+          column: r.columnNumber,
         });
       }
 
@@ -263,7 +264,7 @@ export default class Scan extends SfCommand<Output> {
           this.log("");
           this.table({
             data: resultsByFlow[flowName],
-            columns: ["rule", "type", "name", "severity", "line"],
+            columns: ["rule", "type", "name", "severity", "line", "column"],
           });
           this.log("");
         }
