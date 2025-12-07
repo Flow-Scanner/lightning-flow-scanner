@@ -1,8 +1,10 @@
+import { MetaType } from "../enums/MetaType";
+
 export class FlowAttribute {
   public name: string;
   public subtype: string;
   public expression?: string;
-  public metaType = "attribute";
+  public metaType: MetaType = MetaType.ATTRIBUTE;
 
   constructor(name: string, subtype: string, expression?: string) {
     this.name = name;
@@ -10,3 +12,4 @@ export class FlowAttribute {
     this.expression = expression;
   }
 }
+``
