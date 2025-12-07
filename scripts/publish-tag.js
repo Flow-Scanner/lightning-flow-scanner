@@ -1,26 +1,37 @@
+// scripts/publish-tag.js   ← SAVE HERE IN ROOT
 const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
-// Determine which package to tag based on current directory or argument
-const packagePath = process.argv[2] || process.cwd();
-const pkgJsonPath = path.join(packagePath, 'package.json');
+// This is the ONLY path that works in your fresh clone
+const pkgPath = path.join(__dirname, '..', 'packages', 'core', 'package.json');
 
-if (!fs.existsSync(pkgJsonPath)) {
-  console.error('package.json not found at:', pkgJsonPath);
+if (!fs.existsSync(pkgPath)) {
+  console.error('ERROR: Cannot find packages/core/package.json');
+  console.error('Expected path:', pkgPath);
   process.exit(1);
 }
 
-const { version } = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
-
-// Always use "core-v" prefix for core package
+const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+const version = pkg.version;
 const tag = `core-v${version}`;
 
+console.log(`Creating core tag: ${tag}`);
+
 try {
-  execSync(`git tag ${tag}`, { stdio: 'inherit' });
-  execSync('git push --tags', { stdio: 'inherit' });
-  console.log(`✓ Tagged and pushed ${tag}`);
-} catch (error) {
-  console.error('Failed to tag and push');
+  // Delete old tag — FULLY IGNORE ANY ERROR (Windows + tag doesn't exist)
+  try {
+    execSync(`git tag -d "${tag}"`, { stdio: 'ignore' });
+  } catch (_) {}
+
+  // Create tag
+  execSync(`git tag "${tag}"`, { stdio: 'inherit' });
+
+  // Push ONLY this tag
+  execSync(`git push origin "${tag}" --force`, { stdio: 'inherit' });
+
+  console.log(`${tag} created and pushed successfully!`);
+} catch (err) {
+  console.error('Failed to create tag:', err.message);
   process.exit(1);
 }
