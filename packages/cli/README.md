@@ -43,6 +43,7 @@
 
 
 
+
 ## Table of contens
 
 - **[Usage](#usage)**
@@ -301,6 +302,7 @@ New rules are introduced in Beta mode before being added to the default ruleset.
 }
 
 ```
+
 
 ## Installation
 
