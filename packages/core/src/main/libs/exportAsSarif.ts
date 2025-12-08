@@ -83,6 +83,6 @@ function mapSeverity(sev: string): "error" | "note" | "warning" {
     case "info":
     case "note": return "note";
     case "warning": return "warning";
-    default: return "error";
+    default: return "warning";
   }
 }

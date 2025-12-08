@@ -19,7 +19,7 @@ describe("UnsafeRunningContext", () => {
     const ruleResult: core.RuleResult = unsafeRunningContext.execute(parsed.flow as core.Flow);
     expect(ruleResult.occurs).toBe(true);
     expect(ruleResult.details).not.toHaveLength(0);
-    expect(ruleResult.ruleDefinition.severity).toBe("warning");
+    expect(ruleResult.ruleDefinition.severity).toBe("error");
   });
 
   it("should not have a scan result for with sharing system mode", async () => {

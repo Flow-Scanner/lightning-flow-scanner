@@ -22,7 +22,7 @@ export class HardcodedUrl extends RuleCommon implements IRuleDefinition {
         name: "HardcodedUrl",
         supportedTypes: FlowType.allTypes(),
       },
-      { severity: "warning" }
+      { severity: "error" }
     );
   }
 

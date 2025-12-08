@@ -18,7 +18,7 @@ export function exportDetails(results: ScanResult[], includeDetails = false): Fl
           flowFile,
           flowName,
           ruleName: rule.ruleDefinition.label || rule.ruleName,  // TODO: replace with id
-          severity: rule.severity ?? "error",
+          severity: rule.severity ?? "warning",
         };
         return exported;
       }));

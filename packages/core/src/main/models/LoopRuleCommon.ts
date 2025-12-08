@@ -4,8 +4,8 @@ import { RuleCommon } from "./RuleCommon";
 import { RuleInfo } from "./RuleInfo";
 
 export abstract class LoopRuleCommon extends RuleCommon implements IRuleDefinition {
-  constructor(info: RuleInfo) {
-    super(info);
+  constructor(info: RuleInfo, optional?: { severity?: string }) {
+    super(info, optional);
   }
 
   protected check(
@@ -17,12 +17,10 @@ export abstract class LoopRuleCommon extends RuleCommon implements IRuleDefiniti
     if (!loopElements.length) {
       return [];
     }
-
     const statementsInLoops = this.findStatementsInLoops(flow, loopElements);
     const results = statementsInLoops
       .filter(det => !suppressions.has(det.name))
       .map(det => new Violation(det));
-
     return results;
   }
 
@@ -44,12 +42,10 @@ export abstract class LoopRuleCommon extends RuleCommon implements IRuleDefiniti
         statementsInLoops.push(element);
       }
     };
-
     for (const element of loopElements) {
       const loopEnd = this.findLoopEnd(element);
       new Compiler().traverseFlow(flow, element.name, findStatement, loopEnd);
     }
-
     return statementsInLoops;
   }
 }

@@ -15,8 +15,7 @@ export class ActionCallsInLoop extends LoopRuleCommon implements IRuleDefinition
         label: "Action Call In Loop",
         name: "ActionCallsInLoop",
         supportedTypes: FlowType.backEndTypes,
-      }
-    );
+      }, { severity: "error" });
   }
   protected getStatementTypes(): string[] {
     return ["actionCalls", "apexPluginCalls"];

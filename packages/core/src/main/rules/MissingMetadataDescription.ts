@@ -10,7 +10,7 @@ export class MissingMetadataDescription extends RuleCommon implements IRuleDefin
       label: "Missing Metadata Description",
       name: "MissingMetadataDescription",
       supportedTypes: core.FlowType.allTypes(),
-    });
+    }, { severity: "error" });
   }
 
   protected check(

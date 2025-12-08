@@ -15,7 +15,7 @@ export class DMLStatementInLoop extends LoopRuleCommon implements IRuleDefinitio
       label: "DML Statement In A Loop",
       name: "DMLStatementInLoop",
       supportedTypes: FlowType.backEndTypes,
-    });
+    }, { severity: "error" });
   }
 
   protected getStatementTypes(): string[] {

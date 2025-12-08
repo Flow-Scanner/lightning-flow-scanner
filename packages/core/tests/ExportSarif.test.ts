@@ -27,7 +27,7 @@ describe("exportSarif()", () => {
     const resultsArray = json.runs[0].results;
     expect(resultsArray).toHaveLength(1);
     expect(resultsArray[0].ruleId).toBe("DMLStatementInLoop");
-    expect(resultsArray[0].level).toBe("error");
+    expect(resultsArray[0].level).toBe("warning");
     // Location: has region
     const region = resultsArray[0].locations[0].physicalLocation.region;
     expect(region).toBeDefined();

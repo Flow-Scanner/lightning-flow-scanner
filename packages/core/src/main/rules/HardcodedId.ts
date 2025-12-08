@@ -20,7 +20,7 @@ export class HardcodedId extends RuleCommon implements IRuleDefinition {
           path: "https://www.linkedin.com/feed/update/urn:li:activity:6947530300012826624/",
         },
       ],
-    });
+    }, { severity: "error" });
   }
 
   protected check(

@@ -10,7 +10,7 @@ export class AutoLayout extends RuleCommon implements IRuleDefinition {
         "With Canvas Mode set to Auto-Layout, Elements are spaced, connected, and aligned automatically, keeping your Flow neatly organized thus saving you time.",
       supportedTypes: core.FlowType.allTypes(),
       docRefs: [],
-    });
+    }, { severity: "note" });
   }
   
   protected check(

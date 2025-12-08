@@ -15,7 +15,7 @@ export class SOQLQueryInLoop extends LoopRuleCommon implements IRuleDefinition {
       label: "SOQL Query In A Loop",
       name: "SOQLQueryInLoop",
       supportedTypes: FlowType.backEndTypes,
-    });
+    }, { severity: "error" });
   }
 
   protected getStatementTypes(): string[] {

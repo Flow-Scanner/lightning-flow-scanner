@@ -16,7 +16,7 @@ export class UnsafeRunningContext extends RuleCommon implements IRuleDefinition 
           path: "https://help.salesforce.com/s/articleView?id=sf.flow_distribute_context_data_safety_system_context.htm&type=5",
         },
       ],
-    }, { severity: "warning" });
+    }, { severity: "error" });
   }
 
   protected check(

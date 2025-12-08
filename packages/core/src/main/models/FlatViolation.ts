@@ -5,4 +5,9 @@ export interface FlatViolation extends Omit<Violation, 'details'> {
   flowName: string;
   ruleName: string;
   severity: string;
+  dataType?: string;
+  locationX?: string;
+  locationY?: string;
+  connectsTo?: string;
+  expression?: string;
 }

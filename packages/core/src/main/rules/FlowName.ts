@@ -16,7 +16,7 @@ export class FlowName extends RuleCommon implements IRuleDefinition {
       label: "Flow Naming Convention",
       name: "FlowName",
       supportedTypes: core.FlowType.allTypes(),
-    });
+    }, { severity: "error" });
   }
 
   protected check(

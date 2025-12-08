@@ -11,7 +11,7 @@ export class FlowDescription extends RuleCommon implements IRuleDefinition {
       label: "Missing Flow Description",
       name: "FlowDescription",
       supportedTypes: [...core.FlowType.backEndTypes, ...core.FlowType.visualTypes],
-    });
+    }, { severity: "error" });
   }
 
   protected check(
