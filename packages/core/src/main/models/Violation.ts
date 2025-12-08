@@ -1,3 +1,4 @@
+import { MetaType } from "../enums/MetadataTypes";
 import { Flow } from "./Flow";
 import { FlowAttribute } from "./FlowAttribute";
 import { FlowElement } from "./FlowElement";
@@ -20,17 +21,17 @@ export class Violation {
     this.columnNumber = 1;       // Default; will be overwritten by enrich if found
 
     // Conditionally populate details only if needed (e.g., via config flag later)
-    if (violation.metaType === "variable") {
+    if (violation.metaType === MetaType.VARIABLE) {
       const element = violation as FlowVariable;
       this.details = { dataType: element.dataType };
-    } else if (violation.metaType === "node") {
+    } else if (violation.metaType === MetaType.NODE) {
       const element = violation as FlowNode;
       this.details = {
         connectsTo: element.connectors?.map((connector) => connector.reference),
         locationX: element.locationX,
         locationY: element.locationY,
       };
-    } else if (violation.metaType === "attribute") {
+    } else if (violation.metaType === MetaType.ATTRIBUTE) {
       const element = violation as FlowAttribute;
       this.details = { expression: element.expression };
     }
@@ -48,7 +49,7 @@ export function enrichViolationsWithLineNumbers(
   const flowLevelTags = Flow.ATTRIBUTE_TAGS;
   for (const violation of violations) {
     // For flow elements (nodes, variables, resources), search by <name> tag
-    if (violation.metaType !== 'attribute') {
+    if (violation.metaType !== MetaType.ATTRIBUTE) {
       for (let i = 0; i < lines.length; i++) {
         if (lines[i].includes(`<name>${violation.name}</name>`)) {
           violation.lineNumber = i + 1;
@@ -57,9 +58,8 @@ export function enrichViolationsWithLineNumbers(
         }
       }
     }
-   
     // For flow-level attributes, search by the XML tag if it exists
-    if (violation.metaType === 'attribute') {
+    if (violation.metaType === MetaType.ATTRIBUTE) {
       const tagName = violation.type;
      
       // Only search if it's an actual XML tag (type assertion for literal check)
