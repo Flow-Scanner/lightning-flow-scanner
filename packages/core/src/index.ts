@@ -3,8 +3,8 @@ import type { IRulesConfig } from "./main/interfaces/IRulesConfig";
 import type { FlatViolation } from "./main/models/FlatViolation";
 
 import { Compiler } from "./main/libs/Compiler";
-import { exportDetails } from "./main/libs/exportAsDetails";
-import { exportSarif } from "./main/libs/exportAsSarif";
+import { exportDetails } from "./main/libs/ExportDetails";
+import { exportSarif } from "./main/libs/ExportSarif";
 import { fix } from "./main/libs/FixFlows";
 import { getRules } from "./main/libs/GetRuleDefinitions";
 import { parse } from "./main/libs/ParseFlows";
