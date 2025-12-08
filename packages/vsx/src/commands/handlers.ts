@@ -133,7 +133,7 @@ export default class Commands {
       const def = allRules.find(r => r.name === item.description)!;
       const existing = rules[def.name];
       newRules[def.name] = {
-        severity: existing?.severity || 'error',
+        severity: existing?.severity || def.severity || 'warning',
         expression: existing?.expression,
       };
     }
