@@ -1,9 +1,9 @@
 {
-  "version": "1.0.0",
+  "version": "0.2.0",
   "configurations": [
     {
-      "command": "npm test",
-      "name": "Run npm test",
+      "command": "pnpm test",
+      "name": "Run pnpm test",
       "request": "launch",
       "type": "node-terminal"
     },
@@ -11,6 +11,7 @@
       "type": "node",
       "name": "vscode-jest-tests.v2.lightning-flow-scanner-core",
       "request": "launch",
+      "runtimeExecutable": "pnpm",
       "args": [
         "test",
         "--",
@@ -21,10 +22,13 @@
         "--runTestsByPath",
         "${jest.testFile}"
       ],
-      "cwd": "${workspaceRoot}",
+      "cwd": "${workspaceFolder}\\packages\\core",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "runtimeExecutable": "npm"
+      "skipFiles": [
+        "${workspaceFolder}\\node_modules\\**\\*",
+        "<node_internals>/**/*"
+      ]
     }
   ]
 }
