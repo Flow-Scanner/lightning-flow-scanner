@@ -2,7 +2,17 @@ node_modules/
 *.log
 .DS_Store
 .turbo
-packages/cli/LICENSE.md
 *.vsix
-# Allow VSCode extension dist (required for extension)
-!packages/vsx/dist/
+
+# Ignore documentation and license files in packages
+packages/core/LICENSE.md
+packages/core/CONTRIBUTING.md
+packages/core/SECURITY.md
+packages/core/README.md
+packages/cli/LICENSE.md
+packages/cli/CONTRIBUTING.md
+packages/cli/SECURITY.md
+packages/cli/README.md
+# Ignore Salesforce DX generated files
+assets/example-flows/.sf/
+assets/example-flows/.sfdx/
