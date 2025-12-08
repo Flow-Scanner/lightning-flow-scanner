@@ -45,7 +45,7 @@ export function enrichViolationsWithLineNumbers(
   if (!flowXml || violations.length === 0) return;
   const lines = flowXml.split("\n");
   // Flow-level XML tags (same as Flow.flowMetadata)
-  const flowLevelTags = Flow.FLOW_METADATA_TAGS;
+  const flowLevelTags = Flow.ATTRIBUTE_TAGS;
   for (const violation of violations) {
     // For flow elements (nodes, variables, resources), search by <name> tag
     if (violation.metaType !== 'attribute') {

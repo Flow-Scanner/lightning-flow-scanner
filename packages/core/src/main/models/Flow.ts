@@ -8,9 +8,9 @@ import { FlowVariable } from "./FlowVariable";
 
 export class Flow {
   /**
-   * Metadata Tags of Salesforce Flow Elements
+   * Metadata Tags of Salesforce Flow Attributes
    */
-  public static readonly FLOW_METADATA_TAGS = [
+  public static readonly ATTRIBUTE_TAGS = [
     "description", "apiVersion", "processMetadataValues", "processType",
     "interviewLabel", "label", "status", "runInMode", "startElementReference",
     "isTemplate", "fullName", "timeZoneSidKey",
@@ -18,9 +18,9 @@ export class Flow {
     "triggerOrder", "environments", "segment",
   ] as const;
   /**
-   * Categorized flow contents that should be used in the rule implementation
+   * Metadata Tags of Salesforce Flow Nodes
    */
-  public static readonly FLOW_NODES = [
+  public static readonly NODE_TAGS = [
     "actionCalls",
     "apexPluginCalls",
     "assignments",
@@ -41,11 +41,8 @@ export class Flow {
     "transforms",
     "customErrors",
   ] as const;
-  public static readonly FLOW_RESOURCES = ["textTemplates", "stages"] as const;
-  public static readonly FLOW_VARIABLES = ["choices", "constants", "dynamicChoiceSets", "formulas", "variables"] as const;
-  /**
-   * Categorized flow contents that should be used in the rule implementation
-   */
+  public static readonly RESOURCE_TAGS = ["textTemplates", "stages"] as const;
+  public static readonly VARIABLE_TAGS = ["choices", "constants", "dynamicChoiceSets", "formulas", "variables"] as const;
   public elements?: FlowElement[];
   public fsPath?: string;
   public uri?: string;  // General source URI/path (file or virtual); set from constructor input
@@ -120,7 +117,7 @@ export class Flow {
         continue;
       }
       const data = this.xmldata[nodeType];
-      if (Flow.FLOW_METADATA_TAGS.includes(nodeType as any)) {
+      if (Flow.ATTRIBUTE_TAGS.includes(nodeType as any)) {
         if (Array.isArray(data)) {
           for (const node of data) {
             allNodes.push(new FlowMetadata(node.name, nodeType, node));
@@ -128,7 +125,7 @@ export class Flow {
         } else {
           allNodes.push(new FlowMetadata(data.name, nodeType, data));
         }
-      } else if (Flow.FLOW_VARIABLES.includes(nodeType as any)) {
+      } else if (Flow.VARIABLE_TAGS.includes(nodeType as any)) {
         if (Array.isArray(data)) {
           for (const node of data) {
             allNodes.push(new FlowVariable(node.name, nodeType, node));
@@ -136,7 +133,7 @@ export class Flow {
         } else {
           allNodes.push(new FlowVariable(data.name, nodeType, data));
         }
-      } else if (Flow.FLOW_NODES.includes(nodeType as any)) {
+      } else if (Flow.NODE_TAGS.includes(nodeType as any)) {
         if (Array.isArray(data)) {
           for (const node of data) {
             allNodes.push(new FlowNode(node.name, nodeType, node));
@@ -144,7 +141,7 @@ export class Flow {
         } else {
           allNodes.push(new FlowNode(data.name, nodeType, data));
         }
-      } else if (Flow.FLOW_RESOURCES.includes(nodeType as any)) {
+      } else if (Flow.RESOURCE_TAGS.includes(nodeType as any)) {
         if (Array.isArray(data)) {
           for (const node of data) {
             allNodes.push(new FlowResource(node.name, nodeType, node));
