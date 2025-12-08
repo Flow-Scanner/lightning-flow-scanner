@@ -1,14 +1,11 @@
 import { MetaType } from "../enums/MetadataTypes";
+import { FlowElement } from "./FlowElement";
 
-export class FlowAttribute {
-  public name: string;
-  public subtype: string;
+export class FlowAttribute extends FlowElement {
   public expression?: string;
-  public metaType: MetaType = MetaType.ATTRIBUTE;
 
   constructor(name: string, subtype: string, expression?: string) {
-    this.name = name;
-    this.subtype = subtype;
+    super(MetaType.ATTRIBUTE, subtype, name);  // No element passed, or pass {} if needed
     this.expression = expression;
   }
 }

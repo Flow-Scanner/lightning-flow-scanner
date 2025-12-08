@@ -12,8 +12,8 @@ export class Violation {
   public name: string;
   public type: string;
 
-  constructor(violation: FlowAttribute | FlowElement) {
-    this.name = violation.name as string;
+  constructor(violation: FlowElement) {
+    this.name = violation.name;
     this.metaType = violation.metaType;
     this.type = violation.subtype;
     this.lineNumber = 1;         // Default; will be overwritten by enrich if found

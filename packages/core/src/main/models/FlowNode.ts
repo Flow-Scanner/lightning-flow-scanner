@@ -6,12 +6,10 @@ export class FlowNode extends FlowElement {
   public connectors: FlowElementConnector[] = [];
   public locationX: string;
   public locationY: string;
-  public name: string;
 
   constructor(provName: string, subtype: string, element: object) {
-    super(MetaType.NODE, subtype, element);
     const nodeName = subtype === "start" ? "flowstart" : provName;
-    this.name = nodeName;
+    super(MetaType.NODE, subtype, nodeName, element);
     const connectors = this.getConnectors(subtype, element);
     this.connectors = connectors;
     this.locationX = element["locationX"];

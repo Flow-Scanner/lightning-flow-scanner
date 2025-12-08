@@ -123,10 +123,10 @@ export class Flow {
       if (Flow.FLOW_METADATA_TAGS.includes(nodeType as any)) {
         if (Array.isArray(data)) {
           for (const node of data) {
-            allNodes.push(new FlowMetadata(nodeType, node));
+            allNodes.push(new FlowMetadata(node.name, nodeType, node));
           }
         } else {
-          allNodes.push(new FlowMetadata(nodeType, data));
+          allNodes.push(new FlowMetadata(data.name, nodeType, data));
         }
       } else if (Flow.FLOW_VARIABLES.includes(nodeType as any)) {
         if (Array.isArray(data)) {
