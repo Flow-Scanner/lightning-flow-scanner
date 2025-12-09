@@ -16,6 +16,7 @@ describe("MissingFaultPath", () => {
   it("should return a result for MissingFaultPath when fault path is missing", async () => {
     const flows: Flow[] = await parse([exampleUri]);
     const config = {
+      ruleMode: "isolated",
       rules: { MissingFaultPath: { severity: "error" } },
     };
     const results: ScanResult[] = scan(flows, config);
@@ -38,6 +39,7 @@ describe("MissingFaultPath", () => {
     process.env.IS_NEW_SCAN_ENABLED = "true";
     const flows: Flow[] = await parse([exampleUri]);
     const config = {
+      ruleMode: "isolated",
       rules: {
         MissingFaultPath: { severity: "error", suppressions: ["LogACall"] },
       },

@@ -6,6 +6,7 @@ describe("exportSarif()", () => {
   const badFlowPath = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/demo/DML_Statement_In_A_Loop.flow-meta.xml");
   const goodFlowPath = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/testing/Duplicate_DML_Operation_Fixed.flow-meta.xml");
   const config = {
+    ruleMode: "isolated",
     rules: {
       DMLStatementInLoop: { severity: "error" },
     },

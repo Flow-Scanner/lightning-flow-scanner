@@ -11,6 +11,7 @@ describe("DuplicateDMLOperation  ", () => {
     const flows = await core.parse([example_uri]);
 
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         DuplicateDMLOperation: {
           severity: "error",
@@ -27,6 +28,7 @@ describe("DuplicateDMLOperation  ", () => {
     const flows = await core.parse([fixed_uri]);
 
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         DuplicateDMLOperation: {
           severity: "error",

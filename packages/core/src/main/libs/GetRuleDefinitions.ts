@@ -9,45 +9,86 @@ export function GetRuleDefinitions(
 ): IRuleDefinition[] {
   const selectedRules: IRuleDefinition[] = [];
   const includeBeta = options?.betaMode === true || options?.betamode === true;
+  
+  // Default to "merged" mode for backward compatibility
+  const rulesMode = options?.ruleMode || "merged";
 
-  if (ruleConfig && ruleConfig instanceof Map) {
+  // In "isolated" mode, only load rules that are explicitly configured
+  if (rulesMode === "isolated" && ruleConfig && ruleConfig.size > 0) {
     for (const ruleName of ruleConfig.keys()) {
-      let severity = "warning";
       try {
-        const configuredSeverity = ruleConfig.get(ruleName)?.["severity"];
+        const customConfig = ruleConfig.get(ruleName);
+        
+        // Skip if explicitly disabled
+        if (customConfig && customConfig["enabled"] === false) {
+          continue;
+        }
+
+        // Create the rule instance
+        const matchedRule = new DynamicRule(ruleName, includeBeta) as IRuleDefinition;
+
+        // Apply custom severity if provided
+        const configuredSeverity = customConfig?.["severity"];
         if (
           configuredSeverity &&
           (configuredSeverity === "error" ||
            configuredSeverity === "warning" ||
            configuredSeverity === "note")
         ) {
-          severity = configuredSeverity;
+          matchedRule.severity = configuredSeverity;
         }
 
-        // Pass betaMode to DynamicRule
-        const matchedRule = new DynamicRule(ruleName, includeBeta) as IRuleDefinition;
-        if (configuredSeverity) matchedRule.severity = severity;
         selectedRules.push(matchedRule);
-
       } catch (error) {
         console.log(error.message);
       }
     }
-  } else {
-    // Load all defaults
-    for (const rule in DefaultRuleStore) {
-      const matchedRule = new DynamicRule(rule, includeBeta) as IRuleDefinition;
-      selectedRules.push(matchedRule);
+    return selectedRules;
+  }
+
+  // In "merged" mode (default), start with all default rules and merge with config
+  const allRuleNames = new Set<string>();
+  
+  // Add all default rules
+  for (const ruleName in DefaultRuleStore) {
+    allRuleNames.add(ruleName);
+  }
+
+  // Add beta rules if beta mode is enabled
+  if (includeBeta) {
+    for (const ruleName in BetaRuleStore) {
+      allRuleNames.add(ruleName);
     }
   }
 
-  // Optionally add beta-only rules that are not in defaults
-  if (includeBeta) {
-    for (const betaRuleName in BetaRuleStore) {
-      if (!selectedRules.some(r => r.name === betaRuleName)) {
-        const betaRule = new DynamicRule(betaRuleName, true) as IRuleDefinition;
-        selectedRules.push(betaRule);
+  // Process each rule
+  for (const ruleName of allRuleNames) {
+    try {
+      // Check if there's a custom config for this rule
+      const customConfig = ruleConfig?.get(ruleName);
+      
+      // Skip if explicitly disabled
+      if (customConfig && customConfig["enabled"] === false) {
+        continue;
       }
+
+      // Create the rule instance
+      const matchedRule = new DynamicRule(ruleName, includeBeta) as IRuleDefinition;
+
+      // Apply custom severity if provided
+      const configuredSeverity = customConfig?.["severity"];
+      if (
+        configuredSeverity &&
+        (configuredSeverity === "error" ||
+         configuredSeverity === "warning" ||
+         configuredSeverity === "note")
+      ) {
+        matchedRule.severity = configuredSeverity;
+      }
+
+      selectedRules.push(matchedRule);
+    } catch (error) {
+      console.log(error.message);
     }
   }
 

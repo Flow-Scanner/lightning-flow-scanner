@@ -197,6 +197,7 @@ describe("Exceptions", () => {
       },
     ];
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         APIVersion: {
           severity: "error",
@@ -789,6 +790,7 @@ describe("Exceptions", () => {
       },
     ];
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         APIVersion: {
           severity: "error",

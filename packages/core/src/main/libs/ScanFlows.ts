@@ -23,23 +23,22 @@ export function scan(parsedFlows: ParsedFlow[], ruleOptions?: IRulesConfig): Sca
 
 export function ScanFlows(flows: Flow[], ruleOptions?: IRulesConfig): ScanResult[] {
   const flowResults: ScanResult[] = [];
-  let selectedRules: IRuleDefinition[] = [];
   const rawMode = ruleOptions?.detailLevel;
   const detailLevel =
     typeof rawMode === 'string' && rawMode.toLowerCase() === 'simple'
       ? DetailLevel.SIMPLE
       : DetailLevel.ENRICHED;
 
+  let ruleMap: Map<string, object> | undefined = undefined;
   if (ruleOptions?.rules && Object.keys(ruleOptions.rules).length > 0) {
-    const ruleMap = new Map<string, object>();
+    ruleMap = new Map<string, object>();
     for (const [ruleName, config] of Object.entries(ruleOptions.rules)) {
       ruleMap.set(ruleName, config);
     }
-    selectedRules = GetRuleDefinitions(ruleMap, ruleOptions);
-
-  } else {
-    selectedRules = GetRuleDefinitions(undefined, ruleOptions);
   }
+
+  // This ensures default rules are loaded and merged with any custom configs
+  const selectedRules = GetRuleDefinitions(ruleMap, ruleOptions);
 
   const flowXmlCache = new Map<string, string>();
 

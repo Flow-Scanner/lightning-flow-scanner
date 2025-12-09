@@ -17,9 +17,10 @@ describe("MissingRecordTriggerFilter", () => {
     const flows = await core.parse([violating_uri]);
     expect(flows.length).toBeGreaterThan(0);
     const ruleConfig = {
+      ruleMode: "isolated",
       betamode: true,
       rules: {
-        MissingRecordTriggerFilter: {
+        MissingFilterRecordTrigger: {
           severity: "warning"
         }
       }
@@ -36,9 +37,10 @@ describe("MissingRecordTriggerFilter", () => {
     const flows = await core.parse([fixed_uri]);
     expect(flows.length).toBeGreaterThan(0);
     const ruleConfig = {
+      ruleMode: "isolated",
       betamode: true,
       rules: {
-        MissingRecordTriggerFilter: {
+        MissingFilterRecordTrigger: {
           severity: "warning"
         }
       }

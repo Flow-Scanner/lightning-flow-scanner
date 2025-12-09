@@ -13,6 +13,7 @@ describe("MissingNullHandler", () => {
     expect(flows.length).toBeGreaterThan(0);
 
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         MissingNullHandler: {
           severity: "error"

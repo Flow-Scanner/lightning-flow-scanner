@@ -7,6 +7,7 @@ import { TriggerOrder } from "../src/main/rules/TriggerOrder";
 describe("TriggerOrder", () => {
   it("should not trigger from default configuration on store", async () => {
     const ruleConfig = {
+      ruleMode: "isolated",
       exceptions: {},
       rules: {
         FlowDescription: {
@@ -45,6 +46,7 @@ describe("TriggerOrder", () => {
     const ruleConfig = {
       exceptions: {},
       rules: {
+        ruleMode: "isolated",
         TriggerOrder: {
           severity: "error",
         },

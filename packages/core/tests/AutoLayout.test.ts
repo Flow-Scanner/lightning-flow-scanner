@@ -10,6 +10,7 @@ describe("Autolayout", () => {
   it("should have a result when CanvasMode is set to FREE_FORM_CANVAS", async () => {
     const flows = await core.parse([example_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         AutoLayout: {
           severity: "error",
@@ -27,6 +28,7 @@ describe("Autolayout", () => {
     const flows = await core.parse([fixed_uri]);
     const ruleConfig = {
       rules: {
+        ruleMode: "isolated",
         AutoLayout: {
           severity: "error",
         },

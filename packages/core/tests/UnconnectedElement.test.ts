@@ -39,6 +39,7 @@ describe("UnconnectedElement", () => {
     );
     const flows = await core.parse([connectedElementTestFile]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         UnconnectedElement: {
           severity: "error",
@@ -59,6 +60,7 @@ describe("UnconnectedElement", () => {
     );
     const flows = await core.parse([testFile]);
     const ruleConfig = {
+      ruleMode: "isolated",
       detailLevel: "simple",
     };
     const results: core.ScanResult[] = core.scan(flows, ruleConfig);

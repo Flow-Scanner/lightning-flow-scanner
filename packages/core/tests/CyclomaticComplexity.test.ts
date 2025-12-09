@@ -8,6 +8,7 @@ describe("CyclomaticComplexity ", () => {
   const example_uri = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/demo/Cyclomatic_Complexity.flow-meta.xml");
   const other_uri = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/demo/SOQL_Query_In_A_Loop.flow-meta.xml");
   const defaultConfig = {
+    ruleMode: "isolated",
     rules: {
       CyclomaticComplexity: {
         severity: "error",
@@ -35,6 +36,7 @@ describe("CyclomaticComplexity ", () => {
   it("should have a result when value surpasses a configured threshold", async () => {
     const flows = await core.parse([other_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         CyclomaticComplexity: {
           threshold: 1,

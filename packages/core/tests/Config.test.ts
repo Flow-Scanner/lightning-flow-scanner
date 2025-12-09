@@ -37,6 +37,7 @@ describe("Rule Configurations ", () => {
   it("incorrect rule severity configurations are defaulted", async () => {
     const flows = await core.parse([example_uri1]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         MissingNullHandler: {
           severity: "errorr",
@@ -56,6 +57,7 @@ describe("Rule Configurations ", () => {
       exceptions: {
         CreateANewAccountWithChild: { DuplicateDMLOperation: ["ViewAccountId"] },
       },
+      ruleMode: "isolated",
       rules: {
         MissingNullHandler: {
           severity: "error",
@@ -72,6 +74,7 @@ describe("Rule Configurations ", () => {
   it("Multiple Expressions are individually checked", async () => {
     const flows = await core.parse([example_uri1]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         APIVersion: {
           expression: ">50",

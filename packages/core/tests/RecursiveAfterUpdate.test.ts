@@ -25,6 +25,7 @@ describe("RecursiveAfterUpdate", () => {
         },
       } as Partial<ParsedFlow> as ParsedFlow;
       const ruleConfig = {
+        ruleMode: "isolated",
         exceptions: {},
         rules: {
           RecursiveAfterUpdate: {

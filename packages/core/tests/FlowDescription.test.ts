@@ -10,6 +10,7 @@ describe("FlowDescription", () => {
   it("should return a result when missing a description", async () => {
     const flows = await core.parse([example_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         FlowDescription: {
           severity: "error",
@@ -26,6 +27,7 @@ describe("FlowDescription", () => {
   it("should have no result when provided a description", async () => {
     const flows = await core.parse([fixed_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         FlowDescription: {
           severity: "error",

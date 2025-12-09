@@ -17,6 +17,7 @@ describe("GetRecordAllFields", () => {
   describe("e2e", () => {
     it("should be empty when no Get Record elements are present", () => {
       const config = {
+        ruleMode: "isolated",
         rules: {
           GetRecordAllFields: {
             severity: "error",
@@ -42,6 +43,7 @@ describe("GetRecordAllFields", () => {
 
     it("should error when getRecord element has storeOutputAutomatically", () => {
       const config = {
+        ruleMode: "isolated",
         rules: {
           GetRecordAllFields: {
             severity: "error",

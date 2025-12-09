@@ -14,6 +14,7 @@ describe("InactiveFlow", () => {
       } as Partial<ParsedFlow> as ParsedFlow,
     ];
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         InactiveFlow: {
           severity: "error",
@@ -38,6 +39,7 @@ describe("InactiveFlow", () => {
       } as Partial<ParsedFlow> as ParsedFlow,
     ];
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         InactiveFlow: {
           severity: "error",
@@ -61,6 +63,7 @@ describe("InactiveFlow", () => {
       } as Partial<ParsedFlow> as ParsedFlow,
     ];
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         InactiveFlow: {
           severity: "error",
@@ -84,6 +87,7 @@ describe("InactiveFlow", () => {
       } as Partial<ParsedFlow> as ParsedFlow,
     ];
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         InactiveFlow: {
           severity: "error",

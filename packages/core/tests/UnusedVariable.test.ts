@@ -11,6 +11,7 @@ describe("UnusedVariable Rule", () => {
   it("there should be a result for unused variables", async () => {
     const flows = await core.parse([example_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         UnusedVariable: {
           severity: "error",
@@ -25,6 +26,7 @@ describe("UnusedVariable Rule", () => {
   it("there should be no result for variables used in text elements", async () => {
     const flows = await core.parse([fixed_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         UnusedVariable: {
           severity: "error",
@@ -40,6 +42,7 @@ describe("UnusedVariable Rule", () => {
   it("should fix the unused variable error", async () => {
     const flows = await core.parse([example_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         UnusedVariable: {
           severity: "error",

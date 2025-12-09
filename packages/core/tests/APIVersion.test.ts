@@ -10,6 +10,7 @@ describe("APIVersion", () => {
   it("should have a result when attribute is missing", async () => {
     const flows = await core.parse([example_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         APIVersion: {
           severity: "error",
@@ -26,6 +27,7 @@ describe("APIVersion", () => {
   it("should have a result when below configured threshold", async () => {
     const flows = await core.parse([example_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         APIVersion: {
           severity: "error",
@@ -43,6 +45,7 @@ describe("APIVersion", () => {
   it("should have no result when version is meeting threshold", async () => {
     const flows = await core.parse([fixed_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         APIVersion: {
           severity: "error",
@@ -60,6 +63,7 @@ describe("APIVersion", () => {
   it("should have a result when configured is more than what the file has", async () => {
     const flows = await core.parse([fixed_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         APIVersion: {
           severity: "error",

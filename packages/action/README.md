@@ -259,14 +259,15 @@ It is recommend to configure and define:
 
 Most Lightning Flow Scanner distributions automatically resolve configurations from `.flow-scanner.yml`, `.flow-scanner.json`, or `package.json` → `flowScanner`.
 
-Using the rules section of your configurations, you can specify the list of rules to be run. Furthermore, you can define the severity and configure expressions of rules. Below is a breakdown of the available attributes of rule configuration:
+By default, all default rules are executed. You can customize individual rules and override the rules to be executed without having to specify every rule. Below is a breakdown of the available attributes of rule configuration:
 
 ```json
 {
   "rules": {
     "<RuleName>": {
-      "severity": "<Severity>",
-      "expression": "<Expression>"
+      "severity": "<Severity>", // Override severity level
+      "expression": "<Expression>", // Override rule expression
+      "enabled": "false" // Disable this rule
     }
   }
 }
@@ -351,6 +352,23 @@ New rules are introduced in Beta mode before being added to the default ruleset.
   "betaMode": true
 }
 
+```
+
+### Rule Mode
+
+By default, Lightning Flow Scanner runs **all** default rules and merges any custom configurations you provide. This means you can override specific rules without having to list every rule to be executed. If instead, you want to run **only** the rules you explicitly specify, use `"ruleMode": "isolated"`:
+```json
+{
+  "ruleMode": "isolated",
+  "rules": {
+    "FlowName": {
+      "severity": "error"
+    },
+    "HardcodedId": {
+      "severity": "error"
+    }
+  }
+}
 ```
 
 

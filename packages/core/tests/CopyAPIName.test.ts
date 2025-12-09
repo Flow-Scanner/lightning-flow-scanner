@@ -10,6 +10,7 @@ describe("CopyAPIName ", () => {
   it("CopyAPIName should have a result", async () => {
     const flows = await core.parse([example_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         CopyAPIName: {
           severity: "error",
@@ -27,6 +28,7 @@ describe("CopyAPIName ", () => {
   it("CopyAPIName should have no result", async () => {
     const flows = await core.parse([fixed_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         CopyAPIName: {
           severity: "error",

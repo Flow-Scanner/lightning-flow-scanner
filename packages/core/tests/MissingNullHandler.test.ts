@@ -16,6 +16,7 @@ describe("MissingNullHandler ", () => {
   it("should return a result when no fault path is implemented", async () => {
     const flows = await core.parse([example_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         MissingNullHandler: {
           severity: "error",
@@ -30,6 +31,7 @@ describe("MissingNullHandler ", () => {
   it("should return no result when null handlers are implemented", async () => {
     const flows = await core.parse([fixed_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
         MissingNullHandler: {
           severity: "error",

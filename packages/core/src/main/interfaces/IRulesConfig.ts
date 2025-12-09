@@ -12,4 +12,5 @@ export interface IRulesConfig {
   detailLevel?: 'enriched' | 'simple' | DetailLevel;
   exceptions?: IExceptions;
   rules?: IRuleOptions; 
+  ruleMode?: "merged" | "isolated"; // Defaults to "merged"
 }
