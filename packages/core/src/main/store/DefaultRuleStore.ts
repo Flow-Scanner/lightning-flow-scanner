@@ -23,6 +23,7 @@ import { UnsafeRunningContext } from "../rules/UnsafeRunningContext";
 import { UnusedVariable } from "../rules/UnusedVariable";
 import { MissingMetadataDescription } from "../rules/MissingMetadataDescription";
 import { MissingFilterRecordTrigger } from "../rules/MissingFilterRecordTrigger";
+import { TransformInsteadOfLoop } from "../rules/TransformInsteadOfLoop";
 
 export const DefaultRuleStore: object = {
   ActionCallsInLoop,
@@ -52,5 +53,6 @@ export const DefaultRuleStore: object = {
 
 export const BetaRuleStore: object = {
   MissingMetadataDescription,
-  MissingFilterRecordTrigger
+  MissingFilterRecordTrigger,
+  TransformInsteadOfLoop
 };
