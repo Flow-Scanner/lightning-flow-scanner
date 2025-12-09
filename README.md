@@ -108,7 +108,7 @@ _[InactiveFlow](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main
 _[MissingFaultPath](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/MissingFaultPath.ts)_ – A flow may fail to execute an operation as intended. By default, the flow displays an error to the user and emails the creator. Customize this behavior by incorporating a Fault Path.  
 
 ### Missing Filter Record Trigger
-_[FlowDescription](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/MissingFilterRecordTrigger.ts)_ – Record-triggered flows that lack filters on changed fields or entry conditions can lead to unnecessary executions on every record change. This may degrade system performance, hit governor limits faster, and increase resource consumption in high-volume orgs.
+_[MissingFilterRecordTrigger](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/MissingFilterRecordTrigger.ts)_ – Record-triggered flows that lack filters on changed fields or entry conditions can lead to unnecessary executions on every record change. This may degrade system performance, hit governor limits faster, and increase resource consumption in high-volume orgs.
 **Severity:** 🟡 *Warning*
 
 ### Missing Flow Description  
