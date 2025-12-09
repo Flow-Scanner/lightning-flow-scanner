@@ -140,6 +140,10 @@ _[SameRecordFieldUpdates](https://github.com/Flow-Scanner/lightning-flow-scanner
 _[SOQLQueryInLoop](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/SOQLQueryInLoop.ts)_ – To prevent exceeding Apex governor limits, consolidate all SOQL queries at the end of the flow.  
 **Severity:** 🔴 *Error*
 
+### Transform Instead of Loop
+_[TransformInsteadOfLoop](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/TransformInsteadOfLoop.ts)_ – Detects Loop elements that directly connect to Assignment elements. Transform elements handle collection manipulation in bulk operations, providing significant performance improvements over iterative loop-assignment patterns.  
+**Severity:** 🔵 *Note*
+
 ### Trigger Order  
 _[TriggerOrder](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/TriggerOrder.ts)_ – Guarantee your flow execution order with the **Trigger Order** property introduced in Spring ’22.  
 **Severity:** 🔵 *Note*

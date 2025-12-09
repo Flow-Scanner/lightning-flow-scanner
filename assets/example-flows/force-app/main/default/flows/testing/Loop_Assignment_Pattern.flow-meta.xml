@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <description>This flow demonstrates a violation where a Loop directly connects to an Assignment, which could be replaced with Transform for better performance.</description>
+    <environments>Default</environments>
+    <interviewLabel>Loop Assignment Pattern {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Loop Assignment Pattern</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <loops>
+        <name>Loop_Through_Accounts</name>
+        <label>Loop Through Accounts</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <collectionReference>AccountCollection</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_Account_Fields</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Create_Updated_Accounts</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <assignments>
+        <name>Assign_Account_Fields</name>
+        <label>Assign Account Fields</label>
+        <locationX>264</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Accounts.AnnualRevenue</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>1000000.0</numberValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Accounts.Rating</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Hot</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_To_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Add_To_Collection</name>
+        <label>Add To Collection</label>
+        <locationX>264</locationX>
+        <locationY>350</locationY>
+        <assignmentItems>
+            <assignToReference>UpdatedAccounts</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Through_Accounts</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Accounts</targetReference>
+        </connector>
+    </assignments>
+    <recordCreates>
+        <name>Create_Updated_Accounts</name>
+        <label>Update Accounts</label>
+        <locationX>176</locationX>
+        <locationY>458</locationY>
+        <inputReference>UpdatedAccounts</inputReference>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Loop_Through_Accounts</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>AccountCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>UpdatedAccounts</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+</Flow>
