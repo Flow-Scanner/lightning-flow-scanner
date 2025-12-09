@@ -11,6 +11,7 @@ export class ViolationOverview {
   private readonly _panel: vscode.WebviewPanel;
   private readonly _extensionUri: vscode.Uri;
   private _disposables: vscode.Disposable[] = [];
+  private _allScanResults: ScanResult[] = [];
 
   public static createOrShow(
     extensionUri: vscode.Uri,
@@ -62,6 +63,7 @@ export class ViolationOverview {
   ) {
     this._panel = panel;
     this._extensionUri = extensionUri;
+    this._allScanResults = CacheProvider.instance.get("results") as ScanResult[] || scanResult;
     this._update(scanResult);
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
   }
@@ -95,7 +97,7 @@ export class ViolationOverview {
           if (!data.value) {
             return;
           }
-          ScanOverview.createOrShow(this._extensionUri, data.value);
+          ScanOverview.createOrShow(this._extensionUri, this._allScanResults);
           break;
         }
         case "searchFlowName": {
@@ -142,7 +144,7 @@ export class ViolationOverview {
           const defaultUri = vscode.workspace.workspaceFolders?.[0]?.uri;
           const saveResult = await vscode.window.showSaveDialog({
             defaultUri,
-            filters: { [filterLabel]: [filterExt] }, // Remove the dot from extension
+            filters: { [filterLabel]: [filterExt] },
             title: `Save ${chosenFormat.toUpperCase()} file`,
           });
 
