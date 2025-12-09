@@ -1,6 +1,6 @@
 {
   "name": "lightning-flow-scanner",
-  "version": "6.7.0",
+  "version": "6.8.0",
   "bugs": "https://github.com/Flow-Scanner/lightning-flow-scanner/issues",
   "description": "A Salesforce CLI plugin for analysis and optimization of Salesforce Flow. Scans metadata for 20+ issues such as hardcoded IDs, unsafe contexts, inefficient SOQL/DML operations, recursion risks, and missing fault handling. Supports auto-fixes, rule configurations, and CI/CD integration to help users maintain secure and reliable Flow automations.",
   "dependencies": {
@@ -81,9 +81,9 @@
     "test": "mocha -r ts-node/register test/**/*.test.ts",
     "lfs:link": "npm link lightning-flow-scanner-core && npm pack && sf plugins link",
     "clean": "rimraf lib",
-    "version:patch": "npm version patch",
-    "version:minor": "npm version minor",
-    "version:major": "npm version major",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
+    "version:major": "npm version major --no-git-tag-version",
     "publish:npm": "npm run prepack && npm publish"
   },
   "type": "module",
