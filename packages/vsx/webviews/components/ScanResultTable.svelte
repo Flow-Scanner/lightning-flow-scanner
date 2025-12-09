@@ -1,15 +1,12 @@
 <script lang="ts">
   import { TabulatorFull as Tabulator } from "tabulator-tables";
   import { onMount } from "svelte";
-
   export let scanResults: any[] = [];
   let tableComponent: HTMLDivElement;
   let table: Tabulator;
   let printData: any[] = [];
-
   const detailButton = () =>
     `<button style="background:#2765ae;border-radius:10px;">Details</button>`;
-
   onMount(() => {
     printData = scanResults.map((r) => {
       const obj = { ...r };
@@ -17,7 +14,6 @@
       delete obj.ruleResults;
       return obj;
     });
-
     table = new Tabulator(tableComponent, {
       data: scanResults,
       reactiveData: true,
@@ -27,7 +23,7 @@
           title: "# Results",
           field: "resultCount",
           hozAlign: "center",
-          bottomCalc: "count",
+          bottomCalc: "sum",
           width: 100,
         },
         {
@@ -65,11 +61,9 @@
       ],
     });
   });
-
   export function download() {
     tsvscode.postMessage({ type: "download", value: printData });
   }
-
   function onMessage(e: MessageEvent) {
     const msg = e.data;
     if (msg.type === "applySearchFlowName") {
@@ -80,10 +74,8 @@
       }
       table?.setHeaderFilterValue("label", term);
     }
-
     if (msg.type === "applySearchAttributes") {
     const term = (msg.value ?? "").trim();
-
     if (term) {
       table?.setHeaderFilterValue("resultCount", term);
       table?.setHeaderFilterValue("type", term);
@@ -93,15 +85,11 @@
     }
     return;
   }
-
-    // Add new OR filter with unique ID
     table?.addFilter([
       { field: "resultCount", type: "like", value: term },
       { field: "type", type: "like", value: term },
     ], "or", "attributes-or-filter");
   }
-
 </script>
-
 <svelte:window on:message={onMessage} />
 <div bind:this={tableComponent} class="tabulator-table" />

@@ -13,6 +13,11 @@ packages/cli/LICENSE.md
 packages/cli/CONTRIBUTING.md
 packages/cli/SECURITY.md
 packages/cli/README.md
+packages/vsx/LICENSE.md
+packages/vsx/CONTRIBUTING.md
+packages/vsx/SECURITY.md
+packages/vsx/README.md
+
 # Ignore Salesforce DX generated files
 assets/example-flows/.sf/
 assets/example-flows/.sfdx/
