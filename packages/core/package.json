@@ -1,7 +1,7 @@
 {
   "name": "@flow-scanner/lightning-flow-scanner-core",
   "description": "A lightweight engine for Flow metadata in Node.js, and browser environments. Assess and enhance Salesforce Flow automations for best practices, security, governor limits, and performance issues.",
-  "version": "6.10.0",
+  "version": "6.10.1",
   "main": "out/index.js",
   "exports": {
     ".": {
@@ -18,7 +18,7 @@
     "clean": "rimraf out dist",
     "build:js": "swc src --out-dir out --copy-files --strip-leading-paths --config-file .swcrc",
     "build:types": "tsc -p tsconfig.types.json --declaration --emitDeclarationOnly --outDir out",
-    "copy:media": "node -e \"require('fs').cpSync('docs/media','out/docs/media',{recursive:true,force:true}) || require('fs').mkdirSync('out/docs/media',{recursive:true})\"",
+    "copy:media": "node -e \"require('fs').cpSync('../../docs/media','out/docs/media',{recursive:true,force:true}) || require('fs').mkdirSync('out/docs/media',{recursive:true})\"",
     "prepare:publish": "node ../../scripts/prepare-publish.js",
     "copy:root-files:dist": "node -e \"['../../LICENSE.md'].forEach(f => { const n = f.split('/').pop(); if (require('fs').existsSync(f)) require('fs').copyFileSync(f, 'dist/'+n) })\"",
     "____main____": "__DEVELOPER COMMANDS__",
