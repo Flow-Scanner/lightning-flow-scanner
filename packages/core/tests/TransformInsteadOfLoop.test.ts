@@ -13,6 +13,7 @@ describe("TransformInsteadOfLoop", () => {
     expect(flows.length).toBeGreaterThan(0);
     
     const ruleConfig = {
+      betaMode: true,
       ruleMode: "isolated",
       rules: {
         TransformInsteadOfLoop: {

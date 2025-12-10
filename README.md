@@ -128,6 +128,10 @@ _[MissingNullHandler](https://github.com/Flow-Scanner/lightning-flow-scanner/blo
 _[ProcessBuilder](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/ProcessBuilder.ts)_ – Salesforce is transitioning away from Workflow Rules and Process Builder in favor of Flow. Begin migrating your organization’s automation to Flow.  
 **Severity:** 🟡 *Warning*
 
+### Record ID as String
+_[RecordIdAsString](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/RecordIdAsString.ts)_ – Detects flows using a String variable named `recordId` as input when they could receive the entire record object instead. Since recent Salesforce releases, record pages and quick actions can pass the complete record, eliminating the need for an additional Get Records query and improving performance.  
+**Severity:** 🔵 *Note*
+
 ### Recursive After Update  
 _[RecursiveAfterUpdate](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/RecursiveAfterUpdate.ts)_ – After-update flows are meant for modifying **other** records. Using them on the same record can cause recursion. Consider **before-save** flows for same-record updates.  
 **Severity:** 🟡 *Warning*
@@ -449,7 +453,7 @@ const results = scan(
    cd assets/example-flows && sf project deploy start
    ```
 
-   Navigate to the [Demo Readme](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/assets/example-flows\README.md) for full details
+   Navigate to the [Demo Readme](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/assets/example-flows/README.md) for full details
 
 7. Create a standalone UMD Module(Optional):
 
