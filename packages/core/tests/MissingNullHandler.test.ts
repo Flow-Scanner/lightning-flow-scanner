@@ -6,11 +6,11 @@ import * as core from "../src";
 describe("MissingNullHandler ", () => {
   const example_uri = path.join(
     __dirname,
-    "../../../assets/example-flows/force-app/main/default/flows/demo/Missing_Null_Handler.flow-meta.xml"
+    "../../../example-flows/force-app/main/default/flows/demo/Missing_Null_Handler.flow-meta.xml"
   );
   const fixed_uri = path.join(
     __dirname,
-    "../../../assets/example-flows/force-app/main/default/flows/testing/Missing_Null_Handler_Fixed.flow-meta.xml"
+    "../../../example-flows/force-app/main/default/flows/testing/Missing_Null_Handler_Fixed.flow-meta.xml"
   );
 
   it("should return a result when no fault path is implemented", async () => {

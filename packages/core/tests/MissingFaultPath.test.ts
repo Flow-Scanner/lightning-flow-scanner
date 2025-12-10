@@ -6,11 +6,11 @@ import { Flow, parse, RuleResult, scan, ScanResult } from "../src";
 describe("MissingFaultPath", () => {
   const exampleUri = path.join(
     __dirname,
-    "../../../assets/example-flows/force-app/main/default/flows/demo/Missing_Error_Handler.flow-meta.xml"
+    "../../../example-flows/force-app/main/default/flows/demo/Missing_Error_Handler.flow-meta.xml"
   );
   const fixedUri = path.join(
     __dirname,
-    "../../../assets/example-flows/force-app/main/default/flows/testing/Missing_Error_Handler_Fixed.flow-meta.xml"
+    "../../../example-flows/force-app/main/default/flows/testing/Missing_Error_Handler_Fixed.flow-meta.xml"
   );
 
   it("should return a result for MissingFaultPath when fault path is missing", async () => {

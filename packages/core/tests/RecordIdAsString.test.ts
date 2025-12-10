@@ -5,12 +5,12 @@ import * as core from "../src";
 describe("RecordIdAsString", () => {
   const violating_uri = path.join(
     __dirname,
-    "../../../assets/example-flows/force-app/main/default/flows/testing/RecordId_As_String.flow-meta.xml"
+    "../../../example-flows/force-app/main/default/flows/testing/RecordId_As_String.flow-meta.xml"
   );
 
   const fixed_uri = path.join(
     __dirname,
-    "../../../assets/example-flows/force-app/main/default/flows/testing/RecordId_As_Record_Fixed.flow-meta.xml"
+    "../../../example-flows/force-app/main/default/flows/testing/RecordId_As_Record_Fixed.flow-meta.xml"
   );
 
     it("should flag recordId variable defined as String", async () => {

@@ -4,8 +4,8 @@ import * as path from "path";
 import { describe, it, expect } from "@jest/globals";
 
 describe("CopyAPIName ", () => {
-  const example_uri = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/demo/Copy_API_Name.flow-meta.xml");
-  const fixed_uri = path.join(__dirname, "../../../assets/example-flows/force-app/main/default/flows/testing/Copy_API_Name_Fixed.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/demo/Copy_API_Name.flow-meta.xml");
+  const fixed_uri = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/testing/Copy_API_Name_Fixed.flow-meta.xml");
 
   it("CopyAPIName should have a result", async () => {
     const flows = await core.parse([example_uri]);

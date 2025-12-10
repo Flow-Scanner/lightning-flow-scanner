@@ -30,10 +30,10 @@ You can:
 
 Follow these steps to get up and running with the Lightning Flow Scanner Example Flows:
 
-1. To open this [Salesforce Project](assets\example-flows) in CLI:
+1. To open this [Salesforce Project](../example-flows) in CLI:
 
    ```bash
-   cd assets/example-flows
+   cd example-flows
    ```
 
 2. Deploy Flows(optional)

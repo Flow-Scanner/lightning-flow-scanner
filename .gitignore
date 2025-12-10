@@ -19,6 +19,6 @@ packages/vsx/SECURITY.md
 packages/vsx/README.md
 
 # Ignore Salesforce DX generated files
-assets/example-flows/.sf/
-assets/example-flows/.sfdx/
+example-flows/.sf/
+example-flows/.sfdx/
 packages/core/tsconfig.tsbuildinfo

@@ -24,7 +24,7 @@
 
 <p align="center">
   <a href="https://github.com/Flow-Scanner">
-    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/banner.png" alt="Lightning Flow Scanner" width="43%" />
+    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/docs/media/banner.png" alt="Lightning Flow Scanner" width="43%" />
   </a>
 </p>
 
@@ -227,11 +227,9 @@ Some rules have additional attributes to configure, such as the expression, that
 {
   "rules": {
     "APIVersion": {
-      "severity": "error",
       "expression": "===58" // comparison operator
     },
     "FlowName": {
-      "severity": "note",
       "expression": "[A-Za-z0-9]" // regular expression
     }
   }
@@ -247,10 +245,8 @@ Specifying exceptions allows you to exclude specific scenarios from rule enforce
   "exceptions": {
     "<FlowName>": {
       "<RuleName>": [
-        // Suppress a specific result:
-        "<ResultName>",
-        // Suppress ALL results of rule:
-        "*",
+        "<ResultName>", // Suppress a result
+        "*", // Wildcard to suppress all results
         ...
       ]
     },
@@ -265,8 +261,8 @@ _Example_
 {
   "exceptions": {
     "MyFlow": {
-      "MissingNullHandler": ["*"],
       "HardcodedId": ["Old_Lookup_1"]
+      "MissingNullHandler": ["*"],
     }
   }
 }
@@ -288,15 +284,7 @@ New rules are introduced in Beta mode before being added to the default ruleset.
 By default, Lightning Flow Scanner runs **all** default rules and merges any custom configurations you provide. This means you can override specific rules without having to list every rule to be executed. If instead, you want to run **only** the rules you explicitly specify, use `"ruleMode": "isolated"`:
 ```json
 {
-  "ruleMode": "isolated",
-  "rules": {
-    "FlowName": {
-      "severity": "error"
-    },
-    "HardcodedId": {
-      "severity": "error"
-    }
-  }
+  "ruleMode": "isolated"
 }
 ```
 
@@ -319,8 +307,8 @@ Ready-to-use CI/CD templates and a **native GitHub Action**.
 
 | Platform       | Template Type                     | Link |
 |----------------|-----------------------------------|------|
-| Azure DevOps   | Full Project Scan                 | [`azure-pipelines-flow-FullScan.yml`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/examples/azure-devops/azure-pipelines-flow-FullScan.yml) |
-| Azure DevOps   | Change-Based Scan                 | [`azure-pipelines-flow-changedFiles.yml`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/examples/azure-devops/azure-pipelines-flow-changedFiles.yml) |
+| [Azure DevOps](docs/azure-templates.md)   | Full Project Scan                 | [`azure-pipelines-flow-FullScan.yml`](docs/templates/azure-devops/azure-pipelines-flow-FullScan.yml) |
+| [Azure DevOps](docs/azure-templates.md)   | Change-Based Scan                 | [`azure-pipelines-flow-changedFiles.yml`](docs/templates/azure-devops/azure-pipelines-flow-changedFiles.yml) |
 | **[GitHub Action](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/action/README.md)** | Native PR checks                              | [GitHub Marketplace](https://github.com/marketplace/actions/run-flow-scanner)                           |
 | **[Copado Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado)** | Copado CI/CD pipelines                        | [Copado Marketplace](https://success.copado.com/s/listing-detail?language=en_US&recordId=a54P7000003G3gBIAS) |
 
@@ -337,7 +325,7 @@ GitHub Action Snippet:
     sarif_file: ${{ steps.flowscanner.outputs.sarifPath }}
 ```
 
-To see the full example, see [`scan-flows.yml`](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/examples/github-action/scan-flows.yml).
+To see the full example, see [`scan-flows.yml`](docs/templates/github-action/scan-flows.yml).
 
 ## Quick Start
 
@@ -385,7 +373,7 @@ const results = scan(
 
 ## Development
 
-> This project optionally uses [Volta](https://volta.sh) to guarantee the exact same Node.js and tool versions for every contributor. Install Volta with:
+> This project optionally uses [Volta](https://volta.sh) to guarantee the exact same Node.js and tool versions for every contributor.
 >
 > MacOs/Linux: 
 > ```sh
@@ -450,10 +438,10 @@ const results = scan(
 6. Deploy Demo Flows (Optional):
 
    ```bash
-   cd assets/example-flows && sf project deploy start
+   cd example-flows && sf project deploy start
    ```
 
-   Navigate to the [Demo Readme](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/assets/example-flows/README.md) for full details
+   Navigate to the [Demo Readme](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/example-flows/README.md) for full details
 
 7. Create a standalone UMD Module(Optional):
 

@@ -24,7 +24,7 @@
 
 <p align="center">
   <a href="https://github.com/Flow-Scanner">
-    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/banner.png" alt="Lightning Flow Scanner" width="43%" />
+    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/docs/media/banner.png" alt="Lightning Flow Scanner" width="43%" />
   </a>
 </p>
 
@@ -33,17 +33,11 @@
 
 <p align="center">
   <a href="https://github.com/Flow-Scanner">
-    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/action.gif"/>
+    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/docs/media/action.gif"/>
   </a>
 </p>
 
 ---
-
-
-
-
-
-
 
 
 
@@ -333,10 +327,8 @@ Specifying exceptions allows you to exclude specific scenarios from rule enforce
   "exceptions": {
     "<FlowName>": {
       "<RuleName>": [
-        // Suppress a specific result:
-        "<ResultName>",
-        // Suppress ALL results of rule:
-        "*",
+        "<ResultName>", // Suppress a result
+        "*", // Wildcard to suppress all results
         ...
       ]
     },
@@ -351,8 +343,8 @@ _Example_
 {
   "exceptions": {
     "MyFlow": {
-      "MissingNullHandler": ["*"],
       "HardcodedId": ["Old_Lookup_1"]
+      "MissingNullHandler": ["*"],
     }
   }
 }
@@ -374,15 +366,7 @@ New rules are introduced in Beta mode before being added to the default ruleset.
 By default, Lightning Flow Scanner runs **all** default rules and merges any custom configurations you provide. This means you can override specific rules without having to list every rule to be executed. If instead, you want to run **only** the rules you explicitly specify, use `"ruleMode": "isolated"`:
 ```json
 {
-  "ruleMode": "isolated",
-  "rules": {
-    "FlowName": {
-      "severity": "error"
-    },
-    "HardcodedId": {
-      "severity": "error"
-    }
-  }
+  "ruleMode": "isolated"
 }
 ```
 

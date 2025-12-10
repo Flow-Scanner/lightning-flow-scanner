@@ -24,7 +24,7 @@
 
 <p align="center">
   <a href="https://github.com/Flow-Scanner">
-    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/banner.png" alt="Lightning Flow Scanner" width="43%" />
+    <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/docs/media/banner.png" alt="Lightning Flow Scanner" width="43%" />
   </a>
 </p>
 
@@ -32,19 +32,10 @@
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/assets/media/cli.gif" alt="Flow Overview"/>
+  <img src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/docs/media/cli.gif" alt="Flow Overview"/>
 </p>
 
 ---
-
-
-
-
-
-
-
-
-
 
 
 
@@ -168,6 +159,10 @@ _[MissingNullHandler](https://github.com/Flow-Scanner/lightning-flow-scanner/blo
 _[ProcessBuilder](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/ProcessBuilder.ts)_ – Salesforce is transitioning away from Workflow Rules and Process Builder in favor of Flow. Begin migrating your organization’s automation to Flow.  
 **Severity:** 🟡 *Warning*
 
+### Record ID as String
+_[RecordIdAsString](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/RecordIdAsString.ts)_ – Detects flows using a String variable named `recordId` as input when they could receive the entire record object instead. Since recent Salesforce releases, record pages and quick actions can pass the complete record, eliminating the need for an additional Get Records query and improving performance.  
+**Severity:** 🔵 *Note*
+
 ### Recursive After Update  
 _[RecursiveAfterUpdate](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/RecursiveAfterUpdate.ts)_ – After-update flows are meant for modifying **other** records. Using them on the same record can cause recursion. Consider **before-save** flows for same-record updates.  
 **Severity:** 🟡 *Warning*
@@ -281,10 +276,8 @@ Specifying exceptions allows you to exclude specific scenarios from rule enforce
   "exceptions": {
     "<FlowName>": {
       "<RuleName>": [
-        // Suppress a specific result:
-        "<ResultName>",
-        // Suppress ALL results of rule:
-        "*",
+        "<ResultName>", // Suppress a result
+        "*", // Wildcard to suppress all results
         ...
       ]
     },
@@ -299,8 +292,8 @@ _Example_
 {
   "exceptions": {
     "MyFlow": {
-      "MissingNullHandler": ["*"],
       "HardcodedId": ["Old_Lookup_1"]
+      "MissingNullHandler": ["*"],
     }
   }
 }
@@ -322,15 +315,7 @@ New rules are introduced in Beta mode before being added to the default ruleset.
 By default, Lightning Flow Scanner runs **all** default rules and merges any custom configurations you provide. This means you can override specific rules without having to list every rule to be executed. If instead, you want to run **only** the rules you explicitly specify, use `"ruleMode": "isolated"`:
 ```json
 {
-  "ruleMode": "isolated",
-  "rules": {
-    "FlowName": {
-      "severity": "error"
-    },
-    "HardcodedId": {
-      "severity": "error"
-    }
-  }
+  "ruleMode": "isolated"
 }
 ```
 

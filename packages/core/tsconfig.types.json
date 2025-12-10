@@ -16,7 +16,7 @@
   "exclude": [
     "node_modules",
     "node_modules/**",
-    "assets/example-flows/**",
+    "example-flows/**",
     "tests/**/*.ts",
     "jest.config.ts",
     "vite.config.ts",

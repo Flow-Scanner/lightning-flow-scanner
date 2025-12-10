@@ -2,7 +2,7 @@
 <div class="banner">
 
     <img
-      src="https://raw.githubusercontent.com/Flow-Scanner/lightning-flow-scanner-core/main/assets/media/bannerslim.png"
+      src="https://raw.githubusercontent.com/Flow-Scanner/Lightning-Flow-Scanner/main/docs/media/banner.png"
       alt="Lightning Flow Scanner banner"
     />
 </div>
