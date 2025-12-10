@@ -24,6 +24,7 @@ import { UnusedVariable } from "../rules/UnusedVariable";
 import { MissingMetadataDescription } from "../rules/MissingMetadataDescription";
 import { MissingFilterRecordTrigger } from "../rules/MissingFilterRecordTrigger";
 import { TransformInsteadOfLoop } from "../rules/TransformInsteadOfLoop";
+import { RecordIdAsString } from "../rules/RecordIdAsString";
 
 export const DefaultRuleStore: object = {
   ActionCallsInLoop,
@@ -54,5 +55,6 @@ export const DefaultRuleStore: object = {
 export const BetaRuleStore: object = {
   MissingMetadataDescription,
   MissingFilterRecordTrigger,
-  TransformInsteadOfLoop
+  TransformInsteadOfLoop,
+  RecordIdAsString
 };

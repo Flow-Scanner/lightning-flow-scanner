@@ -16,7 +16,7 @@ export class TransformInsteadOfLoop extends RuleCommon implements IRuleDefinitio
           path: "https://trailhead.salesforce.com/content/learn/modules/multirecord-elements-and-transforms-in-flows/transform-multiple-records",
         },
       ],
-    });
+    }, { severity: "error" });
   }
 
   protected check(
