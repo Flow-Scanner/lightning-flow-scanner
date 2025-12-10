@@ -54,114 +54,114 @@
 <p>📌<strong>Tip:</strong> To link directly to a specific rule, use the full GitHub anchor link format. Example:</p>
 <p><em><a href="https://github.com/Flow-Scanner/lightning-flow-scanner#unsafe-running-context">https://github.com/Flow-Scanner/lightning-flow-scanner#unsafe-running-context</a></em></p>
 
-> Want to code a new rule? → See [How to Write a Rule](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/docs/write-a-rule.md)
+> Want to code a new rule? → See [How to Write a Rule](docs/write-a-rule.md)
 
 ### Action Calls In Loop  
-_[ActionCallsInLoop](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/ActionCallsInLoop.ts)_ – To prevent exceeding Apex governor limits, it is advisable to consolidate and bulkify your apex calls, utilizing a single action call containing a collection variable at the end of the loop.  
+_[ActionCallsInLoop](packages/core/src/main/rules/ActionCallsInLoop.ts)_ – To prevent exceeding Apex governor limits, it is advisable to consolidate and bulkify your apex calls, utilizing a single action call containing a collection variable at the end of the loop.  
 **Severity:** 🔴 *Error*
 
 ### Outdated API Version  
-_[APIVersion](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/APIVersion.ts)_ – Introducing newer API components may lead to unexpected issues with older versions of Flows, as they might not align with the underlying mechanics. Starting from API version 50.0, the **Api Version** attribute has been readily available on the Flow Object. To ensure smooth operation and reduce discrepancies between API versions, it is strongly advised to regularly update and maintain them.  
+_[APIVersion](packages/core/src/main/rules/APIVersion.ts)_ – Introducing newer API components may lead to unexpected issues with older versions of Flows, as they might not align with the underlying mechanics. Starting from API version 50.0, the **Api Version** attribute has been readily available on the Flow Object. To ensure smooth operation and reduce discrepancies between API versions, it is strongly advised to regularly update and maintain them.  
 **Severity:** 🟡 *Warning*
 
 ### Auto Layout  
-_[AutoLayout](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/AutoLayout.ts)_ – With Canvas Mode set to Auto-Layout, elements are spaced, connected, and aligned automatically, keeping your Flow neatly organized—saving you time.  
+_[AutoLayout](packages/core/src/main/rules/AutoLayout.ts)_ – With Canvas Mode set to Auto-Layout, elements are spaced, connected, and aligned automatically, keeping your Flow neatly organized—saving you time.  
 **Severity:** 🔵 *Note*
 
 ### Copy API Name  
-_[CopyAPIName](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/CopyAPIName.ts)_ – Maintaining multiple elements with a similar name, like `Copy_X_Of_Element`, can diminish the overall readability of your Flow. When copying and pasting these elements, remember to update the API name of the newly created copy.  
+_[CopyAPIName](packages/core/src/main/rules/CopyAPIName.ts)_ – Maintaining multiple elements with a similar name, like `Copy_X_Of_Element`, can diminish the overall readability of your Flow. When copying and pasting these elements, remember to update the API name of the newly created copy.  
 **Severity:** 🟡 *Warning*
 
 ### Cyclomatic Complexity  
-_[CyclomaticComplexity](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/CyclomaticComplexity.ts)_ – The number of loops and decision rules, plus the number of decisions. Use a combination of 1) subflows and 2) breaking flows into multiple concise trigger-ordered flows to reduce cyclomatic complexity within a single flow, ensuring maintainability and simplicity.  
+_[CyclomaticComplexity](packages/core/src/main/rules/CyclomaticComplexity.ts)_ – The number of loops and decision rules, plus the number of decisions. Use a combination of 1) subflows and 2) breaking flows into multiple concise trigger-ordered flows to reduce cyclomatic complexity within a single flow, ensuring maintainability and simplicity.  
 **Severity:** 🔵 *Note*
 
 ### DML Statement In A Loop  
-_[DMLStatementInLoop](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/DMLStatementInLoop.ts)_ – To prevent exceeding Apex governor limits, consolidate all your database operations—record creation, updates, or deletions—at the conclusion of the flow.  
+_[DMLStatementInLoop](packages/core/src/main/rules/DMLStatementInLoop.ts)_ – To prevent exceeding Apex governor limits, consolidate all your database operations—record creation, updates, or deletions—at the conclusion of the flow.  
 **Severity:** 🔴 *Error*
 
 ### Duplicate DML Operation  
-_[DuplicateDMLOperation](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/DuplicateDMLOperation.ts)_ – When a flow executes database changes or actions between two screens, prevent users from navigating backward between screens; otherwise, duplicate database operations may be performed.  
+_[DuplicateDMLOperation](packages/core/src/main/rules/DuplicateDMLOperation.ts)_ – When a flow executes database changes or actions between two screens, prevent users from navigating backward between screens; otherwise, duplicate database operations may be performed.  
 **Severity:** 🟡 *Warning*
 
 ### Flow Naming Convention  
-_[FlowName](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/FlowName.ts)_ – The readability of a flow is paramount. Establishing a naming convention significantly enhances findability, searchability, and overall consistency. Include at least a domain and a brief description of the flow’s actions, for example `Service_OrderFulfillment`.  
+_[FlowName](packages/core/src/main/rules/FlowName.ts)_ – The readability of a flow is paramount. Establishing a naming convention significantly enhances findability, searchability, and overall consistency. Include at least a domain and a brief description of the flow’s actions, for example `Service_OrderFulfillment`.  
 **Severity:** 🔴 *Error*
 
 ### Get Record All Fields  
-_[GetRecordAllFields](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/GetRecordAllFields.ts)_ – Following the principle of least privilege (PoLP), avoid using **Get Records** with “Automatically store all fields” unless necessary.  
+_[GetRecordAllFields](packages/core/src/main/rules/GetRecordAllFields.ts)_ – Following the principle of least privilege (PoLP), avoid using **Get Records** with “Automatically store all fields” unless necessary.  
 **Severity:** 🟡 *Warning*
 
 ### Hardcoded Id  
-_[HardcodedId](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/HardcodedId.ts)_ – Avoid hard-coding IDs because they are org specific. Instead, pass them into variables at the start of the flow—via merge-field URL parameters or a **Get Records** element.  
+_[HardcodedId](packages/core/src/main/rules/HardcodedId.ts)_ – Avoid hard-coding IDs because they are org specific. Instead, pass them into variables at the start of the flow—via merge-field URL parameters or a **Get Records** element.  
 **Severity:** 🔴 *Error*
 
 ### Hardcoded Url  
-_[HardcodedUrl](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/HardcodedUrl.ts)_ – Avoid hard-coding URLs because they are environment specific. Use an `$API` formula (preferred) or environment-specific sources like custom labels, metadata, or settings.  
+_[HardcodedUrl](packages/core/src/main/rules/HardcodedUrl.ts)_ – Avoid hard-coding URLs because they are environment specific. Use an `$API` formula (preferred) or environment-specific sources like custom labels, metadata, or settings.  
 **Severity:** 🔴 *Error*
 
 ### Inactive Flow  
-_[InactiveFlow](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/InactiveFlow.ts)_ – Like cleaning out your closet: deleting unused flows is essential. Inactive flows can still cause trouble—such as accidentally deleting records during testing, or being activated as subflows.  
+_[InactiveFlow](packages/core/src/main/rules/InactiveFlow.ts)_ – Like cleaning out your closet: deleting unused flows is essential. Inactive flows can still cause trouble—such as accidentally deleting records during testing, or being activated as subflows.  
 **Severity:** 🟡 *Warning*
 
 ### Missing Fault Path  
-_[MissingFaultPath](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/MissingFaultPath.ts)_ – A flow may fail to execute an operation as intended. By default, the flow displays an error to the user and emails the creator. Customize this behavior by incorporating a Fault Path.  
+_[MissingFaultPath](packages/core/src/main/rules/MissingFaultPath.ts)_ – A flow may fail to execute an operation as intended. By default, the flow displays an error to the user and emails the creator. Customize this behavior by incorporating a Fault Path.  
 **Severity:** 🟡 *Warning*
 
 ### Missing Filter Record Trigger
-_[MissingFilterRecordTrigger](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/MissingFilterRecordTrigger.ts)_ – Record-triggered flows that lack filters on changed fields or entry conditions can lead to unnecessary executions on every record change. This may degrade system performance, hit governor limits faster, and increase resource consumption in high-volume orgs. 
+_[MissingFilterRecordTrigger](packages/core/src/main/rules/MissingFilterRecordTrigger.ts)_ – Record-triggered flows that lack filters on changed fields or entry conditions can lead to unnecessary executions on every record change. This may degrade system performance, hit governor limits faster, and increase resource consumption in high-volume orgs. 
 **Severity:** 🟡 *Warning*
 
 ### Missing Flow Description  
-_[FlowDescription](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/FlowDescription.ts)_ – Descriptions play a vital role in documentation. It is highly recommended to include details about where a flow is used and its intended purpose.  
+_[FlowDescription](packages/core/src/main/rules/FlowDescription.ts)_ – Descriptions play a vital role in documentation. It is highly recommended to include details about where a flow is used and its intended purpose.  
 **Severity:** 🔴 *Error*
 
 ### Missing Metadata Description  
-_[MissingMetadataDescription](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/MissingMetadataDescription.ts)_ – Flags Flow elements (Get Records, Assignments, Decisions, Actions, etc.) and metadata components (Variables, Formulas, Constants, Text Templates) that lack a description. Adding concise descriptions greatly improves readability, maintainability, and helps AI tools understand your automation intent.  
+_[MissingMetadataDescription](packages/core/src/main/rules/MissingMetadataDescription.ts)_ – Flags Flow elements (Get Records, Assignments, Decisions, Actions, etc.) and metadata components (Variables, Formulas, Constants, Text Templates) that lack a description. Adding concise descriptions greatly improves readability, maintainability, and helps AI tools understand your automation intent.  
 **Severity:** 🔴 *Error*
 
 ### Missing Null Handler  
-_[MissingNullHandler](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/MissingNullHandler.ts)_ – When a **Get Records** operation finds no data, it returns `null`. Validate data by using a Decision element to check for a non-null result.  
+_[MissingNullHandler](packages/core/src/main/rules/MissingNullHandler.ts)_ – When a **Get Records** operation finds no data, it returns `null`. Validate data by using a Decision element to check for a non-null result.  
 **Severity:** 🟡 *Warning*
 
 ### Process Builder  
-_[ProcessBuilder](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/ProcessBuilder.ts)_ – Salesforce is transitioning away from Workflow Rules and Process Builder in favor of Flow. Begin migrating your organization’s automation to Flow.  
+_[ProcessBuilder](packages/core/src/main/rules/ProcessBuilder.ts)_ – Salesforce is transitioning away from Workflow Rules and Process Builder in favor of Flow. Begin migrating your organization’s automation to Flow.  
 **Severity:** 🟡 *Warning*
 
 ### Record ID as String
-_[RecordIdAsString](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/RecordIdAsString.ts)_ – Detects flows using a String variable named `recordId` as input when they could receive the entire record object instead. Since recent Salesforce releases, record pages and quick actions can pass the complete record, eliminating the need for an additional Get Records query and improving performance.  
+_[RecordIdAsString](packages/core/src/main/rules/RecordIdAsString.ts)_ – Detects flows using a String variable named `recordId` as input when they could receive the entire record object instead. Since recent Salesforce releases, record pages and quick actions can pass the complete record, eliminating the need for an additional Get Records query and improving performance.  
 **Severity:** 🔵 *Note*
 
 ### Recursive After Update  
-_[RecursiveAfterUpdate](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/RecursiveAfterUpdate.ts)_ – After-update flows are meant for modifying **other** records. Using them on the same record can cause recursion. Consider **before-save** flows for same-record updates.  
+_[RecursiveAfterUpdate](packages/core/src/main/rules/RecursiveAfterUpdate.ts)_ – After-update flows are meant for modifying **other** records. Using them on the same record can cause recursion. Consider **before-save** flows for same-record updates.  
 **Severity:** 🟡 *Warning*
 
 ### Same Record Field Updates  
-_[SameRecordFieldUpdates](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/SameRecordFieldUpdates.ts)_ – Similar to triggers, **before-save** contexts can update the same record via `$Record` without invoking DML.  
+_[SameRecordFieldUpdates](packages/core/src/main/rules/SameRecordFieldUpdates.ts)_ – Similar to triggers, **before-save** contexts can update the same record via `$Record` without invoking DML.  
 **Severity:** 🟡 *Warning*
 
 ### SOQL Query In A Loop  
-_[SOQLQueryInLoop](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/SOQLQueryInLoop.ts)_ – To prevent exceeding Apex governor limits, consolidate all SOQL queries at the end of the flow.  
+_[SOQLQueryInLoop](packages/core/src/main/rules/SOQLQueryInLoop.ts)_ – To prevent exceeding Apex governor limits, consolidate all SOQL queries at the end of the flow.  
 **Severity:** 🔴 *Error*
 
 ### Transform Instead of Loop
-_[TransformInsteadOfLoop](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/TransformInsteadOfLoop.ts)_ – Detects Loop elements that directly connect to Assignment elements. Transform elements handle collection manipulation in bulk operations, providing significant performance improvements over iterative loop-assignment patterns.  
+_[TransformInsteadOfLoop](packages/core/src/main/rules/TransformInsteadOfLoop.ts)_ – Detects Loop elements that directly connect to Assignment elements. Transform elements handle collection manipulation in bulk operations, providing significant performance improvements over iterative loop-assignment patterns.  
 **Severity:** 🔵 *Note*
 
 ### Trigger Order  
-_[TriggerOrder](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/TriggerOrder.ts)_ – Guarantee your flow execution order with the **Trigger Order** property introduced in Spring ’22.  
+_[TriggerOrder](packages/core/src/main/rules/TriggerOrder.ts)_ – Guarantee your flow execution order with the **Trigger Order** property introduced in Spring ’22.  
 **Severity:** 🔵 *Note*
 
 ### Unconnected Element  
-_[UnconnectedElement](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/UnconnectedElement.ts)_ – Avoid unconnected elements that are not used by the flow to keep flows efficient and maintainable.  
+_[UnconnectedElement](packages/core/src/main/rules/UnconnectedElement.ts)_ – Avoid unconnected elements that are not used by the flow to keep flows efficient and maintainable.  
 **Severity:** 🟡 *Warning*
 
 ### Unsafe Running Context  
-_[UnsafeRunningContext](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/UnsafeRunningContext.ts)_ – This flow is configured to run in **System Mode without Sharing**, granting all users permission to view and edit all data. This can lead to unsafe data access.  
+_[UnsafeRunningContext](packages/core/src/main/rules/UnsafeRunningContext.ts)_ – This flow is configured to run in **System Mode without Sharing**, granting all users permission to view and edit all data. This can lead to unsafe data access.  
 **Severity:** 🔴 *Error*
 
 ### Unused Variable  
-_[UnusedVariable](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/UnusedVariable.ts)_ – To maintain efficiency and manageability, avoid including variables that are never referenced.  
+_[UnusedVariable](packages/core/src/main/rules/UnusedVariable.ts)_ – To maintain efficiency and manageability, avoid including variables that are never referenced.  
 **Severity:** 🟡 *Warning*
 
 ---
@@ -295,12 +295,12 @@ By default, Lightning Flow Scanner runs **all** default rules and merges any cus
 
 | Distribution                                      | Best for                                      | Install / Use                                                                                           |
 |----------------------------------------------------------------|-----------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| **[Salesforce CLI Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/cli/README.md)** | Local development, scratch orgs, CI/CD        | `sf plugins install lightning-flow-scanner`                                                             |
-| **[VS Code Extension](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/vsx/README.md)** | Real-time scanning inside VS Code             | `code --install-extension ForceConfigControl.lightning-flow-scanner-vsx`                               |
+| **[Salesforce CLI Plugin](packages/cli/README.md)** | Local development, scratch orgs, CI/CD        | `sf plugins install lightning-flow-scanner`                                                             |
+| **[VS Code Extension](packages/vsx/README.md)** | Real-time scanning inside VS Code             | `code --install-extension ForceConfigControl.lightning-flow-scanner-vsx`                               |
 | **[Salesforce App (Managed Package)](https://github.com/Flow-Scanner/lightning-flow-scanner-app)** | Run scans directly inside a Salesforce org  | `sf package install --package 04tgK0000007M73QAE` |
-| **[Core Library](https://github.com/Flow-Scanner/lightning-flow-scanner/tree/main/packages/core)** (Node.js + Browser) | Custom tools, scripts, extensions, web apps   | `npm install -g @flow-scanner/lightning-flow-scanner-core`                                                 |
+| **[Core Library](packages/core)** (Node.js + Browser) | Custom tools, scripts, extensions, web apps   | `npm install -g @flow-scanner/lightning-flow-scanner-core`                                                 |
 
-**Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](https://github.com/Flow-Scanner/lightning-flow-scanner?tab=security-ov-file).
+**Privacy:** Zero user data collected. All processing is client-side. → See our [Security Policy](SECURITY.md).
 
 ### CICD Templates
 Ready-to-use CI/CD templates and a **native GitHub Action**.  
@@ -309,7 +309,7 @@ Ready-to-use CI/CD templates and a **native GitHub Action**.
 |----------------|-----------------------------------|------|
 | [Azure DevOps](docs/azure-templates.md)   | Full Project Scan                 | [`azure-pipelines-flow-FullScan.yml`](docs/templates/azure-devops/azure-pipelines-flow-FullScan.yml) |
 | [Azure DevOps](docs/azure-templates.md)   | Change-Based Scan                 | [`azure-pipelines-flow-changedFiles.yml`](docs/templates/azure-devops/azure-pipelines-flow-changedFiles.yml) |
-| **[GitHub Action](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/action/README.md)** | Native PR checks                              | [GitHub Marketplace](https://github.com/marketplace/actions/run-flow-scanner)                           |
+| **[GitHub Action](packages/action/README.md)** | Native PR checks                              | [GitHub Marketplace](https://github.com/marketplace/actions/run-flow-scanner)                           |
 | **[Copado Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado)** | Copado CI/CD pipelines                        | [Copado Marketplace](https://success.copado.com/s/listing-detail?language=en_US&recordId=a54P7000003G3gBIAS) |
 
 
@@ -441,7 +441,7 @@ const results = scan(
    cd example-flows && sf project deploy start
    ```
 
-   Navigate to the [Demo Readme](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/example-flows/README.md) for full details
+   Navigate to the [Demo Readme](example-flows/README.md) for full details
 
 7. Create a standalone UMD Module(Optional):
 
@@ -450,4 +450,4 @@ const results = scan(
    ```
    This creates UMD at `dist/lightning-flow-scanner-core.umd.js`.
 
-<p><strong>Want to help improve Lightning Flow Scanner? See our <a href="https://github.com/Flow-Scanner/lightning-flow-scanner?tab=contributing-ov-file">Contributing Guidelines</a></strong></p>
+**Want to help improve Lightning Flow Scanner? See our [Contributing Guidelines](CONTRIBUTING.md)**

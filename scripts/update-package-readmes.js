@@ -89,6 +89,44 @@ function ensureSeparator(content) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// NEW: Absolutify relative links for package READMEs (npm/open-vsx context)
+function absolutifyLinks(content) {
+  const repoBase = 'https://github.com/Flow-Scanner/lightning-flow-scanner';
+  const blobBase = `${repoBase}/blob/main/`;
+
+  // Special mappings for overview tabs
+  const specials = {
+    'SECURITY.md': `${repoBase}?tab=security-ov-file`,
+    'security.md': `${repoBase}?tab=security-ov-file`,
+    'CONTRIBUTING.md': `${repoBase}?tab=contributing-ov-file`,
+    'contributing.md': `${repoBase}?tab=contributing-ov-file`,
+  };
+
+  // Regex for markdown links: [text](relativePath) — skip absolute, anchors, root-absolute, mailto
+  content = content.replace(/\[([^\]]+)\]\(((?!https?:|#|\/|mailto:)[^\)]+)\)/g, (match, text, url) => {
+    const trimmedUrl = url.trim();
+    const newUrl = specials[trimmedUrl] || blobBase + trimmedUrl;
+    return `[${text}](${newUrl})`;
+  });
+
+  // Regex for HTML links: <a href="relativePath">
+  content = content.replace(/<a\s+href="((?!https?:|#|\/|mailto:)[^"]+)"/g, (match, url) => {
+    const trimmedUrl = url.trim();
+    const newUrl = specials[trimmedUrl] || blobBase + trimmedUrl;
+    return `<a href="${newUrl}"`;
+  });
+
+  // Regex for img src="relativePath" — skip absolute (e.g., raw.githubusercontent.com)
+  content = content.replace(/<img\s+[^>]*src="((?!https?:)[^"]+)"/g, (match, url) => {
+    const trimmedUrl = url.trim();
+    const newUrl = specials[trimmedUrl] || blobBase + trimmedUrl;
+    return match.replace(url, newUrl);
+  });
+
+  return content;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Shared content
 const sharedHeader = extractHeaderBlock(mainReadme);
 const defaultRules = ensureSeparator(extractSection(mainReadme, 'Default Rules'));
@@ -164,6 +202,9 @@ function syncPackageReadme(packagePath, packageName) {
   // 3. Sync shared sections
   content = replaceSection(content, 'Default Rules', defaultRules);
   content = replaceSection(content, 'Configuration', configuration);
+
+  // NEW: Absolutify links for package context (npm/open-vsx)
+  content = absolutifyLinks(content);
 
   // 4. Cleanup
   content = content

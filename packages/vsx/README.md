@@ -39,6 +39,7 @@
 
 
 
+
 ## Table of contens
 
 - **[Usage](#usage)**
@@ -240,11 +241,9 @@ Some rules have additional attributes to configure, such as the expression, that
 {
   "rules": {
     "APIVersion": {
-      "severity": "error",
       "expression": "===58" // comparison operator
     },
     "FlowName": {
-      "severity": "note",
       "expression": "[A-Za-z0-9]" // regular expression
     }
   }

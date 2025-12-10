@@ -6,7 +6,6 @@
     }
   ],
   "name": "FlowDemo",
-  "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "63.0"
 }

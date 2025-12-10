@@ -2,6 +2,43 @@
 const fs = require('fs');
 const path = require('path');
 
+// Absolutify relative links for NPM context
+function absolutifyLinks(content) {
+  const repoBase = 'https://github.com/Flow-Scanner/lightning-flow-scanner';
+  const blobBase = `${repoBase}/blob/main/`;
+
+  // Special mappings for overview tabs
+  const specials = {
+    'SECURITY.md': `${repoBase}?tab=security-ov-file`,
+    'security.md': `${repoBase}?tab=security-ov-file`,
+    'CONTRIBUTING.md': `${repoBase}?tab=contributing-ov-file`,
+    'contributing.md': `${repoBase}?tab=contributing-ov-file`,
+  };
+
+  // Regex for markdown links: [text](relativePath) — skip absolute, anchors, root-absolute, mailto
+  content = content.replace(/\[([^\]]+)\]\(((?!https?:|#|\/|mailto:)[^\)]+)\)/g, (match, text, url) => {
+    const trimmedUrl = url.trim();
+    const newUrl = specials[trimmedUrl] || blobBase + trimmedUrl;
+    return `[${text}](${newUrl})`;
+  });
+
+  // Regex for HTML links: <a href="relativePath">
+  content = content.replace(/<a\s+href="((?!https?:|#|\/|mailto:)[^"]+)"/g, (match, url) => {
+    const trimmedUrl = url.trim();
+    const newUrl = specials[trimmedUrl] || blobBase + trimmedUrl;
+    return `<a href="${newUrl}"`;
+  });
+
+  // Regex for img src="relativePath" — skip absolute (e.g., raw.githubusercontent.com)
+  content = content.replace(/<img\s+[^>]*src="((?!https?:)[^"]+)"/g, (match, url) => {
+    const trimmedUrl = url.trim();
+    const newUrl = specials[trimmedUrl] || blobBase + trimmedUrl;
+    return match.replace(url, newUrl);
+  });
+
+  return content;
+}
+
 // Read the source package.json
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
@@ -28,7 +65,11 @@ const publishPkg = {
   const source = path.join('..', '..', f);
   const dest = path.join('out', f);
   if (fs.existsSync(source)) {
-    fs.copyFileSync(source, dest);
+    let content = fs.readFileSync(source, 'utf8');
+    if (f.endsWith('.md') && f !== 'LICENSE.md') {  // Absolutify MD files except LICENSE
+      content = absolutifyLinks(content);
+    }
+    fs.writeFileSync(dest, content);
   }
 });
 
