@@ -4,7 +4,7 @@ These samples show two common ways to run the Lightning Flow Scanner from Azure 
 
 ### Included templates
 
-- [azure-pipelines-flow-FullScan.yml`](../docs/templates/azure-devops/azure-pipelines-flow-FullScan.yml)
+- [`azure-pipelines-flow-FullScan.yml`](../docs/templates/azure-devops/azure-pipelines-flow-FullScan.yml) 
   Runs the scanner across the entire repo (or the default metadata folder) every time the pipeline triggers. The job is intentionally small: check out the code, ensure the plugin is available, run `sf flow:scan --sarif`, and publish `results.sarif` via `PublishBuildArtifacts@1`. Add additional stages (tests, packaging) by extending this template.
 
 - [`azure-pipelines-flow-changedFiles.yml`](../docs/templates/azure-devops/azure-pipelines-flow-changedFiles.yml)  

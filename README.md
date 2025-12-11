@@ -52,7 +52,7 @@
 ## Default Rules
 
 <p>📌<strong>Tip:</strong> To link directly to a specific rule, use the full GitHub anchor link format. Example:</p>
-<p><em><a href="https://github.com/Flow-Scanner/lightning-flow-scanner#unsafe-running-context">https://github.com/Flow-Scanner/lightning-flow-scanner#unsafe-running-context</a></em></p>
+<p><em><a href="https://flow-scanner.github.io/lightning-flow-scanner/#unsafe-running-context">https://flow-scanner.github.io/lightning-flow-scanner/#unsafe-running-context</a></em></p>
 
 > Want to code a new rule? → See [How to Write a Rule](docs/write-a-rule.md)
 
@@ -276,7 +276,6 @@ New rules are introduced in Beta mode before being added to the default ruleset.
 {
   "betaMode": true
 }
-
 ```
 
 ### Rule Mode
