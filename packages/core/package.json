@@ -1,7 +1,7 @@
 {
   "name": "@flow-scanner/lightning-flow-scanner-core",
   "description": "A lightweight engine for Flow metadata in Node.js, and browser environments. Assess and enhance Salesforce Flow automations for best practices, security, governor limits, and performance issues.",
-  "version": "6.10.1",
+  "version": "6.10.2",
   "main": "out/index.js",
   "exports": {
     ".": {
