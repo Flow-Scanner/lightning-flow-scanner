@@ -32,7 +32,7 @@
 
 ---
 
-## Table of contens
+## Table of contents
 
 - **[Default Rules](#default-rules)**
 - **[Configuration](#configuration)**

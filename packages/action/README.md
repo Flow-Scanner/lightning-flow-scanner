@@ -42,7 +42,7 @@
 
 
 
-## Table of contens
+## Table of contents
 
 - **[Usage](#usage)**
   - [Run Manually](#run-manuallyworkflow_dispatch)

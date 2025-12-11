@@ -40,7 +40,7 @@
 
 
 
-## Table of contens
+## Table of contents
 
 - **[Usage](#usage)**
 - **[Default Rules](#default-rules)**
