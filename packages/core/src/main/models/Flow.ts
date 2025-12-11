@@ -17,6 +17,7 @@ export class Flow {
     "isAdditionalPermissionRequiredToRun", "migratedFromWorkflowRuleName",
     "triggerOrder", "environments", "segment",
   ] as const;
+
   /**
    * Metadata Tags of Salesforce Flow Nodes
    */
@@ -34,43 +35,39 @@ export class Flow {
     "recordUpdates",
     "recordRollbacks",
     "screens",
-    "start",
     "steps",
     "subflows",
     "waits",
     "transforms",
     "customErrors",
   ] as const;
+
   public static readonly RESOURCE_TAGS = ["textTemplates", "stages"] as const;
   public static readonly VARIABLE_TAGS = ["choices", "constants", "dynamicChoiceSets", "formulas", "variables"] as const;
-  public elements?: FlowElement[];
 
-  public fsPath?: string; //  This is only set in Node.js environments and is the resolved absolute path. In browser environments, it stays undefined.
-  public uri?: string;  // This is always set from the constructor's path parameter and represents the input path (could be relative, absolute, or virtual)
+  public elements: FlowElement[] = [];
+  public fsPath?: string;
+  public uri?: string;
   public interviewLabel?: string;
-  public label: string;
-  public name?: string;
+  public label: string = "";
+  public name: string = "unnamed";
   public processMetadataValues?: any;
-  public processType?: string;
+  public processType: string = "AutoLaunchedFlow";
+  public type: string = "";
   public root?: any;
   public start?: any;
   public startElementReference?: string;
   public startReference?: string;
-  public status?: string;
+  public startNode?: FlowNode;
+  public status: string = "";
   public triggerOrder?: number;
-  public type?: string;
-  /**
-   * XML to JSON conversion in raw format
-   */
   public xmldata: any;
 
   constructor(path?: string, data?: unknown) {
     if (path) {
-      this.uri = path;  // Always set general URI from input (file path or virtual)
+      this.uri = path;
       
-      // Only resolve fsPath in Node.js environments
-      // In browser with polyfills, fsPath stays undefined
-      if (typeof process !== 'undefined' && process.cwd) {
+      if (typeof process !== 'undefined' && typeof process.cwd === 'function') {
         this.fsPath = p.resolve(path);
       }
       
@@ -78,13 +75,16 @@ export class Flow {
       if (flowName.includes(".")) {
         flowName = flowName.split(".")[0];
       }
-      this.name = flowName;
+      this.name = flowName || "unnamed";
     }
+
     if (data) {
-      const hasFlowElement = typeof data === "object" && "Flow" in data;
+      const hasFlowElement = typeof data === "object" && data !== null && "Flow" in data;
       if (hasFlowElement) {
         this.xmldata = (data as any).Flow;
-      } else this.xmldata = data;
+      } else {
+        this.xmldata = data;
+      }
       this.preProcessNodes();
     }
   }
@@ -102,110 +102,137 @@ export class Flow {
   }
 
   public preProcessNodes() {
-    this.label = this.xmldata.label;
+    if (!this.xmldata) {
+      return;
+    }
+
+    // Extract top-level attributes
+    this.label = this.xmldata.label || "";
     this.interviewLabel = this.xmldata.interviewLabel;
-    this.processType = this.xmldata.processType;
+    this.processType = this.xmldata.processType || "AutoLaunchedFlow";
+    this.type = this.processType;
     this.processMetadataValues = this.xmldata.processMetadataValues;
     this.startElementReference = this.xmldata.startElementReference;
     this.start = this.xmldata.start;
-    this.status = this.xmldata.status;
-    this.type = this.xmldata.processType;
+    this.status = this.xmldata.status || "Draft";
     this.triggerOrder = this.xmldata.triggerOrder;
-    const allNodes: Array<FlowMetadata | FlowNode | FlowVariable> = [];
+
+    const allNodes: Array<FlowMetadata | FlowNode | FlowVariable | FlowResource> = [];
+
     for (const nodeType in this.xmldata) {
       // Skip xmlns and attributes
       if (nodeType.startsWith("@_") || nodeType === "@xmlns") {
         continue;
       }
+
       const data = this.xmldata[nodeType];
+
+      // Handle start node separately - store in startNode, don't add to elements
+      if (nodeType === "start") {
+        if (Array.isArray(data) && data.length > 0) {
+          this.startNode = new FlowNode(data[0].name || "start", "start", data[0]);
+        } else if (!Array.isArray(data)) {
+          this.startNode = new FlowNode(data.name || "start", "start", data);
+        }
+        continue;
+      }
+
+      // Process other node types
       if (Flow.ATTRIBUTE_TAGS.includes(nodeType as any)) {
-        if (Array.isArray(data)) {
-          for (const node of data) {
-            allNodes.push(new FlowMetadata(node.name, nodeType, node));
-          }
-        } else {
-          allNodes.push(new FlowMetadata(data.name, nodeType, data));
-        }
+        this.processNodeType(data, nodeType, allNodes, FlowMetadata);
       } else if (Flow.VARIABLE_TAGS.includes(nodeType as any)) {
-        if (Array.isArray(data)) {
-          for (const node of data) {
-            allNodes.push(new FlowVariable(node.name, nodeType, node));
-          }
-        } else {
-          allNodes.push(new FlowVariable(data.name, nodeType, data));
-        }
+        this.processNodeType(data, nodeType, allNodes, FlowVariable);
       } else if (Flow.NODE_TAGS.includes(nodeType as any)) {
-        if (Array.isArray(data)) {
-          for (const node of data) {
-            allNodes.push(new FlowNode(node.name, nodeType, node));
-          }
-        } else {
-          allNodes.push(new FlowNode(data.name, nodeType, data));
-        }
+        this.processNodeType(data, nodeType, allNodes, FlowNode);
       } else if (Flow.RESOURCE_TAGS.includes(nodeType as any)) {
-        if (Array.isArray(data)) {
-          for (const node of data) {
-            allNodes.push(new FlowResource(node.name, nodeType, node));
-          }
-        } else {
-          allNodes.push(new FlowResource(data.name, nodeType, data));
-        }
+        this.processNodeType(data, nodeType, allNodes, FlowResource);
       }
     }
+
     this.elements = allNodes;
     this.startReference = this.findStart();
   }
+
+  private processNodeType<T extends FlowElement>(
+    data: any,
+    nodeType: string,
+    allNodes: FlowElement[],
+    NodeClass: new (name: string, subtype: string, data: any) => T
+  ) {
+    if (Array.isArray(data)) {
+      for (const node of data) {
+        allNodes.push(new NodeClass(node.name, nodeType, node));
+      }
+    } else {
+      allNodes.push(new NodeClass(data.name, nodeType, data));
+    }
+  }
+
+  private findStart(): string {
+  // Priority 1: Explicit startElementReference
+  if (this.startElementReference) {
+    return this.startElementReference;
+  }
+
+  // Priority 2: Start node with regular connector
+  if (this.startNode && this.startNode.connectors && this.startNode.connectors.length > 0) {
+    const connector = this.startNode.connectors[0];
+    // FlowElementConnector stores targetReference in the 'reference' property
+    if (connector.reference) {
+      return connector.reference;
+    }
+  }
+
+  // Priority 3: Start node with scheduledPaths (async flows)
+  // scheduledPaths can be an array or a single object
+  if (this.startNode?.element) {
+    const scheduledPaths = this.startNode.element['scheduledPaths'];
+    if (scheduledPaths) {
+      const paths = Array.isArray(scheduledPaths) ? scheduledPaths : [scheduledPaths];
+      if (paths.length > 0 && paths[0]?.connector) {
+        const targetRef = paths[0].connector.targetReference;
+        if (targetRef) {
+          return targetRef;
+        }
+      }
+    }
+  }
+
+  // No valid start found
+  return "";
+}
 
   public toXMLString(): string {
     try {
       return this.generateDoc();
     } catch (exception) {
-      console.warn(`Unable to write xml, caught an error ${exception.toString()}`);
+      const errorMsg = exception instanceof Error ? exception.message : String(exception);
+      console.warn(`Unable to write xml, caught an error: ${errorMsg}`);
       return "";
     }
   }
 
-  private findStart() {
-    let start = "";
-    const flowElements: FlowNode[] = this.elements!.filter(
-      (node) => node instanceof FlowNode
-    ) as FlowNode[];
-    if (this.startElementReference) {
-      start = this.startElementReference;
-    } else if (
-      flowElements.find((n) => {
-        return n.subtype === "start";
-      })
-    ) {
-      const startElement = flowElements.find((n) => {
-        return n.subtype === "start";
-      });
-      start = startElement!.connectors[0]["reference"];
-    }
-    return start;
-  }
-
   private generateDoc(): string {
-    // eslint-disable-next-line sonarjs/no-clear-text-protocols
     const flowXmlNamespace = "http://soap.sforce.com/2006/04/metadata";
     const builderOptions = {
-      attributeNamePrefix: "@_",               // Matches parsing (key prefix)
-      format: true,                            // Pretty-print (indented; expands empties to </tag>)
-      ignoreAttributes: false,                 // Preserve attrs like xmlns
-      suppressBooleanAttributes: false,        // NEW: Force ="true" for boolean-like strings (fixes missing value)
-      suppressEmptyNode: false                 // Keep empty tags (but doesn't force self-closing in pretty)
+      attributeNamePrefix: "@_",
+      format: true,
+      ignoreAttributes: false,
+      suppressBooleanAttributes: false,
+      suppressEmptyNode: false
     };
+
     const builder = new XMLBuilder(builderOptions);
-    // Fallback: Inject xmlns as attribute if missing
     const xmldataWithNs = { ...this.xmldata };
+
     if (!xmldataWithNs["@_xmlns"]) {
       xmldataWithNs["@_xmlns"] = flowXmlNamespace;
     }
-    // Optional: Add xsi if needed (often in parsed data; test has it in root)
+
     if (!xmldataWithNs["@_xmlns:xsi"]) {
       xmldataWithNs["@_xmlns:xsi"] = "http://www.w3.org/2001/XMLSchema-instance";
     }
-    // Build: Wrap in { Flow: ... }
+
     const rootObj = { Flow: xmldataWithNs };
     return builder.build(rootObj);
   }

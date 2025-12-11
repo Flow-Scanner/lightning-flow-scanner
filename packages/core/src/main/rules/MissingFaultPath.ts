@@ -1,3 +1,4 @@
+
 import * as core from "../internals/internals";
 import { RuleCommon } from "../models/RuleCommon";
 import { IRuleDefinition } from "../interfaces/IRuleDefinition";
@@ -33,14 +34,13 @@ export class MissingFaultPath extends RuleCommon implements IRuleDefinition {
     if (!this.applicableElements.includes(proxyNode.subtype)) {
       return false;
     }
-
-    // Exclude specific wait element subtypes that don't need fault paths
+    
     if (proxyNode.subtype === "waits") {
       const elementSubtype: string = (proxyNode.element as Record<string, unknown>)?.["elementSubtype"] as string;
       const excludedSubtypes: string[] = ["WaitDuration", "WaitDate"];
       return !excludedSubtypes.includes(elementSubtype);
     }
-
+    
     return true;
   }
 
@@ -51,26 +51,26 @@ export class MissingFaultPath extends RuleCommon implements IRuleDefinition {
   ): core.Violation[] {
     const compiler = new core.Compiler();
     const results: core.Violation[] = [];
-
+    
     const elementsWhereFaultPathIsApplicable = (
-      flow.elements?.filter((node) => {
+      flow.elements.filter((node) => {
         const proxyNode = node as unknown as core.FlowNode;
         return this.isValidSubtype(proxyNode);
       }) as core.FlowNode[]
     ).map((e) => e.name);
 
-    const isRecordBeforeSave = flow.start.triggerType === "RecordBeforeSave";
+    // Safely check if this is a RecordBeforeSave flow
+    const isRecordBeforeSave = this.isRecordBeforeSaveFlow(flow);
 
     const visitCallback = (element: core.FlowNode) => {
       if (
         !element?.connectors?.find((connector) => connector.type === "faultConnector") &&
         elementsWhereFaultPathIsApplicable.includes(element.name)
       ) {
-        // Skip record updates in before-save flows (they're safe by design)
         if (isRecordBeforeSave && element.subtype === "recordUpdates") {
           return;
         }
-
+        
         if (!this.isPartOfFaultHandlingFlow(element, flow)) {
           if (!suppressions.has(element.name)) {
             results.push(new core.Violation(element));
@@ -79,27 +79,55 @@ export class MissingFaultPath extends RuleCommon implements IRuleDefinition {
       }
     };
 
-    compiler.traverseFlow(flow, flow.startReference, visitCallback);
+    const startRef = this.getStartReference(flow);
+    if (startRef) {
+      compiler.traverseFlow(flow, startRef, visitCallback);
+    }
+
     return results;
   }
 
+  /**
+   * Safely determine if this is a RecordBeforeSave flow.
+   * Checks the startNode property for trigger type.
+   */
+  private isRecordBeforeSaveFlow(flow: core.Flow): boolean {
+    const startNode = this.getStartNode(flow);
+    
+    if (startNode?.element) {
+      const triggerType = (startNode.element as Record<string, unknown>)?.["triggerType"];
+      return triggerType === "RecordBeforeSave";
+    }
+
+    // Fallback: check raw start data if startNode is not available
+    if (flow.start && typeof flow.start === "object") {
+      const triggerType = (flow.start as Record<string, unknown>)?.["triggerType"];
+      return triggerType === "RecordBeforeSave";
+    }
+
+    return false;
+  }
+
   private isPartOfFaultHandlingFlow(element: core.FlowNode, flow: core.Flow): boolean {
-    const flowelements = flow.elements?.filter(
-      (el) => el instanceof core.FlowNode
-    ) as core.FlowNode[];
+    const flowelements = flow.elements.filter(
+      (el): el is core.FlowNode => el instanceof core.FlowNode
+    );
 
     for (const otherElement of flowelements) {
       if (otherElement !== element) {
         if (
           otherElement.connectors?.find(
             (connector) =>
-              connector.type === "faultConnector" && connector.reference === element.name
+              connector.type === "faultConnector" && 
+              connector.reference && 
+              connector.reference === element.name
           )
         ) {
           return true;
         }
       }
     }
+
     return false;
   }
 }

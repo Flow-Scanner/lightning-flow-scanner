@@ -9,6 +9,7 @@
     "sourceMap": false,
     "rootDir": "src",
     "strict": false,
+    "strictNullChecks": true,
     "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": true

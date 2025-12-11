@@ -1,15 +1,17 @@
 import { RuleInfo } from "./RuleInfo";
 import * as core from "../internals/internals";
+
 export abstract class RuleCommon {
   public description: string;
   public docRefs: Array<{ label: string; path: string }> = [];
-  public isConfigurable: boolean; // Auto-detected by checking if the implemented check() method actually uses "options."
+  public isConfigurable: boolean;
   public label: string;
   public name: string;
   public severity?: string;
   public supportedTypes: string[];
   public suppressionElement?: string;
   public uri?: string;
+
   constructor(info: RuleInfo, optional?: { severity?: string }) {
     this.name = info.name;
     this.supportedTypes = info.supportedTypes;
@@ -29,40 +31,66 @@ export abstract class RuleCommon {
     this.severity = optional?.severity ?? "error";
     this.suppressionElement = info.suppressionElement;
   }
-  /**
-   * execute() – automatic suppression
-   */
+
   public execute(
     flow: core.Flow,
     options?: object,
     suppressions: string[] = []
   ): core.RuleResult {
-    // Wildcard suppression disables entire rule
     if (suppressions.includes("*")) {
       return new core.RuleResult(this as any, []);
     }
-    // Convert to Set for fast lookup
     const suppSet = new Set(suppressions);
-    // Raw violations from rule
     let violations = this.check(flow, options, suppSet);
-    // Automatically filter suppressed violations by their .name
     violations = violations.filter(v => !suppSet.has(v.name));
-    // Wrap into RuleResult
     return new core.RuleResult(this as any, violations);
   }
-  /**
-   * Rules implement this. They should return *all* violations,
-   * NOT pre-filter suppressed ones (unless they need early-exit performance).
-   */
+
   protected abstract check(
     flow: core.Flow,
     options: object | undefined,
     suppressions: Set<string>
   ): core.Violation[];
-  /**
-   * Legacy/manual suppression helper (still available for early exits)
-   */
+
   protected isSuppressed(name: string, suppressions: Set<string>): boolean {
     return suppressions.has(name);
+  }
+
+  /**
+   * Get the start node (the special <start> element).
+   * This is now stored separately in flow.startNode, not in flow.elements.
+   * 
+   * @param flow - The Flow instance
+   * @returns The start FlowNode or undefined if not found
+   */
+  protected getStartNode(flow: core.Flow): core.FlowNode | undefined {
+    return flow.startNode;
+  }
+
+  /**
+   * Get the reference name of the first actual element (what the flow starts at).
+   * This is the element that comes AFTER the start node.
+   * 
+   * @param flow - The Flow instance
+   * @returns The start reference name or undefined
+   */
+  protected getStartReference(flow: core.Flow): string | undefined {
+    return flow.startReference || undefined;
+  }
+
+  /**
+   * Find the INDEX of the first actual element in a FlowNode array.
+   * Useful for rules that need to iterate by index.
+   * 
+   * @param flow - The Flow instance
+   * @param flowElements - Array of FlowNodes (typically from flow.elements)
+   * @returns The index of the starting element, or -1 if not found
+   */
+  protected findStartIndex(flow: core.Flow, flowElements: core.FlowNode[]): number {
+    const startRef = this.getStartReference(flow);
+    if (!startRef) {
+      return -1;
+    }
+    return flowElements.findIndex(n => n.name === startRef);
   }
 }

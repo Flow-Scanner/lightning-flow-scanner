@@ -1,6 +1,7 @@
 import * as core from "../internals/internals";
 import { RuleCommon } from "../models/RuleCommon";
 import { IRuleDefinition } from "../interfaces/IRuleDefinition";
+
 export class DuplicateDMLOperation extends RuleCommon implements IRuleDefinition {
   constructor() {
     super({
@@ -12,31 +13,38 @@ export class DuplicateDMLOperation extends RuleCommon implements IRuleDefinition
       docRefs: [],
     });
   }
+
   protected check(
     flow: core.Flow,
     _options: object | undefined,
     suppressions: Set<string>
   ): core.Violation[] {
     const flowElements: core.FlowNode[] = flow.elements.filter(
-      (node) => node instanceof core.FlowNode
-    ) as core.FlowNode[];
-    const processedElementIndexes: number[] = [];
-    const unconnectedElementIndexes: number[] = [];
-    const DuplicateDMLOperations: core.FlowNode[] = [];
-    const startingNode = this.findStart(flow);
+      (node): node is core.FlowNode => node instanceof core.FlowNode
+    );
+
+    // Use the helper to find the starting element index
+    const startingNode = this.findStartIndex(flow, flowElements);
     if (startingNode === -1) {
       return [];
     }
+
+    const processedElementIndexes: number[] = [];
+    const unconnectedElementIndexes: number[] = [];
+    const DuplicateDMLOperations: core.FlowNode[] = [];
     let dmlFlag = false;
     let indexesToProcess = [startingNode];
+
     do {
       indexesToProcess = indexesToProcess.filter(
         (index) => !processedElementIndexes.includes(index)
       );
+
       if (indexesToProcess.length > 0) {
         for (const [index, element] of flowElements.entries()) {
           if (indexesToProcess.includes(index)) {
             const references: string[] = [];
+            
             if (element.connectors && element.connectors.length > 0) {
               for (const connector of element.connectors) {
                 if (connector.reference) {
@@ -44,15 +52,19 @@ export class DuplicateDMLOperation extends RuleCommon implements IRuleDefinition
                 }
               }
             }
+
             dmlFlag = this.flagDML(element, dmlFlag);
+
             if (references.length > 0) {
               const elementsByReferences = flowElements.filter((el) =>
                 references.includes(el.name)
               );
+
               for (const nextElement of elementsByReferences) {
                 const nextIndex = flowElements.findIndex(
                   (el) => nextElement.name === el.name
                 );
+
                 if (nextElement.subtype === "screens") {
                   if (
                     dmlFlag &&
@@ -64,11 +76,13 @@ export class DuplicateDMLOperation extends RuleCommon implements IRuleDefinition
                     }
                   }
                 }
+
                 if (!processedElementIndexes.includes(nextIndex)) {
                   indexesToProcess.push(nextIndex);
                 }
               }
             }
+
             processedElementIndexes.push(index);
           }
         }
@@ -83,22 +97,13 @@ export class DuplicateDMLOperation extends RuleCommon implements IRuleDefinition
       processedElementIndexes.length + unconnectedElementIndexes.length <
       flowElements.length
     );
-    return DuplicateDMLOperations.map(
-      (det) => new core.Violation(det)
-    );
+
+    return DuplicateDMLOperations.map((det) => new core.Violation(det));
   }
-  private findStart(flow: core.Flow): number {
-    const flowElements: core.FlowNode[] = flow.elements.filter(
-      (node) => node instanceof core.FlowNode
-    ) as core.FlowNode[];
-    if (flow.startElementReference) {
-      return flowElements.findIndex((n) => n.name === flow.startElementReference);
-    } else {
-      return flowElements.findIndex((n) => n.subtype === "start");
-    }
-  }
+
   private flagDML(element: core.FlowNode, dmlFlag: boolean): boolean {
     const dmlStatementTypes = ["recordDeletes", "recordUpdates", "recordCreates"];
+    
     if (dmlStatementTypes.includes(element.subtype)) {
       return true;
     } else if (
