@@ -22,3 +22,4 @@ packages/vsx/README.md
 example-flows/.sf/
 example-flows/.sfdx/
 packages/core/tsconfig.tsbuildinfo
+.npmrc
