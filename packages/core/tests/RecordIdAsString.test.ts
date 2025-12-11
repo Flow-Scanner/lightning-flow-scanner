@@ -30,9 +30,6 @@ describe("RecordIdAsString", () => {
     const results: core.ScanResult[] = core.scan(flows, ruleConfig);
     expect(results.length).toBeGreaterThan(0);
     
-    // Debug output
-    console.log("All rule results:", results[0].ruleResults.map(r => r.ruleName));
-    
     const ruleResult = results[0].ruleResults.find(r => r.ruleName === "RecordIdAsString");
     expect(ruleResult).toBeDefined();
     expect(ruleResult.occurs).toBe(true);

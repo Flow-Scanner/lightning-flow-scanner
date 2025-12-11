@@ -1,3 +1,4 @@
+
 import * as core from "../internals/internals";
 import { RuleCommon } from "../models/RuleCommon";
 import { IRuleDefinition } from "../interfaces/IRuleDefinition";
@@ -20,17 +21,19 @@ export class UnconnectedElement extends RuleCommon implements IRuleDefinition {
     suppressions: Set<string>
   ): core.Violation[] {
     const connectedElements: Set<string> = new Set<string>();
+    
     const logConnected = (element: core.FlowNode) => {
       connectedElements.add(element.name);
     };
 
-    const flowElements: core.FlowNode[] = flow.elements!.filter(
-      (node) => node instanceof core.FlowNode
-    ) as core.FlowNode[];
+    const flowElements: core.FlowNode[] = flow.elements.filter(
+      (node): node is core.FlowNode => node instanceof core.FlowNode
+    );
 
-    const startIndex = this.findStart(flowElements);
-    if (startIndex !== -1) {
-      new core.Compiler().traverseFlow(flow, flowElements[startIndex].name, logConnected);
+    // Use the helper to get the start reference
+    const startRef = this.getStartReference(flow);
+    if (startRef) {
+      new core.Compiler().traverseFlow(flow, startRef, logConnected);
     }
 
     const unconnectedElements: core.FlowNode[] = flowElements.filter(
@@ -38,11 +41,5 @@ export class UnconnectedElement extends RuleCommon implements IRuleDefinition {
     );
 
     return unconnectedElements.map((det) => new core.Violation(det));
-  }
-
-  private findStart(nodes: core.FlowNode[]) {
-    return nodes.findIndex((n) => {
-      return n.subtype === "start";
-    });
   }
 }
