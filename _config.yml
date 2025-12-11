@@ -1,0 +1,10 @@
+title: Lightning Flow Scanner
+description: Documentation for Lightning Flow Scanner
+
+theme: jekyll-theme-cayman
+
+include:
+  - CONTRIBUTING.md
+  - SECURITY.md
+  - README.md
+  - LICENSE.md
