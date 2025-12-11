@@ -44,8 +44,9 @@ export class Flow {
   public static readonly RESOURCE_TAGS = ["textTemplates", "stages"] as const;
   public static readonly VARIABLE_TAGS = ["choices", "constants", "dynamicChoiceSets", "formulas", "variables"] as const;
   public elements?: FlowElement[];
-  public fsPath?: string;
-  public uri?: string;  // General source URI/path (file or virtual); set from constructor input
+
+  public fsPath?: string; //  This is only set in Node.js environments and is the resolved absolute path. In browser environments, it stays undefined.
+  public uri?: string;  // This is always set from the constructor's path parameter and represents the input path (could be relative, absolute, or virtual)
   public interviewLabel?: string;
   public label: string;
   public name?: string;
