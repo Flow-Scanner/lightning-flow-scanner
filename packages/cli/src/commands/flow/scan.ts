@@ -215,6 +215,11 @@ export default class Scan extends SfCommand<Output> {
       "lineNumber",
       "columnNumber",
       "metaType",
+      "dataType",
+      "locationX",
+      "locationY",
+      "connectsTo",
+      "expression",
     ];
 
     const records = flatResults.map(r => ({
@@ -227,6 +232,11 @@ export default class Scan extends SfCommand<Output> {
       lineNumber: r.lineNumber ?? "",
       columnNumber: r.columnNumber ?? "",
       metaType: r.metaType ?? "",
+      dataType: r.dataType ?? "",
+      locationX: r.locationX ?? "",
+      locationY: r.locationY ?? "",
+      connectsTo: r.connectsTo ?? "",
+      expression: r.expression ?? "",
     }));
 
     return csvStringify(records, {
@@ -238,6 +248,8 @@ export default class Scan extends SfCommand<Output> {
   private displayHumanReadable(flatResults: any[], scanResults: ScanResult[]) {
     if (flatResults.length > 0) {
       const resultsByFlow: Record<string, any[]> = {};
+      
+      // Group results by flow - keep it simple, just add file path info
       for (const r of flatResults) {
         resultsByFlow[r.flowName] = resultsByFlow[r.flowName] ?? [];
         resultsByFlow[r.flowName].push({
@@ -251,15 +263,17 @@ export default class Scan extends SfCommand<Output> {
       }
 
       for (const flowName in resultsByFlow) {
-        const match = scanResults.find((s) => s.flow.label === flowName);
+        const match = scanResults.find((s) => s.flow.name === flowName);
         if (match) {
+          
           this.styledHeader(
-            `Flow: ${chalk.yellow(flowName)} ${chalk.bgYellow(
+            `Flow: ${chalk.yellow(match.flow.label || flowName)} ${chalk.bgYellow(
               `(${match.flow.name}.flow-meta.xml)`
             )} ${chalk.red(`(${resultsByFlow[flowName].length} results)`)}`
           );
           this.log(chalk.italic("Type: " + match.flow.type));
           this.log("");
+          
           this.table({
             data: resultsByFlow[flowName],
             columns: ["rule", "type", "name", "severity", "line", "column"],
@@ -281,7 +295,6 @@ export default class Scan extends SfCommand<Output> {
     this.log("");
   }
 
-  // Convert flat results back to CLI's Violation format for backwards compatibility
   private convertToCliViolations(flatResults: any[]): any[] {
     return flatResults.map(r => ({
       flowName: r.flowName,
@@ -294,7 +307,11 @@ export default class Scan extends SfCommand<Output> {
       lineNumber: r.lineNumber,
       columnNumber: r.columnNumber,
       metaType: r.metaType,
-      details: r.details,
+      dataType: r.dataType,
+      locationX: r.locationX,
+      locationY: r.locationY,
+      connectsTo: r.connectsTo,
+      expression: r.expression,
     }));
   }
 }
