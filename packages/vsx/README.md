@@ -1,24 +1,21 @@
 <p align="center">
-  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/LICENSE.md">
-    <img src="https://img.shields.io/github/license/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="License">
+  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/stargazers">
+    <img src="https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner?label=Stargazers&style=flat-square" alt="GitHub stars">
   </a>
-  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/Flow-Scanner/lightning-flow-scanner.svg?style=flat-square" alt="Contributors">
-  </a>
-  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
-    <img src="https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=core&style=flat-square" alt="Core version">
+   <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+    <img src="https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=Core&style=flat-square" alt="Core version">
   </a>
   <a href="https://www.npmjs.com/package/lightning-flow-scanner">
-    <img src="https://img.shields.io/npm/v/lightning-flow-scanner?label=cli&style=flat-square" alt="CLI version">
+    <img src="https://img.shields.io/npm/v/lightning-flow-scanner?label=CLI&style=flat-square" alt="CLI version">
   </a>
   <a href="https://open-vsx.org/extension/ForceConfigControl/lightning-flow-scanner-vsx">
-    <img src="https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=Open%20VSX&style=flat-square" alt="Open VSX">
-  </a>
-  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/stargazers">
-    <img src="https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner?style=flat-square" alt="GitHub stars">
+    <img src="https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=VS%20Code&style=flat-square" alt="Open VSX">
   </a>
   <a href="https://www.npmjs.com/package/lightning-flow-scanner-core">
-    <img src="https://img.shields.io/badge/downloads-510k%2B-success?style=flat-square" alt="Total Downloads">
+    <img src="https://img.shields.io/npm/dt/lightning-flow-scanner-core?label=Downloads<v6&style=flat-square" alt="Downloads(<v6>)">
+  </a>
+   <a href="https://www.npmjs.com/package/lightning-flow-scanner-core">
+    <img src="https://img.shields.io/npm/dt/@flow-scanner/lightning-flow-scanner-core?label=Downloads>v6&style=flat-square" alt="Downloads(>v6)">
   </a>
 </p>
 
@@ -36,6 +33,7 @@
 </p>
 
 ---
+
 
 
 
