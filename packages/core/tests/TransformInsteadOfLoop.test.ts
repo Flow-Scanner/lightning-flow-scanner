@@ -5,7 +5,7 @@ import * as core from "../src";
 describe("TransformInsteadOfLoop", () => {
   const violating_uri = path.join(
     __dirname,
-    "../../../example-flows/force-app/main/default/flows/testing/Loop_Assignment_Pattern.flow-meta.xml"
+    "../../../example-flows/force-app/testing/Loop_Assignment_Pattern.flow-meta.xml"
   );
 
   it("should flag loop that connects directly to assignment", async () => {

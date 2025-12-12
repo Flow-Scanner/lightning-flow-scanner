@@ -3,8 +3,8 @@ import * as path from "path";
 import { describe, it, expect } from "@jest/globals";
 
 describe("FlowName", () => {
-  const example_uri = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/demo/FlowNamingConvention.flow-meta.xml");
-  const fixed_uri = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/testing/Flow_Naming_Convention_Fixed.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/FlowNamingConvention.flow-meta.xml");
+  const fixed_uri = path.join(__dirname, "../../../example-flows/force-app/testing/Flow_Naming_Convention_Fixed.flow-meta.xml");
   
   it("should have a result when not in line with conventions", async () => {
     const flows = await core.parse([example_uri]);

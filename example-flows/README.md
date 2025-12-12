@@ -39,5 +39,5 @@ Follow these steps to get up and running with the Lightning Flow Scanner Example
 2. Deploy Flows(optional)
 
    ```bash
-   sf project deploy start --source-dir force-app/main/default
+   sf project deploy start --source-dir force-app
    ```

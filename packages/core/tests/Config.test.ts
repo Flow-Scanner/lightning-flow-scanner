@@ -4,7 +4,7 @@ import * as path from "path";
 import * as core from "../src";
 
 describe("Rule Configurations ", () => {
-  const example_uri1 = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/demo/Unconnected_Element.flow-meta.xml");
+  const example_uri1 = path.join(__dirname, "../../../example-flows/force-app/demo/Unconnected_Element.flow-meta.xml");
 
   // eslint-disable-next-line jest/no-disabled-tests
   it.skip("should use default when no configuration is provided", async () => {

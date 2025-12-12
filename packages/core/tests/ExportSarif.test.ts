@@ -3,8 +3,8 @@ import * as path from "path";
 import * as core from "../src";
 
 describe("exportSarif()", () => {
-  const badFlowPath = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/demo/DML_Statement_In_A_Loop.flow-meta.xml");
-  const goodFlowPath = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/testing/Duplicate_DML_Operation_Fixed.flow-meta.xml");
+  const badFlowPath = path.join(__dirname, "../../../example-flows/force-app/demo/DML_Statement_In_A_Loop.flow-meta.xml");
+  const goodFlowPath = path.join(__dirname, "../../../example-flows/force-app/testing/Duplicate_DML_Operation_Fixed.flow-meta.xml");
   const config = {
     ruleMode: "isolated",
     rules: {
@@ -23,7 +23,7 @@ describe("exportSarif()", () => {
     expect(json.runs[0].tool.driver.name).toBe("Lightning Flow Scanner");
     // Artifacts: real path (relative or absolute containing the substring)
     const artifactUri = json.runs[0].artifacts[0].location.uri;
-    expect(artifactUri).toContain("force-app/main/default/flows/demo/DML_Statement_In_A_Loop.flow-meta.xml");
+    expect(artifactUri).toContain("force-app/demo/DML_Statement_In_A_Loop.flow-meta.xml");
     // Results: one issue
     const resultsArray = json.runs[0].results;
     expect(resultsArray).toHaveLength(1);

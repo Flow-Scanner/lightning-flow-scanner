@@ -5,7 +5,7 @@ import { describe, it, expect } from "@jest/globals";
 describe("Rule Enabled Flag", () => {
   const example_uri = path.join(
     __dirname, 
-    "../../../example-flows/force-app/main/default/flows/demo/Outdated_API_Version.flow-meta.xml"
+    "../../../example-flows/force-app/demo/Outdated_API_Version.flow-meta.xml"
   );
 
   it("should not run a rule when enabled is set to false", async () => {

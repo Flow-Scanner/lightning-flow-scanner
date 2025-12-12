@@ -4,7 +4,7 @@ import * as path from "path";
 import * as core from "../src";
 
 describe("SOQLQueryInLoop ", () => {
-  const example_uri = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/demo/SOQL_Query_In_A_Loop.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/SOQL_Query_In_A_Loop.flow-meta.xml");
 
   const config = {
     ruleMode: "isolated",

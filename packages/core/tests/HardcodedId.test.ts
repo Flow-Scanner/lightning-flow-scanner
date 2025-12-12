@@ -4,7 +4,7 @@ import * as path from "path";
 import { describe, it, expect } from "@jest/globals";
 
 describe("HardcodedId", () => {
-  const example_uri = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/demo/Hardcoded_Id.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Hardcoded_Id.flow-meta.xml");
 
   it("there should be one result for the rule HardcodedIds", async () => {
     const flows = await core.parse([example_uri]);

@@ -5,12 +5,12 @@ import * as core from "../src";
 describe("MissingRecordTriggerFilter", () => {
   const violating_uri = path.join(
     __dirname,
-    "../../../example-flows/force-app/main/default/flows/demo/TriggerWithoutFilter.flow-meta.xml"
+    "../../../example-flows/force-app/demo/Trigger_Without_Filter.flow-meta.xml"
   );
   
   const fixed_uri = path.join(
     __dirname,
-    "../../../example-flows/force-app/main/default/flows/testing/TriggerWithoutFilter_Fixed.flow-meta.xml"
+    "../../../example-flows/force-app/testing/TriggerWithoutFilter_Fixed.flow-meta.xml"
   );
 
   it("should return a violation for flow without filters", async () => {

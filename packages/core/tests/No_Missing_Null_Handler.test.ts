@@ -5,7 +5,7 @@ import * as core from "../src";
 describe("MissingNullHandler", () => {
   const example_uri = path.join(
     __dirname,
-    "../../../example-flows/force-app/main/default/flows/testing/No_Missing_Null_Handler.flow-meta.xml"
+    "../../../example-flows/force-app/testing/No_Missing_Null_Handler.flow-meta.xml"
   );
 
   it("should not return a result", async () => {

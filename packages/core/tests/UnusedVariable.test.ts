@@ -5,8 +5,8 @@ import { ParsedFlow } from "../src/main/models/ParsedFlow";
 import { describe, it, expect } from "@jest/globals";
 
 describe("UnusedVariable Rule", () => {
-  const example_uri = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/demo/Unused_Variable.flow-meta.xml");
-  const fixed_uri = path.join(__dirname, "../../../example-flows/force-app/main/default/flows/testing/Unused_Variable_Fixed.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Unused_Variable.flow-meta.xml");
+  const fixed_uri = path.join(__dirname, "../../../example-flows/force-app/testing/Unused_Variable_Fixed.flow-meta.xml");
 
   it("there should be a result for unused variables", async () => {
     const flows = await core.parse([example_uri]);
