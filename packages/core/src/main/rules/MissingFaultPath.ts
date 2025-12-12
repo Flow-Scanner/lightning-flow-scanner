@@ -1,4 +1,3 @@
-
 import * as core from "../internals/internals";
 import { RuleCommon } from "../models/RuleCommon";
 import { IRuleDefinition } from "../interfaces/IRuleDefinition";
@@ -35,6 +34,7 @@ export class MissingFaultPath extends RuleCommon implements IRuleDefinition {
       return false;
     }
     
+    // Exclude specific wait element subtypes that don't need fault paths
     if (proxyNode.subtype === "waits") {
       const elementSubtype: string = (proxyNode.element as Record<string, unknown>)?.["elementSubtype"] as string;
       const excludedSubtypes: string[] = ["WaitDuration", "WaitDate"];
@@ -59,7 +59,7 @@ export class MissingFaultPath extends RuleCommon implements IRuleDefinition {
       }) as core.FlowNode[]
     ).map((e) => e.name);
 
-    // Safely check if this is a RecordBeforeSave flow
+    // Check if this is a RecordBeforeSave flow
     const isRecordBeforeSave = this.isRecordBeforeSaveFlow(flow);
 
     const visitCallback = (element: core.FlowNode) => {
@@ -67,6 +67,7 @@ export class MissingFaultPath extends RuleCommon implements IRuleDefinition {
         !element?.connectors?.find((connector) => connector.type === "faultConnector") &&
         elementsWhereFaultPathIsApplicable.includes(element.name)
       ) {
+        // Skip record updates in before-save flows (they're safe by design)
         if (isRecordBeforeSave && element.subtype === "recordUpdates") {
           return;
         }
@@ -79,32 +80,23 @@ export class MissingFaultPath extends RuleCommon implements IRuleDefinition {
       }
     };
 
-    const startRef = this.getStartReference(flow);
-    if (startRef) {
-      compiler.traverseFlow(flow, startRef, visitCallback);
+    if (flow.startReference) {
+      compiler.traverseFlow(flow, flow.startReference, visitCallback);
     }
 
     return results;
   }
 
   /**
-   * Safely determine if this is a RecordBeforeSave flow.
-   * Checks the startNode property for trigger type.
+   *  Determine if this is a RecordBeforeSave flow.
    */
   private isRecordBeforeSaveFlow(flow: core.Flow): boolean {
-    const startNode = this.getStartNode(flow);
-    
-    if (startNode?.element) {
-      const triggerType = (startNode.element as Record<string, unknown>)?.["triggerType"];
-      return triggerType === "RecordBeforeSave";
+    if (flow.startNode?.element) {
+      const triggerType = (flow.startNode.element as Record<string, unknown>)?.["triggerType"];
+      if (triggerType === "RecordBeforeSave") {
+        return true;
+      }
     }
-
-    // Fallback: check raw start data if startNode is not available
-    if (flow.start && typeof flow.start === "object") {
-      const triggerType = (flow.start as Record<string, unknown>)?.["triggerType"];
-      return triggerType === "RecordBeforeSave";
-    }
-
     return false;
   }
 

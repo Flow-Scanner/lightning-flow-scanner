@@ -21,13 +21,14 @@ export class MissingFilterRecordTrigger extends RuleCommon implements IRuleDefin
 ): core.Violation[] {
   const violations: core.Violation[] = [];
   // Check if this is a record-triggered flow
-  const triggerType = flow.xmldata?.start?.triggerType;
+  const triggerType = this.getStartProperty(flow, 'triggerType');
   // Only check flows with record trigger types
   if (!triggerType || !["RecordAfterSave", "RecordBeforeSave"].includes(triggerType)) {
     return violations;
   }
   // Check if the flow has filters or entry conditions at the flow level
-  const filters = flow.xmldata?.start?.filters;
+  const filters = this.getStartProperty(flow, 'filters');
+
   const hasFilters = !!filters;
   const scheduledPaths = flow.xmldata?.start?.scheduledPaths;
   const hasScheduledPaths = !!scheduledPaths;

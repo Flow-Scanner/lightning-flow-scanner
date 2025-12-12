@@ -11,13 +11,16 @@ describe("SameRecordFieldUpdates", () => {
   it("should flag same record updates on before context flows", async () => {
     const testData: ParsedFlow = {
       flow: {
-        start: {
-          locationX: "50",
-          locationY: "0",
-          connector: { targetReference: "Update_triggering_records" },
-          object: "Account",
-          recordTriggerType: "Create",
-          triggerType: "RecordBeforeSave",
+        status: "Active",
+        startNode: {
+          element: {
+            recordTriggerType: "Create",
+            triggerType: "RecordBeforeSave",
+            object: "Account",
+            connector: { targetReference: "Update_triggering_records" },
+            locationX: "50",
+            locationY: "0",
+          }
         },
         elements: [
           {
@@ -36,33 +39,10 @@ describe("SameRecordFieldUpdates", () => {
             name: "Update_triggering_records",
             locationX: "176",
             locationY: "287",
-          },
-          {
-            element: {
-              locationX: "50",
-              locationY: "0",
-              connector: { targetReference: "Update_triggering_records" },
-              object: "Account",
-              recordTriggerType: "Create",
-              triggerType: "RecordBeforeSave",
-            },
-            subtype: "start",
-            metaType: "node",
-            connectors: [
-              {
-                element: { targetReference: "Update_triggering_records" },
-                processed: false,
-                type: "connector",
-                reference: "Update_triggering_records",
-              },
-            ],
-            name: "flowstart",
-            locationX: "50",
-            locationY: "0",
-          },
+          }
         ],
       },
-    } as Partial<ParsedFlow> as ParsedFlow;
+    } as unknown as Partial<ParsedFlow> as ParsedFlow;
 
     const ruleResult: RuleResult = rule.execute(testData.flow as Flow);
 
@@ -72,13 +52,16 @@ describe("SameRecordFieldUpdates", () => {
   it("should not flag same record updates on after context flows", async () => {
     const testData: ParsedFlow = {
       flow: {
-        start: {
-          locationX: "50",
-          locationY: "0",
-          connector: { targetReference: "Update_triggering_records" },
-          object: "Account",
-          recordTriggerType: "Create",
-          triggerType: "RecordAfterSave",
+        status: "Active",
+        startNode: {
+          element: {
+            recordTriggerType: "Create",
+            triggerType: "RecordAfterSave",
+            object: "Account",
+            connector: { targetReference: "Update_triggering_records" },
+            locationX: "50",
+            locationY: "0",
+          }
         },
         elements: [
           {
@@ -97,33 +80,10 @@ describe("SameRecordFieldUpdates", () => {
             name: "Update_triggering_records",
             locationX: "176",
             locationY: "287",
-          },
-          {
-            element: {
-              locationX: "50",
-              locationY: "0",
-              connector: { targetReference: "Update_triggering_records" },
-              object: "Account",
-              recordTriggerType: "Create",
-              triggerType: "RecordAfterSave",
-            },
-            subtype: "start",
-            metaType: "node",
-            connectors: [
-              {
-                element: { targetReference: "Update_triggering_records" },
-                processed: false,
-                type: "connector",
-                reference: "Update_triggering_records",
-              },
-            ],
-            name: "flowstart",
-            locationX: "50",
-            locationY: "0",
-          },
+          }
         ],
       },
-    } as Partial<ParsedFlow> as ParsedFlow;
+    } as unknown as Partial<ParsedFlow> as ParsedFlow;
 
     const ruleResult: RuleResult = rule.execute(testData.flow as Flow);
 
@@ -172,6 +132,7 @@ describe("SameRecordFieldUpdates", () => {
   it("should not error when start element is not existing", async () => {
     const testData: ParsedFlow = {
       flow: {
+        status: "Active",
         elements: [
           {
             element: {
@@ -225,6 +186,7 @@ describe("SameRecordFieldUpdates", () => {
   it("should not error when elements are missing", async () => {
     const testData: ParsedFlow = {
       flow: {
+        status: "Active",
         start: {
           locationX: "50",
           locationY: "0",

@@ -30,9 +30,11 @@ export class RecordIdAsString extends RuleCommon implements IRuleDefinition {
   const violations: core.Violation[] = [];
 
   // Skip record-triggered flows - they don't support this pattern
+  const triggerType = this.getStartProperty(flow, 'triggerType');
   const isRecordTriggered = 
-    flow.start?.triggerType === "RecordAfterSave" || 
-    flow.start?.triggerType === "RecordBeforeSave";
+    triggerType === "RecordAfterSave" || 
+    triggerType === "RecordBeforeDelete" || 
+    triggerType === "RecordBeforeSave";
 
   if (isRecordTriggered) {
     return violations;
