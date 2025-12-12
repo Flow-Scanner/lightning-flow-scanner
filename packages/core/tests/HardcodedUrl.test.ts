@@ -28,6 +28,7 @@ describe("HardcodedUrl", () => {
         {
           flow: {
             type: "AutoLaunchedFlow",
+            status: "Active",
             elements: [
               {
                 name: "hardcodedUrl",

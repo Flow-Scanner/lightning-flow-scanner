@@ -45,22 +45,50 @@ export class Flow {
   public static readonly RESOURCE_TAGS = ["textTemplates", "stages"] as const;
   public static readonly VARIABLE_TAGS = ["choices", "constants", "dynamicChoiceSets", "formulas", "variables"] as const;
 
+  // Flow elements (excludes legacy start nodes)
   public elements: FlowElement[] = [];
-  public fsPath?: string;
-  public uri?: string;
-  public interviewLabel?: string;
+
+  // Path properties
+  public fsPath?: string; // Resolved absolute path (Node.js only)
+  public uri?: string;    // Input path (could be relative, absolute, or virtual)
+
+  // Flow metadata
   public label: string = "";
+  public interviewLabel?: string;
   public name: string = "unnamed";
   public processMetadataValues?: any;
   public processType: string = "AutoLaunchedFlow";
-  public type: string = "";
-  public root?: any;
-  public start?: any;
-  public startElementReference?: string;
-  public startReference?: string;
-  public startNode?: FlowNode;
+  public type: string = ""; // Alias for processType (backward compatibility)
   public status: string = "";
   public triggerOrder?: number;
+
+  // Start-related properties
+  /**
+   * @deprecated Use startNode.element instead. Kept for backward compatibility.
+   */
+  public start?: any;
+  
+  /**
+   * Direct reference to first element (from XML attribute).
+   * Used in newer flows as an alternative to the start element.
+   */
+  public startElementReference?: string;
+  
+  /**
+   * Computed reference to the first element to execute.
+   * This is what rules should use for traversal.
+   */
+  public startReference?: string;
+  
+  /**
+   * Parsed FlowNode object of the start element.
+   * Contains trigger information and connectors.
+   * Access start element data via startNode.element
+   */
+  public startNode?: FlowNode;
+
+  // Legacy/internal
+  public root?: any;
   public xmldata: any;
 
   constructor(path?: string, data?: unknown) {
@@ -113,7 +141,6 @@ export class Flow {
     this.type = this.processType;
     this.processMetadataValues = this.xmldata.processMetadataValues;
     this.startElementReference = this.xmldata.startElementReference;
-    this.start = this.xmldata.start;
     this.status = this.xmldata.status || "Draft";
     this.triggerOrder = this.xmldata.triggerOrder;
 
@@ -127,14 +154,14 @@ export class Flow {
 
       const data = this.xmldata[nodeType];
 
-      // Handle start node separately - store in startNode, don't add to elements
+      // Handle start nodes separately - store in startNode, don't add to elements
       if (nodeType === "start") {
         if (Array.isArray(data) && data.length > 0) {
           this.startNode = new FlowNode(data[0].name || "start", "start", data[0]);
         } else if (!Array.isArray(data)) {
           this.startNode = new FlowNode(data.name || "start", "start", data);
         }
-        continue;
+        continue; // Don't add to elements array
       }
 
       // Process other node types
@@ -168,39 +195,44 @@ export class Flow {
     }
   }
 
+  /**
+   * Find the name of the first element to execute.
+   * Priority order:
+   * 1. startElementReference (newer flows, direct XML attribute)
+   * 2. Start node connector (older flows, points to first element)
+   * 3. Start node scheduledPaths (async flows)
+   */
   private findStart(): string {
-  // Priority 1: Explicit startElementReference
-  if (this.startElementReference) {
-    return this.startElementReference;
-  }
-
-  // Priority 2: Start node with regular connector
-  if (this.startNode && this.startNode.connectors && this.startNode.connectors.length > 0) {
-    const connector = this.startNode.connectors[0];
-    // FlowElementConnector stores targetReference in the 'reference' property
-    if (connector.reference) {
-      return connector.reference;
+    // Priority 1: Explicit startElementReference
+    if (this.startElementReference) {
+      return this.startElementReference;
     }
-  }
 
-  // Priority 3: Start node with scheduledPaths (async flows)
-  // scheduledPaths can be an array or a single object
-  if (this.startNode?.element) {
-    const scheduledPaths = this.startNode.element['scheduledPaths'];
-    if (scheduledPaths) {
-      const paths = Array.isArray(scheduledPaths) ? scheduledPaths : [scheduledPaths];
-      if (paths.length > 0 && paths[0]?.connector) {
-        const targetRef = paths[0].connector.targetReference;
-        if (targetRef) {
-          return targetRef;
+    // Priority 2: Start node with regular connector
+    if (this.startNode && this.startNode.connectors && this.startNode.connectors.length > 0) {
+      const connector = this.startNode.connectors[0];
+      if (connector.reference) {
+        return connector.reference;
+      }
+    }
+
+    // Priority 3: Start node with scheduledPaths (async flows)
+    if (this.startNode?.element) {
+      const scheduledPaths = this.startNode.element['scheduledPaths'];
+      if (scheduledPaths) {
+        const paths = Array.isArray(scheduledPaths) ? scheduledPaths : [scheduledPaths];
+        if (paths.length > 0 && paths[0]?.connector) {
+          const targetRef = paths[0].connector.targetReference;
+          if (targetRef) {
+            return targetRef;
+          }
         }
       }
     }
-  }
 
-  // No valid start found
-  return "";
-}
+    // No valid start found
+    return "";
+  }
 
   public toXMLString(): string {
     try {

@@ -1,5 +1,4 @@
 import { describe, expect, it } from "@jest/globals";
-
 import { Flow, RuleResult, scan, ScanResult } from "../src";
 import { ParsedFlow } from "../src/main/models/ParsedFlow";
 import { TriggerOrder } from "../src/main/rules/TriggerOrder";
@@ -18,9 +17,17 @@ describe("TriggerOrder", () => {
     const flows: ParsedFlow[] = [
       {
         flow: {
+          status: "Active",
           type: "AutoLaunchedFlow",
+          startNode: {
+            element: {
+              triggerType: "RecordAfterSave",
+              object: "Account"
+            }
+          }
         },
-      } as Partial<ParsedFlow> as ParsedFlow,
+        type: "AutoLaunchedFlow",
+      } as unknown as Partial<ParsedFlow> as ParsedFlow,
     ];
     const results: ScanResult[] = scan(flows, ruleConfig);
     const scanResults = results.pop();
@@ -35,12 +42,16 @@ describe("TriggerOrder", () => {
     const flows: ParsedFlow[] = [
       {
         flow: {
-          start: {
-            object: "Account",
-          },
+          status: "Active",
           type: "AutoLaunchedFlow",
+          startNode: {
+            element: {
+              object: "Account",
+              triggerType: "RecordAfterSave"
+            }
+          }
         },
-      } as Partial<ParsedFlow> as ParsedFlow,
+      } as unknown as Partial<ParsedFlow> as ParsedFlow,
     ];
 
     const ruleConfig = {
@@ -64,12 +75,16 @@ describe("TriggerOrder", () => {
   it("should flag trigger order when not present", async () => {
     const testData: ParsedFlow = {
       flow: {
-        start: {
-          object: "Account",
-        },
+        status: "Active",
         type: "AutoLaunchedFlow",
+        startNode: {
+          element: {
+            object: "Account",
+            triggerType: "RecordAfterSave"
+          }
+        }
       },
-    } as Partial<ParsedFlow> as ParsedFlow;
+    } as unknown as Partial<ParsedFlow> as ParsedFlow;
 
     const ruleResult: RuleResult = new TriggerOrder().execute(testData.flow as Flow);
 
@@ -79,11 +94,14 @@ describe("TriggerOrder", () => {
   it("should not flag trigger order when present", async () => {
     const testData: ParsedFlow = {
       flow: {
-        start: {
-          object: "Account",
-        },
-        triggerOrder: 10,
+        status: "Active",
         type: "AutoLaunchedFlow",
+        triggerOrder: 10,
+        startNode: {
+          element: {
+            object: "Account",
+          }
+        }
       },
     } as Partial<ParsedFlow> as ParsedFlow;
 

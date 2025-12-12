@@ -1,5 +1,4 @@
 import { describe, expect, it } from "@jest/globals";
-
 import { Flow, RuleResult, scan } from "../src";
 import { ParsedFlow } from "../src/main/models/ParsedFlow";
 import { RecursiveAfterUpdate } from "../src/main/rules/RecursiveAfterUpdate";
@@ -20,10 +19,17 @@ describe("RecursiveAfterUpdate", () => {
               subtype: "recordUpdates",
             },
           ],
-          start: { recordTriggerType: "CreateAndUpdate", triggerType: "RecordAfterSave" },
+          startNode: {
+            element: {
+              recordTriggerType: "Create",
+              triggerType: "RecordAfterSave",
+              object: "Account"
+            }
+          },
           type: "AutoLaunchedFlow",
         },
       } as Partial<ParsedFlow> as ParsedFlow;
+
       const ruleConfig = {
         ruleMode: "isolated",
         exceptions: {},
@@ -63,7 +69,13 @@ describe("RecursiveAfterUpdate", () => {
                 subtype: "recordUpdates",
               },
             ],
-            start: { recordTriggerType: "CreateAndUpdate", triggerType: "RecordAfterSave" },
+            startNode: {
+              element: {
+                recordTriggerType: "CreateAndUpdate",
+                triggerType: "RecordAfterSave",
+                object: "Account"
+              }
+            },
           },
         } as Partial<ParsedFlow> as ParsedFlow;
 
@@ -83,7 +95,13 @@ describe("RecursiveAfterUpdate", () => {
                 subtype: "recordUpdates",
               },
             ],
-            start: { recordTriggerType: "CreateAndUpdate", triggerType: "RecordAfterSave" },
+            startNode: {
+              element: {
+                recordTriggerType: "CreateAndUpdate",
+                triggerType: "RecordAfterSave",
+                object: "Account"
+              }
+            },
           },
         } as Partial<ParsedFlow> as ParsedFlow;
 
@@ -113,10 +131,12 @@ describe("RecursiveAfterUpdate", () => {
                 subtype: "recordUpdates",
               },
             ],
-            start: {
-              object: "Case",
-              recordTriggerType: "CreateAndUpdate",
-              triggerType: "RecordAfterSave",
+            startNode: {
+              element: {
+                object: "Case",
+                recordTriggerType: "CreateAndUpdate",
+                triggerType: "RecordAfterSave",
+              }
             },
           },
         } as Partial<ParsedFlow> as ParsedFlow;
@@ -145,10 +165,12 @@ describe("RecursiveAfterUpdate", () => {
                 subtype: "recordUpdates",
               },
             ],
-            start: {
-              object: "Case",
-              recordTriggerType: "CreateAndUpdate",
-              triggerType: "RecordAfterSave",
+            startNode: {
+              element: {
+                object: "Case",
+                recordTriggerType: "CreateAndUpdate",
+                triggerType: "RecordAfterSave",
+              }
             },
           },
         } as Partial<ParsedFlow> as ParsedFlow;

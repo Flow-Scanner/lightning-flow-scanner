@@ -31,10 +31,13 @@ export class RecursiveAfterUpdate extends RuleCommon implements IRuleDefinition 
     suppressions: Set<string>
   ): core.Violation[] {
     const results: core.Violation[] = [];
-    const isAfterSave = flow.start?.triggerType === "RecordAfterSave";
-    const isQualifiedTriggerTypes = this.qualifiedRecordTriggerTypes.has(
-      flow.start?.recordTriggerType
-    );
+
+    const triggerType = this.getStartProperty(flow, 'triggerType');
+    const recordTriggerType = this.getStartProperty(flow, 'recordTriggerType');
+
+    const isAfterSave = triggerType === "RecordAfterSave";
+    const isQualifiedTriggerTypes = this.qualifiedRecordTriggerTypes.has(recordTriggerType);
+
     if (!isAfterSave || !isQualifiedTriggerTypes) {
       return results;
     }
@@ -57,13 +60,14 @@ export class RecursiveAfterUpdate extends RuleCommon implements IRuleDefinition 
       }
     }
     // === Lookup → same object type updates ===
+    const flowObject = this.getStartProperty(flow, 'object');
     const lookupElementsWithTheSameObjectType = flow.elements
       ?.filter(
         (node) =>
           node.subtype === "recordLookups" &&
           typeof node.element === "object" &&
           "object" in node.element &&
-          flow.start.object === node.element["object"]
+          flowObject  === node.element["object"]
       )
       ?.map((node) => node.name);
     if (

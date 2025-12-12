@@ -11,7 +11,7 @@ export abstract class RuleCommon {
   public supportedTypes: string[];
   public suppressionElement?: string;
   public uri?: string;
-
+  
   constructor(info: RuleInfo, optional?: { severity?: string }) {
     this.name = info.name;
     this.supportedTypes = info.supportedTypes;
@@ -37,6 +37,7 @@ export abstract class RuleCommon {
     options?: object,
     suppressions: string[] = []
   ): core.RuleResult {
+    // Wildcard suppression disables entire rule
     if (suppressions.includes("*")) {
       return new core.RuleResult(this as any, []);
     }
@@ -92,5 +93,19 @@ export abstract class RuleCommon {
       return -1;
     }
     return flowElements.findIndex(n => n.name === startRef);
+  }
+
+  /**
+   * Safely get a property from the start element.
+   * 
+   * @param flow - The Flow instance
+   * @param propertyName - The property to retrieve (e.g., 'triggerType', 'object')
+   * @returns The property value or undefined
+   */
+  protected getStartProperty(flow: core.Flow, propertyName: string): any {
+    if (flow.startNode?.element) {
+      return (flow.startNode.element as Record<string, unknown>)?.[propertyName];
+    }
+    return undefined;
   }
 }

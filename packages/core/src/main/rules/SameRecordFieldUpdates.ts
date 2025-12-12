@@ -34,11 +34,11 @@ export class SameRecordFieldUpdates extends RuleCommon implements IRuleDefinitio
     _suppressions: Set<string>
   ): core.Violation[] {
     const results: core.Violation[] = [];
-    const isBeforeSaveType = flow.start?.triggerType === "RecordBeforeSave";
-    const isQualifiedTriggerTypes = this.qualifiedRecordTriggerTypes.has(
-      flow.start?.recordTriggerType
-    );
+    const triggerType = this.getStartProperty(flow, 'triggerType');
+    const recordTriggerType = this.getStartProperty(flow, 'recordTriggerType');
 
+    const isBeforeSaveType = triggerType === "RecordBeforeSave";
+    const isQualifiedTriggerTypes = this.qualifiedRecordTriggerTypes.has(recordTriggerType);
     if (!isBeforeSaveType || !isQualifiedTriggerTypes) {
       return results;
     }
