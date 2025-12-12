@@ -29,7 +29,7 @@ export function exportSarif(results: ScanResult[]): string {
         }))),
       tool: {
         driver: {
-          informationUri: "https://github.com/Flow-Scanner/lightning-flow-scanner-core",
+          informationUri: "https://github.com/Flow-Scanner/lightning-flow-scanner",
           name: "Lightning Flow Scanner",
           rules: result.ruleResults
             .filter(r => r.occurs)
