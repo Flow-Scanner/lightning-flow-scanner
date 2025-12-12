@@ -9,14 +9,14 @@
     <img src="https://img.shields.io/npm/v/lightning-flow-scanner?label=CLI&style=flat-square" alt="CLI version">
   </a>
   <a href="https://open-vsx.org/extension/ForceConfigControl/lightning-flow-scanner-vsx">
-    <img src="https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=VS%20Code&style=flat-square" alt="Open VSX">
+    <img src="https://img.shields.io/open-vsx/v/ForceConfigControl/lightning-flow-scanner-vsx?label=VS%20Code&style=flat-square" alt="VS Code version">
   </a>
   <a href="https://www.npmjs.com/package/lightning-flow-scanner-core">
-    <img src="https://img.shields.io/npm/dt/lightning-flow-scanner-core?label=Downloads<v6&style=flat-square" alt="Downloads(<v6>)">
-  </a>
-   <a href="https://www.npmjs.com/package/lightning-flow-scanner-core">
-    <img src="https://img.shields.io/npm/dt/@flow-scanner/lightning-flow-scanner-core?label=Downloads>v6&style=flat-square" alt="Downloads(>v6)">
-  </a>
+  <img src="https://img.shields.io/npm/dt/lightning-flow-scanner-core?label=Downloads%3Cv6&style=flat-square" alt="Downloads <v6">
+</a>
+<a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+  <img src="https://img.shields.io/npm/dt/@flow-scanner/lightning-flow-scanner-core?label=Downloads%3Ev6&style=flat-square" alt="Downloads >v6">
+</a>
 </p>
 
 <p align="center">
@@ -35,6 +35,7 @@
 </p>
 
 ---
+
 
 
 
