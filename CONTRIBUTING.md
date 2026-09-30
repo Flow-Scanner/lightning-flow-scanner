@@ -1,13 +1,12 @@
 ## Contributing Guidelines
 
-Since 2021, the _Lightning Flow Scanner_ has grown from its roots as VS Code tool to empower Salesforce Developers across six free and open-source platforms—from developer tools to native Salesforce App—delivering a unified experience for robust static analysis of Flows. [Our dedicated community](https://activity.lightningflowscanner.org/) has shared their expertise to deepen understanding of Flow optimization. Your support can amplify our impact. Here’s how you can contribute:
+Lightning Flow Scanner is free and open source. A few ways to help:
 
-- 💬 Share feedback to help us improve.
-- 📢 Share our work with your network.
-- 💻 Contribute code by submitting pull requests.
-- 🤝 [Join as a member](https://register.lightningflowscanner.org/) to connect.
-- Sponsor the ecosystem by [making a donation](https://opencollective.com/lightning-flow-scanner-core).
-
+- 💬 Share feedback.
+- 📢 Tell others about it.
+- 💻 Open a pull request.
+- 🤝 [Join as a member](https://register.lightningflowscanner.org/) to follow what we’re building. It’s free, no spam, and you can put your name on the project wall.
+- 💚 [Donate](https://opencollective.com/lightning-flow-scanner-core) to keep the project running.
 ### I have a Question/Feedback
 
 For general questions, ideas, or seeking input on topics that might (or might not) turn into issues, we recommend to use our [Discussions](https://github.com/orgs/Flow-Scanner/discussions) forum. This is best for open-ended conversations, brainstorming, and gathering community input before creating a feature request.
@@ -26,7 +25,6 @@ If it's more specific like a bug or a new feature—use GitHub Issues instead. B
 - [VS Code/Code Builder](https://github.com/Flow-Scanner/lightning-flow-scanner/issues/new?template=bug-vscode.md)
 - [GitHub Action](https://github.com/Flow-Scanner/lightning-flow-scanner/issues/new?template=bug-action.md)
 - [Salesforce App](https://github.com/Flow-Scanner/lightning-flow-scanner-app/issues)
-- [Copado Plugin](https://github.com/Flow-Scanner/lightning-flow-scanner-copado/issues)
 
 ### Submitting Pull Requests
 

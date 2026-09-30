@@ -1,22 +1,22 @@
 <p align="center">
-  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/stargazers">
-    <img src="https://img.shields.io/github/stars/Flow-Scanner/lightning-flow-scanner?label=Stargazers&style=flat-square" alt="GitHub stars">
-  </a>
-   <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
-    <img src="https://img.shields.io/npm/v/@flow-scanner/lightning-flow-scanner-core?label=Core&style=flat-square" alt="Core version">
+  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+    <img src="https://badgen.net/npm/v/@flow-scanner/lightning-flow-scanner-core?label=Core" alt="Core version">
   </a>
   <a href="https://www.npmjs.com/package/lightning-flow-scanner">
-    <img src="https://img.shields.io/npm/v/lightning-flow-scanner?label=CLI&style=flat-square" alt="CLI version">
+    <img src="https://badgen.net/npm/v/lightning-flow-scanner?label=CLI" alt="CLI version">
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=ForceConfigControl.lightning-flow-scanner-vsx">
-  <img src="https://badgen.net/vs-marketplace/v/ForceConfigControl.lightning-flow-scanner-vsx?label=VS%20Code" alt="VS Code version">
-</a>
-  <a href="https://www.npmjs.com/package/lightning-flow-scanner-core">
-  <img src="https://img.shields.io/npm/dt/lightning-flow-scanner-core?label=Downloads%3Cv6&style=flat-square" alt="Downloads <v6">
-</a>
-<a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
-  <img src="https://img.shields.io/npm/dt/@flow-scanner/lightning-flow-scanner-core?label=Downloads%3Ev6&style=flat-square" alt="Downloads >v6">
-</a>
+    <img src="https://badgen.net/vs-marketplace/v/ForceConfigControl.lightning-flow-scanner-vsx?label=VS%20Code" alt="VS Code version">
+  </a>
+  <a href="https://github.com/marketplace/actions/lightning-flow-scan">
+    <img src="https://badgen.net/badge/Action/v3.7.4/blue" alt="GitHub Action version">
+  </a>
+  <a href="https://appexchange.salesforce.com/appxListingDetail?listingId=80d6caf3-d4a8-41ec-b48e-da1fe3457e98">
+    <img src="https://badgen.net/github/tag/Flow-Scanner/lightning-flow-scanner-app?label=App" alt="Salesforce App version">
+  </a>
+  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/stargazers">
+    <img src="https://badgen.net/github/stars/Flow-Scanner/lightning-flow-scanner?label=Stargazers" alt="GitHub stars">
+  </a>
 </p>
 
 <p align="center">
