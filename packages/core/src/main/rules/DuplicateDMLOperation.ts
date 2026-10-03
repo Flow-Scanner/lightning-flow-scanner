@@ -48,8 +48,8 @@ export class DuplicateDMLOperation extends RuleCommon implements IRuleDefinition
       if (
         nextSeenDML &&
         node.subtype === "screens" &&
-        node.element["allowBack"] === "true" &&
-        node.element["showFooter"] === "true" &&
+        this.isTrue(node.element["allowBack"]) &&
+        this.isTrue(node.element["showFooter"]) &&
         !suppressions.has(node.name)
       ) {
         violations.push(new core.Violation(node));
@@ -60,7 +60,7 @@ export class DuplicateDMLOperation extends RuleCommon implements IRuleDefinition
       if (
         nextSeenDML &&
         node.subtype === "screens" &&
-        node.element["allowBack"] !== "true"
+        !this.isTrue(node.element["allowBack"])
       ) {
         nextSeenDML = false;
       }
@@ -79,5 +79,11 @@ export class DuplicateDMLOperation extends RuleCommon implements IRuleDefinition
       node.subtype === "recordUpdates" ||
       node.subtype === "recordDeletes"
     );
+  }
+
+  // XML-parsed flows carry the string "true"; flows built from Tooling API
+  // JSON (e.g. the Salesforce app) carry a real boolean.
+  private isTrue(value: unknown): boolean {
+    return value === true || String(value).toLowerCase() === "true";
   }
 }
