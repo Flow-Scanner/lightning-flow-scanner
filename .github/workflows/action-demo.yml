@@ -21,7 +21,6 @@ jobs:
 
       - name: Lightning Flow Scan
         id: flowscanner
-        uses: Flow-Scanner/lightning-flow-scanner@action-v3.5.0
+        uses: Flow-Scanner/lightning-flow-scanner@action-v3.7.4
         with:
           sarif-only: false
-          config: example-flows/.flow-scanner.example.yml
