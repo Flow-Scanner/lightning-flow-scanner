@@ -7,111 +7,111 @@ ignore:
 
 exceptions:
   # Action Call In A Loop
-  Action_Call_In_A_Loop:
+  Demo_Action_In_Loop:
     action-call-in-loop:
       - Create_Task_For_Account
 
   # DML Statement In A Loop
-  DML_Statement_In_A_Loop:
+  Demo_DML_In_Loop:
     dml-in-loop:
       - createNewCase
 
   # Duplicate DML Operation
-  Duplicate_DML_Operation:
+  Demo_Duplicate_DML:
     duplicate-dml:
       - mock_screen_2
 
   # Excessive Cyclomatic Complexity
-  Excessive_Cyclomatic_Complexity:
+  Demo_Complexity:
     excessive-cyclomatic-complexity:
       - "28"
 
   # Flow Naming Convention
-  FlowNamingConvention:
+  DemoBadName:
     invalid-naming-convention:
-      - FlowNamingConvention
+      - DemoBadName
 
   # Get Records Stores All Fields
-  Get_Records_Stores_All_Fields:
+  Demo_All_Fields:
     get-record-all-fields:
       - Get_Account_Record
 
   # Hardcoded Id
-  Hardcoded_Id:
+  Demo_Hardcoded_Id:
     hardcoded-id:
       - create_Test_Account
 
   # Hardcoded URL
-  Hardcoded_Url:
+  Demo_Hardcoded_Url:
     hardcoded-url:
       - Create_Case_With_URL
 
   # Inactive Flow
-  Inactive_Flow:
+  Demo_Inactive:
     inactive-flow:
       - Draft
 
   # Invalid API Version
-  Invalid_API_Version:
+  Demo_Old_API_Version:
     invalid-api-version:
       - "49"
 
   # Missing Auto Layout
-  Missing_Auto_Layout:
+  Demo_No_Auto_Layout:
     missing-auto-layout:
       - FREE_FORM_CANVAS
 
   # Missing Fault Path
-  Missing_Fault_Path:
+  Demo_No_Fault_Path:
     missing-fault-path:
       - log_call
 
   # Missing Flow Description
-  Missing_Flow_Description:
+  Demo_No_Description:
     missing-flow-description:
       - "*"
 
   # Missing Null Handler
-  Missing_Null_Handler_Simple:
+  Demo_No_Null_Check:
     missing-null-handler:
       - Get_User
 
   # Missing Trigger Order
-  Missing_Trigger_Order:
+  Demo_No_Trigger_Order:
     unspecified-trigger-order:
       - TriggerOrder
 
   # Recursive After Update
-  Recursive_After_Update:
+  Demo_Recursion:
     recursive-record-update:
       - Update_Account_Last_Modified_Info
 
   # SOQL Query In A Loop
-  SOQL_Query_In_A_Loop:
+  Demo_SOQL_In_Loop:
     soql-in-loop:
       - SOQL_Query_Example
 
   # Same Record Field Updates
-  Same_Record_Field_Updates:
+  Demo_Same_Record_Update:
     same-record-field-updates:
       - Update_triggering_records
 
   # Unclear API Name
-  Unclear_API_Name:
+  Demo_Unclear_Names:
     unclear-api-naming:
       - Copy_1_of_mockscreen
 
   # Unreachable Element
-  Unreachable_Element:
+  Demo_Unreachable:
     unreachable-element:
       - unused_assignment
 
   # Unsafe Running Context
-  Unsafe_Running_Context:
+  Demo_System_Mode:
     unsafe-running-context:
       - SystemModeWithoutSharing
 
   # Unused Variable
-  Unused_Variable:
+  Demo_Unused_Variable:
     unused-variable:
       - anUnusedVariable

@@ -4,7 +4,7 @@ import * as path from "path";
 import { describe, it, expect } from "@jest/globals";
 
 describe("FlowDescription", () => {
-  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Missing_Flow_Description.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Demo_No_Description.flow-meta.xml");
   const fixed_uri = path.join(__dirname, "../../../example-flows/force-app/testing/Missing_Flow_Description_Fixed.flow-meta.xml");
 
   it("should return a result when missing a description", async () => {

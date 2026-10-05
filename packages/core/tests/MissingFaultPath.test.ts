@@ -6,7 +6,7 @@ import { Flow, parse, ParsedFlow, RuleResult, scan, ScanResult } from "../src";
 describe("MissingFaultPath", () => {
   const exampleUri = path.join(
     __dirname,
-    "../../../example-flows/force-app/demo/Missing_Fault_Path.flow-meta.xml"
+    "../../../example-flows/force-app/demo/Demo_No_Fault_Path.flow-meta.xml"
   );
   const fixedUri = path.join(
     __dirname,

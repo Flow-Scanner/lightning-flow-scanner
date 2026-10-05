@@ -13,7 +13,7 @@ describe("UnsafeRunningContext", () => {
   it("should have a scan result for without sharing system mode", async () => {
     const unsafeContextTestFile = path.join(
       __dirname,
-      "../../../example-flows/force-app/demo/Unsafe_Running_Context.flow-meta.xml"
+      "../../../example-flows/force-app/demo/Demo_System_Mode.flow-meta.xml"
     );
     const parsed: ParsedFlow = (await parse([unsafeContextTestFile])).pop() as ParsedFlow;
     const ruleResult: core.RuleResult = unsafeRunningContext.execute(parsed.flow as core.Flow);

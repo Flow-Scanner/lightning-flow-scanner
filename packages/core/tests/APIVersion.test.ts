@@ -4,7 +4,7 @@ import * as path from "path";
 import { describe, it, expect } from "@jest/globals";
 
 describe("APIVersion", () => {
-  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Invalid_API_Version.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Demo_Old_API_Version.flow-meta.xml");
   const fixed_uri = path.join(__dirname, "../../../example-flows/force-app/testing/Outdated_API_Version_Fixed.flow-meta.xml");
 
   it("should have a result when attribute is missing", async () => {

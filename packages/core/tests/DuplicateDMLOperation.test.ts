@@ -4,7 +4,7 @@ import * as path from "path";
 import * as core from "../src";
 
 describe("DuplicateDMLOperation  ", () => {
-  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Duplicate_DML_Operation.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Demo_Duplicate_DML.flow-meta.xml");
   const fixed_uri = path.join(__dirname, "../../../example-flows/force-app/testing/Duplicate_DML_Operation_Fixed.flow-meta.xml");
 
   it("should have 1 result in a flow with a DML statement inbetween screens ", async () => {

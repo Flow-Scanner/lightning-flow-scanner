@@ -4,7 +4,7 @@ import * as path from "path";
 import { describe, it, expect } from "@jest/globals";
 
 describe("UnusedVariable Exceptions", () => {
-  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Unused_Variable.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Demo_Unused_Variable.flow-meta.xml");
 
   it("should detect unused variable without exceptions", async () => {
     const flows = await core.parse([example_uri]);
@@ -30,7 +30,7 @@ describe("UnusedVariable Exceptions", () => {
         },
       },
       exceptions: {
-        Unused_Variable: {
+        Demo_Unused_Variable: {
           "unused-variable": ["*"],
         },
       },
@@ -49,7 +49,7 @@ describe("UnusedVariable Exceptions", () => {
         },
       },
       exceptions: {
-        Unused_Variable: {
+        Demo_Unused_Variable: {
           "unused-variable": ["anUnusedVariable"],
         },
       },
@@ -74,7 +74,7 @@ describe("UnusedVariable Exceptions", () => {
         },
       },
       exceptions: {
-        Unused_Variable: {
+        Demo_Unused_Variable: {
           "unused-variable": [""],
         },
       },

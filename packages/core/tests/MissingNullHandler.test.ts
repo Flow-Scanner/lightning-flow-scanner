@@ -6,7 +6,7 @@ import * as core from "../src";
 describe("MissingNullHandler ", () => {
   const example_uri = path.join(
     __dirname,
-    "../../../example-flows/force-app/demo/Missing_Null_Handler_Simple.flow-meta.xml"
+    "../../../example-flows/force-app/demo/Demo_No_Null_Check.flow-meta.xml"
   );
   const fixed_uri = path.join(
     __dirname,

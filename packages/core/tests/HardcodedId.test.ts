@@ -7,7 +7,7 @@ import { Flow, ParsedFlow, ScanResult } from "../src/main/internals/internals";
 import { scan } from "../src";
 
 describe("HardcodedId", () => {
-  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Hardcoded_Id.flow-meta.xml");
+  const example_uri = path.join(__dirname, "../../../example-flows/force-app/demo/Demo_Hardcoded_Id.flow-meta.xml");
 
   it("there should be one result for the rule HardcodedIds", async () => {
     const flows = await core.parse([example_uri]);

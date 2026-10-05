@@ -3,7 +3,7 @@ import * as path from "path";
 import * as core from "../src";
 
 describe("exportSarif()", () => {
-  const badFlowPath = path.join(__dirname, "../../../example-flows/force-app/demo/DML_Statement_In_A_Loop.flow-meta.xml");
+  const badFlowPath = path.join(__dirname, "../../../example-flows/force-app/demo/Demo_DML_In_Loop.flow-meta.xml");
   const goodFlowPath = path.join(__dirname, "../../../example-flows/force-app/testing/Duplicate_DML_Operation_Fixed.flow-meta.xml");
   const config = {
     ruleMode: "isolated",
@@ -23,7 +23,7 @@ describe("exportSarif()", () => {
     expect(json.runs[0].tool.driver.name).toBe("Lightning Flow Scanner");
     // Artifacts: real path (relative or absolute containing the substring)
     const artifactUri = json.runs[0].artifacts[0].location.uri;
-    expect(artifactUri).toContain("force-app/demo/DML_Statement_In_A_Loop.flow-meta.xml");
+    expect(artifactUri).toContain("force-app/demo/Demo_DML_In_Loop.flow-meta.xml");
     // Results: one issue
     const resultsArray = json.runs[0].results;
     expect(resultsArray).toHaveLength(1);
@@ -51,12 +51,12 @@ describe("exportSarif()", () => {
     const flows = await core.parse([badFlowPath]);
     // Simulate browser: remove fsPath and set virtual uri with subdir structure
     flows[0].flow.fsPath = undefined;
-    flows[0].flow.uri = "flows/demo/DML_Statement_In_A_Loop.flow-meta.xml";
+    flows[0].flow.uri = "flows/demo/Demo_DML_In_Loop.flow-meta.xml";
     const results = core.scan(flows, config);
     const sarif = core.exportSarif(results);
     const json = JSON.parse(sarif);
    
     const uri = json.runs[0].artifacts[0].location.uri;
-    expect(uri).toBe("flows/demo/DML_Statement_In_A_Loop.flow-meta.xml");
+    expect(uri).toBe("flows/demo/Demo_DML_In_Loop.flow-meta.xml");
   });
 });

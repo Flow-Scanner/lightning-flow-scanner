@@ -10,7 +10,7 @@ describe("UnconnectedElement", () => {
   it("there should be checks for unconnected element", async () => {
     const connectedElementTestFile = path.join(
       __dirname,
-      "../../../example-flows/force-app/demo/Unreachable_Element.flow-meta.xml"
+      "../../../example-flows/force-app/demo/Demo_Unreachable.flow-meta.xml"
     );
     const parsed: ParsedFlow = (await parse([connectedElementTestFile])).pop() as ParsedFlow;
     const ruleResult: core.RuleResult = unconnectedElementRule.execute(parsed.flow as core.Flow);
@@ -35,7 +35,7 @@ describe("UnconnectedElement", () => {
   it("should fix the unconnected element error", async () => {
     const connectedElementTestFile = path.join(
       __dirname,
-      "../../../example-flows/force-app/demo/Unreachable_Element.flow-meta.xml"
+      "../../../example-flows/force-app/demo/Demo_Unreachable.flow-meta.xml"
     );
     const flows = await core.parse([connectedElementTestFile]);
     const ruleConfig = {
@@ -56,7 +56,7 @@ describe("UnconnectedElement", () => {
   it("should not include enriched details with detailLevel simple", async () => {
     const testFile = path.join(
       __dirname,
-      "../../../example-flows/force-app/demo/Unreachable_Element.flow-meta.xml"
+      "../../../example-flows/force-app/demo/Demo_Unreachable.flow-meta.xml"
     );
     const flows = await core.parse([testFile]);
     const ruleConfig = {

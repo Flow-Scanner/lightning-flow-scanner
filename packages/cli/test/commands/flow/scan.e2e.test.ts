@@ -48,13 +48,13 @@ describe("Scan E2E Tests", () => {
 
   describe("Category Filtering", () => {
     // Demo flows contain violations for each category:
-    // - problem: DML_Statement_In_A_Loop, SOQL_Query_In_A_Loop, Hardcoded_Id, Hardcoded_Url,
-    //            Missing_Fault_Path, Missing_Null_Handler_Simple, Unsafe_Running_Context,
-    //            Duplicate_DML_Operation, Recursive_After_Update
-    // - suggestion: Action_Call_In_A_Loop, Invalid_API_Version, Excessive_Cyclomatic_Complexity,
-    //              Get_Records_Stores_All_Fields, Inactive_Flow, Missing_Trigger_Order, Same_Record_Field_Updates
-    // - layout: FlowNamingConvention, Missing_Flow_Description, Unclear_API_Name,
-    //           Missing_Auto_Layout, Unreachable_Element, Unused_Variable
+    // - problem: Demo_DML_In_Loop, Demo_SOQL_In_Loop, Demo_Hardcoded_Id, Demo_Hardcoded_Url,
+    //            Demo_No_Fault_Path, Demo_No_Null_Check, Demo_System_Mode,
+    //            Demo_Duplicate_DML, Demo_Recursion
+    // - suggestion: Demo_Action_In_Loop, Demo_Old_API_Version, Demo_Complexity,
+    //              Demo_All_Fields, Demo_Inactive, Demo_No_Trigger_Order, Demo_Same_Record_Update
+    // - layout: DemoBadName, Demo_No_Description, Demo_Unclear_Names,
+    //           Demo_No_Auto_Layout, Demo_Unreachable, Demo_Unused_Variable
 
     it("should only report problem category violations when --categories problem is used", async () => {
       const output = await new Scan(["-d", demoFlowsPath, "--categories", "problem"], config).run();
@@ -205,8 +205,8 @@ describe("Scan E2E Tests", () => {
       // Create temp config with ignoreFlows
       fs.writeFileSync(tempConfigPath, `
 ignoreFlows:
-  - "Hardcoded_Id"
-  - "Hardcoded_Url"
+  - "Demo_Hardcoded_Id"
+  - "Demo_Hardcoded_Url"
 rules: {}
 `);
 
@@ -218,8 +218,8 @@ rules: {}
 
         // Verify the ignored flows are not in results
         const flowNames = new Set(output.results.map(r => r.flowApiName));
-        expect(flowNames.has("Hardcoded_Id")).to.be.false;
-        expect(flowNames.has("Hardcoded_Url")).to.be.false;
+        expect(flowNames.has("Demo_Hardcoded_Id")).to.be.false;
+        expect(flowNames.has("Demo_Hardcoded_Url")).to.be.false;
       } finally {
         // Clean up temp config
         if (fs.existsSync(tempConfigPath)) {
@@ -237,7 +237,7 @@ rules: {}
 ignore:
   - "**/testing/**"
 ignoreFlows:
-  - "Hardcoded_Id"
+  - "Demo_Hardcoded_Id"
 rules: {}
 `);
 
@@ -248,7 +248,7 @@ rules: {}
         expect(output.summary.flowsNumber).to.equal(21, "Should apply both path and flow name ignore");
 
         const flowNames = new Set(output.results.map(r => r.flowApiName));
-        expect(flowNames.has("Hardcoded_Id")).to.be.false;
+        expect(flowNames.has("Demo_Hardcoded_Id")).to.be.false;
       } finally {
         if (fs.existsSync(tempConfigPath)) {
           fs.unlinkSync(tempConfigPath);
