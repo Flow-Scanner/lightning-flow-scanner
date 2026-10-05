@@ -1,7 +1,4 @@
 <p align="center">
-  <a href="https://github.com/marketplace/actions/lightning-flow-scan">
-    <img src="https://badgen.net/badge/Action/v3.7.4/blue" alt="GitHub Action version">
-  </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=ForceConfigControl.lightning-flow-scanner-vsx">
     <img src="https://badgen.net/vs-marketplace/v/ForceConfigControl.lightning-flow-scanner-vsx?label=VS%20Code" alt="VS Code version">
   </a>
@@ -10,6 +7,9 @@
   </a>
   <a href="https://www.npmjs.com/package/lightning-flow-scanner">
     <img src="https://badgen.net/npm/v/lightning-flow-scanner?label=CLI" alt="CLI version">
+  </a>
+  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+    <img src="https://badgen.net/npm/v/@flow-scanner/lightning-flow-scanner-core?label=Core" alt="Core version">
   </a>
 </p>
 

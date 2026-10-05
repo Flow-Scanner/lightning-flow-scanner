@@ -8,8 +8,8 @@
   <a href="https://appexchange.salesforce.com/appxListingDetail?listingId=80d6caf3-d4a8-41ec-b48e-da1fe3457e98">
     <img src="https://badgen.net/github/tag/Flow-Scanner/lightning-flow-scanner-app?label=App" alt="Salesforce App version">
   </a>
-  <a href="https://www.npmjs.com/package/lightning-flow-scanner">
-    <img src="https://badgen.net/npm/v/lightning-flow-scanner?label=CLI" alt="CLI version">
+  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+    <img src="https://badgen.net/npm/v/@flow-scanner/lightning-flow-scanner-core?label=Core" alt="Core version">
   </a>
 </p>
 

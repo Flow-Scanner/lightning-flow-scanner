@@ -160,6 +160,39 @@ const packageGifs = {
 };
 
 // Core demo image — root README only (it doubles as core's npm README)
+// Each package README drops its own version badge: npm and the marketplaces
+// already show that version next to the title.
+const OWN_BADGE_ALT = {
+  cli: 'CLI version',
+  vsx: 'VS Code version',
+  action: 'GitHub Action version',
+};
+
+function removeOwnBadge(header, packageName) {
+  const alt = OWN_BADGE_ALT[packageName.toLowerCase()];
+  if (!alt) return header;
+  const escaped = alt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const badge = new RegExp(`\\n[ \\t]*<a [^>]*>\\s*<img [^>]*alt="${escaped}"[^>]*>\\s*<\\/a>`);
+  if (!badge.test(header)) console.warn(`Own badge "${alt}" not found for ${packageName}`);
+  return header.replace(badge, '');
+}
+
+// Package READMEs end their badge row with Core, which the root README
+// leaves out since it is core's own page.
+const CORE_BADGE = `  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
+    <img src="https://badgen.net/npm/v/@flow-scanner/lightning-flow-scanner-core?label=Core" alt="Core version">
+  </a>`;
+
+function addCoreBadge(header) {
+  if (header.includes('alt="Core version"')) return header;
+  const end = header.indexOf('</p>');
+  if (end === -1) {
+    console.warn('No badge row found for the Core badge');
+    return header;
+  }
+  return header.slice(0, end).trimEnd() + '\n' + CORE_BADGE + '\n' + header.slice(end);
+}
+
 const CORE_DEMO = /\n*<p align="center">\s*<img [^>]*core-demo\.png[^>]*>\s*<\/p>\n*/;
 
 // Availability note — moved below the demo GIF in package READMEs
@@ -189,13 +222,14 @@ function syncPackageReadme(packagePath, packageName) {
   const gifBlock = packageGifs[lower] || '';
 
   // Insert package-specific GIF right before --- with clean, consistent spacing
-  let newHeader = sharedHeader;
+  const header = addCoreBadge(removeOwnBadge(sharedHeader, packageName));
+  let newHeader = header;
 
   const gifBlockTrimmed = (packageGifs[lower] || '').trim();
 
   if (gifBlockTrimmed) {
     // Remove the trailing --- and any whitespace around it
-    newHeader = sharedHeader.replace(/\s*---\s*$/, '').trimEnd();
+    newHeader = header.replace(/\s*---\s*$/, '').trimEnd();
     newHeader = newHeader.replace(CORE_DEMO, '\n\n').trimEnd();
 
     // In the root README the availability note sits directly under the subtitle.
