@@ -1,12 +1,15 @@
+import * as path from "path";
 import { SfCommand, Flags } from "@salesforce/sf-plugins-core";
 import { Messages } from "@salesforce/core";
 import chalk from "chalk";
 import { loadScannerOptions } from "../../libs/ScannerConfig.js";
 import { FindFlows } from "../../libs/FindFlows.js";
+import { FileSystemResolver } from "../../libs/FileSystemResolver.js";
 import { ScanResult as Output } from "../../models/ScanResult.js";
 import pkg, {
   ParsedFlow,
   ScanResult,
+  type SubflowResolver,
 } from "@flow-scanner/lightning-flow-scanner-core";
 import type { Threshold, RuleCategory } from "@flow-scanner/lightning-flow-scanner-core";
 import { stringify as csvStringify } from "csv-stringify/sync";
@@ -15,7 +18,7 @@ const {
   parse: parseFlows,
   scan: scanFlows,
   exportSarif: exportSarif,
-  exportDetails: exportDetails,
+  flatten: flattenResults,
 } = pkg;
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
@@ -137,6 +140,17 @@ export default class Scan extends SfCommand<Output> {
     const parsedFlows: ParsedFlow[] = await parseFlows(flowFiles);
     this.debug(`parsed flows ${parsedFlows.length}`, ...parsedFlows);
 
+    // ---- 4b. Build a subflow resolver for cross-flow analysis ----------------
+    // Rules that traverse into referenced subflows (e.g. DML-in-loop across
+    // subflows, unresolved-subflow) resolve synchronously during check(), so the
+    // resolver is eager-loaded up front. Failure to build it must never fail the
+    // scan; affected rules simply skip cross-flow analysis.
+    const subflowResolver = await this.buildSubflowResolver(
+      flags.directory,
+      flowFiles,
+      mergedConfig.ignore
+    );
+
     // ---- 5. Run the scan (threshold filtering happens in core) ---------------
     let scanResults: ScanResult[];
     try {
@@ -147,14 +161,15 @@ export default class Scan extends SfCommand<Output> {
         threshold: this.threshold,
         ignoreFlows: mergedConfig.ignoreFlows,
         exceptions: mergedConfig.exceptions,
+        subflowResolver,
       };
       scanResults = scanFlows(parsedFlows, scanConfig);
     } catch (err) {
       this.error(`Scan failed: ${(err as Error).message}`);
     }
     this.debug("Does every scanResult have fsPath?", scanResults.some(r => !r.flow?.fsPath));
-    // ---- 6. Use exportDetails to get flattened results with line numbers ----
-    const flatResults = exportDetails(scanResults, true); // includeDetails=true for full info
+    // ---- 6. Flatten to one self-contained record per violation --------------
+    const flatResults = flattenResults(scanResults);
     this.flatResults = flatResults;
 
     // ---- 8. Handle output formats -------------------------------------------
@@ -178,6 +193,29 @@ export default class Scan extends SfCommand<Output> {
     };
 
     return { summary, status: 0, results: this.convertToCliViolations(flatResults) };
+  }
+
+  private async buildSubflowResolver(
+    directory: string | undefined,
+    flowFiles: string[],
+    ignore?: string[]
+  ): Promise<SubflowResolver | undefined> {
+    // Search the scanned directory, or the set of directories the located flow
+    // files live in, so referenced sibling subflows can be resolved.
+    const searchPaths = directory
+      ? [directory]
+      : Array.from(new Set(flowFiles.map((f) => path.dirname(f))));
+    if (searchPaths.length === 0) return undefined;
+    try {
+      return await FileSystemResolver.create({
+        searchPaths,
+        ignorePatterns: ignore,
+        eager: true, // pre-load so rules can resolve subflows synchronously
+      });
+    } catch (err) {
+      this.debug(`Subflow resolver init failed: ${(err as Error).message}`);
+      return undefined;
+    }
   }
 
   private findFlows(directory?: string, sourcepath?: string[], configIgnore?: string[]) {
@@ -213,6 +251,13 @@ export default class Scan extends SfCommand<Output> {
       "locationY",
       "connectsTo",
       "expression",
+      "description",
+      "referencedFlow",
+      "referencedElement",
+      "referencedType",
+      "callChain",
+      "taintedVariables",
+      "sinkType",
     ];
 
     const records = flatResults.map(r => ({
@@ -231,8 +276,15 @@ export default class Scan extends SfCommand<Output> {
       dataType: r.dataType ?? "",
       locationX: r.locationX ?? "",
       locationY: r.locationY ?? "",
-      connectsTo: r.connectsTo ?? "",
+      connectsTo: (r.connectsTo ?? []).join(", "),
       expression: r.expression ?? "",
+      description: r.description ?? "",
+      referencedFlow: r.referencedFlow ?? "",
+      referencedElement: r.referencedElement ?? "",
+      referencedType: r.referencedType ?? "",
+      callChain: (r.callChain ?? []).join(" -> "),
+      taintedVariables: (r.taintedVariables ?? []).join(", "),
+      sinkType: r.sinkType ?? "",
     }));
 
     return csvStringify(records, {
@@ -312,6 +364,13 @@ export default class Scan extends SfCommand<Output> {
       locationY: r.locationY,
       connectsTo: r.connectsTo,
       expression: r.expression,
+      description: r.description,
+      referencedFlow: r.referencedFlow,
+      referencedElement: r.referencedElement,
+      referencedType: r.referencedType,
+      callChain: r.callChain,
+      taintedVariables: r.taintedVariables,
+      sinkType: r.sinkType,
     }));
   }
 }

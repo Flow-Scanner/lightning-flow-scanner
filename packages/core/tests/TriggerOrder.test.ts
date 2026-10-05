@@ -69,7 +69,7 @@ describe("TriggerOrder", () => {
     const expectedRule = scanResults?.ruleResults.find((rule) => rule.ruleName === "TriggerOrder");
     expect(expectedRule).toBeTruthy();
     expect(expectedRule?.occurs).toBe(true);
-    expect(expectedRule?.details[0].details).toEqual({ expression: "10, 20, 30 ..." });
+    expect(expectedRule?.details[0].expression).toBe("10, 20, 30 ...");
   });
 
   it("should flag trigger order when not present", async () => {

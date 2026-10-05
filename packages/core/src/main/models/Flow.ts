@@ -288,6 +288,34 @@ export class Flow {
     return "";
   }
 
+  /**
+   * Get all subflow nodes in this flow.
+   * @returns Array of FlowNode objects with subtype 'subflows'
+   */
+  public getSubflowNodes(): FlowNode[] {
+    return this.elements.filter(
+      (e): e is FlowNode => e instanceof FlowNode && e.subtype === "subflows"
+    );
+  }
+
+  /**
+   * Get the API names of all referenced subflows.
+   * @returns Array of unique subflow API names
+   */
+  public getSubflowNames(): string[] {
+    const names = this.getSubflowNodes()
+      .map((node) => node.flowName)
+      .filter((name): name is string => !!name);
+    return [...new Set(names)];
+  }
+
+  /**
+   * Check if this flow references any subflows.
+   */
+  public hasSubflows(): boolean {
+    return this.getSubflowNodes().length > 0;
+  }
+
   public toXMLString(): string {
     try {
       return this.generateDoc();

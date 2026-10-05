@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <description>Collects user input on a screen and passes it into a subflow that runs without sharing.</description>
+    <label>Taint Parent Unsafe</label>
+    <processType>Flow</processType>
+    <status>Active</status>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Collect_Input</targetReference>
+        </connector>
+    </start>
+    <screens>
+        <name>Collect_Input</name>
+        <label>Collect Input</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>UserInput</name>
+            <dataType>String</dataType>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <connector>
+            <targetReference>Call_NoSharing_Child</targetReference>
+        </connector>
+    </screens>
+    <subflows>
+        <name>Call_NoSharing_Child</name>
+        <label>Call NoSharing Child</label>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
+        <flowName>Taint_Child_NoSharing</flowName>
+        <inputAssignments>
+            <name>childInput</name>
+            <value>
+                <elementReference>UserInput</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>

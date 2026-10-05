@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import { SelectFlows } from '../libs/SelectFlows';
 import { ScanOverview } from '../panels/ScanOverviewPanel';
 import * as core from '@flow-scanner/lightning-flow-scanner-core';
+import { FileSystemResolver } from '../libs/FileSystemResolver';
 import { CacheProvider } from '../providers/cache-provider';
 import { OutputChannel } from '../providers/outputChannel';
 import { loadScannerConfig } from '../providers/config-provider';
@@ -10,6 +11,27 @@ import * as path from 'path';
 
 const toFsPaths = (uris: vscode.Uri[]): string[] => uris.map(u => u.fsPath);
 const toUris = (paths: string[]): vscode.Uri[] => paths.map(p => vscode.Uri.file(p));
+
+/**
+ * Build a subflow resolver over the workspace so cross-flow rules can analyze
+ * referenced subflows. Prefers the open workspace folders; falls back to the
+ * directories of the scanned files. Never throws — cross-flow analysis simply
+ * degrades to single-flow if the resolver cannot be built.
+ */
+async function buildWorkspaceResolver(
+  fsPaths: string[]
+): Promise<core.SubflowResolver | undefined> {
+  try {
+    const searchPaths =
+      vscode.workspace.workspaceFolders?.map((f) => f.uri.fsPath) ??
+      Array.from(new Set(fsPaths.map((p) => path.dirname(p))));
+    if (searchPaths.length === 0) return undefined;
+    return await FileSystemResolver.create({ searchPaths, eager: true });
+  } catch (e) {
+    OutputChannel.getInstance().logChannel.debug('Subflow resolver init failed', e);
+    return undefined;
+  }
+}
 
 type Severity = "error" | "warning" | "note";
 
@@ -357,6 +379,8 @@ export default class Commands {
     ScanOverview.createOrShow(this.context.extensionUri, []);
 
     OutputChannel.getInstance().logChannel.debug('Using rule config for scan:', config);
+    const fsPaths = toFsPaths(selectedUris);
+    const parsed = await core.parse(fsPaths);
     const scanConfig = {
       rules: config.rules,
       betamode: config.betamode,
@@ -365,8 +389,8 @@ export default class Commands {
       exceptions: config.exceptions,
       categories: effectiveCategories,
       threshold: effectiveThreshold,
+      subflowResolver: await buildWorkspaceResolver(fsPaths),
     };
-    const parsed = await core.parse(toFsPaths(selectedUris));
     const results = core.scan(parsed, scanConfig);
 
     await CacheProvider.instance.set('results', results);
@@ -559,8 +583,9 @@ export default class Commands {
           return;
         }
       }
-      const parsed = await core.parse(toFsPaths(uris));
-      results = core.scan(parsed, { rules: config.rules, betamode: config.betamode, ignoreFlows: config.ignoreFlows, exceptions: config.exceptions });
+      const fixFsPaths = toFsPaths(uris);
+      const parsed = await core.parse(fixFsPaths);
+      results = core.scan(parsed, { rules: config.rules, betamode: config.betamode, ignoreFlows: config.ignoreFlows, exceptions: config.exceptions, subflowResolver: await buildWorkspaceResolver(fixFsPaths) });
     }
     if (results.length === 0) {
       vscode.window.showInformationMessage('No issues to fix.');

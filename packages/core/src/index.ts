@@ -5,12 +5,12 @@ import type { IRulesConfig, RuleCategory, Severity, Threshold } from "./main/int
 import { SEVERITY_ORDER, meetsThreshold, countThresholdViolations, filterByThreshold } from "./main/interfaces/IRulesConfig";
 import type { FlatViolation } from "./main/models/FlatViolation";
 import { Compiler } from "./main/libs/Compiler";
-import { exportDetails } from "./main/libs/ExportDetails";
+import { flatten } from "./main/libs/Flatten";
 import { exportSarif } from "./main/libs/ExportSarif";
 import { fix } from "./main/libs/FixFlows";
 import { getRules } from "./main/libs/GetRuleDefinitions";
 import { parse } from "./main/libs/ParseFlows";
-import { scan } from "./main/libs/ScanFlows";
+import { scan, scanFlat } from "./main/libs/ScanFlows";
 import { Flow } from "./main/models/Flow";
 import { FlowAttribute } from "./main/models/FlowAttribute";
 import { FlowElement } from "./main/models/FlowElement";
@@ -25,10 +25,35 @@ import { Violation } from "./main/models/Violation";
 import { DEFAULT_ICONS, ASCII_ICONS, type NodeIconConfig } from "./main/config/NodeIcons";
 import { DEFAULT_VARIABLE_ICONS, ASCII_VARIABLE_ICONS, type VariableIconConfig } from "./main/config/VariableIcons";
 import { exportDiagram, type DiagramOptions } from "./main/libs/ExportDiagram";
+import {
+  NoOpResolver,
+  PreloadedResolver,
+  defaultResolver,
+  type SubflowResolver,
+  type ResolvedSubflow,
+} from "./main/libs/SubflowResolver";
+import {
+  FileSystemResolver,
+  type FileSystemResolverOptions,
+  type FlowFileFinder,
+} from "./main/libs/FileSystemResolver";
+import {
+  buildResolver,
+  type FlowSource,
+  type BuildResolverOptions,
+} from "./main/libs/BuildResolver";
+import { parseFlowXml, createFlowParser } from "./main/libs/ParseFlowXml";
 
 export {
   Compiler,
-  exportDetails,
+  NoOpResolver,
+  PreloadedResolver,
+  FileSystemResolver,
+  defaultResolver,
+  buildResolver,
+  parseFlowXml,
+  createFlowParser,
+  flatten,
   exportDiagram,
   exportSarif,
   fix,
@@ -45,6 +70,7 @@ export {
   Violation,
   RuleResult,
   scan,
+  scanFlat,
   ScanResult,
   DEFAULT_ICONS,
   ASCII_ICONS,
@@ -56,4 +82,4 @@ export {
   countThresholdViolations,
   filterByThreshold,
 };
-export type { ConfigurableOption, FlatViolation, IRuleDefinition, IRulesConfig, RuleCategory, Severity, Threshold, NodeIconConfig, DiagramOptions, VariableIconConfig };
+export type { ConfigurableOption, FlatViolation, IRuleDefinition, IRulesConfig, RuleCategory, Severity, Threshold, NodeIconConfig, DiagramOptions, VariableIconConfig, SubflowResolver, ResolvedSubflow, FileSystemResolverOptions, FlowFileFinder, FlowSource, BuildResolverOptions };

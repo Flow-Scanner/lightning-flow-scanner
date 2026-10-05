@@ -2,13 +2,13 @@
 
 System rules detect issues that are normally prevented by the Flow Builder UI. These rules are valuable when Flow XML files are edited directly by AI tools, scripts, or other automated processes.
 
-## Disabling System Rules
+## Enabling System Rules
 
-System rules are enabled by default. To disable them for performance optimization:
+System rules are disabled by default. To opt in:
 
 ```yaml
 # .flow-scanner.yml
-systemRules: false
+systemRules: true
 ```
 
 Or programmatically:
@@ -17,7 +17,7 @@ Or programmatically:
 import { scan } from '@flow-scanner/lightning-flow-scanner-core';
 
 const results = scan(parsedFlows, {
-  systemRules: false,
+  systemRules: true,
   betaMode: true    // Required for beta system rules
 });
 ```

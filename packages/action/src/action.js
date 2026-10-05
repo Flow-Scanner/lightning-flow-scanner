@@ -288,10 +288,21 @@ async function run() {
       core.info(`Scanning ${pFlows.length} Flow(s)...`);
     }
 
+    // Build a subflow resolver over all parsed flows so cross-flow rules can
+    // analyze referenced subflows (DML-in-loop through subflows, unresolved
+    // subflows, user data passed into a without-sharing subflow, ...).
+    const subflowResolver = new lfs_core.PreloadedResolver();
+    for (const pFlow of pFlows) {
+      if (pFlow.flow && pFlow.flow.name) {
+        subflowResolver.addFlow(pFlow.flow.name, pFlow.flow);
+      }
+    }
+    const scanConfig = Object.assign({}, config, { subflowResolver });
+
     // Scan flows
     let scanResults = [];
     for (const flow of pFlows) {
-      const res = lfs_core.scan([flow], config);
+      const res = lfs_core.scan([flow], scanConfig);
       scanResults.push(...res);
     }
 

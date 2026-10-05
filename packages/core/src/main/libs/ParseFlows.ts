@@ -1,21 +1,14 @@
-import { XMLParser } from "fast-xml-parser";
 import { promises as fs } from "fs";
 import * as p from "path";
 
 import { Flow } from "../models/Flow";
 import { ParsedFlow } from "../models/ParsedFlow";
+import { createFlowParser } from "./ParseFlowXml";
 
 
 export async function parse(selectedUris: string[]): Promise<ParsedFlow[]> {
   const parseResults: ParsedFlow[] = [];
-  const parser = new XMLParser({
-    attributeNamePrefix: "@_",
-    ignoreAttributes: false,
-    // @ts-expect-error type issue
-    ignoreNameSpace: false,
-    parseTagValue: false,
-    textNodeName: "#text"
-  });
+  const parser = createFlowParser();
 
   for (const uri of selectedUris) {
     try {

@@ -11,7 +11,11 @@ describe("RuleCommon automatically sets isConfigurable correctly", () => {
       const ruleInstance = ruleRegistry.createInstance(ruleId);
 
       const checkSource = (ruleInstance as any).check.toString();
-      const usesOptions = /options[.\?]/.test(checkSource);
+      // `subflowResolver` is injected into the options bag by the scan framework
+      // (see ScanFlows), not a user-facing configurable option, so reading it must
+      // not count as consuming rule configuration.
+      const configSource = checkSource.replace(/options\s*\??\s*\.\s*subflowResolver/g, "");
+      const usesOptions = /options[.\?]/.test(configSource);
 
       expect(ruleInstance.isConfigurable).toBe(usesOptions);
 

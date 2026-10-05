@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <description>Collects user input and passes it into a subflow that runs WITH sharing; no violation expected.</description>
+    <label>Taint Parent Safe</label>
+    <processType>Flow</processType>
+    <status>Active</status>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Collect_Input</targetReference>
+        </connector>
+    </start>
+    <screens>
+        <name>Collect_Input</name>
+        <label>Collect Input</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <fields>
+            <name>UserInput</name>
+            <dataType>String</dataType>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <connector>
+            <targetReference>Call_Safe_Child</targetReference>
+        </connector>
+    </screens>
+    <subflows>
+        <name>Call_Safe_Child</name>
+        <label>Call Safe Child</label>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
+        <flowName>Taint_Child_Safe</flowName>
+        <inputAssignments>
+            <name>childInput</name>
+            <value>
+                <elementReference>UserInput</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>

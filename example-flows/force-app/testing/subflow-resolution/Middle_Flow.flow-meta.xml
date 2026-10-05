@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <description>Middle flow in a chain: Parent -> Middle -> Child_With_DML. Used to test recursive subflow resolution.</description>
+    <label>Middle Flow</label>
+    <processType>AutoLaunchedFlow</processType>
+    <status>Active</status>
+    <interviewLabel>Middle Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <runInMode>DefaultMode</runInMode>
+
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Call_Child_Flow</targetReference>
+        </connector>
+    </start>
+
+    <variables>
+        <name>InputAccountId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+
+    <subflows>
+        <name>Call_Child_Flow</name>
+        <label>Call Child Flow</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <flowName>Child_With_DML</flowName>
+        <inputAssignments>
+            <name>InputAccountId</name>
+            <value>
+                <elementReference>InputAccountId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>

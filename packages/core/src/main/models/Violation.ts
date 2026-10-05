@@ -5,13 +5,37 @@ import { FlowElement } from "./FlowElement";
 import { FlowNode } from "./FlowNode";
 import { FlowVariable } from "./FlowVariable";
 
+/**
+ * A single rule violation. Deliberately flat: every field lives at the top
+ * level with a fixed name and type, whatever kind of element or rule produced
+ * it — there is no polymorphic `details` bag. Fields that don't apply to a
+ * given violation are simply absent.
+ */
 export class Violation {
-  public columnNumber: number;  // Mandatory post-enrich; defaults to 1 if not found
-  public details?: object;      // Optional; only populated for rule-specific needs
-  public lineNumber: number;    // Mandatory post-enrich; defaults to 1 if not found
-  public metaType: string;
+  // Identity — always present
   public name: string;
-  public type: string;
+  public type: string;          // Element subtype (e.g. recordUpdates, variables)
+  public metaType: string;      // node | variable | attribute | resource
+
+  // Position in the flow XML — mandatory post-enrich; defaults to 1 if not found
+  public lineNumber: number;
+  public columnNumber: number;
+
+  // Element facts — set when the element kind carries them
+  public dataType?: string;     // variables
+  public connectsTo?: string[]; // nodes: connector targets
+  public locationX?: string;    // nodes: canvas position
+  public locationY?: string;
+  public expression?: string;   // flow-level attributes
+
+  // Rule context — one shared vocabulary across all rules
+  public description?: string;       // Human explanation of this occurrence
+  public referencedFlow?: string;    // Subflow API name involved (cross-flow findings)
+  public referencedElement?: string; // Element inside the referenced flow
+  public referencedType?: string;    // Subtype of that element
+  public callChain?: string[];       // Chain of flow names for cross-flow findings
+  public taintedVariables?: string[];
+  public sinkType?: string;          // Element subtype acting as the data sink
 
   constructor(violation: FlowElement) {
     this.name = violation.name;
@@ -20,22 +44,40 @@ export class Violation {
     this.lineNumber = 1;         // Default; will be overwritten by enrich if found
     this.columnNumber = 1;       // Default; will be overwritten by enrich if found
 
-    // Conditionally populate details only if needed (e.g., via config flag later)
     if (violation.metaType === MetaType.VARIABLE) {
       const element = violation as FlowVariable;
-      this.details = { dataType: element.dataType };
+      this.dataType = element.dataType;
     } else if (violation.metaType === MetaType.NODE) {
       const element = violation as FlowNode;
-      this.details = {
-        connectsTo: element.connectors?.map((connector) => connector.reference),
-        locationX: element.locationX,
-        locationY: element.locationY,
-      };
+      this.connectsTo = element.connectors?.map((connector) => connector.reference);
+      this.locationX = element.locationX;
+      this.locationY = element.locationY;
     } else if (violation.metaType === MetaType.ATTRIBUTE) {
       const element = violation as FlowAttribute;
-      this.details = { expression: element.expression };
+      this.expression = element.expression;
     }
-    // For other metaTypes or if details disabled, remains undefined
+  }
+}
+
+/** Optional fields removed at DetailLevel.SIMPLE (identity/position remain). */
+const DETAIL_FIELDS = [
+  "dataType",
+  "connectsTo",
+  "locationX",
+  "locationY",
+  "expression",
+  "description",
+  "referencedFlow",
+  "referencedElement",
+  "referencedType",
+  "callChain",
+  "taintedVariables",
+  "sinkType",
+] as const;
+
+export function stripViolationDetails(violation: Violation): void {
+  for (const field of DETAIL_FIELDS) {
+    delete violation[field];
   }
 }
 

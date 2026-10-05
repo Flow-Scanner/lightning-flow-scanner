@@ -8,12 +8,12 @@ export function GetRuleDefinitions(
   options?: IRulesConfig
 ): IRuleDefinition[] {
   const includeBeta = options?.betaMode === true || options?.betamode === true;
-  const includeSystem = options?.systemRules !== false; // defaults to true
+  const includeSystem = options?.systemRules === true; // system rules are opt-in (defaults to false)
   const categories = options?.categories; // undefined means all categories
   const rulesMode = options?.ruleMode || "merged";
   const selectedRules: IRuleDefinition[] = [];
 
-  const ruleIds = ruleRegistry.getAllRuleIds(includeBeta);
+  const ruleIds = ruleRegistry.getAllRuleIds({ includeBeta, includeSystem });
 
   // ISOLATED MODE
   if (rulesMode === "isolated" && ruleConfig && ruleConfig.size > 0) {
@@ -27,11 +27,9 @@ export function GetRuleDefinitions(
 
       const rule = ruleRegistry.createInstance(entry.ruleId);  // Always use ruleId to instantiate
 
-      // Skip system rules if disabled
-      if (rule.category === 'system' && !includeSystem) continue;
-
-      // Skip rules not in selected categories (if categories filter is specified)
-      if (!isCategoryIncluded(rule.category, categories, includeSystem)) continue;
+      // Explicitly configured rules run even when they are system rules — the
+      // systemRules flag only gates default (merged-mode) selection.
+      if (!isCategoryIncluded(rule.category, categories, true)) continue;
 
       if (config?.severity) {
         rule.severity = config.severity;

@@ -7,8 +7,10 @@ import {
 } from "../../main/internals/internals";
 import { DetailLevel, meetsThreshold } from "../interfaces/IRulesConfig";
 import { ParsedFlow } from "../models/ParsedFlow";
-import { enrichViolationsWithLineNumbers } from "../models/Violation";
+import { enrichViolationsWithLineNumbers, stripViolationDetails } from "../models/Violation";
+import { FlatViolation } from "../models/FlatViolation";
 import { GetRuleDefinitions } from "./GetRuleDefinitions";
+import { flatten } from "./Flatten";
 import { getRuleDocumentationUrl } from "./RuleDocumentation";
 
 function getRuleConfigByIdOrName(
@@ -50,6 +52,15 @@ export function scan(parsedFlows: ParsedFlow[], ruleOptions?: IRulesConfig): Sca
   return scanResults;
 }
 
+/**
+ * Scan and return one flat, uniformly-typed record per violation — the
+ * primary output shape for downstream consumers (CSV, CI annotations,
+ * dashboards). Use scan() when the per-flow tree is needed (e.g. SARIF).
+ */
+export function scanFlat(parsedFlows: ParsedFlow[], ruleOptions?: IRulesConfig): FlatViolation[] {
+  return flatten(scan(parsedFlows, ruleOptions));
+}
+
 export function ScanFlows(flows: Flow[], ruleOptions?: IRulesConfig): ScanResult[] {
   const flowResults: ScanResult[] = [];
   const rawMode = ruleOptions?.detailLevel;
@@ -85,9 +96,14 @@ export function ScanFlows(flows: Flow[], ruleOptions?: IRulesConfig): ScanResult
         const config = getRuleConfigByIdOrName(rule, ruleOptions?.rules);
         const suppressions = getSuppressionsForRule(rule, flow.name, ruleOptions?.exceptions);
 
+        // Merge subflowResolver into rule options if available
+        const ruleConfig = ruleOptions?.subflowResolver
+          ? { ...config, subflowResolver: ruleOptions.subflowResolver }
+          : config;
+
         const result =
-          config && Object.keys(config).length > 0
-            ? rule.execute(flow, config, suppressions)
+          ruleConfig && Object.keys(ruleConfig).length > 0
+            ? rule.execute(flow, ruleConfig, suppressions)
             : rule.execute(flow, undefined, suppressions);
 
         // Apply custom message if provided in config, otherwise use summary
@@ -131,9 +147,7 @@ export function ScanFlows(flows: Flow[], ruleOptions?: IRulesConfig): ScanResult
   if (detailLevel === DetailLevel.SIMPLE) {
     flowResults.forEach(scanResult => {
       scanResult.ruleResults.forEach(ruleResult => {
-        ruleResult.details.forEach(violation => {
-          delete violation.details;
-        });
+        ruleResult.details.forEach(stripViolationDetails);
       });
     });
   }

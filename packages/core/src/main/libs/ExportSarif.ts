@@ -26,8 +26,7 @@ export function exportSarif(results: ScanResult[]): string {
           properties: {
             element: d.name,
             flow: flow.name,
-            type: d.type,
-            ...d.details,
+            ...violationProperties(d),
           },
           ruleId: r.ruleId,
         }))),
@@ -71,6 +70,13 @@ function getUri(flow: Flow): string {
   }
   
   return `flows/${flow.name}.flow-meta.xml`;
+}
+
+/** Violation fields carried into SARIF result properties (undefined keys are
+ * dropped by JSON serialization). Position is mapped separately via region. */
+function violationProperties(d: Violation): Record<string, unknown> {
+  const { name: _name, metaType: _metaType, lineNumber: _line, columnNumber: _column, ...rest } = d;
+  return rest;
 }
 
 function mapRegion(detail: Violation): any {
