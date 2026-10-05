@@ -159,8 +159,11 @@ const packageGifs = {
 `
 };
 
+// Core demo image — root README only (it doubles as core's npm README)
+const CORE_DEMO = /\n*<p align="center">\s*<img [^>]*core-demo\.png[^>]*>\s*<\/p>\n*/;
+
 // Availability note — moved below the demo GIF in package READMEs
-const AVAILABILITY_NOTE = /\n*<p align="center">Also available in[\s\S]*?<\/p>\n*/;
+const AVAILABILITY_NOTE = /\n*<table align=\"center\"><tr><td>ℹ️ Also [\s\S]*?<\/table>\n*/;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Sync function — fully stable, GIF always injected
@@ -193,6 +196,7 @@ function syncPackageReadme(packagePath, packageName) {
   if (gifBlockTrimmed) {
     // Remove the trailing --- and any whitespace around it
     newHeader = sharedHeader.replace(/\s*---\s*$/, '').trimEnd();
+    newHeader = newHeader.replace(CORE_DEMO, '\n\n').trimEnd();
 
     // In the root README the availability note sits directly under the subtitle.
     // Package READMEs lead with the demo GIF, so the note belongs below it.

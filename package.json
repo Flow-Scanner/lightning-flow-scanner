@@ -14,6 +14,7 @@
     "build:vsx:package": "pnpm --filter=lightning-flow-scanner-vsx run build:vsx",
     "generate:readme": "node .github/scripts/generate-readme.js",
     "build:docs": "node .github/scripts/generate-readme.js && node .github/scripts/update-package-readmes.js",
+    "build:core-demo": "node .github/scripts/generate-core-demo.js",
     "test": "turbo run test --filter=!lightning-flow-scanner-action",
     "test:core": "turbo run test --filter=@flow-scanner/lightning-flow-scanner-core",
     "test:cli": "turbo run test --filter=lightning-flow-scanner",

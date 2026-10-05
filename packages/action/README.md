@@ -1,21 +1,15 @@
 <p align="center">
-  <a href="https://www.npmjs.com/package/@flow-scanner/lightning-flow-scanner-core">
-    <img src="https://badgen.net/npm/v/@flow-scanner/lightning-flow-scanner-core?label=Core" alt="Core version">
-  </a>
-  <a href="https://www.npmjs.com/package/lightning-flow-scanner">
-    <img src="https://badgen.net/npm/v/lightning-flow-scanner?label=CLI" alt="CLI version">
+  <a href="https://github.com/marketplace/actions/lightning-flow-scan">
+    <img src="https://badgen.net/badge/Action/v3.7.4/blue" alt="GitHub Action version">
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=ForceConfigControl.lightning-flow-scanner-vsx">
     <img src="https://badgen.net/vs-marketplace/v/ForceConfigControl.lightning-flow-scanner-vsx?label=VS%20Code" alt="VS Code version">
   </a>
-  <a href="https://github.com/marketplace/actions/lightning-flow-scan">
-    <img src="https://badgen.net/badge/Action/v3.7.4/blue" alt="GitHub Action version">
-  </a>
   <a href="https://appexchange.salesforce.com/appxListingDetail?listingId=80d6caf3-d4a8-41ec-b48e-da1fe3457e98">
     <img src="https://badgen.net/github/tag/Flow-Scanner/lightning-flow-scanner-app?label=App" alt="Salesforce App version">
   </a>
-  <a href="https://github.com/Flow-Scanner/lightning-flow-scanner/stargazers">
-    <img src="https://badgen.net/github/stars/Flow-Scanner/lightning-flow-scanner?label=Stargazers" alt="GitHub stars">
+  <a href="https://www.npmjs.com/package/lightning-flow-scanner">
+    <img src="https://badgen.net/npm/v/lightning-flow-scanner?label=CLI" alt="CLI version">
   </a>
 </p>
 
@@ -33,7 +27,7 @@
   </a>
 </p>
 
-<p align="center">Also available in the <a href="https://chromewebstore.google.com/detail/salesforce-inspector-relo/hpijlohoihegkfehhibggnkbjhoemldh"><b>Salesforce Inspector Reloaded</b></a> extension and <a href="https://appexchange.salesforce.com/appxListingDetail?listingId=a0N4V00000HA0X2UAL"><b>Org Check</b></a> app</p>
+<table align="center"><tr><td>ℹ️ Also built into <a href="https://chromewebstore.google.com/detail/salesforce-inspector-relo/hpijlohoihegkfehhibggnkbjhoemldh"><b>Salesforce Inspector Reloaded</b></a> and <a href="https://appexchange.salesforce.com/appxListingDetail?listingId=a0N4V00000HA0X2UAL"><b>Org Check</b></a></td></tr></table>
 
 ---
 
