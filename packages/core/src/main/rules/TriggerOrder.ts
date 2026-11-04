@@ -31,13 +31,17 @@ export class TriggerOrder extends RuleCommon implements IRuleDefinition {
     _suppressions: Set<string>
   ): core.Violation[] {
 
-    const startObject = this.getStartProperty(flow, "object");
-    // If there's no `object` on the start node, this is NOT a record-triggered flow
-    if (!startObject) {
+    // triggerOrder applies only to record-triggered flows. Platform-event flows
+    // also set start.object (the event name) but cannot configure an order.
+    const triggerType = this.getStartProperty(flow, "triggerType");
+    const isRecordTriggered =
+      triggerType === "RecordAfterSave" ||
+      triggerType === "RecordBeforeSave" ||
+      triggerType === "RecordBeforeDelete";
+    if (!isRecordTriggered) {
       return [];
     }
 
-    // This *is* a record-triggered flow → should have triggerOrder
     if (!flow.triggerOrder) {
       return [
         new core.Violation(

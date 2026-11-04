@@ -91,6 +91,44 @@ describe("TriggerOrder", () => {
     expect(ruleResult.occurs).toBeTruthy();
   });
 
+  it("should flag a before-delete record trigger without trigger order", async () => {
+    const testData: ParsedFlow = {
+      flow: {
+        status: "Active",
+        type: "AutoLaunchedFlow",
+        startNode: {
+          element: {
+            object: "Account",
+            triggerType: "RecordBeforeDelete",
+          },
+        },
+      },
+    } as unknown as Partial<ParsedFlow> as ParsedFlow;
+
+    const ruleResult: RuleResult = new TriggerOrder().execute(testData.flow as Flow);
+
+    expect(ruleResult.occurs).toBeTruthy();
+  });
+
+  it("should not flag a platform-event flow that has an object and no trigger order", async () => {
+    const testData: ParsedFlow = {
+      flow: {
+        status: "Active",
+        type: "AutoLaunchedFlow",
+        startNode: {
+          element: {
+            object: "Order_Event__e",
+            triggerType: "PlatformEvent",
+          },
+        },
+      },
+    } as unknown as Partial<ParsedFlow> as ParsedFlow;
+
+    const ruleResult: RuleResult = new TriggerOrder().execute(testData.flow as Flow);
+
+    expect(ruleResult.occurs).toBeFalsy();
+  });
+
   it("should not flag trigger order when present", async () => {
     const testData: ParsedFlow = {
       flow: {
