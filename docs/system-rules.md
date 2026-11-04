@@ -17,8 +17,7 @@ Or programmatically:
 import { scan } from '@flow-scanner/lightning-flow-scanner-core';
 
 const results = scan(parsedFlows, {
-  systemRules: false,
-  betaMode: true    // Required for beta system rules
+  systemRules: false
 });
 ```
 
@@ -30,7 +29,7 @@ const results = scan(parsedFlows, {
 
 ## Available Rules
 
-### Missing Start Reference ![Beta](https://img.shields.io/badge/status-beta-yellow)
+### Missing Start Reference
 When a flow has no start reference.
 
 **Rule ID:** `missing-start-reference`

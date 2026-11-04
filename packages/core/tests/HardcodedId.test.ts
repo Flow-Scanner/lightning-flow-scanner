@@ -12,9 +12,10 @@ describe("HardcodedId", () => {
   it("there should be one result for the rule HardcodedIds", async () => {
     const flows = await core.parse([example_uri]);
     const results: core.ScanResult[] = core.scan(flows);
-    const occurringResults = results[0].ruleResults.filter((rule) => rule.occurs);
+    const occurringResults = results[0].ruleResults.filter(
+      (rule) => rule.occurs && rule.ruleName === "HardcodedId"
+    );
     expect(occurringResults).toHaveLength(1);
-    expect(occurringResults[0].ruleName).toBe("HardcodedId");
   });
 
   describe("description field", () => {

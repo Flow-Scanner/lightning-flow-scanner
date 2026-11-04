@@ -28,8 +28,8 @@ describe("Autolayout", () => {
   it("should not have result when autolayout is configured", async () => {
     const flows = await core.parse([fixed_uri]);
     const ruleConfig = {
+      ruleMode: "isolated",
       rules: {
-        ruleMode: "isolated",
         AutoLayout: {
           severity: "error",
         },

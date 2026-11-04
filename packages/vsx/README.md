@@ -87,7 +87,7 @@ Avoid hard-coding record IDs, as they are unique to a specific org and will not 
 **Class Name:** _[HardcodedId](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/HardcodedId.ts)_
 **Severity:** 🔴 *Error*
 
-#### Hardcoded Secret ![Beta](https://img.shields.io/badge/status-beta-yellow)
+#### Hardcoded Secret
 Avoid hardcoding secrets, API keys, tokens, or credentials in Flows. These should be stored securely in Named Credentials, Custom Settings, Custom Metadata, or external secret management systems.
 
 **Rule ID:** `hardcoded-secret`
@@ -189,7 +189,7 @@ Flows running on outdated API versions may behave inconsistently when newer plat
 | expression | expression | `>= 50` | Comparison expression for API version (e.g., `>= 58`, `< 50`, `=== 60`) |
 
 
-#### Missing Filter Record Trigger ![Beta](https://img.shields.io/badge/status-beta-yellow)
+#### Missing Filter Record Trigger
 Record-triggered Flows without filters on changed fields or entry conditions execute on every record change. Adding filters ensures the Flow runs only when needed, improving performance.
 
 **Rule ID:** `missing-record-trigger-filter`
@@ -203,7 +203,7 @@ Before-save Flows can safely update the triggering record directly via $Record, 
 **Class Name:** _[SameRecordFieldUpdates](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/SameRecordFieldUpdates.ts)_
 **Severity:** 🟡 *Warning*
 
-#### Cognitive Complexity ![Beta](https://img.shields.io/badge/status-beta-yellow)
+#### Cognitive Complexity
 Flows with deeply nested loops and decisions are hard to understand. Unlike cyclomatic complexity which counts paths, cognitive complexity penalizes nesting depth. Consider extracting nested logic into subflows.
 
 **Rule ID:** `cognitive-complexity`
@@ -234,14 +234,14 @@ Record-triggered Flows without a specified Trigger Order may execute in an unpre
 **Class Name:** _[TriggerOrder](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/TriggerOrder.ts)_
 **Severity:** 🔵 *Note*
 
-#### Record ID as String ![Beta](https://img.shields.io/badge/status-beta-yellow)
+#### Record ID as String
 Flows that use a String variable for a record ID instead of receiving the full record introduce unnecessary complexity and additional Get Records queries. Using the complete record simplifies the Flow and improves performance.
 
 **Rule ID:** `record-id-as-string`
 **Class Name:** _[RecordIdAsString](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/RecordIdAsString.ts)_
 **Severity:** 🔵 *Note*
 
-#### Transform Instead of Loop ![Beta](https://img.shields.io/badge/status-beta-yellow)
+#### Transform Instead of Loop
 Loop elements that perform direct Assignments on each item can slow down Flows. Using Transform elements allows bulk operations on collections, improving performance and reducing complexity.
 
 **Rule ID:** `transform-instead-of-loop`
@@ -273,7 +273,7 @@ Flow descriptions are essential for documentation and maintainability. Include a
 **Class Name:** _[FlowDescription](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/FlowDescription.ts)_
 **Severity:** 🔴 *Error*
 
-#### Missing Metadata Description ![Beta](https://img.shields.io/badge/status-beta-yellow)
+#### Missing Metadata Description
 Elements and metadata without a description reduce clarity and maintainability. Adding descriptions improves readability and makes your automation easier to understand.
 
 **Rule ID:** `missing-metadata-description`

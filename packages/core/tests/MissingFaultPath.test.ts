@@ -33,9 +33,9 @@ describe("MissingFaultPath", () => {
   it("should return no result when fault path is implemented", async () => {
     const flows: Flow[] = await parse([fixedUri]);
     const results: ScanResult[] = scan(flows);
-    const occurringResults = results[0].ruleResults.filter((r) => r.occurs);
+    const faultPath = results[0].ruleResults.find((r) => r.ruleName === "MissingFaultPath");
 
-    expect(occurringResults).toHaveLength(0);
+    expect(faultPath?.occurs).toBeFalsy();
   });
 
   it("should not flag elements that are downstream of a fault path", async () => {

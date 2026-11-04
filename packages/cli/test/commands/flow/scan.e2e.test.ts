@@ -62,13 +62,14 @@ describe("Scan E2E Tests", () => {
       // Verify we got results
       expect(output.summary.results).to.be.greaterThan(0, "Should find problem violations");
 
-      // Problem rules: dml-in-loop, soql-in-loop, hardcoded-id, hardcoded-url, missing-fault-path,
-      // missing-null-handler, unsafe-running-context, duplicate-dml, recursive-record-update
+      // Problem rules: dml-in-loop, soql-in-loop, hardcoded-id, hardcoded-url, hardcoded-secret,
+      // missing-fault-path, missing-null-handler, unsafe-running-context, duplicate-dml, recursive-record-update
       const problemRuleIds = [
         "dml-in-loop",
         "soql-in-loop",
         "hardcoded-id",
         "hardcoded-url",
+        "hardcoded-secret",
         "missing-fault-path",
         "missing-null-handler",
         "unsafe-running-context",
@@ -92,7 +93,9 @@ describe("Scan E2E Tests", () => {
       expect(output.summary.results).to.be.greaterThan(0, "Should find suggestion violations");
 
       // Suggestion rules: action-call-in-loop, cognitive-complexity, invalid-api-version,
-      // excessive-cyclomatic-complexity, get-record-all-fields, inactive-flow, unspecified-trigger-order, same-record-field-updates
+      // excessive-cyclomatic-complexity, get-record-all-fields, inactive-flow,
+      // unspecified-trigger-order, same-record-field-updates, missing-record-trigger-filter,
+      // record-id-as-string, transform-instead-of-loop
       const suggestionRuleIds = [
         "action-call-in-loop",
         "cognitive-complexity",
@@ -101,7 +104,10 @@ describe("Scan E2E Tests", () => {
         "get-record-all-fields",
         "inactive-flow",
         "unspecified-trigger-order",
-        "same-record-field-updates"
+        "same-record-field-updates",
+        "missing-record-trigger-filter",
+        "record-id-as-string",
+        "transform-instead-of-loop"
       ];
 
       // All results should be from suggestion category rules
@@ -120,14 +126,15 @@ describe("Scan E2E Tests", () => {
       expect(output.summary.results).to.be.greaterThan(0, "Should find layout violations");
 
       // Layout rules: invalid-naming-convention, missing-flow-description, unclear-api-naming,
-      // missing-auto-layout, unreachable-element, unused-variable
+      // missing-auto-layout, unreachable-element, unused-variable, missing-metadata-description
       const layoutRuleIds = [
         "invalid-naming-convention",
         "missing-flow-description",
         "unclear-api-naming",
         "missing-auto-layout",
         "unreachable-element",
-        "unused-variable"
+        "unused-variable",
+        "missing-metadata-description"
       ];
 
       // All results should be from layout category rules
@@ -155,7 +162,8 @@ describe("Scan E2E Tests", () => {
         "unclear-api-naming",
         "missing-auto-layout",
         "unreachable-element",
-        "unused-variable"
+        "unused-variable",
+        "missing-metadata-description"
       ];
 
       for (const result of output.results) {
@@ -183,7 +191,8 @@ describe("Scan E2E Tests", () => {
         "unclear-api-naming",
         "missing-auto-layout",
         "unreachable-element",
-        "unused-variable"
+        "unused-variable",
+        "missing-metadata-description"
       ];
 
       for (const result of output.results) {

@@ -161,7 +161,7 @@ registry.register("action-call-in-loop", ActionCallsInLoop, "ActionCallsInLoop")
 registry.register("invalid-api-version", APIVersion, "APIVersion");
 registry.register("missing-auto-layout", AutoLayout, "AutoLayout");
 registry.register("unclear-api-naming", CopyAPIName, "CopyAPIName");
-registry.register("cognitive-complexity", CognitiveComplexity, "CognitiveComplexity", true);
+registry.register("cognitive-complexity", CognitiveComplexity, "CognitiveComplexity");
 registry.register("excessive-cyclomatic-complexity", CyclomaticComplexity, "CyclomaticComplexity");
 registry.register("dml-in-loop", DMLStatementInLoop, "DMLStatementInLoop");
 registry.register("duplicate-dml", DuplicateDMLOperation, "DuplicateDMLOperation");
@@ -182,11 +182,11 @@ registry.register("unreachable-element", UnconnectedElement, "UnconnectedElement
 registry.register("unsafe-running-context", UnsafeRunningContext, "UnsafeRunningContext");
 registry.register("unused-variable", UnusedVariable, "UnusedVariable");
 
-registry.register("missing-metadata-description", MissingMetadataDescription, "MissingMetadataDescription", true);
-registry.register("missing-record-trigger-filter", MissingRecordTriggerFilter, "MissingFilterRecordTrigger", true);
-registry.register("missing-start-reference", MissingStartReference, "MissingStartReference",true);
-registry.register("transform-instead-of-loop", TransformInsteadOfLoop, "TransformInsteadOfLoop", true);
-registry.register("record-id-as-string", RecordIdAsString, "RecordIdAsString", true);
-registry.register("hardcoded-secret", HardcodedSecret, "HardcodedSecret", true);
+registry.register("missing-metadata-description", MissingMetadataDescription, "MissingMetadataDescription");
+registry.register("missing-record-trigger-filter", MissingRecordTriggerFilter, "MissingFilterRecordTrigger");
+registry.register("missing-start-reference", MissingStartReference, "MissingStartReference");
+registry.register("transform-instead-of-loop", TransformInsteadOfLoop, "TransformInsteadOfLoop");
+registry.register("record-id-as-string", RecordIdAsString, "RecordIdAsString");
+registry.register("hardcoded-secret", HardcodedSecret, "HardcodedSecret");
 
 export const ruleRegistry = registry;
