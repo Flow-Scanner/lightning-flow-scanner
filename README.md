@@ -66,78 +66,78 @@ These rules detect anti-patterns and unsafe practices in your Flows that could b
 #### DML Statement In A Loop
 Executing DML operations (insert, update, delete) inside a loop is a high-risk anti-pattern that frequently causes governor limit exceptions. All database operations should be collected and executed once, outside the loop.
 
-**Rule ID:** `dml-in-loop`
-**Class Name:** _[DMLStatementInLoop](packages/core/src/main/rules/DMLStatementInLoop.ts)_
+**Rule ID:** `dml-in-loop`<br>
+**Class Name:** _[DMLStatementInLoop](packages/core/src/main/rules/DMLStatementInLoop.ts)_<br>
 **Severity:** 🔴 *Error*
 
 #### Hardcoded Id
 Avoid hard-coding record IDs, as they are unique to a specific org and will not work in other environments. Instead, store IDs in variables—such as merge-field URL parameters or a **Get Records** element—to make the Flow portable, maintainable, and flexible.
 
-**Rule ID:** `hardcoded-id`
-**Class Name:** _[HardcodedId](packages/core/src/main/rules/HardcodedId.ts)_
+**Rule ID:** `hardcoded-id`<br>
+**Class Name:** _[HardcodedId](packages/core/src/main/rules/HardcodedId.ts)_<br>
 **Severity:** 🔴 *Error*
 
 #### Hardcoded Secret
 Avoid hardcoding secrets, API keys, tokens, or credentials in Flows. These should be stored securely in Named Credentials, Custom Settings, Custom Metadata, or external secret management systems.
 
-**Rule ID:** `hardcoded-secret`
-**Class Name:** _[HardcodedSecret](packages/core/src/main/rules/HardcodedSecret.ts)_
+**Rule ID:** `hardcoded-secret`<br>
+**Class Name:** _[HardcodedSecret](packages/core/src/main/rules/HardcodedSecret.ts)_<br>
 **Severity:** 🔴 *Error*
 
 #### Hardcoded Url
 Avoid hard-coding URLs, as they may change between environments or over time. Instead, store URLs in variables or custom settings to make the Flow adaptable, maintainable, and environment-independent.
 
-**Rule ID:** `hardcoded-url`
-**Class Name:** _[HardcodedUrl](packages/core/src/main/rules/HardcodedUrl.ts)_
+**Rule ID:** `hardcoded-url`<br>
+**Class Name:** _[HardcodedUrl](packages/core/src/main/rules/HardcodedUrl.ts)_<br>
 **Severity:** 🔴 *Error*
 
 #### Process Builder
 Process Builder is retired. Continuing to use it increases maintenance overhead and risks future compatibility issues. Migrating automation to Flow reduces risk and improves maintainability.
 
-**Rule ID:** `process-builder-usage`
-**Class Name:** _[ProcessBuilder](packages/core/src/main/rules/ProcessBuilder.ts)_
+**Rule ID:** `process-builder-usage`<br>
+**Class Name:** _[ProcessBuilder](packages/core/src/main/rules/ProcessBuilder.ts)_<br>
 **Severity:** 🔴 *Error*
 
 #### SOQL Query In A Loop
 Running SOQL queries inside a loop can rapidly exceed query limits and severely degrade performance. Queries should be executed once, with results reused throughout the loop.
 
-**Rule ID:** `soql-in-loop`
-**Class Name:** _[SOQLQueryInLoop](packages/core/src/main/rules/SOQLQueryInLoop.ts)_
+**Rule ID:** `soql-in-loop`<br>
+**Class Name:** _[SOQLQueryInLoop](packages/core/src/main/rules/SOQLQueryInLoop.ts)_<br>
 **Severity:** 🔴 *Error*
 
 #### Unsafe Running Context
 Flows configured to run in System Mode without Sharing grant access to all data, bypassing user permissions. Avoid this setting to prevent security risks and protect sensitive data.
 
-**Rule ID:** `unsafe-running-context`
-**Class Name:** _[UnsafeRunningContext](packages/core/src/main/rules/UnsafeRunningContext.ts)_
+**Rule ID:** `unsafe-running-context`<br>
+**Class Name:** _[UnsafeRunningContext](packages/core/src/main/rules/UnsafeRunningContext.ts)_<br>
 **Severity:** 🔴 *Error*
 
 #### Duplicate DML Operation
 When a Flow performs database operations across multiple screens, users navigating backward can cause the same actions to run multiple times. To prevent unintended changes, either restrict backward navigation or redesign the Flow so database operations execute in a single, forward-moving step.
 
-**Rule ID:** `duplicate-dml`
-**Class Name:** _[DuplicateDMLOperation](packages/core/src/main/rules/DuplicateDMLOperation.ts)_
+**Rule ID:** `duplicate-dml`<br>
+**Class Name:** _[DuplicateDMLOperation](packages/core/src/main/rules/DuplicateDMLOperation.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Missing Fault Path
 Elements that can fail should include a Fault Path to handle errors gracefully. Without it, failures show generic errors to users. Fault Paths improve reliability and user experience.
 
-**Rule ID:** `missing-fault-path`
-**Class Name:** _[MissingFaultPath](packages/core/src/main/rules/MissingFaultPath.ts)_
+**Rule ID:** `missing-fault-path`<br>
+**Class Name:** _[MissingFaultPath](packages/core/src/main/rules/MissingFaultPath.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Missing Null Handler
 Get Records operations return null when no data is found. Without handling these null values, Flows can fail or produce unintended results. Adding a null check improves reliability and ensures the Flow behaves as expected.
 
-**Rule ID:** `missing-null-handler`
-**Class Name:** _[MissingNullHandler](packages/core/src/main/rules/MissingNullHandler.ts)_
+**Rule ID:** `missing-null-handler`<br>
+**Class Name:** _[MissingNullHandler](packages/core/src/main/rules/MissingNullHandler.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Recursive After Update
 After-save Flows that update the same record can trigger recursion, causing unintended behavior or performance issues. Avoid updating the triggering record in after-save Flows; use before-save Flows instead to prevent recursion.
 
-**Rule ID:** `recursive-record-update`
-**Class Name:** _[RecursiveAfterUpdate](packages/core/src/main/rules/RecursiveAfterUpdate.ts)_
+**Rule ID:** `recursive-record-update`<br>
+**Class Name:** _[RecursiveAfterUpdate](packages/core/src/main/rules/RecursiveAfterUpdate.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 ---
@@ -149,29 +149,29 @@ These rules highlight areas where Flows can be improved. Following them increase
 #### Action Call In A Loop
 Repeatedly invoking Apex actions inside a loop can exhaust governor limits and lead to performance issues. Where possible, bulkify your logic by moving the action call outside the loop and passing a collection variable instead.
 
-**Rule ID:** `action-call-in-loop`
-**Class Name:** _[ActionCallsInLoop](packages/core/src/main/rules/ActionCallsInLoop.ts)_
+**Rule ID:** `action-call-in-loop`<br>
+**Class Name:** _[ActionCallsInLoop](packages/core/src/main/rules/ActionCallsInLoop.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Get Record All Fields
 Avoid using Get Records to retrieve all fields unless necessary. This improves performance, reduces processing time, and limits exposure of unnecessary data.
 
-**Rule ID:** `get-record-all-fields`
-**Class Name:** _[GetRecordAllFields](packages/core/src/main/rules/GetRecordAllFields.ts)_
+**Rule ID:** `get-record-all-fields`<br>
+**Class Name:** _[GetRecordAllFields](packages/core/src/main/rules/GetRecordAllFields.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Inactive Flow
 Inactive Flows should be deleted or archived to reduce risk. Even when inactive, they can cause unintended record changes during testing or be activated as subflows. Keeping only active, relevant Flows improves safety and maintainability.
 
-**Rule ID:** `inactive-flow`
-**Class Name:** _[InactiveFlow](packages/core/src/main/rules/InactiveFlow.ts)_
+**Rule ID:** `inactive-flow`<br>
+**Class Name:** _[InactiveFlow](packages/core/src/main/rules/InactiveFlow.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Invalid API Version ![Auto-Fix](https://img.shields.io/badge/-auto--fix-green)
 Flows running on outdated API versions may behave inconsistently when newer platform features or components are used. From API version 50.0 onward, the API Version attribute explicitly controls Flow runtime behavior. Keeping Flows aligned with a supported API version helps prevent compatibility issues and ensures predictable execution.
 
-**Rule ID:** `invalid-api-version`
-**Class Name:** _[APIVersion](packages/core/src/main/rules/APIVersion.ts)_
+**Rule ID:** `invalid-api-version`<br>
+**Class Name:** _[APIVersion](packages/core/src/main/rules/APIVersion.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 | Option | Type | Default | Description |
@@ -182,22 +182,22 @@ Flows running on outdated API versions may behave inconsistently when newer plat
 #### Missing Filter Record Trigger
 Record-triggered Flows without filters on changed fields or entry conditions execute on every record change. Adding filters ensures the Flow runs only when needed, improving performance.
 
-**Rule ID:** `missing-record-trigger-filter`
-**Class Name:** _[MissingFilterRecordTrigger](packages/core/src/main/rules/MissingFilterRecordTrigger.ts)_
+**Rule ID:** `missing-record-trigger-filter`<br>
+**Class Name:** _[MissingFilterRecordTrigger](packages/core/src/main/rules/MissingFilterRecordTrigger.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Same Record Field Updates
 Before-save Flows can safely update the triggering record directly via $Record, applying changes efficiently without extra DML operations. Using before-save updates improves performance
 
-**Rule ID:** `same-record-field-updates`
-**Class Name:** _[SameRecordFieldUpdates](packages/core/src/main/rules/SameRecordFieldUpdates.ts)_
+**Rule ID:** `same-record-field-updates`<br>
+**Class Name:** _[SameRecordFieldUpdates](packages/core/src/main/rules/SameRecordFieldUpdates.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Cognitive Complexity
 Flows with deeply nested loops and decisions are hard to understand. Unlike cyclomatic complexity which counts paths, cognitive complexity penalizes nesting depth. Consider extracting nested logic into subflows.
 
-**Rule ID:** `cognitive-complexity`
-**Class Name:** _[CognitiveComplexity](packages/core/src/main/rules/CognitiveComplexity.ts)_
+**Rule ID:** `cognitive-complexity`<br>
+**Class Name:** _[CognitiveComplexity](packages/core/src/main/rules/CognitiveComplexity.ts)_<br>
 **Severity:** 🔵 *Note*
 
 | Option | Type | Default | Description |
@@ -208,8 +208,8 @@ Flows with deeply nested loops and decisions are hard to understand. Unlike cycl
 #### Excessive Cyclomatic Complexity
 High numbers of loops and decision elements increase a Flow's cyclomatic complexity. To maintain simplicity and readability, consider using subflows or splitting a Flow into smaller, ordered Flows.
 
-**Rule ID:** `excessive-cyclomatic-complexity`
-**Class Name:** _[CyclomaticComplexity](packages/core/src/main/rules/CyclomaticComplexity.ts)_
+**Rule ID:** `excessive-cyclomatic-complexity`<br>
+**Class Name:** _[CyclomaticComplexity](packages/core/src/main/rules/CyclomaticComplexity.ts)_<br>
 **Severity:** 🔵 *Note*
 
 | Option | Type | Default | Description |
@@ -220,22 +220,22 @@ High numbers of loops and decision elements increase a Flow's cyclomatic complex
 #### Missing Trigger Order
 Record-triggered Flows without a specified Trigger Order may execute in an unpredictable sequence. Setting a Trigger Order ensures your Flows run in the intended order.
 
-**Rule ID:** `unspecified-trigger-order`
-**Class Name:** _[TriggerOrder](packages/core/src/main/rules/TriggerOrder.ts)_
+**Rule ID:** `unspecified-trigger-order`<br>
+**Class Name:** _[TriggerOrder](packages/core/src/main/rules/TriggerOrder.ts)_<br>
 **Severity:** 🔵 *Note*
 
 #### Record ID as String
 Flows that use a String variable for a record ID instead of receiving the full record introduce unnecessary complexity and additional Get Records queries. Using the complete record simplifies the Flow and improves performance.
 
-**Rule ID:** `record-id-as-string`
-**Class Name:** _[RecordIdAsString](packages/core/src/main/rules/RecordIdAsString.ts)_
+**Rule ID:** `record-id-as-string`<br>
+**Class Name:** _[RecordIdAsString](packages/core/src/main/rules/RecordIdAsString.ts)_<br>
 **Severity:** 🔵 *Note*
 
 #### Transform Instead of Loop
 Loop elements that perform direct Assignments on each item can slow down Flows. Using Transform elements allows bulk operations on collections, improving performance and reducing complexity.
 
-**Rule ID:** `transform-instead-of-loop`
-**Class Name:** _[TransformInsteadOfLoop](packages/core/src/main/rules/TransformInsteadOfLoop.ts)_
+**Rule ID:** `transform-instead-of-loop`<br>
+**Class Name:** _[TransformInsteadOfLoop](packages/core/src/main/rules/TransformInsteadOfLoop.ts)_<br>
 **Severity:** 🔵 *Note*
 
 ---
@@ -247,8 +247,8 @@ Focused on naming, documentation, and organization, these rules ensure Flows rem
 #### Flow Naming Convention
 Using clear and consistent Flow names improves readability, discoverability, and maintainability. A good naming convention helps team members quickly understand a Flow's purpose—for example, including a domain and brief description like Service_OrderFulfillment. Adopt a naming pattern that aligns with your organization's standards.
 
-**Rule ID:** `invalid-naming-convention`
-**Class Name:** _[FlowName](packages/core/src/main/rules/FlowName.ts)_
+**Rule ID:** `invalid-naming-convention`<br>
+**Class Name:** _[FlowName](packages/core/src/main/rules/FlowName.ts)_<br>
 **Severity:** 🔴 *Error*
 
 | Option | Type | Default | Description |
@@ -259,43 +259,43 @@ Using clear and consistent Flow names improves readability, discoverability, and
 #### Missing Flow Description
 Flow descriptions are essential for documentation and maintainability. Include a description for each Flow, explaining its purpose and where it's used.
 
-**Rule ID:** `missing-flow-description`
-**Class Name:** _[FlowDescription](packages/core/src/main/rules/FlowDescription.ts)_
+**Rule ID:** `missing-flow-description`<br>
+**Class Name:** _[FlowDescription](packages/core/src/main/rules/FlowDescription.ts)_<br>
 **Severity:** 🔴 *Error*
 
 #### Missing Metadata Description
 Elements and metadata without a description reduce clarity and maintainability. Adding descriptions improves readability and makes your automation easier to understand.
 
-**Rule ID:** `missing-metadata-description`
-**Class Name:** _[MissingMetadataDescription](packages/core/src/main/rules/MissingMetadataDescription.ts)_
+**Rule ID:** `missing-metadata-description`<br>
+**Class Name:** _[MissingMetadataDescription](packages/core/src/main/rules/MissingMetadataDescription.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Unclear API Name
 Elements with unclear or duplicated API names, like Copy_X_Of_Element, reduce Flow readability. Make sure to update the API name when copying elements to keep your Flow organized.
 
-**Rule ID:** `unclear-api-naming`
-**Class Name:** _[CopyAPIName](packages/core/src/main/rules/CopyAPIName.ts)_
+**Rule ID:** `unclear-api-naming`<br>
+**Class Name:** _[CopyAPIName](packages/core/src/main/rules/CopyAPIName.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Unreachable Element ![Auto-Fix](https://img.shields.io/badge/-auto--fix-green)
 Unconnected elements never execute and add unnecessary clutter. Remove or connect unused Flow elements to keep Flows clean and efficient.
 
-**Rule ID:** `unreachable-element`
-**Class Name:** _[UnconnectedElement](packages/core/src/main/rules/UnconnectedElement.ts)_
+**Rule ID:** `unreachable-element`<br>
+**Class Name:** _[UnconnectedElement](packages/core/src/main/rules/UnconnectedElement.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Unused Variable ![Auto-Fix](https://img.shields.io/badge/-auto--fix-green)
 Unused variables are never referenced and add unnecessary clutter. Remove them to keep Flows efficient and easy to maintain.
 
-**Rule ID:** `unused-variable`
-**Class Name:** _[UnusedVariable](packages/core/src/main/rules/UnusedVariable.ts)_
+**Rule ID:** `unused-variable`<br>
+**Class Name:** _[UnusedVariable](packages/core/src/main/rules/UnusedVariable.ts)_<br>
 **Severity:** 🟡 *Warning*
 
 #### Missing Auto Layout ![Auto-Fix](https://img.shields.io/badge/-auto--fix-green)
 Auto-Layout automatically arranges and aligns Flow elements, keeping the canvas organized and easier to maintain. Enabling it saves time and improves readability.
 
-**Rule ID:** `missing-auto-layout`
-**Class Name:** _[AutoLayout](packages/core/src/main/rules/AutoLayout.ts)_
+**Rule ID:** `missing-auto-layout`<br>
+**Class Name:** _[AutoLayout](packages/core/src/main/rules/AutoLayout.ts)_<br>
 **Severity:** 🔵 *Note*
 
 #### System (subcategory)

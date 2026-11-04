@@ -96,8 +96,8 @@ function formatRule(rule) {
   return `#### ${rule.title}${betaBadge}${fixableBadge}
 ${rule.description}
 
-**Rule ID:** \`${rule.ruleId}\`
-**Class Name:** _[${rule.className}](packages/core/src/main/rules/${rule.className}.ts)_
+**Rule ID:** \`${rule.ruleId}\`<br>
+**Class Name:** _[${rule.className}](packages/core/src/main/rules/${rule.className}.ts)_<br>
 **Severity:** ${formatSeverity(rule.severity)}${optionsSection}`;
 }
 
@@ -113,8 +113,8 @@ function formatSystemRule(rule) {
   return `### ${rule.title}${betaBadge}${fixableBadge}
 ${rule.description}
 
-**Rule ID:** \`${rule.ruleId}\`
-**Class Name:** _[${rule.className}](../packages/core/src/main/rules/${rule.className}.ts)_
+**Rule ID:** \`${rule.ruleId}\`<br>
+**Class Name:** _[${rule.className}](../packages/core/src/main/rules/${rule.className}.ts)_<br>
 **Severity:** ${formatSeverity(rule.severity)}${optionsSection}`;
 }
 

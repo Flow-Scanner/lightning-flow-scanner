@@ -32,8 +32,8 @@ const results = scan(parsedFlows, {
 ### Missing Start Reference
 When a flow has no start reference.
 
-**Rule ID:** `missing-start-reference`
-**Class Name:** _[MissingStartReference](../packages/core/src/main/rules/MissingStartReference.ts)_
+**Rule ID:** `missing-start-reference`<br>
+**Class Name:** _[MissingStartReference](../packages/core/src/main/rules/MissingStartReference.ts)_<br>
 **Severity:** 🔴 *Error*
 
 ---
