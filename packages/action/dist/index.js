@@ -237218,7 +237218,7 @@ registry.register("action-call-in-loop", _ActionCallsInLoop.ActionCallsInLoop, "
 registry.register("invalid-api-version", _APIVersion.APIVersion, "APIVersion");
 registry.register("missing-auto-layout", _AutoLayout.AutoLayout, "AutoLayout");
 registry.register("unclear-api-naming", _CopyAPIName.CopyAPIName, "CopyAPIName");
-registry.register("cognitive-complexity", _CognitiveComplexity.CognitiveComplexity, "CognitiveComplexity", true);
+registry.register("cognitive-complexity", _CognitiveComplexity.CognitiveComplexity, "CognitiveComplexity");
 registry.register("excessive-cyclomatic-complexity", _CyclomaticComplexity.CyclomaticComplexity, "CyclomaticComplexity");
 registry.register("dml-in-loop", _DMLStatementInLoop.DMLStatementInLoop, "DMLStatementInLoop");
 registry.register("duplicate-dml", _DuplicateDMLOperation.DuplicateDMLOperation, "DuplicateDMLOperation");
@@ -237238,12 +237238,12 @@ registry.register("unspecified-trigger-order", _TriggerOrder.TriggerOrder, "Trig
 registry.register("unreachable-element", _UnconnectedElement.UnconnectedElement, "UnconnectedElement");
 registry.register("unsafe-running-context", _UnsafeRunningContext.UnsafeRunningContext, "UnsafeRunningContext");
 registry.register("unused-variable", _UnusedVariable.UnusedVariable, "UnusedVariable");
-registry.register("missing-metadata-description", _MissingMetadataDescription.MissingMetadataDescription, "MissingMetadataDescription", true);
-registry.register("missing-record-trigger-filter", _MissingRecordTriggerFilter.MissingRecordTriggerFilter, "MissingFilterRecordTrigger", true);
-registry.register("missing-start-reference", _MissingStartReference.MissingStartReference, "MissingStartReference", true);
-registry.register("transform-instead-of-loop", _TransformInsteadOfLoop.TransformInsteadOfLoop, "TransformInsteadOfLoop", true);
-registry.register("record-id-as-string", _RecordIdAsString.RecordIdAsString, "RecordIdAsString", true);
-registry.register("hardcoded-secret", _HardcodedSecret.HardcodedSecret, "HardcodedSecret", true);
+registry.register("missing-metadata-description", _MissingMetadataDescription.MissingMetadataDescription, "MissingMetadataDescription");
+registry.register("missing-record-trigger-filter", _MissingRecordTriggerFilter.MissingRecordTriggerFilter, "MissingFilterRecordTrigger");
+registry.register("missing-start-reference", _MissingStartReference.MissingStartReference, "MissingStartReference");
+registry.register("transform-instead-of-loop", _TransformInsteadOfLoop.TransformInsteadOfLoop, "TransformInsteadOfLoop");
+registry.register("record-id-as-string", _RecordIdAsString.RecordIdAsString, "RecordIdAsString");
+registry.register("hardcoded-secret", _HardcodedSecret.HardcodedSecret, "HardcodedSecret");
 const ruleRegistry = registry;
 
 
@@ -241505,12 +241505,12 @@ let DuplicateDMLOperation = class DuplicateDMLOperation extends _RuleCommon.Rule
             const node = graph.getNode(name);
             if (!node) continue;
             let nextSeenDML = seenDML || this.isDML(node);
-            if (nextSeenDML && node.subtype === "screens" && node.element["allowBack"] === "true" && node.element["showFooter"] === "true" && !suppressions.has(node.name)) {
+            if (nextSeenDML && node.subtype === "screens" && this.isTrue(node.element["allowBack"]) && this.isTrue(node.element["showFooter"]) && !suppressions.has(node.name)) {
                 violations.push(new _internals.Violation(node));
             // Note: do NOT return early; multiple violations possible
             }
             // Reset DML flag after screen with back disabled
-            if (nextSeenDML && node.subtype === "screens" && node.element["allowBack"] !== "true") {
+            if (nextSeenDML && node.subtype === "screens" && !this.isTrue(node.element["allowBack"])) {
                 nextSeenDML = false;
             }
             for (const next of graph.getNextElements(name)){
@@ -241524,6 +241524,11 @@ let DuplicateDMLOperation = class DuplicateDMLOperation extends _RuleCommon.Rule
     }
     isDML(node) {
         return node.subtype === "recordCreates" || node.subtype === "recordUpdates" || node.subtype === "recordDeletes";
+    }
+    // XML-parsed flows carry the string "true"; flows built from Tooling API
+    // JSON (e.g. the Salesforce app) carry a real boolean.
+    isTrue(value) {
+        return value === true || String(value).toLowerCase() === "true";
     }
     constructor(){
         super({
@@ -243473,12 +243478,13 @@ function _interop_require_wildcard(obj, nodeInterop) {
 }
 let TriggerOrder = class TriggerOrder extends _RuleCommon.RuleCommon {
     check(flow, _options, _suppressions) {
-        const startObject = this.getStartProperty(flow, "object");
-        // If there's no `object` on the start node, this is NOT a record-triggered flow
-        if (!startObject) {
+        // triggerOrder applies only to record-triggered flows. Platform-event flows
+        // also set start.object (the event name) but cannot configure an order.
+        const triggerType = this.getStartProperty(flow, "triggerType");
+        const isRecordTriggered = triggerType === "RecordAfterSave" || triggerType === "RecordBeforeSave" || triggerType === "RecordBeforeDelete";
+        if (!isRecordTriggered) {
             return [];
         }
-        // This *is* a record-triggered flow → should have triggerOrder
         if (!flow.triggerOrder) {
             return [
                 new _internals.Violation(new _internals.FlowAttribute("TriggerOrder", "TriggerOrder", "10, 20, 30 ..."))
