@@ -1,6 +1,6 @@
 ## Contributing Guidelines
 
-Lightning Flow Scanner is free and open source. A few ways to help:
+Lightning Flow Scanner is free and open source, thanks to [everyone who has helped](https://activity.lightningflowscanner.org/). A few ways to help:
 
 - 💬 Share feedback.
 - 📢 Tell others about it.
