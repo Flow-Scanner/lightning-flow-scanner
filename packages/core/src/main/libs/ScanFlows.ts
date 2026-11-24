@@ -8,6 +8,8 @@ import {
 import { DetailLevel, meetsThreshold } from "../interfaces/IRulesConfig";
 import { ParsedFlow } from "../models/ParsedFlow";
 import { enrichViolationsWithLineNumbers } from "../models/Violation";
+import { DUPLICATE_FLOW_LOGIC_RULE_ID } from "../rules/DuplicateFlowLogic";
+import { duplicateLogicViolations } from "./DuplicateFlowLogic";
 import { GetRuleDefinitions } from "./GetRuleDefinitions";
 import { getRuleDocumentationUrl } from "./RuleDocumentation";
 
@@ -126,6 +128,8 @@ export function ScanFlows(flows: Flow[], ruleOptions?: IRulesConfig): ScanResult
     flowXmlCache.delete(flow.name);
   }
 
+  applyDuplicateFlowLogic(flowResults, selectedRules, ruleOptions);
+
   flowXmlCache.clear();
 
   if (detailLevel === DetailLevel.SIMPLE) {
@@ -152,4 +156,40 @@ export function ScanFlows(flows: Flow[], ruleOptions?: IRulesConfig): ScanResult
   }
 
   return flowResults;
+}
+
+function applyDuplicateFlowLogic(
+  flowResults: ScanResult[],
+  selectedRules: IRuleDefinition[],
+  ruleOptions?: IRulesConfig
+): void {
+  const rule = selectedRules.find(candidate => candidate.ruleId === DUPLICATE_FLOW_LOGIC_RULE_ID);
+  if (!rule || flowResults.length === 0) return;
+
+  const byFlow = duplicateLogicViolations(flowResults.map(scanResult => scanResult.flow));
+
+  for (const scanResult of flowResults) {
+    const ruleResult = scanResult.ruleResults.find(result => result.ruleId === rule.ruleId);
+    if (!ruleResult) continue;
+
+    const suppressions = getSuppressionsForRule(rule, scanResult.flow.name, ruleOptions?.exceptions);
+    if (
+      suppressions.includes("*") ||
+      suppressions.includes(rule.ruleId) ||
+      suppressions.includes(rule.name)
+    ) {
+      continue;
+    }
+
+    const blocked = new Set(suppressions);
+    const violations = (byFlow.get(scanResult.flow) ?? []).filter(violation => !blocked.has(violation.name));
+    if (violations.length === 0) continue;
+
+    const flowXml = typeof scanResult.flow.toXMLString === "function" ? scanResult.flow.toXMLString() : "";
+    if (flowXml) {
+      enrichViolationsWithLineNumbers(violations, flowXml);
+    }
+    ruleResult.details = violations;
+    ruleResult.occurs = true;
+  }
 }

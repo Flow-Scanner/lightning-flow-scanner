@@ -19,6 +19,10 @@ export function exportDetails(results: ScanResult[], includeDetails = false): Fl
         const { details, ...base } = detail;
         
         // Build the flat violation with conditionally flattened details
+        const summary = details && typeof (details as { summary?: unknown }).summary === "string"
+          ? (details as { summary: string }).summary
+          : undefined;
+
         const exported: FlatViolation = {
           ...base,
           flowFile,
@@ -26,7 +30,7 @@ export function exportDetails(results: ScanResult[], includeDetails = false): Fl
           ruleId: rule.ruleId,
           ruleName: rule.ruleName,
           severity: rule.severity ?? "warning",
-          message: rule.message || rule.ruleDefinition.description,
+          message: summary || rule.message || rule.ruleDefinition.description,
           messageUrl: rule.messageUrl,
         };
 
@@ -47,7 +51,9 @@ export function exportDetails(results: ScanResult[], includeDetails = false): Fl
               ? details.connectsTo.join(', ') 
               : String(details.connectsTo);
           }
-          if ('expression' in details) {
+          if (summary) {
+            exported.expression = summary;
+          } else if ('expression' in details) {
             exported.expression = details.expression as string;
           }
         }

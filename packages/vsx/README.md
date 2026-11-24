@@ -163,6 +163,13 @@ Repeatedly invoking Apex actions inside a loop can exhaust governor limits and l
 **Class Name:** _[ActionCallsInLoop](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/ActionCallsInLoop.ts)_<br>
 **Severity:** 🟡 *Warning*
 
+#### Duplicate Flow Logic ![Beta](https://img.shields.io/badge/status-beta-yellow)
+The same stretch of logic appears in more than one place. Element names, labels, and canvas positions are ignored. Extract the shared chain into a subflow.
+
+**Rule ID:** `duplicate-flow-logic`<br>
+**Class Name:** _[DuplicateFlowLogic](https://github.com/Flow-Scanner/lightning-flow-scanner/blob/main/packages/core/src/main/rules/DuplicateFlowLogic.ts)_<br>
+**Severity:** 🟡 *Warning*
+
 #### Get Record All Fields
 Avoid using Get Records to retrieve all fields unless necessary. This improves performance, reduces processing time, and limits exposure of unnecessary data.
 

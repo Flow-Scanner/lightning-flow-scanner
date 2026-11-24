@@ -10,6 +10,7 @@ import { CopyAPIName } from "../rules/CopyAPIName";
 import { CyclomaticComplexity } from "../rules/CyclomaticComplexity";
 import { DMLStatementInLoop } from "../rules/DMLStatementInLoop";
 import { DuplicateDMLOperation } from "../rules/DuplicateDMLOperation";
+import { DuplicateFlowLogic } from "../rules/DuplicateFlowLogic";
 import { FlowDescription } from "../rules/FlowDescription";
 import { FlowName } from "../rules/FlowName";
 import { GetRecordAllFields } from "../rules/GetRecordAllFields";
@@ -188,5 +189,6 @@ registry.register("missing-start-reference", MissingStartReference, "MissingStar
 registry.register("transform-instead-of-loop", TransformInsteadOfLoop, "TransformInsteadOfLoop");
 registry.register("record-id-as-string", RecordIdAsString, "RecordIdAsString");
 registry.register("hardcoded-secret", HardcodedSecret, "HardcodedSecret");
+registry.register("duplicate-flow-logic", DuplicateFlowLogic, "DuplicateFlowLogic", true);
 
 export const ruleRegistry = registry;
