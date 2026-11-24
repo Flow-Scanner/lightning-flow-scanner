@@ -26,9 +26,11 @@ describe("Beta Rule Handling", () => {
     }
   });
 
-  it("runs the same rules with or without betaMode when none are in beta", () => {
-    const defaultIds = core.getRules().map(rule => rule.ruleId).sort();
-    const betaIds = core.getRules(undefined, { betaMode: true }).map(rule => rule.ruleId).sort();
-    expect(betaIds).toEqual(defaultIds);
+  it("keeps duplicate flow logic behind betaMode", () => {
+    const defaultIds = core.getRules().map(rule => rule.ruleId);
+    const betaIds = core.getRules(undefined, { betaMode: true }).map(rule => rule.ruleId);
+    expect(defaultIds).not.toContain("duplicate-flow-logic");
+    expect(betaIds).toContain("duplicate-flow-logic");
+    expect(betaIds.filter(id => id !== "duplicate-flow-logic").sort()).toEqual([...defaultIds].sort());
   });
 });
